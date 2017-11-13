@@ -53,6 +53,7 @@
 						<th>Status</th>
 						<th>Details</th>
 						
+						
 					</tr>
 				</thead>
 			</table>
@@ -125,18 +126,24 @@
              <div class="modalcontent">
           		<h4>Type Project :</h4>
           		<p id="projecttype"></p>
+          		<p> <select id="projecttypelist" name="projecttype"></select></p>
           		<h4>Status :</h4>
           		<p id="status"></p>
+          		<p> <select id="statuslist" name="status"></select></p>
           		<h4>Project Description :</h4>
           		<p id="projectdescription"></p>
+          		<p><input id="description" class="input"  type="text" name="description" autocomplete="off" /></p>
           		<h4>Project Creation Date :</h4>
           		<p id="creationdate"></p>
           		<h4>Project Due Date :</h4>
 				<p id="duedate"></p>
+				<p><input id="duedateedit" class="input"  type="text" name="duedate" autocomplete="off" /></p>
 				<h4>Project Start Date :</h4>
 				<p id="startdate"></p>
+				<p><input id="startdateedit" class="input"  type="text" name="startdate" autocomplete="off" /></p>
 				<h4>Project Finish Date :</h4>
-				<p id="finishdate"></p>				          
+				<p id="finishdate"></p>		
+				<p><input id="finishdateedit" class="input"  type="text" name="sinishdate" autocomplete="off" /></p>		          
              </div>
              
          <div >   
@@ -163,15 +170,19 @@
              </div>
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-default">Edit</button>
-          <button type="button" class="btn btn-default">Save</button>
-          <button type="button" class="btn btn-default">Delete</button>
+        
+          <button id="editbutton" type="button" class="btn btn-default">Edit</button>
+          <button id="savebutton" type="button" class="btn btn-default">Save</button>
+          <button id="deletebutton"type="button" class="btn btn-default">Delete</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
       
     </div>
   </div>
+  
+  
+  
 
 </body>
 </html>

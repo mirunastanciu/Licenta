@@ -1,6 +1,7 @@
 package com.test.app.ticket;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class TicketController {
 		return m;
 	}
 
-	@RequestMapping(path = "/ticketsToDo", method = RequestMethod.GET)
+	/*@RequestMapping(path = "/ticketsToDo", method = RequestMethod.GET)
 	public List<Ticket> getAllTicketsToDo() {
 		List<Ticket> l = ticketService.getAllTickets();
 		Iterator<Ticket> it = l.iterator();
@@ -62,34 +63,70 @@ public class TicketController {
 			}
 		}
 		return l;
+	}*/
+	
+	@RequestMapping(path = "/ticketsToDo", method = RequestMethod.GET)
+	public List<TicketDetails> getAllTicketsToDo() {
+		List<Ticket> l = ticketService.getAllTickets();
+		List<TicketDetails> td = new ArrayList<>();
+		
+		Iterator<Ticket> it = l.iterator();
+		while (it.hasNext()) {
+			Ticket tk = it.next();
+			
+			if (tk.getIdstatus() == 1) {
+				TicketDetails tkd = new TicketDetails();
+				tkd.setIdticket(tk.getId());
+				tkd.setDescription(tk.getDescription());
+				tkd.setProjecttypename(projectTypetService.getProjectTypeById(tk.getProjcttype()).getProjtypename());
+				tkd.setDuedate(tk.getDuedate());
+				tkd.setStatus(ticketStatusService.getTicketStatusById(tk.getIdstatus()).getStatusname());
+				td.add(tkd);
+			}
+		}
+		return td;
 	}
 
 	@RequestMapping(path = "/ticketsInProgress", method = RequestMethod.GET)
-	public List<Ticket> getAllTicketsAssigned() {
+	public List<TicketDetails> getAllTicketsAssigned() {
 		List<Ticket> l = ticketService.getAllTickets();
+		List<TicketDetails> td = new ArrayList<>();
 		Iterator<Ticket> it = l.iterator();
 		while (it.hasNext()) {
-			Ticket t = it.next();
-			if (t.getIdstatus() != 2 && t.getIdstatus() != 3
-					&& t.getIdstatus() != 4) {
-				it.remove();
+			Ticket tk = it.next();
+			if (tk.getIdstatus() == 2 || tk.getIdstatus() == 3
+					|| tk.getIdstatus() == 4) {
+				TicketDetails tkd = new TicketDetails();
+				tkd.setIdticket(tk.getId());
+				tkd.setDescription(tk.getDescription());
+				tkd.setProjecttypename(projectTypetService.getProjectTypeById(tk.getProjcttype()).getProjtypename());
+				tkd.setDuedate(tk.getDuedate());
+				tkd.setStatus(ticketStatusService.getTicketStatusById(tk.getIdstatus()).getStatusname());
+				td.add(tkd);
 			}
 		}
-		return l;
+		return td;
 	}
 
 	@RequestMapping(path = "/ticketsDone", method = RequestMethod.GET)
-	public List<Ticket> getAllTicketsDone() {
+	public List<TicketDetails> getAllTicketsDone() {
 		List<Ticket> l = ticketService.getAllTickets();
+		List<TicketDetails> td = new ArrayList<>();
 		Iterator<Ticket> it = l.iterator();
 		while (it.hasNext()) {
-			Ticket t = it.next();
-			if (t.getIdstatus() != 5) {
-				it.remove();
+			Ticket tk = it.next();
+			if (tk.getIdstatus() == 5) {
+				TicketDetails tkd = new TicketDetails();
+				tkd.setIdticket(tk.getId());
+				tkd.setDescription(tk.getDescription());
+				tkd.setProjecttypename(projectTypetService.getProjectTypeById(tk.getProjcttype()).getProjtypename());
+				tkd.setDuedate(tk.getDuedate());
+				tkd.setStatus(ticketStatusService.getTicketStatusById(tk.getIdstatus()).getStatusname());
+				td.add(tkd);
 			}
 
 		}
-		return l;
+		return td;
 	}
 	
 	@RequestMapping(value = "/addTicket")
@@ -175,6 +212,7 @@ public class TicketController {
 		return tkd;
 
 	    }	
-
+	 
+	 
 
 }

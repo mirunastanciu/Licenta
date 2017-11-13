@@ -1,4 +1,4 @@
-$(document).ready(function () {       
+x$(document).ready(function () {       
     var options;
 	$.ajax("/allProjectTypesName", 
 		       { type: 'GET',
