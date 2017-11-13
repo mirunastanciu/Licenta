@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Register Project</title>
+	<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="../style/stylesheet.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="../js/scriptRegisterProject.js"></script>
+</head>
+<body>
+	<div class="centred">
+      <nav class="nav">
+          <a id="text-nav" href="index.html">HOME</a>  
+          <a id="text-nav" href="/administratorStartPage">START PAGE</a> 
+          <a id="text-nav" href="contact.html">CONTACT</a> 
+          
+      </nav>    
+	</div> 
+
+<div class="container">  
+	<form  name="addTicket" action="/addTicket" onsubmit="return ValidateForm()" >
+	
+    	<p>Project Type</p>
+    	<p> <select id="projecttypelist" name="projecttype"></select></p>
+    	
+        <p>Description <input class="input"  type="text" name="description" autocomplete="off" required/></p>
+        
+        <p>Assigne Persson</p>
+        <p> <select id="assigne" name="assignpersson"></select></p>
+        
+        <div>
+        	<p>Due Date <input class="input"  type="text" name="duedate" autocomplete="off" required /></p>
+             
+        </div>      
+        
+        <p><input type="submit" value="Add Ticket" /></p>
+    </form>
+ 
+</div>
+</body>
+</html>

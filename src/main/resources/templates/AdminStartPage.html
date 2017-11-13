@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Admin Start Page</title>
+
+<!-- Ajax -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.js"></script>
+
+
+<link rel="stylesheet" href="../style/stylesheet.css">
+<!-- Responsive -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- DataTables plugin -->
+<!-- <script type="text/javascript" src="../js/jquery-3.2.1.js"></script> -->
+<!-- <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script> -->
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../style/bootstrap.css">
+<link rel="stylesheet" href="../style/datatables.css">
+<link rel="stylesheet" href="../style/jquery.dataTables.css">
+<link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+
+
+<script src="../js/script.js"></script>
+</head>
+<body>
+	<div class="centred ">
+		<nav class="nav">
+			<a id="text-nav" href="/administratorStartPage">HOME</a> 
+			<a id="text-nav" href="AdminAcountPage.html">MY ACOUNT</a> 
+			<a id="text-nav" href="/newTicketPage">NEW TICKET</a>
+			
+
+
+		</nav>
+	</div>
+	<div >
+		<div class="divpaddin">
+
+			<h2>Client Request</h2>
+			<br> 
+			<table id="ticketsTable" class="table " class="row-border">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Description</th>
+						<th>Project Type</th>
+						<th>Due Date</th>
+						<th>Status</th>
+						<th>Details</th>
+						
+					</tr>
+				</thead>
+			</table>
+
+
+		</div>
+
+		<div class="divpaddin" >
+			<h2>Asigned Project</h2>
+				<br> 
+			<table id="getAllTicketsAssigned" class="table " class="row-border">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Description</th>
+						<th>Project Type</th>
+						<th>Due Date</th>
+						<th>Status</th>
+						<th>Details</th>
+					</tr>
+				</thead>
+			</table>
+
+		</div>
+
+		<div class="divpaddin" >
+			
+			<h2>Done Project</h2>
+				<br> 
+			<table id="getAllTicketsDone" class="table " class="row-border">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Description</th>
+						<th>Project Type</th>
+						<th>Due Date</th>
+						<th>Status</th>
+						<th>Details</th>
+					</tr>
+				</thead>
+			</table>
+
+		</div>
+
+		<div class="divpaddin" >
+			<h2>
+				<strong>Developers</strong>
+			</h2>
+
+		</div>
+	</div>
+	
+	
+	<div class="modal fade modalTD" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Ticket Details</h4>
+        </div>
+        <div class="modal-body">
+        <div >
+          <h2>Ticket Details </h2>
+         </div>
+          	 <br>
+          	 
+             <div class="modalcontent">
+          		<h4>Type Project :</h4>
+          		<p id="projecttype"></p>
+          		<h4>Status :</h4>
+          		<p id="status"></p>
+          		<h4>Project Description :</h4>
+          		<p id="projectdescription"></p>
+          		<h4>Project Creation Date :</h4>
+          		<p id="creationdate"></p>
+          		<h4>Project Due Date :</h4>
+				<p id="duedate"></p>
+				<h4>Project Start Date :</h4>
+				<p id="startdate"></p>
+				<h4>Project Finish Date :</h4>
+				<p id="finishdate"></p>				          
+             </div>
+             
+         <div >   
+         <h2>Employee Details</h2>
+         </div> 
+         	 <br>
+             <div class="modalcontent">
+             	<h4>Employee Name :</h4>
+             	<p id="employeename"></p>
+             	<h4>Employee Email :</h4>
+             	<p id="employeeemail"></p>
+             	<h4>Employee Specialisation :</h4>
+             	<p id="employeespecialisation"></p>
+             </div>
+         <div >   
+         <h2>Client Details</h2> 
+         </div> 
+        	 <br>   
+             <div class="modalcontent">
+             	<h4>Client Name :</h4>
+             	<p id="clientname"></p>
+             	<h4>Client Email :</h4>
+             	<p id="clientemail"></p>
+             </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default">Edit</button>
+          <button type="button" class="btn btn-default">Save</button>
+          <button type="button" class="btn btn-default">Delete</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+</body>
+</html>
+

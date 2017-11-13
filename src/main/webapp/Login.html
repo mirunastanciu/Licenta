@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login Page</title>
+	<link rel="stylesheet" href="../style/stylesheet.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="login">
+
+<div class="centred">
+      <nav class="nav">
+	      <a id="text-nav" href="index.html">HOME</a> 
+	      <a id="text-nav" href="Login.html">LOGIN</a> 
+	      <a id="text-nav" href="contact.html">CONTACT</a> 
+	     
+	  </nav>
+</div> 
+
+<!--<div  class="login-form">
+	<h3>Username: <input type="text" name="username" value=""></h3><br>
+    <h3>Password: <input type="text" name="password" value=""></h3><br>
+
+    <a href="AdminStartPage.html"><button id="button-style" >Login</button></a>
+</div>
+
+<a href="Register.html"><button class="login-form" id="button-style">REGISTER as a member</button></a>-->
+
+<div class="containerLogin">
+	
+	<form  action="/accountvalidation" >
+	
+    	<p>Username :<input class="input" type="text" name="username" autocomplete="off" /></p>
+        <p>Password :<input class="input"  type="password" name="password" autocomplete="off" /></p>
+        <p><input type="submit" value="Login" /></p>
+    </form>
+</div>
+<div class="centred">
+	<a id="text-nav" href="ForgotPasswordPage.html"><button class="passwordbutton">Forgot Passowrd</button></a>
+</div>	
+</body>
+
+</html>

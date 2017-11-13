@@ -1,0 +1,32 @@
+package com.test.app.ticketstatus;
+
+import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class TicketStatusService {
+	
+	@Autowired
+	TicketStatusRepository ticketStatusRepository;
+	
+	
+	public ArrayList<TicketStatus> getAllTicketStatuses(){
+		ArrayList<TicketStatus> l = new ArrayList<>();
+		ticketStatusRepository.findAll().forEach(l::add);
+		return l;
+	}
+	
+	
+	public TicketStatus getTicketStatusById(int a){
+		ArrayList<TicketStatus> l = getAllTicketStatuses();
+		 for(int i=0;i<l.size();i++){
+			 if(l.get(i).getIdstatus() == a){
+				 return l.get(i);
+			 }
+		 }
+		return null;
+	}
+	
+
+}
