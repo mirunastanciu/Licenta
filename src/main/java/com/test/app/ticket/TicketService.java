@@ -1,5 +1,6 @@
 package com.test.app.ticket;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,32 @@ public class TicketService {
 	public Ticket addTicket(Ticket tichet){
 		return ticketRepository.save(tichet);
 	}
+	
+	/*public Ticket updateTicket(int a , int projecttype , int status , String description , Date duedate , 
+			Date startdate , Date finishdate ,int employeename){
+		Ticket t = getTicketById(a);
+		
+		t.setProjcttype(projecttype);
+		t.setIdstatus(status);
+		t.setDescription(description);
+		t.setDuedate(duedate);
+		t.setStartdate(startdate);
+		t.setFinishdate(finishdate);
+		t.setIdemployee(employeename);
+		
+		
+		return t;
+		
+		
+	}*/
+	/*public Ticket update(){
+		return ticketRepository.update(id, projecttype, status, description, duedate, startdate, finishdate, employeename);
+	}*/
+	
+	public  void update(int id , Ticket ticket){
+		ticketRepository.save(ticket);
+	}
+	
 	
 	public  Ticket getTicketById(int a){
 		ArrayList<Ticket> t = getAllTickets() ;

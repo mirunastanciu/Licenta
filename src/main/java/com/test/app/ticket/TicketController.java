@@ -149,6 +149,17 @@ public class TicketController {
 		
 		
 	}
+/*	@ResponseBody
+	@RequestMapping(value="/updateTicket", method=RequestMethod.PUT )
+	public void updateTicket(@RequestParam(value = "idTicket") int id,@RequestParam(value = "newprojecttype") String newprojecttype,
+			@RequestParam(value = "newstatus") String newstatus,@RequestParam(value = "newdescription") String newdescription,
+			@RequestParam(value = "newduedate") Date newduedate,@RequestParam(value = "newstartdate") Date newstartdate,
+			@RequestParam(value = "newfinishdate") Date newfinishdate,@RequestParam(value = "newemployee") String newemployee){
+		
+		Ticket t = ticketService.getTicketById(id);
+		t.setProjcttype(getIdProjectTypeByName(newprojecttype));
+		t.
+	}*/
 
 	
 	public int getIdProjectTypeByName(String a){

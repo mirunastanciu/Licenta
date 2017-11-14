@@ -126,10 +126,10 @@
              <div class="modalcontent">
           		<h4>Type Project :</h4>
           		<p id="projecttype"></p>
-          		<p> <select id="projecttypelist" name="projecttype"></select></p>
+          		<p> <select id="projecttypelist" name="projecttype" onchange="projectTypeChange();"></select></p>
           		<h4>Status :</h4>
           		<p id="status"></p>
-          		<p> <select id="statuslist" name="status"></select></p>
+          		<p> <select id="statuslist" name="status" onchange="statusChange();"></select></p>
           		<h4>Project Description :</h4>
           		<p id="projectdescription"></p>
           		<p><input id="description" class="input"  type="text" name="description" autocomplete="off" /></p>
@@ -153,6 +153,7 @@
              <div class="modalcontent">
              	<h4>Employee Name :</h4>
              	<p id="employeename"></p>
+             	 	<p> <select id="employeelist" name="employee"></select></p>
              	<h4>Employee Email :</h4>
              	<p id="employeeemail"></p>
              	<h4>Employee Specialisation :</h4>

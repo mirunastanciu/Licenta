@@ -32,6 +32,7 @@ $(document).ready( function () {
 					$("#duedateedit").hide();
 					$("#startdateedit").hide();
 					$("#finishdateedit").hide();
+					$("#employeelist").hide();
 					
 		            $(".modal-body #projecttype").html(data.projecttypename);
 		            $(".modal-body #status").html(data.status);
@@ -50,7 +51,61 @@ $(document).ready( function () {
 		          
 		            $('#myModal').modal('show');
 		            
-		            
+		            $('.modal-footer').on('click', '#editbutton', function () {
+		            	$("#projecttypelist").show();
+		            	$("#statuslist").show();
+		            	$("#description").show();
+		            	$("#duedateedit").show();
+		            	$("#startdateedit").show();
+		            	$("#finishdateedit").show();
+		            	$("#employeelist").show();
+		            });
+						
+						 var options;
+							$.ajax("/allProjectTypesName", 
+								       { type: 'GET',
+								 		 success: function (data) {		        	 
+										       options = data;
+										       	$('#projecttypelist').empty();
+										       	$.each(options, function(i, p) {
+										       	$('#projecttypelist').append($('<option></option>').val(p).html(p));
+										       	});
+								       } 
+								         
+								       });
+							
+							 var options1;
+								$.ajax("/getAllEmployiesName", 
+									       { type: 'GET',
+									 		 success: function (data) {		        	 
+											       options1 = data;
+											       
+											       	$('#employeelist').empty();
+											       	$.each(options1, function(i, p) {
+											       	$('#employeelist').append($('<option></option>').val(p).html(p));
+											       	});
+									       } 
+									         
+									       })
+							var options2;
+								$.ajax("/getAllTicketStatusNames", 
+									       { type: 'GET',
+									 		 success: function (data) {		        	 
+											       options2 = data;
+											       
+											       	$('#statuslist').empty();
+											       	$.each(options2, function(i, p) {
+											       	$('#statuslist').append($('<option></option>').val(p).html(p));
+											       	});
+									       } 
+									         
+									       })	
+									       
+					
+									       
+					$('.modal-footer').on('click', '#savebutton', function () {
+					
+					});				      
 		            	
 		        },
 		        error: function(){
@@ -89,6 +144,14 @@ $(document).ready( function () {
 			   data: {idTicket: idTicket},
 			   success: function(data, status, xhr){
 		            /*$('#myModal .modal-body ').html(data.clientname);*/
+				   $("#projecttypelist").hide();
+					$("#statuslist").hide();
+					$("#description").hide();
+					$("#duedateedit").hide();
+					$("#startdateedit").hide();
+					$("#finishdateedit").hide();
+					$("#employeelist").hide();
+				   
 		            $(".modal-body #projecttype").html(data.projecttypename);
 		            $(".modal-body #status").html(data.status);
 		            $(".modal-body #projectdescription").html(data.description);
@@ -105,6 +168,57 @@ $(document).ready( function () {
 		            $(".modal-body #clientemail").html(data.clientemail);
 		          
 		            $('#myModal').modal('show');
+		            
+		            $('.modal-footer').on('click', '#editbutton', function () {
+		            	$("#projecttypelist").show();
+		            	$("#statuslist").show();
+		            	$("#description").show();
+		            	$("#duedateedit").show();
+		            	$("#startdateedit").show();
+		            	$("#finishdateedit").show();
+		            	$("#employeelist").show();
+		            });
+						
+						 var options;
+							$.ajax("/allProjectTypesName", 
+								       { type: 'GET',
+								 		 success: function (data) {		        	 
+										       options = data;
+										       	$('#projecttypelist').empty();
+										       	$.each(options, function(i, p) {
+										       	$('#projecttypelist').append($('<option></option>').val(p).html(p));
+										       	});
+								       } 
+								         
+								       });
+							
+							 var options1;
+								$.ajax("/getAllEmployiesName", 
+									       { type: 'GET',
+									 		 success: function (data) {		        	 
+											       options1 = data;
+											       
+											       	$('#employeelist').empty();
+											       	$.each(options1, function(i, p) {
+											       	$('#employeelist').append($('<option></option>').val(p).html(p));
+											       	});
+									       } 
+									         
+									       });
+									       
+							var options2;
+								$.ajax("/getAllTicketStatusNames", 
+									       { type: 'GET',
+									 		 success: function (data) {		        	 
+											       options2 = data;
+											       
+											       	$('#statuslist').empty();
+											       	$.each(options2, function(i, p) {
+											       	$('#statuslist').append($('<option></option>').val(p).html(p));
+											       	});
+									       } 
+									         
+									       });	       
 		        },
 		        error: function(){
 		            alert("error");
@@ -142,6 +256,14 @@ $(document).ready( function () {
 			   data: {idTicket: idTicket},
 			   success: function(data, status, xhr){
 		            /*$('#myModal .modal-body ').html(data.clientname);*/
+				   $("#projecttypelist").hide();
+					$("#statuslist").hide();
+					$("#description").hide();
+					$("#duedateedit").hide();
+					$("#startdateedit").hide();
+					$("#finishdateedit").hide();
+					$("#employeelist").hide();
+				   
 		            $(".modal-body #projecttype").html(data.projecttypename);
 		            $(".modal-body #status").html(data.status);
 		            $(".modal-body #projectdescription").html(data.description);
@@ -158,6 +280,57 @@ $(document).ready( function () {
 		            $(".modal-body #clientemail").html(data.clientemail);
 		          
 		            $('#myModal').modal('show');
+		            
+		            $('.modal-footer').on('click', '#editbutton', function () {
+		            	$("#projecttypelist").show();
+		            	$("#statuslist").show();
+		            	$("#description").show();
+		            	$("#duedateedit").show();
+		            	$("#startdateedit").show();
+		            	$("#finishdateedit").show();
+		            	$("#employeelist").show();
+		            });
+						
+						 var options;
+							$.ajax("/allProjectTypesName", 
+								       { type: 'GET',
+								 		 success: function (data) {		        	 
+										       options = data;
+										       	$('#projecttypelist').empty();
+										       	$.each(options, function(i, p) {
+										       	$('#projecttypelist').append($('<option></option>').val(p).html(p));
+										       	});
+								       } 
+								         
+								       });
+							
+							 var options1;
+								$.ajax("/getAllEmployiesName", 
+									       { type: 'GET',
+									 		 success: function (data) {		        	 
+											       options1 = data;
+											       
+											       	$('#employeelist').empty();
+											       	$.each(options1, function(i, p) {
+											       	$('#employeelist').append($('<option></option>').val(p).html(p));
+											       	});
+									       } 
+									         
+									       });
+									       
+							var options2;
+								$.ajax("/getAllTicketStatusNames", 
+									       { type: 'GET',
+									 		 success: function (data) {		        	 
+											       options2 = data;
+											       
+											       	$('#statuslist').empty();
+											       	$.each(options2, function(i, p) {
+											       	$('#statuslist').append($('<option></option>').val(p).html(p));
+											       	});
+									       } 
+									         
+									       });		  
 		        },
 		        error: function(){
 		            alert("error");
@@ -166,5 +339,42 @@ $(document).ready( function () {
 		});
 });
 
+function projectTypeChange() 
+{
+    sel = document.getElementById("projecttypelist"); // 
+    var priceDesc = document.getElementById("projecttype");
+    if ( sel.options[sel.selectedIndex].value == "JVA" ) {
+      priceDesc.innerHTML = sel.options[sel.selectedIndex].value;
+    }
+    else if ( sel.options[sel.selectedIndex].value == "HTML" ) {
+    	priceDesc.innerHTML = sel.options[sel.selectedIndex].value;
+    }	
+}
+
+function statusChange() 
+{
+
+	$.ajax("/getAllTicketStatusNames", 
+		       { type: 'GET',
+		 		 success: function (data) {		        	 
+				       
+				       for(var i in data){
+				    	   sel = document.getElementById("statuslist"); // 
+				    	    var priceDesc = document.getElementById("status");
+				    	    if ( sel.options[sel.selectedIndex].value == data[i] ) {
+				    	      priceDesc.innerHTML = sel.options[sel.selectedIndex].value;
+				    	    }
+				       }
+				 }
+   /* sel = document.getElementById("statuslist"); // 
+    var priceDesc = document.getElementById("status");
+    if ( sel.options[sel.selectedIndex].value == "JVA" ) {
+      priceDesc.innerHTML = sel.options[sel.selectedIndex].value;
+    }
+    else if ( sel.options[sel.selectedIndex].value == "HTML" ) {
+    	priceDesc.innerHTML = sel.options[sel.selectedIndex].value;
+    }	*/
+})
+}
 
 
