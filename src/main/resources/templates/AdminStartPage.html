@@ -15,15 +15,12 @@
 <link rel="stylesheet" href="../style/stylesheet.css">
 <!-- Responsive -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- DataTables plugin -->
-<!-- <script type="text/javascript" src="../js/jquery-3.2.1.js"></script> -->
-<!-- <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script> -->
+	
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="../style/bootstrap.css">
 <link rel="stylesheet" href="../style/datatables.css">
 <link rel="stylesheet" href="../style/jquery.dataTables.css">
 <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
-
 
 <script src="../js/script.js"></script>
 </head>
@@ -130,20 +127,28 @@
           		<h4>Status :</h4>
           		<p id="status"></p>
           		<p> <select id="statuslist" name="status" onchange="statusChange();"></select></p>
-          		<h4>Project Description :</h4>
-          		<p id="projectdescription"></p>
-          		<p><input id="description" class="input"  type="text" name="description" autocomplete="off" /></p>
+          		<div id="desc" onchange="descriptionChange()">
+          			<h4>Project Description :</h4>
+          			<p id="projectdescription"></p>
+          			<input id="description" class="input"  type="text" name="description" autocomplete="off" />
+          		</div>          		
           		<h4>Project Creation Date :</h4>
           		<p id="creationdate"></p>
-          		<h4>Project Due Date :</h4>
-				<p id="duedate"></p>
-				<p><input id="duedateedit" class="input"  type="text" name="duedate" autocomplete="off" /></p>
-				<h4>Project Start Date :</h4>
-				<p id="startdate"></p>
-				<p><input id="startdateedit" class="input"  type="text" name="startdate" autocomplete="off" /></p>
-				<h4>Project Finish Date :</h4>
-				<p id="finishdate"></p>		
-				<p><input id="finishdateedit" class="input"  type="text" name="sinishdate" autocomplete="off" /></p>		          
+          		<div id="dd" onchange="duedateonChange()">
+          			<h4>Project Due Date :</h4>
+					<p id="duedate"></p>
+					<p><input id="duedateedit" class="input"  type="date"  name="duedate" autocomplete="off" /></p>
+				</div>
+				<div id="sd" onchange="startdateonChange()">
+					<h4>Project Start Date :</h4>
+					<p id="startdate"></p>
+					<p><input id="startdateedit" class="input"  type="date" name="startdate" autocomplete="off" /></p>
+				</div>
+				<div id="fd" onchange="finishdateonChange()">
+					<h4>Project Finish Date :</h4>
+					<p id="finishdate"></p>		
+					<p><input id="finishdateedit" class="input"  type="date" name="sinishdate" autocomplete="off" /></p>
+				</div>		          
              </div>
              
          <div >   
@@ -151,9 +156,11 @@
          </div> 
          	 <br>
              <div class="modalcontent">
-             	<h4>Employee Name :</h4>
-             	<p id="employeename"></p>
-             	 	<p> <select id="employeelist" name="employee"></select></p>
+            	 <div id="emp">
+             		<h4>Employee Name :</h4>
+             		<p id="employeename"></p>
+             		<p> <select id="employeelist" name="employee" onchange="assignementChange()"></select></p>
+             	</div>
              	<h4>Employee Email :</h4>
              	<p id="employeeemail"></p>
              	<h4>Employee Specialisation :</h4>

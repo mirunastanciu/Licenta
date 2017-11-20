@@ -2,7 +2,7 @@ var idTicket;
 
 $(window).resize(function(){location.reload();});
 					   	
-
+//To Do table
 $(document).ready( function () {
 
 	 var table = $('#ticketsTable').dataTable({
@@ -17,6 +17,7 @@ $(document).ready( function () {
 						    {"mData": "status"},
 						    {"defaultContent": '<button class="btn-details" type="button">Details</button>'} ]
 	 });
+	 //Details button function
 	 $('#ticketsTable').on('click', '.btn-details', function () {
 		 var tr = $(this).closest('tr');
 		 idTicket = tr.children('td:eq(0)').text();//get the id (from db)
@@ -25,15 +26,15 @@ $(document).ready( function () {
 			   url: "getDetailsByIdTicket",
 			   data: {idTicket: idTicket},
 			   success: function(data, status, xhr){
-		            /*$('#myModal .modal-body ').html(data.clientname);*/
+		           
 				   	$("#projecttypelist").hide();
 					$("#statuslist").hide();
 					$("#description").hide();
 					$("#duedateedit").hide();
 					$("#startdateedit").hide();
 					$("#finishdateedit").hide();
-					$("#employeelist").hide();
-					
+					$("#employeelist").hide();					
+									
 		            $(".modal-body #projecttype").html(data.projecttypename);
 		            $(".modal-body #status").html(data.status);
 		            $(".modal-body #projectdescription").html(data.description);
@@ -48,10 +49,11 @@ $(document).ready( function () {
 		            
 		            $(".modal-body #clientname").html(data.clientname);
 		            $(".modal-body #clientemail").html(data.clientemail);
-		          
+		           
 		            $('#myModal').modal('show');
-		            
+		            //Edit function
 		            $('.modal-footer').on('click', '#editbutton', function () {
+		            	
 		            	$("#projecttypelist").show();
 		            	$("#statuslist").show();
 		            	$("#description").show();
@@ -101,8 +103,8 @@ $(document).ready( function () {
 									         
 									       })	
 									       
-					
-									       
+				
+					//update function
 					$('.modal-footer').on('click', '#savebutton', function () {
 					
 					});				      
@@ -117,8 +119,8 @@ $(document).ready( function () {
 	 
 });
 
-//
 
+//Assigned Table
 $(document).ready( function () {
 	 var table = $('#getAllTicketsAssigned').dataTable({
 			"sAjaxSource": "/ticketsInProgress",
@@ -135,6 +137,7 @@ $(document).ready( function () {
 			              {"mData": "status"},
 			    {"defaultContent": '<button class="btn-details" type="button">Details</button>'}]
 	 });
+	 //Details button function
 	 $('#getAllTicketsAssigned').on('click', '.btn-details', function () {
 		 var tr = $(this).closest('tr');
 		 idTicket = tr.children('td:eq(0)').text();//get the id (from db)
@@ -168,7 +171,7 @@ $(document).ready( function () {
 		            $(".modal-body #clientemail").html(data.clientemail);
 		          
 		            $('#myModal').modal('show');
-		            
+		            //Edit function
 		            $('.modal-footer').on('click', '#editbutton', function () {
 		            	$("#projecttypelist").show();
 		            	$("#statuslist").show();
@@ -227,8 +230,8 @@ $(document).ready( function () {
 	});
 });
 
-//
 
+//Done Table
 $(document).ready( function () {
 	
 	 var table = $('#getAllTicketsDone').dataTable({
@@ -236,17 +239,15 @@ $(document).ready( function () {
 			"sAjaxDataProp": "",
 			"responsive": true,
 			"order": [[ 0, "asc" ]],
-			"aoColumns": [/* { "mData": "id"},*/
+			"aoColumns": [
 			              { "mData": "idticket"},
 			              { "mData": "description"},
-			              /* { "mData": "projcttype"},*/
 			              { "mData": "projecttypename"},
 			              { "mData": "duedate"},
-			              /*{ "mData": "idstatus"},*/
 			              {"mData": "status"},
 			    {"defaultContent": '<button class="btn-details" type="button">Details</button>'}]
 	 });
-	 
+	 //Details button function
 	 $('#getAllTicketsDone').on('click', '.btn-details', function () {
 		 var tr = $(this).closest('tr');
 		 idTicket = tr.children('td:eq(0)').text();//get the id (from db)
@@ -255,7 +256,7 @@ $(document).ready( function () {
 			   url: "getDetailsByIdTicket",
 			   data: {idTicket: idTicket},
 			   success: function(data, status, xhr){
-		            /*$('#myModal .modal-body ').html(data.clientname);*/
+		        
 				   $("#projecttypelist").hide();
 					$("#statuslist").hide();
 					$("#description").hide();
@@ -280,7 +281,7 @@ $(document).ready( function () {
 		            $(".modal-body #clientemail").html(data.clientemail);
 		          
 		            $('#myModal').modal('show');
-		            
+		            //Edit function
 		            $('.modal-footer').on('click', '#editbutton', function () {
 		            	$("#projecttypelist").show();
 		            	$("#statuslist").show();
@@ -338,19 +339,27 @@ $(document).ready( function () {
 		 });   
 		});
 });
-
+//Change Project Type on Edit mode
 function projectTypeChange() 
 {
-    sel = document.getElementById("projecttypelist"); // 
-    var priceDesc = document.getElementById("projecttype");
-    if ( sel.options[sel.selectedIndex].value == "JVA" ) {
-      priceDesc.innerHTML = sel.options[sel.selectedIndex].value;
-    }
-    else if ( sel.options[sel.selectedIndex].value == "HTML" ) {
-    	priceDesc.innerHTML = sel.options[sel.selectedIndex].value;
-    }	
-}
+	
 
+	$.ajax("/allProjectTypesName", 
+		       { type: 'GET',
+		 		 success: function (data) {		        	 
+				       
+				       for(var i in data){
+				    	   sel = document.getElementById("projecttypelist"); // 
+				    	    var projecttype = document.getElementById("projecttype");
+				    	    if ( sel.options[sel.selectedIndex].value == data[i] ) {
+				    	    	projecttype.innerHTML = sel.options[sel.selectedIndex].value;
+				    	    }
+				       }
+				 }
+	})
+   
+}
+//Change Status on Edit mode
 function statusChange() 
 {
 
@@ -360,21 +369,99 @@ function statusChange()
 				       
 				       for(var i in data){
 				    	   sel = document.getElementById("statuslist"); // 
-				    	    var priceDesc = document.getElementById("status");
+				    	    var status = document.getElementById("status");
 				    	    if ( sel.options[sel.selectedIndex].value == data[i] ) {
-				    	      priceDesc.innerHTML = sel.options[sel.selectedIndex].value;
+				    	    	status.innerHTML = sel.options[sel.selectedIndex].value;
 				    	    }
 				       }
 				 }
-   /* sel = document.getElementById("statuslist"); // 
-    var priceDesc = document.getElementById("status");
-    if ( sel.options[sel.selectedIndex].value == "JVA" ) {
-      priceDesc.innerHTML = sel.options[sel.selectedIndex].value;
-    }
-    else if ( sel.options[sel.selectedIndex].value == "HTML" ) {
-    	priceDesc.innerHTML = sel.options[sel.selectedIndex].value;
-    }	*/
-})
+	})
 }
+
+
+//Change description on Edit mode
+function descriptionChange(){
+
+	$("#desc").click(function(e) { 
+		var desc = $("#desc p").text();
+		var descedit = document.getElementById("description");
+		 if(desc !== descedit && $(descedit).val().length !== 0 ){
+			 if(e.target.id !== "description"){
+				$(".modal-body #projectdescription").html(descedit.value);
+	    	 	
+	    		}
+			 }
+	});
+}
+
+//Change Due Date
+function duedateonChange(){
+
+	$("#dd").click(function(e) { 
+		var duedate =  $("#dd p").text();;
+	    var duedateedit = document.getElementById("duedateedit");
+	    if(duedate.value !== duedateedit.value && $(duedateedit).val().length !== 0 ){
+	    	if(e.target.id !== "duedateedit" ){
+	    		$(".modal-body #duedate").html(duedateedit.value);
+	    	 }
+		}
+	});
+}
+
+//Change Start Date
+function startdateonChange(){
+
+	$("#sd").click(function(e) {
+		var startdate =  $("#sd p").text();
+	    var startdateedit = document.getElementById("startdateedit");
+		if(startdate.value !== startdateedit && $(startdateedit).val().length !== 0 ){
+	    	 if(e.target.id !== "startdateedit" ){
+	    		$(".modal-body #startdate").html(startdateedit.value);
+	    	 }
+		}
+	})
+}
+
+//Change Finish Date
+function finishdateonChange(){
+
+	$("#fd").click(function(e) {
+		var finishdate =  $("#fd p").text();;
+	    var finishdateedit = document.getElementById("finishdateedit");
+		if(finishdate.value !== finishdateedit && $(finishdateedit).val().length !== 0 ){
+	    	 if(e.target.id !== "finishdateedit" ){
+	    		$(".modal-body #finishdate").html(finishdateedit.value);
+	    	 }
+		}
+	})
+}
+//Change assignement
+function assignementChange(){
+		
+	 sel = document.getElementById("employeelist"); 
+	 name = sel.options[sel.selectedIndex].value;
+	 console.log(name)
+	 $.ajax({
+		   method: "POST",
+		   url: "getEmployeeByName",
+		   data: {name: name},
+		   success: function(data, status, xhr){
+			   var name1=data.firstname+" "+data.lastname;
+			  $(".modal-body #employeename").html(name1);
+			  $(".modal-body #employeeemail").html(data.email);
+			  var idspecialisation = data.idspecialisation;
+			  $.ajax({
+				   method: "POST",
+				   url: "getSpecialisationById",
+				   data: {idspecialisation: idspecialisation},
+				   success: function(data, status, xhr){
+					   $(".modal-body #employeespecialisation").html(data.name);
+				 }
+			  })
+	}
+	 })
+}
+
+
 
 

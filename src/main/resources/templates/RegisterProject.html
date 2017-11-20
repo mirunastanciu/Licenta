@@ -20,7 +20,7 @@
 	</div> 
 
 <div class="container">  
-	<form  name="addTicket" action="/addTicket" onsubmit="return ValidateForm()" >
+	<form  name="addTicket" action="/addTicket" >
 	
     	<p>Project Type</p>
     	<p> <select id="projecttypelist" name="projecttype"></select></p>
@@ -31,7 +31,7 @@
         <p> <select id="assigne" name="assignpersson"></select></p>
         
         <div>
-        	<p>Due Date <input class="input"  type="text" name="duedate" autocomplete="off" required /></p>
+        	<p>Due Date <input class="input"  type="date" name="duedate" autocomplete="off" required /></p>
              
         </div>      
         

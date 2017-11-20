@@ -26,5 +26,16 @@ public class EmployeeService {
 		 }
 		return null;
 	}
+	
+	public  Employee getEmployeeByName(String a){
+		ArrayList<Employee> e = getAllEmployies();
+		 for(int i=0;i<e.size();i++){
+			 String b = e.get(i).getFirstname() +" "+ e.get(i).getLastname();
+			 if(b.equals(a)){
+				 return e.get(i);
+			 }
+		 }
+		return null;
+	}
 
 }

@@ -1,6 +1,5 @@
 package com.test.app.ticket;
 
-import java.sql.Date;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;

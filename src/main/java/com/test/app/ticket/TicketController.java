@@ -143,12 +143,38 @@ public class TicketController {
 		
 		t.setIdstatus(1);
 		
+		ticketService.update(3,t);
 		ModelAndView model = new ModelAndView("redirect:/administratorStartPage");
 		return model;
 		
 		
 		
 	}
+	/*
+	@RequestMapping(value = "/updateTicket" , method=RequestMethod.POST)
+	public ModelAndView addTicket(@RequestParam("projecttype") String projecttype ,
+							@RequestParam("description") String description,
+							@RequestParam("assignpersson") String assignpersson,
+							@RequestParam("duedate") Date duedate){
+		Ticket t = new Ticket();
+		t.setId(1);
+		t.setDescription(description);
+		t.setProjcttype(getIdProjectTypeByName(projecttype));
+		t.setIdemployee(getIdEmployeeByName(assignpersson));
+		t.setDuedate(duedate);
+		t.setIdclient(1);
+		
+		t.setIdstatus(1);
+		
+		ticketService.addTicket(t);
+		ModelAndView model = new ModelAndView("redirect:/administratorStartPage");
+		return model;
+		
+		
+		
+	}
+	*/
+	
 /*	@ResponseBody
 	@RequestMapping(value="/updateTicket", method=RequestMethod.PUT )
 	public void updateTicket(@RequestParam(value = "idTicket") int id,@RequestParam(value = "newprojecttype") String newprojecttype,
