@@ -26,4 +26,12 @@ public class AccountTypeController {
 		ModelAndView m = new ModelAndView("AdminStartPage");
 		return m;
 	}
+	
+	@RequestMapping("/adminiAccountPage")
+	public ModelAndView getAdminAccountPage() {
+		ModelAndView m = new ModelAndView("AdminAccountPage");
+		return m;
+	}
+	
+	
 }

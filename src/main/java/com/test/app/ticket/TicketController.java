@@ -167,7 +167,18 @@ public class TicketController {
 		t.setDescription(projectdescription);
 		t.setProjcttype(getIdProjectTypeByName(projecttype));
 		t.setIdemployee(getIdEmployeeByName(employeename));
-		t.setDuedate(duedate);
+		if(duedate==null){
+			t.setDuedate(null);
+		}else{
+			t.setDuedate(duedate);
+		}
+		
+		if(duedate==null){
+			t.setStartdate(null);
+		}else{
+			t.setStartdate(startdate);
+		}
+		
 		t.setStartdate(startdate);
 		t.setFinishdate(finishdate);
 		t.setIdstatus(ticketStatusService.getStatusIdByName(status));
