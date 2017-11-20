@@ -105,7 +105,7 @@
 	
 	
 	<div class="modal fade modalTD" id="myModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
     
       <!-- Modal content-->
       <div class="modal-content">
@@ -115,68 +115,73 @@
           <h4 class="modal-title">Ticket Details</h4>
         </div>
         <div class="modal-body">
-        <div >
+        <div  class="InLineDiv-StAdmPg">
+        <div>
           <h2>Ticket Details </h2>
-         </div>
+         </div >
           	 <br>
           	 
-             <div class="modalcontent">
-          		<h4>Type Project :</h4>
+             <div class="modalcontent " >
+          		<h4>Type Project </h4>
           		<p id="projecttype"></p>
           		<p> <select id="projecttypelist" name="projecttype" onchange="projectTypeChange();"></select></p>
-          		<h4>Status :</h4>
+          		<h4>Status </h4>
           		<p id="status"></p>
           		<p> <select id="statuslist" name="status" onchange="statusChange();"></select></p>
           		<div id="desc" onchange="descriptionChange()">
-          			<h4>Project Description :</h4>
+          			<h4>Project Description </h4>
           			<p id="projectdescription"></p>
           			<input id="description" class="input"  type="text" name="description" autocomplete="off" />
           		</div>          		
-          		<h4>Project Creation Date :</h4>
+          		<h4>Project Creation Date </h4>
           		<p id="creationdate"></p>
           		<div id="dd" onchange="duedateonChange()">
-          			<h4>Project Due Date :</h4>
+          			<h4>Project Due Date </h4>
 					<p id="duedate"></p>
 					<p><input id="duedateedit" class="input"  type="date"  name="duedate" autocomplete="off" /></p>
 				</div>
 				<div id="sd" onchange="startdateonChange()">
-					<h4>Project Start Date :</h4>
+					<h4>Project Start Date </h4>
 					<p id="startdate"></p>
 					<p><input id="startdateedit" class="input"  type="date" name="startdate" autocomplete="off" /></p>
 				</div>
 				<div id="fd" onchange="finishdateonChange()">
-					<h4>Project Finish Date :</h4>
+					<h4>Project Finish Date </h4>
 					<p id="finishdate"></p>		
 					<p><input id="finishdateedit" class="input"  type="date" name="sinishdate" autocomplete="off" /></p>
 				</div>		          
              </div>
-             
+            </div> 
+         <div  class="InLineDiv-StAdmPg">
          <div >   
          <h2>Employee Details</h2>
          </div> 
          	 <br>
-             <div class="modalcontent">
+             <div class="modalcontent ">
             	 <div id="emp">
-             		<h4>Employee Name :</h4>
+             		<h4>Employee Name </h4>
              		<p id="employeename"></p>
              		<p> <select id="employeelist" name="employee" onchange="assignementChange()"></select></p>
              	</div>
-             	<h4>Employee Email :</h4>
+             	<h4>Employee Email</h4>
              	<p id="employeeemail"></p>
-             	<h4>Employee Specialisation :</h4>
+             	<h4>Employee Specialisation </h4>
              	<p id="employeespecialisation"></p>
              </div>
-         <div >   
+             </div>
+         <div class="InLineDiv-StAdmPg">    
+         <div>
          <h2>Client Details</h2> 
          </div> 
         	 <br>   
              <div class="modalcontent">
-             	<h4>Client Name :</h4>
+             	<h4>Client Name </h4>
              	<p id="clientname"></p>
-             	<h4>Client Email :</h4>
+             	<h4>Client Email </h4>
              	<p id="clientemail"></p>
              </div>
-        </div>
+        
+       </div>
         <div class="modal-footer">
         
           <button id="editbutton" type="button" class="btn btn-default">Edit</button>

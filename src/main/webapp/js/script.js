@@ -1,17 +1,17 @@
 var idTicket;
 
 $(window).resize(function(){location.reload();});
-					   	
+
 //To Do table
 $(document).ready( function () {
 
 	 var table = $('#ticketsTable').dataTable({
-			"sAjaxSource": "/ticketsToDo",		
+			"sAjaxSource": "/ticketsToDo",
 			"sAjaxDataProp": "",
 			"responsive": true,
 			"order": [[ 0, "asc" ]],
 			"aoColumns": [	{"mData": "idticket"},
-						    {"mData": "description"},						  
+						    {"mData": "description"},
 						    {"mData": "projecttypename"},
 						    {"mData": "duedate"},
 						    {"mData": "status"},
@@ -26,15 +26,15 @@ $(document).ready( function () {
 			   url: "getDetailsByIdTicket",
 			   data: {idTicket: idTicket},
 			   success: function(data, status, xhr){
-		           
+
 				   	$("#projecttypelist").hide();
 					$("#statuslist").hide();
 					$("#description").hide();
 					$("#duedateedit").hide();
 					$("#startdateedit").hide();
 					$("#finishdateedit").hide();
-					$("#employeelist").hide();					
-									
+					$("#employeelist").hide();
+
 		            $(".modal-body #projecttype").html(data.projecttypename);
 		            $(".modal-body #status").html(data.status);
 		            $(".modal-body #projectdescription").html(data.description);
@@ -42,18 +42,18 @@ $(document).ready( function () {
 		            $(".modal-body #duedate").html(data.duedate);
 		            $(".modal-body #startdate").html(data.startdate);
 		            $(".modal-body #finishdate").html(data.finishdate);
-		          
+
 		            $(".modal-body #employeename").html(data.employeename);
 		            $(".modal-body #employeeemail").html(data.employeeemail);
 		            $(".modal-body #employeespecialisation").html(data.employeespecialisation);
-		            
+
 		            $(".modal-body #clientname").html(data.clientname);
 		            $(".modal-body #clientemail").html(data.clientemail);
-		           
+
 		            $('#myModal').modal('show');
 		            //Edit function
 		            $('.modal-footer').on('click', '#editbutton', function () {
-		            	
+
 		            	$("#projecttypelist").show();
 		            	$("#statuslist").show();
 		            	$("#description").show();
@@ -62,61 +62,86 @@ $(document).ready( function () {
 		            	$("#finishdateedit").show();
 		            	$("#employeelist").show();
 		            });
-						
+
 						 var options;
-							$.ajax("/allProjectTypesName", 
+							$.ajax("/allProjectTypesName",
 								       { type: 'GET',
-								 		 success: function (data) {		        	 
+								 		 success: function (data) {
 										       options = data;
 										       	$('#projecttypelist').empty();
 										       	$.each(options, function(i, p) {
 										       	$('#projecttypelist').append($('<option></option>').val(p).html(p));
 										       	});
-								       } 
-								         
+								       }
+
 								       });
-							
+
 							 var options1;
-								$.ajax("/getAllEmployiesName", 
+								$.ajax("/getAllEmployiesName",
 									       { type: 'GET',
-									 		 success: function (data) {		        	 
+									 		 success: function (data) {
 											       options1 = data;
-											       
+
 											       	$('#employeelist').empty();
 											       	$.each(options1, function(i, p) {
 											       	$('#employeelist').append($('<option></option>').val(p).html(p));
 											       	});
-									       } 
-									         
+									       }
+
 									       })
 							var options2;
-								$.ajax("/getAllTicketStatusNames", 
+								$.ajax("/getAllTicketStatusNames",
 									       { type: 'GET',
-									 		 success: function (data) {		        	 
+									 		 success: function (data) {
 											       options2 = data;
-											       
+
 											       	$('#statuslist').empty();
 											       	$.each(options2, function(i, p) {
 											       	$('#statuslist').append($('<option></option>').val(p).html(p));
 											       	});
-									       } 
-									         
-									       })	
-									       
-				
+									       }
+
+									       })
+
+
 					//update function
 					$('.modal-footer').on('click', '#savebutton', function () {
-					
-					});				      
-		            	
-		        },
-		        error: function(){
-		            alert("error");
-		        }  
-		 });	   
+						idTicket = tr.children('td:eq(0)').text();//get the id (from db)
+						var projecttype =  $(".modalcontent #projecttype").text();
+						var status =  $(".modalcontent #status").text();
+						var projectdescription =  $(".modalcontent #projectdescription").text();
+						var duedate =  $("#dd #duedate").text();
+						var startdate =  $("#sd #startdate").text();
+						var finishdate =  $("#fd #finishdate").text();
+						var employeename =  $("#emp #employeename").text();
+
+
+						 $.ajax({
+							   method: "POST",
+							   url: "updateTicket",
+							   data: [{idTicket: idTicket},
+								   	  {projecttype: projecttype},
+								   	  {status: status},
+								   	  {projectdescription: projectdescription},
+								   	  {duedate: duedate},
+								      {startdate: startdate},
+								      {finishdate: finishdate},
+								      {startdate: startdate}
+								   		],
+							   success: function(data, status, xhr){
+
+							   }, error: function(){
+								   alert("error");
+								   }
+							   });
+
+					});
+
+				}, error: function(){
+					alert("error");
+				  }
+		});
 	});
-	
-	 
 });
 
 
@@ -154,7 +179,7 @@ $(document).ready( function () {
 					$("#startdateedit").hide();
 					$("#finishdateedit").hide();
 					$("#employeelist").hide();
-				   
+
 		            $(".modal-body #projecttype").html(data.projecttypename);
 		            $(".modal-body #status").html(data.status);
 		            $(".modal-body #projectdescription").html(data.description);
@@ -162,14 +187,14 @@ $(document).ready( function () {
 		            $(".modal-body #duedate").html(data.duedate);
 		            $(".modal-body #startdate").html(data.startdate);
 		            $(".modal-body #finishdate").html(data.finishdate);
-		          
+
 		            $(".modal-body #employeename").html(data.employeename);
 		            $(".modal-body #employeeemail").html(data.employeeemail);
 		            $(".modal-body #employeespecialisation").html(data.employeespecialisation);
-		            
+
 		            $(".modal-body #clientname").html(data.clientname);
 		            $(".modal-body #clientemail").html(data.clientemail);
-		          
+
 		            $('#myModal').modal('show');
 		            //Edit function
 		            $('.modal-footer').on('click', '#editbutton', function () {
@@ -181,51 +206,51 @@ $(document).ready( function () {
 		            	$("#finishdateedit").show();
 		            	$("#employeelist").show();
 		            });
-						
+
 						 var options;
-							$.ajax("/allProjectTypesName", 
+							$.ajax("/allProjectTypesName",
 								       { type: 'GET',
-								 		 success: function (data) {		        	 
+								 		 success: function (data) {
 										       options = data;
 										       	$('#projecttypelist').empty();
 										       	$.each(options, function(i, p) {
 										       	$('#projecttypelist').append($('<option></option>').val(p).html(p));
 										       	});
-								       } 
-								         
+								       }
+
 								       });
-							
+
 							 var options1;
-								$.ajax("/getAllEmployiesName", 
+								$.ajax("/getAllEmployiesName",
 									       { type: 'GET',
-									 		 success: function (data) {		        	 
+									 		 success: function (data) {
 											       options1 = data;
-											       
+
 											       	$('#employeelist').empty();
 											       	$.each(options1, function(i, p) {
 											       	$('#employeelist').append($('<option></option>').val(p).html(p));
 											       	});
-									       } 
-									         
+									       }
+
 									       });
-									       
+
 							var options2;
-								$.ajax("/getAllTicketStatusNames", 
+								$.ajax("/getAllTicketStatusNames",
 									       { type: 'GET',
-									 		 success: function (data) {		        	 
+									 		 success: function (data) {
 											       options2 = data;
-											       
+
 											       	$('#statuslist').empty();
 											       	$.each(options2, function(i, p) {
 											       	$('#statuslist').append($('<option></option>').val(p).html(p));
 											       	});
-									       } 
-									         
-									       });	       
+									       }
+
+									       });
 		        },
 		        error: function(){
 		            alert("error");
-		        }  
+		        }
 		 });
 	});
 });
@@ -233,7 +258,7 @@ $(document).ready( function () {
 
 //Done Table
 $(document).ready( function () {
-	
+
 	 var table = $('#getAllTicketsDone').dataTable({
 			"sAjaxSource": "/ticketsDone",
 			"sAjaxDataProp": "",
@@ -256,7 +281,7 @@ $(document).ready( function () {
 			   url: "getDetailsByIdTicket",
 			   data: {idTicket: idTicket},
 			   success: function(data, status, xhr){
-		        
+
 				   $("#projecttypelist").hide();
 					$("#statuslist").hide();
 					$("#description").hide();
@@ -264,7 +289,7 @@ $(document).ready( function () {
 					$("#startdateedit").hide();
 					$("#finishdateedit").hide();
 					$("#employeelist").hide();
-				   
+
 		            $(".modal-body #projecttype").html(data.projecttypename);
 		            $(".modal-body #status").html(data.status);
 		            $(".modal-body #projectdescription").html(data.description);
@@ -272,14 +297,14 @@ $(document).ready( function () {
 		            $(".modal-body #duedate").html(data.duedate);
 		            $(".modal-body #startdate").html(data.startdate);
 		            $(".modal-body #finishdate").html(data.finishdate);
-		          
+
 		            $(".modal-body #employeename").html(data.employeename);
 		            $(".modal-body #employeeemail").html(data.employeeemail);
 		            $(".modal-body #employeespecialisation").html(data.employeespecialisation);
-		            
+
 		            $(".modal-body #clientname").html(data.clientname);
 		            $(".modal-body #clientemail").html(data.clientemail);
-		          
+
 		            $('#myModal').modal('show');
 		            //Edit function
 		            $('.modal-footer').on('click', '#editbutton', function () {
@@ -291,65 +316,65 @@ $(document).ready( function () {
 		            	$("#finishdateedit").show();
 		            	$("#employeelist").show();
 		            });
-						
+
 						 var options;
-							$.ajax("/allProjectTypesName", 
+							$.ajax("/allProjectTypesName",
 								       { type: 'GET',
-								 		 success: function (data) {		        	 
+								 		 success: function (data) {
 										       options = data;
 										       	$('#projecttypelist').empty();
 										       	$.each(options, function(i, p) {
 										       	$('#projecttypelist').append($('<option></option>').val(p).html(p));
 										       	});
-								       } 
-								         
+								       }
+
 								       });
-							
+
 							 var options1;
-								$.ajax("/getAllEmployiesName", 
+								$.ajax("/getAllEmployiesName",
 									       { type: 'GET',
-									 		 success: function (data) {		        	 
+									 		 success: function (data) {
 											       options1 = data;
-											       
+
 											       	$('#employeelist').empty();
 											       	$.each(options1, function(i, p) {
 											       	$('#employeelist').append($('<option></option>').val(p).html(p));
 											       	});
-									       } 
-									         
+									       }
+
 									       });
-									       
+
 							var options2;
-								$.ajax("/getAllTicketStatusNames", 
+								$.ajax("/getAllTicketStatusNames",
 									       { type: 'GET',
-									 		 success: function (data) {		        	 
+									 		 success: function (data) {
 											       options2 = data;
-											       
+
 											       	$('#statuslist').empty();
 											       	$.each(options2, function(i, p) {
 											       	$('#statuslist').append($('<option></option>').val(p).html(p));
 											       	});
-									       } 
-									         
-									       });		  
+									       }
+
+									       });
 		        },
 		        error: function(){
 		            alert("error");
-		        }  
-		 });   
+		        }
+		 });
 		});
 });
 //Change Project Type on Edit mode
-function projectTypeChange() 
+function projectTypeChange()
 {
-	
 
-	$.ajax("/allProjectTypesName", 
+
+	$.ajax("/allProjectTypesName",
 		       { type: 'GET',
-		 		 success: function (data) {		        	 
-				       
+		 		 success: function (data) {
+
 				       for(var i in data){
-				    	   sel = document.getElementById("projecttypelist"); // 
+				    	   sel = document.getElementById("projecttypelist"); //
 				    	    var projecttype = document.getElementById("projecttype");
 				    	    if ( sel.options[sel.selectedIndex].value == data[i] ) {
 				    	    	projecttype.innerHTML = sel.options[sel.selectedIndex].value;
@@ -357,18 +382,18 @@ function projectTypeChange()
 				       }
 				 }
 	})
-   
+
 }
 //Change Status on Edit mode
-function statusChange() 
+function statusChange()
 {
 
-	$.ajax("/getAllTicketStatusNames", 
+	$.ajax("/getAllTicketStatusNames",
 		       { type: 'GET',
-		 		 success: function (data) {		        	 
-				       
+		 		 success: function (data) {
+
 				       for(var i in data){
-				    	   sel = document.getElementById("statuslist"); // 
+				    	   sel = document.getElementById("statuslist"); //
 				    	    var status = document.getElementById("status");
 				    	    if ( sel.options[sel.selectedIndex].value == data[i] ) {
 				    	    	status.innerHTML = sel.options[sel.selectedIndex].value;
@@ -382,13 +407,13 @@ function statusChange()
 //Change description on Edit mode
 function descriptionChange(){
 
-	$("#desc").click(function(e) { 
+	$("#desc").click(function(e) {
 		var desc = $("#desc p").text();
 		var descedit = document.getElementById("description");
 		 if(desc !== descedit && $(descedit).val().length !== 0 ){
 			 if(e.target.id !== "description"){
 				$(".modal-body #projectdescription").html(descedit.value);
-	    	 	
+
 	    		}
 			 }
 	});
@@ -397,8 +422,8 @@ function descriptionChange(){
 //Change Due Date
 function duedateonChange(){
 
-	$("#dd").click(function(e) { 
-		var duedate =  $("#dd p").text();;
+	$("#dd").click(function(e) {
+		var duedate =  $("#dd p").text();
 	    var duedateedit = document.getElementById("duedateedit");
 	    if(duedate.value !== duedateedit.value && $(duedateedit).val().length !== 0 ){
 	    	if(e.target.id !== "duedateedit" ){
@@ -437,8 +462,8 @@ function finishdateonChange(){
 }
 //Change assignement
 function assignementChange(){
-		
-	 sel = document.getElementById("employeelist"); 
+
+	 sel = document.getElementById("employeelist");
 	 name = sel.options[sel.selectedIndex].value;
 	 console.log(name)
 	 $.ajax({
