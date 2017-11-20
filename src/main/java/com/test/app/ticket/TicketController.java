@@ -145,7 +145,7 @@ public class TicketController {
 
 		t.setIdstatus(1);
 
-		ticketService.update(3,t);
+		ticketService.addTicket(t);
 		ModelAndView model = new ModelAndView("redirect:/administratorStartPage");
 		return model;
 
@@ -154,15 +154,15 @@ public class TicketController {
 	}
 
 	@RequestMapping(value = "/updateTicket" , method=RequestMethod.POST)
-	public ModelAndView updateTicket(@RequestParam("idTicket") int idTicket ,
-							@RequestParam("projecttype") String projecttype,
-							@RequestParam("status") String status,
-							@RequestParam("projectdescription") String projectdescription,
-							@RequestParam("duedate") Date duedate,
-							@RequestParam("startdate") Date startdate,
-							@RequestParam("finishdate") Date finishdate,
-							@RequestParam("employeename") String employeename){
-		Ticket t = new Ticket();
+	public ModelAndView updateTicket(@RequestParam(value="idTicket") int idTicket ,
+							@RequestParam(value="projecttype") String projecttype,
+							@RequestParam(value="status") String status,
+							@RequestParam(value="projectdescription") String projectdescription,
+							@RequestParam(value="duedate") Date duedate,
+							@RequestParam(value="startdate") Date startdate,
+							@RequestParam(value="finishdate") Date finishdate,
+							@RequestParam(value="employeename") String employeename){
+		Ticket t = ticketService.getTicketById(idTicket);
 		t.setId(idTicket);
 		t.setDescription(projectdescription);
 		t.setProjcttype(getIdProjectTypeByName(projecttype));
@@ -171,7 +171,7 @@ public class TicketController {
 		t.setStartdate(startdate);
 		t.setFinishdate(finishdate);
 		t.setIdstatus(ticketStatusService.getStatusIdByName(status));
-		ticketService.update(idTicket, t);
+		ticketService.addTicket(t);
 
 		ModelAndView model = new ModelAndView("redirect:/administratorStartPage");
 		return model;

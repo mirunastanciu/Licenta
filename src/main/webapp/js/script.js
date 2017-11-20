@@ -102,11 +102,9 @@ $(document).ready( function () {
 									       }
 
 									       })
-
-
 					//update function
 					$('.modal-footer').on('click', '#savebutton', function () {
-						idTicket = tr.children('td:eq(0)').text();//get the id (from db)
+						console.log(idTicket)//get the id (from db)
 						var projecttype =  $(".modalcontent #projecttype").text();
 						var status =  $(".modalcontent #status").text();
 						var projectdescription =  $(".modalcontent #projectdescription").text();
@@ -115,30 +113,30 @@ $(document).ready( function () {
 						var finishdate =  $("#fd #finishdate").text();
 						var employeename =  $("#emp #employeename").text();
 
-
 						 $.ajax({
 							   method: "POST",
 							   url: "updateTicket",
-							   data: [{idTicket: idTicket},
-								   	  {projecttype: projecttype},
-								   	  {status: status},
-								   	  {projectdescription: projectdescription},
-								   	  {duedate: duedate},
-								      {startdate: startdate},
-								      {finishdate: finishdate},
-								      {startdate: startdate}
-								   		],
+							   data:
+							          {"idTicket": idTicket,
+								   	  "projecttype": projecttype,
+								   	  "status": status,
+								   	  "projectdescription": projectdescription,
+								   	  "duedate": duedate,
+								      "startdate": startdate,
+								      "finishdate": finishdate,
+								      "employeename": employeename}
+								   		,
 							   success: function(data, status, xhr){
-
+								   $('#myModal').modal('hide');
+								   location.reload();
 							   }, error: function(){
-								   alert("error");
+								   alert("error Update Method");
 								   }
 							   });
-
 					});
 
 				}, error: function(){
-					alert("error");
+					alert("error opening modal");
 				  }
 		});
 	});
@@ -247,6 +245,39 @@ $(document).ready( function () {
 									       }
 
 									       });
+								
+								//update function
+								$('.modal-footer').on('click', '#savebutton', function () {
+									console.log(idTicket)//get the id (from db)
+									var projecttype =  $(".modalcontent #projecttype").text();
+									var status =  $(".modalcontent #status").text();
+									var projectdescription =  $(".modalcontent #projectdescription").text();
+									var duedate =  $("#dd #duedate").text();
+									var startdate =  $("#sd #startdate").text();
+									var finishdate =  $("#fd #finishdate").text();
+									var employeename =  $("#emp #employeename").text();
+
+									 $.ajax({
+										   method: "POST",
+										   url: "updateTicket",
+										   data:
+										          {"idTicket": idTicket,
+											   	  "projecttype": projecttype,
+											   	  "status": status,
+											   	  "projectdescription": projectdescription,
+											   	  "duedate": duedate,
+											      "startdate": startdate,
+											      "finishdate": finishdate,
+											      "employeename": employeename}
+											   		,
+										   success: function(data, status, xhr){
+											   $('#myModal').modal('hide');
+											   location.reload();
+										   }, error: function(){
+											   alert("error Update Method");
+											   }
+										   });
+								});		
 		        },
 		        error: function(){
 		            alert("error");
@@ -357,6 +388,38 @@ $(document).ready( function () {
 									       }
 
 									       });
+								//update function
+								$('.modal-footer').on('click', '#savebutton', function () {
+									console.log(idTicket)//get the id (from db)
+									var projecttype =  $(".modalcontent #projecttype").text();
+									var status =  $(".modalcontent #status").text();
+									var projectdescription =  $(".modalcontent #projectdescription").text();
+									var duedate =  $("#dd #duedate").text();
+									var startdate =  $("#sd #startdate").text();
+									var finishdate =  $("#fd #finishdate").text();
+									var employeename =  $("#emp #employeename").text();
+
+									 $.ajax({
+										   method: "POST",
+										   url: "updateTicket",
+										   data:
+										          {"idTicket": idTicket,
+											   	  "projecttype": projecttype,
+											   	  "status": status,
+											   	  "projectdescription": projectdescription,
+											   	  "duedate": duedate,
+											      "startdate": startdate,
+											      "finishdate": finishdate,
+											      "employeename": employeename}
+											   		,
+										   success: function(data, status, xhr){
+											   $('#myModal').modal('hide');
+											   location.reload();
+										   }, error: function(){
+											   alert("error Update Method");
+											   }
+										   });
+								});			
 		        },
 		        error: function(){
 		            alert("error");
