@@ -117,13 +117,15 @@
           <h4 class="modal-title">Ticket Details</h4>
         </div>
         <div class="modal-body">
-        <div  class="InLineDiv-StAdmPg">
+        <div >
+        
         <div>
           <h2>Ticket Details </h2>
          </div >
           	 <br>
           	 
              <div class="modalcontent " >
+             <div id="div1" class="InLineDiv-StAdmPg " >
                 <h4>Ticket ID </h4>
           		<p id="ticketid"></p>
           		<h4>Type Project </h4>
@@ -136,7 +138,9 @@
           			<h4>Project Description </h4>
           			<p id="projectdescription"></p>
           			<input id="description" class="input"  type="text" name="description" autocomplete="off" />
-          		</div>          		
+          		</div>  
+          	</div>	  
+          	<div id="div2" class="InLineDiv-StAdmPg">     		
           		<h4>Project Creation Date </h4>
           		<p id="creationdate"></p>
           		<div id="dd" onchange="duedateonChange()">
@@ -153,7 +157,8 @@
 					<h4>Project Finish Date </h4>
 					<p id="finishdate"></p>		
 					<p><input id="finishdateedit" class="input"  type="date" name="sinishdate" autocomplete="off" /></p>
-				</div>		          
+				</div>
+			</div> 			          
              </div>
             </div> 
          <div  class="InLineDiv-StAdmPg">
@@ -161,7 +166,7 @@
          <h2>Employee Details</h2>
          </div> 
          	 <br>
-             <div class="modalcontent ">
+             <div class="modalcontent " >
             	 <div id="emp">
              		<h4>Employee Name </h4>
              		<p id="employeename"></p>

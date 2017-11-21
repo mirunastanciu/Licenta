@@ -151,7 +151,7 @@ input[type=submit]:hover {
 .InLineDiv-StAdmPg{
     display: inline-block;
     vertical-align:top;
-    margin-left: 30px;
+    margin-left: 60px;
     margin-right: 40px;
 }
 
@@ -266,5 +266,13 @@ input:required:focus {
 .header{
 	background-color: #2196F3;
 }
+/* 
+.divleft{
+	margin-legt:50px;
+}
+
+.divright{
+	margin-right:50px;
+} */
 
 
