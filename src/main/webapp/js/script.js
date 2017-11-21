@@ -127,6 +127,10 @@ $(document).ready( function () {
 								      "employeename": employeename}
 								   		,
 							   success: function(data, status, xhr){
+
+								   console.log(duedate);
+										   console.log(startdate);
+												   console.log(finishdate);
 								   $('#myModal').modal('hide');
 								   location.reload();
 							   }, error: function(){
@@ -245,7 +249,7 @@ $(document).ready( function () {
 									       }
 
 									       });
-								
+
 								//update function
 								$('.modal-footer').on('click', '#savebutton', function () {
 									console.log(idTicket)//get the id (from db)
@@ -277,7 +281,7 @@ $(document).ready( function () {
 											   alert("error Update Method");
 											   }
 										   });
-								});		
+								});
 		        },
 		        error: function(){
 		            alert("error");
@@ -419,7 +423,7 @@ $(document).ready( function () {
 											   alert("error Update Method");
 											   }
 										   });
-								});			
+								});
 		        },
 		        error: function(){
 		            alert("error");

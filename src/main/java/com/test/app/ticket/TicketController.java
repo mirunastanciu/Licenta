@@ -1,6 +1,9 @@
 package com.test.app.ticket;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -158,29 +161,31 @@ public class TicketController {
 							@RequestParam(value="projecttype") String projecttype,
 							@RequestParam(value="status") String status,
 							@RequestParam(value="projectdescription") String projectdescription,
-							@RequestParam(value="duedate") Date duedate,
-							@RequestParam(value="startdate") Date startdate,
-							@RequestParam(value="finishdate") Date finishdate,
-							@RequestParam(value="employeename") String employeename){
+							@RequestParam(value="duedate") String duedate,
+							@RequestParam(value="startdate") String startdate,
+							@RequestParam(value="finishdate") String finishdate,
+							@RequestParam(value="employeename") String employeename) throws ParseException{
 		Ticket t = ticketService.getTicketById(idTicket);
 		t.setId(idTicket);
 		t.setDescription(projectdescription);
 		t.setProjcttype(getIdProjectTypeByName(projecttype));
 		t.setIdemployee(getIdEmployeeByName(employeename));
-		if(duedate==null){
-			t.setDuedate(null);
-		}else{
-			t.setDuedate(duedate);
+
+		if(duedate.equals("")==false){
+			   java.sql.Date parseDate = java.sql.Date.valueOf(duedate);
+			   t.setDuedate(parseDate);
 		}
-		
-		if(duedate==null){
-			t.setStartdate(null);
-		}else{
-			t.setStartdate(startdate);
+
+		if(startdate.equals("")==false){
+			java.sql.Date parseDate = java.sql.Date.valueOf(startdate);
+			   t.setStartdate(parseDate);
 		}
-		
-		t.setStartdate(startdate);
-		t.setFinishdate(finishdate);
+
+		if(finishdate.equals("")==false){
+			java.sql.Date parseDate = java.sql.Date.valueOf(finishdate);
+			   t.setFinishdate(parseDate);
+		}
+
 		t.setIdstatus(ticketStatusService.getStatusIdByName(status));
 		ticketService.addTicket(t);
 
