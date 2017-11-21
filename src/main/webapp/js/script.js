@@ -10,13 +10,16 @@ $(document).ready( function () {
 			"sAjaxDataProp": "",
 			"responsive": true,
 			"order": [[ 0, "asc" ]],
-			"aoColumns": [	{"mData": "idticket"},
+			"aoColumns": [	/*{"mData": "tr.index()"},*/
+			              	{"mData": "idticket"},
 						    {"mData": "description"},
 						    {"mData": "projecttypename"},
 						    {"mData": "duedate"},
 						    {"mData": "status"},
-						    {"defaultContent": '<button class="btn-details" type="button">Details</button>'} ]
-	 });
+						    {"defaultContent": '<button class="btn-details" type="button">Details</button>'} ],
+		
+	 });	
+	
 	 //Details button function
 	 $('#ticketsTable').on('click', '.btn-details', function () {
 		 var tr = $(this).closest('tr');
@@ -34,7 +37,8 @@ $(document).ready( function () {
 					$("#startdateedit").hide();
 					$("#finishdateedit").hide();
 					$("#employeelist").hide();
-
+					
+					$(".modal-body #ticketid").html(data.idticket);
 		            $(".modal-body #projecttype").html(data.projecttypename);
 		            $(".modal-body #status").html(data.status);
 		            $(".modal-body #projectdescription").html(data.description);
@@ -182,6 +186,7 @@ $(document).ready( function () {
 					$("#finishdateedit").hide();
 					$("#employeelist").hide();
 
+					$(".modal-body #ticketid").html(data.idticket);
 		            $(".modal-body #projecttype").html(data.projecttypename);
 		            $(".modal-body #status").html(data.status);
 		            $(".modal-body #projectdescription").html(data.description);
@@ -325,6 +330,7 @@ $(document).ready( function () {
 					$("#finishdateedit").hide();
 					$("#employeelist").hide();
 
+					$(".modal-body #ticketid").html(data.idticket);
 		            $(".modal-body #projecttype").html(data.projecttypename);
 		            $(".modal-body #status").html(data.status);
 		            $(".modal-body #projectdescription").html(data.description);

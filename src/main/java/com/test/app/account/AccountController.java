@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -55,10 +56,11 @@ public class AccountController {
 	}
 
 	//User validation
-	@RequestMapping(value = "/accountvalidation", method = RequestMethod.GET)
+	@ResponseBody
+	@RequestMapping(value = "/accountvalidation", method = RequestMethod.POST)
 	public ModelAndView getAdminStartPage(
-			@RequestParam("username") String username,
-			@RequestParam("password") String password) {
+			@RequestParam(value = "username") String username,
+			@RequestParam(value = "password") String password) {
 		
 		ArrayList<Account> l = accountService.getAllAccounts();
 		for (int i = 0; i < l.size(); i++) {

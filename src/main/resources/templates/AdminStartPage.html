@@ -44,6 +44,7 @@
 			<table id="ticketsTable" class="table " class="row-border">
 				<thead>
 					<tr>
+					    <!-- <th>No</th> -->
 						<th>Id</th>
 						<th>Description</th>
 						<th>Project Type</th>
@@ -123,6 +124,8 @@
           	 <br>
           	 
              <div class="modalcontent " >
+                <h4>Ticket ID </h4>
+          		<p id="ticketid"></p>
           		<h4>Type Project </h4>
           		<p id="projecttype"></p>
           		<p> <select id="projecttypelist" name="projecttype" onchange="projectTypeChange();"></select></p>
@@ -187,7 +190,7 @@
         
           <button id="editbutton" type="button" class="btn btn-default">Edit</button>
           <button id="savebutton" type="button" class="btn btn-default">Save</button>
-          <button id="deletebutton"type="button" class="btn btn-default">Delete</button>
+          <button id="deletebutton" type="button" class="btn btn-default">Delete</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>

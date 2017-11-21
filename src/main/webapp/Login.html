@@ -3,8 +3,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Login Page</title>
+    <!-- Ajax -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="../style/stylesheet.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script type="text/javascript" src="../js/login.js"></script>
 </head>
 <body class="login">
 
@@ -27,11 +31,11 @@
 <a href="Register.html"><button class="login-form" id="button-style">REGISTER as a member</button></a>-->
 
 <div class="containerLogin">
+<!-- 	action="/accountvalidation"  -->
+	<form  action="/accountvalidation" method="post">
 	
-	<form  action="/accountvalidation" >
-	
-    	<p>Username :<input class="input" type="text" name="username" autocomplete="off" /></p>
-        <p>Password :<input class="input"  type="password" name="password" autocomplete="off" /></p>
+    	<p>Username :<input  id="username" class="input" type="text" name="username" autocomplete="off" /></p>
+        <p>Password :<input id="password" class="input"  type="password" name="password" autocomplete="off" /></p>
         <p><input type="submit" value="Login" /></p>
     </form>
 </div>
