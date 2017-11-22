@@ -26,4 +26,8 @@ public class ClientService {
 		 }
 		return null;
 	}
+	
+	public Client saveClient(Client c){
+		return clientRepository.save(c);
+	}
 }

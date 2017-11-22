@@ -19,8 +19,8 @@ public class AccountService {
 		return accountsList;
 	}
 	
-	public Account addAccount(Account account){
-		return accountRepository.save(account);
+	public void saveAccount(Account account){
+		accountRepository.save(account);
 	}
 	
 

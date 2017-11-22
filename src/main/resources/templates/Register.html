@@ -2,8 +2,10 @@
 <html>
 <head>
     <title>Register Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../style/stylesheet.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/ClientRegistration.js"></script>
 </head>
 <body>
 <div class="centred">
@@ -15,22 +17,25 @@
 </div> 
 <h3>Register Form</h3>
 
-<div class="container">
-  <form action="/action_page.php">
-    <label for="fname">First Name</label>
-    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+<div id="saveClientDiv" class="container">
+  <div class="inLine">
+    <p>First Name</p>
+    <input type="text" id="fname" class="input" name="firstname" placeholder="Your name..">
 
-    <label for="lname">Last Name</label>
-    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+    <p>Last Name</p>
+    <input type="text" id="lname" class="input" name="lastname" placeholder="Your last name..">
 
-    <label for="Uname">Username</label>
-    <input type="text" id="Uname" name="username" placeholder="Your Username..">
+    <p>Username</p>
+    <input type="text" id="Uname" class="input" name="username" placeholder="Your Username..">
 
-    <label for="Pass">Password</label>
-    <input type="text" id="Pass" name="passwoed" placeholder="Your Password..">
+    <p>Password</p>
+    <input type="text" id="Pass" class="input" name="passwoed" placeholder="Your Password..">
+    
+     <p>Email</p>
+    <input type="text" id="email" class="input" name="email" placeholder="Your Email..">
 
 
-    <label for="country">Country</label>
+    <p>Country</p>
     <select id="country" name="country">
         <option value="australia">Australia</option>
         <option value="canada">Canada</option>
@@ -38,10 +43,29 @@
         <option value="romania">Romania</option>
         <option value="ungaria">Ungaria</option>
     </select>
+  </div>
+  <div class="inLine">
+     <p>County</p>
+     <input type="text" id="county" class="input" name="county" placeholder="Your County..">
+     
+     <p>Town</p>
+     <input type="text" id="town" class="input" name="town" placeholder="Your Town..">
+     
+     <p>Street</p>
+     <input type="text" id="street" class="input" name="street" placeholder="Your Street..">
+     
+     <p>Street Number</p>
+     <input type="text" id="streetno" class="input" name="streetno" placeholder="Your Street Number..">
+     
+     <p>Build</p>
+     <input type="text" id="build" class="input" name="build" placeholder="Your Build..">
+     
+     <p>Appartment Number</p>
+     <input type="text" id="appno" class="input" name="appno" placeholder="Your Appartment Number..">
+    
 
-
-    <input type="submit" value="Submit">
-  </form>
+ </div>
+    <button id="saveClientButton" type="button" onclick="Save()">Save</button>
 </div>
 
 </body>

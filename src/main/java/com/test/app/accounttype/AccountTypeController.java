@@ -33,5 +33,11 @@ public class AccountTypeController {
 		return m;
 	}
 	
+	@RequestMapping("/registerTicket")
+	public ModelAndView getRegisterProject() {
+		ModelAndView m = new ModelAndView("Register");
+		return m;
+	}
+	
 	
 }

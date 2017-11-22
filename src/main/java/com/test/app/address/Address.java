@@ -1,14 +1,30 @@
 package com.test.app.address;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="address")
 public class Address {
 
+	@Id
+	@Column(name="IDADDRESS")
 	private int idaddress;
+	@Column(name="COUNTRY")
 	private String country;
+	@Column(name="COUNTY")
 	private String conuty;
+	@Column(name="TOWN")
 	private String town;
+	@Column(name="STREET")
 	private String street;
+	@Column(name="STREETNUMBER")
 	private int streetnumber;
+	@Column(name="BUILDINNUMBER")
 	private int buildnumber;
+	@Column(name="APARTMENTNUMBER")
 	private int apartmentnumber;
 
 	public int getIdaddress() {

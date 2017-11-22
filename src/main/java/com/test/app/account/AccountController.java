@@ -43,9 +43,12 @@ public class AccountController {
 		return model;
 	}
 
-	@RequestMapping(value = "/addAccount")
-	public Account addAccount(@RequestParam("username") String username,
-			@RequestParam("password") String password) {
+	/*@RequestMapping(value = "/addAccount")
+	public Account addAccount(@RequestParam(value="username") String username,
+								@RequestParam(value="password") String password ,
+								@RequestParam(value="firstname") String firstname,
+								@RequestParam(value="lastname") String lastname,
+								@RequestParam(value="country") String country) {
 		Account ac = new Account();
 		ac.setUsername(username);
 		ac.setPassword(password);
@@ -53,7 +56,7 @@ public class AccountController {
 		ac.setIddress(0);
 
 		return accountService.addAccount(ac);
-	}
+	}*/
 
 	//User validation
 	@ResponseBody
@@ -82,7 +85,7 @@ public class AccountController {
 			} else {
 				System.out
 						.println("This account doesn't exist ! Please register");
-				model = new ModelAndView("Register.html");
+				model = new ModelAndView("redirect:/registerTicket");
 				// return "redirect:Register.html";
 			}
 		}

@@ -172,7 +172,7 @@ input[type=submit]:hover {
 }
 
 .loginbtn{
-		margin-top: 1px;
+	margin-top: 1px;
     margin-right: 2px;
     position: absolute;
     top: 10px;
@@ -266,13 +266,31 @@ input:required:focus {
 .header{
 	background-color: #2196F3;
 }
-/* 
-.divleft{
-	margin-legt:50px;
+
+#saveClientButton{
+	color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #2196F3;
+    display: block;
+  	
 }
 
-.divright{
-	margin-right:50px;
-} */
+.inLine{
+	display: inline-block;
+    width: 50%;
+    vertical-align: top;
+    /*  margin-left: 10px; */
+   /*  margin-right: 30px;  */
+}
 
+.inLine input{
+	width:60%;
+}
+
+#country{
+	width:60%;
+}
 
