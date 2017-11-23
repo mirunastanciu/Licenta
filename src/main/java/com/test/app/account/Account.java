@@ -1,17 +1,24 @@
 package com.test.app.account;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="account")
 public class Account {
 	@Id
+	@Column(name="IDACCOUNT")
 	private int idaccount;
+	@Column(name="USERNAME")
 	private String username;
+	@Column(name="PASSWORD")	
 	private String password;
+	@Column(name="IDACCOUNTTYPE")
 	private int idaccounttype;
-	private int iddress;
+	@Column(name="IDADDRESS")
+	private int idadress;
 
 	public int getIdaccount() {
 		return idaccount;
@@ -46,11 +53,11 @@ public class Account {
 	}
 
 	public int getIddress() {
-		return iddress;
+		return idadress;
 	}
 
 	public void setIddress(int iddress) {
-		this.iddress = iddress;
+		this.idadress = iddress;
 	}
 
 	

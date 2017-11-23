@@ -27,7 +27,7 @@ public class ClientService {
 		return null;
 	}
 	
-	public Client saveClient(Client c){
-		return clientRepository.save(c);
+	public void saveClient(Client c){
+		 clientRepository.save(c);
 	}
 }

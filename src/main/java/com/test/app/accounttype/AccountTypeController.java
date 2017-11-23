@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+
 public class AccountTypeController {
 
 	
@@ -19,25 +20,15 @@ public class AccountTypeController {
 		ModelAndView m = new ModelAndView("ClientStartPage");
 		return m;
 	}
-
 	
-	@RequestMapping("/administratorPage")
+	@RequestMapping("/employeeSratPage")
 	public ModelAndView getEmployeePage() {
 		ModelAndView m = new ModelAndView("AdminStartPage");
 		return m;
 	}
 	
-	@RequestMapping("/adminiAccountPage")
-	public ModelAndView getAdminAccountPage() {
-		ModelAndView m = new ModelAndView("AdminAccountPage");
-		return m;
-	}
 	
-	@RequestMapping("/registerTicket")
-	public ModelAndView getRegisterProject() {
-		ModelAndView m = new ModelAndView("Register");
-		return m;
-	}
+	
 	
 	
 }

@@ -34,7 +34,7 @@
 			          
 			          ,
 			   success: function(data, status, xhr){
-			   alert("success");
+			   alert("The account have been saved succesfull !");
 			   }
 		 });
  }	 

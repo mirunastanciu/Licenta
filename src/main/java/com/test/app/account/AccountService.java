@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class AccountService {
 	
 	@Autowired
-	private AccountRepository accountRepository;
+	AccountRepository accountRepository;
 
 	public ArrayList<Account> getAllAccounts() {
 		ArrayList<Account> accountsList = new ArrayList<>();
@@ -20,7 +20,7 @@ public class AccountService {
 	}
 	
 	public void saveAccount(Account account){
-		accountRepository.save(account);
+		 accountRepository.save(account);
 	}
 	
 

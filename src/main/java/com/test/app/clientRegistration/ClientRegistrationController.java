@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 
+import org.springframework.web.servlet.ModelAndView;
+
 import com.test.app.account.Account;
 import com.test.app.account.AccountService;
 import com.test.app.address.Address;
@@ -33,9 +35,9 @@ public class ClientRegistrationController {
 	@Autowired 
 	ClientService clientService;
 	
-	@ResponseBody
+	
 	@RequestMapping(value = "/saveClientAccount" , method = RequestMethod.POST)
-	public void saveCleint(@RequestParam(value="firstname") String firstname,
+	public ModelAndView saveCleint(@RequestParam(value="firstname") String firstname,
 						   @RequestParam(value="lastname") String lastname,
 						   @RequestParam(value="email") String email,
 						   @RequestParam(value="username") String username,
@@ -64,8 +66,8 @@ public class ClientRegistrationController {
 		Account account = new Account();
 		account.setUsername(username);
 		account.setPassword(password);
-		ArrayList<Address> addresses = addresService.getAddresses();			
-		account.setIddress(addresses.size());
+		ArrayList<Address> addressesList = addresService.getAddresses();	
+		account.setIddress(addressesList.get(addressesList.size()-1).getIdaddress());
 		account.setIdaccounttype(2);//Client account type = 2
 		
 		accountService.saveAccount(account);
@@ -74,10 +76,13 @@ public class ClientRegistrationController {
 		client.setFisrtname(firstname);
 		client.setLastname(lastname);
 		client.setEmail(email);
-		ArrayList<Account> clientList = accountService.getAllAccounts();
-		client.setIdaccount(clientList.size());
+		ArrayList<Account> accountList = accountService.getAllAccounts();
+		client.setIdaccount(accountList.get(accountList.size()-1).getIdaccount());
 		
 		clientService.saveClient(client);
+		
+		ModelAndView model = new ModelAndView("redirect:/loginPage");
+		return model;
 	}
 	
 

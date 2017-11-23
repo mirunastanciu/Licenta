@@ -44,31 +44,7 @@ public class TicketController {
 
 	@Autowired
 	SpecialisationService specialisationService;
-
-
-
-
-
-
-
-	@RequestMapping("/newTicketPage")
-	public ModelAndView getAdminPage() {
-		ModelAndView m = new ModelAndView("RegisterProject");
-		return m;
-	}
-
-	/*@RequestMapping(path = "/ticketsToDo", method = RequestMethod.GET)
-	public List<Ticket> getAllTicketsToDo() {
-		List<Ticket> l = ticketService.getAllTickets();
-		Iterator<Ticket> it = l.iterator();
-		while (it.hasNext()) {
-			Ticket t = it.next();
-			if (t.getIdstatus() != 1) {
-				it.remove();
-			}
-		}
-		return l;
-	}*/
+	
 
 	@RequestMapping(path = "/ticketsToDo", method = RequestMethod.GET)
 	public List<TicketDetails> getAllTicketsToDo() {

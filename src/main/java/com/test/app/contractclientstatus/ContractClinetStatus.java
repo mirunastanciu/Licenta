@@ -1,4 +1,4 @@
-package com.tets.app.contractclientstatus;
+package com.test.app.contractclientstatus;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
