@@ -28,36 +28,62 @@ public class AccountController {
 	//User validation
 	@ResponseBody
 	@RequestMapping(value = "/accountvalidation", method = RequestMethod.POST)
-	public ModelAndView accountValidation(
+	public String accountValidation(
 			@RequestParam(value = "username") String username,
 			@RequestParam(value = "password") String password) {
-		
+		String response = null;
 		ArrayList<Account> l = accountService.getAllAccounts();
 		for (int i = 0; i < l.size(); i++) {
 
 			if (username.equals(l.get(i).getUsername())
 					&& password.equals(l.get(i).getPassword())) {
 				if (l.get(i).validateAdmin()) {
-
-					model = new ModelAndView("redirect:/administratorStartPage");
+					response =  "http://localhost:8080/administratorStartPage";
+					//model = new ModelAndView("redirect:/administratorStartPage");
 					// return "redirect:AdminStartPage.html";
 					break;
 				}else if(l.get(i).validateClient()){
-					model = new ModelAndView("redirect:/clientStartPage");
+					response = "http://localhost:8080/clientStartPage";
+					//model = new ModelAndView("redirect:/clientStartPage");
 					break;
 				}else if(l.get(i).validateEmployee()){
-					model = new ModelAndView("redirect:/administratorPage");
+					response = "http://localhost:8080/administratorPage";
+					//model = new ModelAndView("redirect:/administratorPage");
 					break;
+					
 				}
 			} else {
-				System.out
-						.println("This account doesn't exist ! Please register");
-				model = new ModelAndView("redirect:/registerAccount");
+				response = "http://localhost:8080/registerAccount";
+				//model = new ModelAndView("redirect:/registerAccount");
 				// return "redirect:Register.html";
 			}
 		}
-		return model;
+		return response;
+		
 
 	}
-
+	
+/*	@SuppressWarnings("rawtypes")
+	@RequestMapping(value="/uniqueUser" , method=RequestMethod.POST)
+	
+	public ResponseEntity uniquerUserCheck(@RequestParam(value="username") String username){
+		ArrayList<Account> accountList = accountService.getAllAccounts();
+		// 0-faild ; 1-success;
+		int response = 1;
+		for(int i=0;i<accountList.size();i++){
+			if((accountList.get(i).getUsername()).equals(username)){
+				response = 0;
+			}
+		}
+		
+		if(response == 1){
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+		}else{
+			return new ResponseEntity(HttpStatus.OK);
+		}
+		
+		
+		
+	}
+*/
 }

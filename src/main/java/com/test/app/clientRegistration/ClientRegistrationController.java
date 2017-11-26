@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -34,10 +33,10 @@ public class ClientRegistrationController {
 	
 	@Autowired 
 	ClientService clientService;
-	
+	ModelAndView model;
 	
 	@RequestMapping(value = "/saveClientAccount" , method = RequestMethod.POST)
-	public ModelAndView saveCleint(@RequestParam(value="firstname") String firstname,
+	public String saveCleint(@RequestParam(value="firstname") String firstname,
 						   @RequestParam(value="lastname") String lastname,
 						   @RequestParam(value="email") String email,
 						   @RequestParam(value="username") String username,
@@ -49,40 +48,52 @@ public class ClientRegistrationController {
 						   @RequestParam(value="streetno") int streetno,
 						   @RequestParam(value="buildno") int buildno,
 						   @RequestParam(value="appno") int appno){
+		ArrayList<Account> accountList1 = accountService.getAllAccounts();
+		int response = 1;
+		for(int i=0;i<accountList1.size();i++){
+			if((accountList1.get(i).getUsername()).equals(username)){
+				response = 0;
+			}
+		}
 		
-		Address address = new Address();
-		address.setCountry(country);
-		address.setConuty(county);
-		address.setTown(town);
-		address.setStreet(street);
-		address.setStreetnumber(streetno);
-		address.setBuildnumber(buildno);
-		address.setApartmentnumber(appno);
+		if(response == 1){
+			
+			
+			Address address = new Address();
+			address.setCountry(country);
+			address.setConuty(county);
+			address.setTown(town);
+			address.setStreet(street);
+			address.setStreetnumber(streetno);
+			address.setBuildnumber(buildno);
+			address.setApartmentnumber(appno);
 		
 		
 		
-		addresService.saveAddress(address);
+			addresService.saveAddress(address);
 		
-		Account account = new Account();
-		account.setUsername(username);
-		account.setPassword(password);
-		ArrayList<Address> addressesList = addresService.getAddresses();	
-		account.setIddress(addressesList.get(addressesList.size()-1).getIdaddress());
-		account.setIdaccounttype(2);//Client account type = 2
+			Account account = new Account();
+			account.setUsername(username);
+			account.setPassword(password);
+			ArrayList<Address> addressesList = addresService.getAddresses();	
+			account.setIddress(addressesList.get(addressesList.size()-1).getIdaddress());
+			account.setIdaccounttype(2);//Client account type = 2
 		
-		accountService.saveAccount(account);
+			accountService.saveAccount(account);
 		
-		Client client = new Client();
-		client.setFisrtname(firstname);
-		client.setLastname(lastname);
-		client.setEmail(email);
-		ArrayList<Account> accountList = accountService.getAllAccounts();
-		client.setIdaccount(accountList.get(accountList.size()-1).getIdaccount());
+			Client client = new Client();
+			client.setFisrtname(firstname);
+			client.setLastname(lastname);
+			client.setEmail(email);
+			ArrayList<Account> accountList = accountService.getAllAccounts();
+			client.setIdaccount(accountList.get(accountList.size()-1).getIdaccount());
 		
-		clientService.saveClient(client);
-		
-		ModelAndView model = new ModelAndView("redirect:/loginPage");
-		return model;
+			clientService.saveClient(client);
+			return "success";
+		}else{
+			
+			return "faild";
+		}
 	}
 	
 

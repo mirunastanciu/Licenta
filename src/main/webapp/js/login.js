@@ -1,7 +1,6 @@
-function login(){
-	alert("kjhgf")
-	var username =  document.getElementById('username').value;
-	var password =  document.getElementById('password').value ;
+ function Login(){
+	var username = $('#username').val();
+	 var password = $('#password').val();
 	console.log(username);
 	console.log(password);
 	$.ajax({
@@ -9,10 +8,14 @@ function login(){
 		url: "accountvalidation",
 		data:
 			{"username": username,
-			"password": password
+			 "password": password
 			},
 			success: function(data, status, xhr){
-			
+				if(data == "http://localhost:8080/registerAccount"){
+					alert("This account dosn't exist ! Please register...");
+				}else{
+				 window.location.replace(data); 
+				}
 			}, error: function(){
 				alert("error on Login");
 				}
