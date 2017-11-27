@@ -66,6 +66,11 @@ public class TicketService {
 		return null;
 	}
 	
+	public void delete(Ticket t){
+		ticketRepository.delete(t);
+		
+	}
+	
 	
 	
 

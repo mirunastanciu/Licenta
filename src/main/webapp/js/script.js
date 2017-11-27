@@ -142,6 +142,27 @@ $(document).ready( function () {
 								   }
 							   });
 					});
+								
+					//Delete fuction
+					$('.modal-footer').on('click', '#deletebutton', function () {	
+						
+						 $.ajax({
+							   method: "POST",
+							   url: "deleteTicket",
+							   data: {idTicket: idTicket},
+							   success: function(data, status, xhr){
+								   alert("The tickes has been deleted");
+								   $('#myModal').modal('hide');
+								   location.reload();
+							   
+							   },error:function(){
+								   alert("Error on delet ticket !!!");
+								   }
+							   
+					  });
+					
+					});
+								
 
 				}, error: function(){
 					alert("error opening modal");

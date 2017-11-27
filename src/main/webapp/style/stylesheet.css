@@ -305,3 +305,14 @@ input:required:focus {
   	
 }
 
+#createNewEmployee{
+	color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #2196F3;
+    display: block;
+  	
+}
+

@@ -36,5 +36,12 @@ public class GetPagesController {
 		ModelAndView m = new ModelAndView("ForgotPasswordPage");
 		return m;
 	}
+	
+
+	@RequestMapping("/employeesPage")
+	public ModelAndView getEmployeesPage() {
+		ModelAndView m = new ModelAndView("Employees");
+		return m;
+	}
 
 }

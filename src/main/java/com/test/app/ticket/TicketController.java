@@ -247,6 +247,12 @@ public class TicketController {
 		return tkd;
 
 	    }
+	 
+	 @RequestMapping(value ="/deleteTicket" , method=RequestMethod.POST )
+	 public void deleteTicket(@RequestParam(value = "idTicket") int id){
+		
+		 ticketService.delete(ticketService.getTicketById(id));
+	 }
 
 
 
