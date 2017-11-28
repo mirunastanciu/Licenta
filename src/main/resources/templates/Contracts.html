@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Admin Start Page</title>
+
+<!-- Ajax -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.js"></script>
+
+
+<link rel="stylesheet" href="../style/stylesheet.css">
+<!-- Responsive -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../style/bootstrap.css">
+<link rel="stylesheet" href="../style/datatables.css">
+<link rel="stylesheet" href="../style/jquery.dataTables.css">
+<link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+
+<script src="../js/contract.js"></script>
+</head>
+<body>
+<div class="centred ">
+		<nav class="nav">
+			<a id="text-nav" href="/administratorStartPage">HOME</a> 
+			<a id="text-nav" href="/administratorStartPage">START PAGE</a> 
+			<a id="text-nav" href="/adminiAccountPage">MY ACOUNT</a> 
+			<a id="text-nav" href="/newTicketPage">NEW TICKET</a>
+			<a id="text-nav" href="/employeesPage">EMPLOYEES</a>
+			<a id="text-nav" href="">CONTRACTS</a>
+			<a id="text-nav" href="">INVOICE</a>
+
+		</nav>
+	</div>
+	<div class="divpaddin">
+		<h2>Employee Contracts</h2>
+		<button id="createNewEmployeeContract" onclick="SaveEmployee()">Create New Employee Contract</button>
+		<br> 
+		<table id="employeeContractTable" class="table " class="row-border">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Status</th>
+					<th>Salary</th>
+					<th>Start Date</th>
+				</tr>
+			</thead>
+		</table>
+		
+		<h2>Client Contracts</h2>
+		<button id="createNewClientContract" onclick="SaveEmployee()">Create New Client Contract</button>
+		<br> 
+		<table id="clientContractTable" class="table " class="row-border">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Status</th>
+					<th>Amount</th>
+					<th>Start Date</th>
+				</tr>
+			</thead>
+		</table>
+
+
+	</div>
+		
+	<div class="modal fade modalTD" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Ticket Details</h4>
+        </div>
+        <div class="modal-body">
+          <div >
+          <div>
+             <h2>Ticket Details </h2>
+          </div >
+          <br>
+          <div class="modalcontent " >
+              <div class="InLineDiv-StAdmPg">
+    			<p>First Name</p>
+    			<input type="text" id="fname" class="input" name="firstname" placeholder="Your name.."  autocomplete="off" required/>
+
+    			<p>Last Name</p>
+    			<input type="text" id="lname" class="input" name="lastname" placeholder="Your last name.."  autocomplete="off" required/>
+
+    			<p>Username</p>
+    			<input type="text" id="Uname" class="input" name="username" placeholder="Your Username.."  autocomplete="off" required/>
+
+    			<p>Password</p>
+    			<input type="text" id="Pass" class="input" name="passwoed" placeholder="Your Password.."  autocomplete="off" required/>
+    
+     			<p>Email</p>
+    			<input type="text" id="email" class="input" name="email" placeholder="Your Email.."  autocomplete="off" required/>
+ 				
+ 				<p>Specialisation</p>
+    			<select id="specialisation" name="specialisation" required>
+       				 <option value="australia">Junior</option>
+       				 <option value="canada">Middle</option>
+       				 <option value="usa">Senior</option>
+       				 
+    			</select>
+
+    			<p>Country</p>
+    			<select id="country" name="country" required>
+       				 <option value="australia">Australia</option>
+       				 <option value="canada">Canada</option>
+       				 <option value="usa">USA</option>
+       				 <option value="romania">Romania</option>
+       				 <option value="ungaria">Ungaria</option>
+    			</select>
+ 			</div>
+  			<div class="InLineDiv-StAdmPg">
+     			<p>County</p>
+     			<input type="text" id="county" class="input" name="county" placeholder="Your County.."  autocomplete="off" required/>
+     
+     			<p>Town</p>
+     			<input type="text" id="town" class="input" name="town" placeholder="Your Town.."  autocomplete="off" required/>
+     
+     			<p>Street</p>
+     			<input type="text" id="street" class="input" name="street" placeholder="Your Street.."  autocomplete="off" required/>
+     
+     			<p>Street Number</p>
+     			<input type="text" id="streetno" class="input" name="streetno" placeholder="Your Street Number.."  autocomplete="off" required/>
+     
+     			<p>Build</p>
+     			<input type="text" id="build" class="input" name="build" placeholder="Your Build.."  autocomplete="off" required/>
+     
+     			<p>Appartment Number</p>
+     			<input type="text" id="appno" class="input" name="appno" placeholder="Your Appartment Number.."  autocomplete="off" required/>
+    		</div>
+        </div>
+        <div class="modal-footer">
+        
+          <button id="savebutton" type="button" class="btn btn-default">Save</button>
+          <button id="deletebutton" type="button" class="btn btn-default">Delete</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  </div>
+	
+</body>
+</html>
