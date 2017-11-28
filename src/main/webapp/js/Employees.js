@@ -1,3 +1,5 @@
+$(window).resize(function(){location.reload();});
+
 $(document).ready( function () {
 
 	 var table = $('#employeeTable').dataTable({

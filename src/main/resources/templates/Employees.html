@@ -25,6 +25,18 @@
 <script src="../js/Employees.js"></script>
 </head>
 <body>
+<div class="centred ">
+		<nav class="nav">
+			<a id="text-nav" href="/administratorStartPage">HOME</a> 
+			<a id="text-nav" href="/administratorStartPage">START PAGE</a> 
+			<a id="text-nav" href="/adminiAccountPage">MY ACOUNT</a> 
+			<a id="text-nav" href="/newTicketPage">NEW TICKET</a>
+			<a id="text-nav" href="/employeesPage">EMPLOYEES</a>
+			<a id="text-nav" href="/contractsPage">CONTRACTS</a>
+			<a id="text-nav" href="">INVOICE</a>
+
+		</nav>
+	</div>
 	<div class="divpaddin">
 		<h2>Developers</h2>
 		<button id="createNewEmployee" onclick="SaveEmployee()">Create new Employee</button>
@@ -72,7 +84,14 @@
     
      			<p>Email</p>
     			<input type="text" id="email" class="input" name="email" placeholder="Your Email.."  autocomplete="off" required/>
-
+ 				
+ 				<p>Specialisation</p>
+    			<select id="specialisation" name="specialisation" required>
+       				 <option value="australia">Junior</option>
+       				 <option value="canada">Middle</option>
+       				 <option value="usa">Senior</option>
+       				 
+    			</select>
 
     			<p>Country</p>
     			<select id="country" name="country" required>

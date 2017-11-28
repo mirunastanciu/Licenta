@@ -2,14 +2,29 @@ package com.test.app.contractemployee;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "contractemployee")
 public class ContractEmployee {
+
+	@Id
+	@Column(name = "IDCONTRACTEMPLOYEE")
 	private int id;
+	@Column(name = "IDSTATUS")
 	private int idstatus;
-	private int employee;
+	@Column(name = "SALARY")
 	private double salary;
+	@Column(name = "SIGNATUREDATE")
 	private Date signature;
+	@Column(name = "STARTDATE")
 	private Date startdate;
+	@Column(name = "EXPIRATIONDATE")
 	private Date expirationdate;
+	@Column(name = "CURENCY")
 	private String curency;
 
 	public int getId() {
@@ -26,14 +41,6 @@ public class ContractEmployee {
 
 	public void setIdstatus(int idstatus) {
 		this.idstatus = idstatus;
-	}
-
-	public int getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(int employee) {
-		this.employee = employee;
 	}
 
 	public double getSalary() {

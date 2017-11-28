@@ -2,20 +2,31 @@ package com.test.app.contractclient;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="contractclient")
 public class ContractClient {
 
 	@Id
+	@Column(name="IDCONTRACTCLIENT")
 	private int id;
+	@Column(name="IDSTATUS")
 	private int idstatus;
+	@Column(name="CONTRACTAMOUNT")
 	private double amount;
+	@Column(name="CONTRACTCURENCY")
 	private String curency;
+	@Column(name="IDCLIENT")
 	private int idclient;
+	@Column(name="SIGNATUREDATE")
 	private Date signature;
+	@Column(name="STARTDATE")
 	private Date startdate;
+	@Column(name="EXPIRATIONDATE")
 	private Date expirationdate;
 
 	public int getId() {

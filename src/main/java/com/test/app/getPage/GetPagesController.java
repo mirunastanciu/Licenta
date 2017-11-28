@@ -43,5 +43,11 @@ public class GetPagesController {
 		ModelAndView m = new ModelAndView("Employees");
 		return m;
 	}
+	
+	@RequestMapping("/contractsPage")
+	public ModelAndView getContractsPage() {
+		ModelAndView m = new ModelAndView("Contracts");
+		return m;
+	}
 
 }
