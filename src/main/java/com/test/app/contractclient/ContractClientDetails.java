@@ -1,0 +1,62 @@
+package com.test.app.contractclient;
+
+import java.sql.Date;
+
+public class ContractClientDetails {
+
+	private int id;
+	private String status;
+	private double amount;
+	private String curency;
+	private Date startdate;
+	private Date expirationdate;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int idstatus) {
+		this.id = idstatus;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+
+	public String getCurency() {
+		return curency;
+	}
+
+	public void setCurency(String curency) {
+		this.curency = curency;
+	}
+
+	public Date getStartdate() {
+		return startdate;
+	}
+
+	public void setStartdate(Date startdate) {
+		this.startdate = startdate;
+	}
+
+	public Date getExpirationdate() {
+		return expirationdate;
+	}
+
+	public void setExpirationdate(Date expirationdate) {
+		this.expirationdate = expirationdate;
+	}
+
+}

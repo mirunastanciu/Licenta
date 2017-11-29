@@ -1,16 +1,18 @@
 package com.test.app.contractemployeestatus;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="")
+@Table(name="statuscontractemployee")
 public class ContractEmployeeStatus {
 
 	@Id
-	
+	@Column(name="IDSTATUS")
 	private int idstatus;
+	@Column(name="STATUSNAME")
 	private String statusname;
 
 	public int getIdstatus() {
