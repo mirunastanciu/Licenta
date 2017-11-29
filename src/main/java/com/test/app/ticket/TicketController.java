@@ -1,11 +1,8 @@
 package com.test.app.ticket;
 
 import java.sql.Date;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.test.app.client.ClientService;
 import com.test.app.employee.Employee;
 import com.test.app.employee.EmployeeService;
-import com.test.app.projecttype.ProjectType;
+
 import com.test.app.projecttype.ProjectTypeService;
 import com.test.app.specialisation.SpecialisationService;
 import com.test.app.ticketstatus.TicketStatusService;
@@ -48,65 +45,56 @@ public class TicketController {
 
 	@RequestMapping(path = "/ticketsToDo", method = RequestMethod.GET)
 	public List<TicketDetails> getAllTicketsToDo() {
-		List<Ticket> l = ticketService.getAllTickets();
+		List<Ticket> ttodo = ticketService.getTicketsToDo();
 		List<TicketDetails> td = new ArrayList<>();
 
-		Iterator<Ticket> it = l.iterator();
-		while (it.hasNext()) {
-			Ticket tk = it.next();
+		for(int i=0;i<ttodo.size();i++){
 
-			if (tk.getIdstatus() == 1) {
 				TicketDetails tkd = new TicketDetails();
-				tkd.setIdticket(tk.getId());
-				tkd.setDescription(tk.getDescription());
-				tkd.setProjecttypename(projectTypetService.getProjectTypeById(tk.getProjcttype()).getProjtypename());
-				tkd.setDuedate(tk.getDuedate());
-				tkd.setStatus(ticketStatusService.getTicketStatusById(tk.getIdstatus()).getStatusname());
+				tkd.setIdticket(ttodo.get(i).getId());
+				tkd.setDescription(ttodo.get(i).getDescription());
+				tkd.setProjecttypename(projectTypetService.getProjectTypeById(ttodo.get(i).getProjcttype()).getProjtypename());
+				tkd.setDuedate(ttodo.get(i).getDuedate());
+				tkd.setStatus(ticketStatusService.getTicketStatusById(ttodo.get(i).getIdstatus()).getStatusname());
 				td.add(tkd);
 			}
-		}
+		
 		return td;
 	}
 
 	@RequestMapping(path = "/ticketsInProgress", method = RequestMethod.GET)
 	public List<TicketDetails> getAllTicketsAssigned() {
-		List<Ticket> l = ticketService.getAllTickets();
+		List<Ticket> tInProgress = ticketService.getTicketsInProgress();
 		List<TicketDetails> td = new ArrayList<>();
-		Iterator<Ticket> it = l.iterator();
-		while (it.hasNext()) {
-			Ticket tk = it.next();
-			if (tk.getIdstatus() == 2 || tk.getIdstatus() == 3
-					|| tk.getIdstatus() == 4) {
+		for(int i=0;i<tInProgress.size();i++){
+			
 				TicketDetails tkd = new TicketDetails();
-				tkd.setIdticket(tk.getId());
-				tkd.setDescription(tk.getDescription());
-				tkd.setProjecttypename(projectTypetService.getProjectTypeById(tk.getProjcttype()).getProjtypename());
-				tkd.setDuedate(tk.getDuedate());
-				tkd.setStatus(ticketStatusService.getTicketStatusById(tk.getIdstatus()).getStatusname());
+				tkd.setIdticket(tInProgress.get(i).getId());
+				tkd.setDescription(tInProgress.get(i).getDescription());
+				tkd.setProjecttypename(projectTypetService.getProjectTypeById(tInProgress.get(i).getProjcttype()).getProjtypename());
+				tkd.setDuedate(tInProgress.get(i).getDuedate());
+				tkd.setStatus(ticketStatusService.getTicketStatusById(tInProgress.get(i).getIdstatus()).getStatusname());
 				td.add(tkd);
 			}
-		}
+		
 		return td;
 	}
 
 	@RequestMapping(path = "/ticketsDone", method = RequestMethod.GET)
 	public List<TicketDetails> getAllTicketsDone() {
-		List<Ticket> l = ticketService.getAllTickets();
+		List<Ticket> tDone = ticketService.getTicketsDone();
 		List<TicketDetails> td = new ArrayList<>();
-		Iterator<Ticket> it = l.iterator();
-		while (it.hasNext()) {
-			Ticket tk = it.next();
-			if (tk.getIdstatus() == 5) {
+		for(int i=0;i<tDone.size();i++) {
 				TicketDetails tkd = new TicketDetails();
-				tkd.setIdticket(tk.getId());
-				tkd.setDescription(tk.getDescription());
-				tkd.setProjecttypename(projectTypetService.getProjectTypeById(tk.getProjcttype()).getProjtypename());
-				tkd.setDuedate(tk.getDuedate());
-				tkd.setStatus(ticketStatusService.getTicketStatusById(tk.getIdstatus()).getStatusname());
+				tkd.setIdticket(tDone.get(i).getId());
+				tkd.setDescription(tDone.get(i).getDescription());
+				tkd.setProjecttypename(projectTypetService.getProjectTypeById(tDone.get(i).getProjcttype()).getProjtypename());
+				tkd.setDuedate(tDone.get(i).getDuedate());
+				tkd.setStatus(ticketStatusService.getTicketStatusById(tDone.get(i).getIdstatus()).getStatusname());
 				td.add(tkd);
 			}
 
-		}
+		
 		return td;
 	}
 
@@ -117,7 +105,7 @@ public class TicketController {
 							@RequestParam("duedate") Date duedate){
 		Ticket t = new Ticket();
 		t.setDescription(description);
-		t.setProjcttype(getIdProjectTypeByName(projecttype));
+		t.setProjcttype(projectTypetService.getIdProjectTypeByName(projecttype));
 		t.setIdemployee(getIdEmployeeByName(assignpersson));
 		t.setDuedate(duedate);
 		t.setIdclient(1);
@@ -131,7 +119,7 @@ public class TicketController {
 
 
 	}
-
+	
 	@RequestMapping(value = "/updateTicket" , method=RequestMethod.POST)
 	public ModelAndView updateTicket(@RequestParam(value="idTicket") int idTicket ,
 							@RequestParam(value="projecttype") String projecttype,
@@ -144,7 +132,7 @@ public class TicketController {
 		Ticket t = ticketService.getTicketById(idTicket);
 		t.setId(idTicket);
 		t.setDescription(projectdescription);
-		t.setProjcttype(getIdProjectTypeByName(projecttype));
+		t.setProjcttype(projectTypetService.getIdProjectTypeByName(projecttype));
 		t.setIdemployee(getIdEmployeeByName(employeename));
 
 		if(duedate.equals("")==false){
@@ -167,35 +155,8 @@ public class TicketController {
 
 		ModelAndView model = new ModelAndView("redirect:/administratorStartPage");
 		return model;
-
-
-
 	}
 
-
-/*	@ResponseBody
-	@RequestMapping(value="/updateTicket", method=RequestMethod.PUT )
-	public void updateTicket(@RequestParam(value = "idTicket") int id,@RequestParam(value = "newprojecttype") String newprojecttype,
-			@RequestParam(value = "newstatus") String newstatus,@RequestParam(value = "newdescription") String newdescription,
-			@RequestParam(value = "newduedate") Date newduedate,@RequestParam(value = "newstartdate") Date newstartdate,
-			@RequestParam(value = "newfinishdate") Date newfinishdate,@RequestParam(value = "newemployee") String newemployee){
-
-		Ticket t = ticketService.getTicketById(id);
-		t.setProjcttype(getIdProjectTypeByName(newprojecttype));
-		t.
-	}*/
-
-
-	public int getIdProjectTypeByName(String a){
-		List<ProjectType> l = projectTypetService.getAllProjectTypes();
-		for(int i=0;i<l.size();i++){
-			if(l.get(i).getProjtypename().equals(a)){
-				return l.get(i).getId();
-			}
-		}
-		return 0;
-
-	}
 
 	public int getIdEmployeeByName(String a){
 		List<Employee> l = employeeService.getAllEmployies();
@@ -208,14 +169,6 @@ public class TicketController {
 		return 0;
 	}
 
-	@RequestMapping(path = "/getTicketById")
-	public TicketDetails getTicketById(){
-		 Ticket t = ticketService.getTicketById(4);
-		 TicketDetails tkd = new TicketDetails();
-		 tkd.setStatus(ticketStatusService.getTicketStatusById(t.getIdstatus()).getStatusname());
-
-		 return tkd;
-	}
 
 	 @ResponseBody
 	 @RequestMapping(value ="/getDetailsByIdTicket" , method=RequestMethod.POST )
@@ -240,10 +193,6 @@ public class TicketController {
 		 tkd.setStartdate(tk.getStartdate());
 		 tkd.setFinishdate(tk.getFinishdate());
 		 tkd.setDescription(tk.getDescription());
-
-
-
-
 		return tkd;
 
 	    }

@@ -18,13 +18,7 @@ public class EmployeeService {
 	
 
 	public  Employee getEmployeeById(int a){
-		ArrayList<Employee> e = getAllEmployies();
-		 for(int i=0;i<e.size();i++){
-			 if(e.get(i).getId() == a){
-				 return e.get(i);
-			 }
-		 }
-		return null;
+		return employeeRepository.getEmployeeById(a);
 	}
 	
 	public  Employee getEmployeeByName(String a){
@@ -37,5 +31,9 @@ public class EmployeeService {
 		 }
 		return null;
 	}
-
+	
+	public int getIdEmployeeByName(String a , String b){
+		return employeeRepository.getIdEmployeeByName(a, b);
+	}
+	
 }

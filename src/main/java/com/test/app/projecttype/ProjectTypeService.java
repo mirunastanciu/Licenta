@@ -27,5 +27,10 @@ public class ProjectTypeService {
 		 }
 		return null;
 	}
+	
+	public int getIdProjectTypeByName(String a){
+		return projectTypeRepository.getIdProjectTypeByName(a);
+	}
+	
 
 }
