@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>Admin Start Page</title>
+<title>Employee Page</title>
 
 <!-- Ajax -->
 <script
@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="../style/jquery.dataTables.css">
 <link rel="stylesheet" href="../style/jquery.dataTables.min.css">
 
-<script src="../js/Employees.js"></script>
+<script src="../js/employees.js"></script>
 </head>
 <body>
 <div class="centred ">
@@ -39,7 +39,7 @@
 	</div>
 	<div class="divpaddin">
 		<h2>Developers</h2>
-		<button id="createNewEmployee" onclick="SaveEmployee()">Create new Employee</button>
+		<button id="createNewEmployee" onclick="CreateNewEmployeeModal()">Create new Employee</button>
 		<br> 
 		<table id="employeeTable" class="table " class="row-border">
 			<thead>
@@ -47,6 +47,8 @@
 					<th>Id</th>
 					<th>Name</th>
 					<th>Specialisation</th>
+					<th>Specialisation Lavel</th>
+					<th>Details</th>
 				</tr>
 			</thead>
 		</table>
@@ -60,7 +62,7 @@
     <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Ticket Details</h4>
+          <h4 class="modal-title">Create New Employee</h4>
         </div>
         <div class="modal-body">
           <div >
@@ -86,23 +88,33 @@
     			<input type="text" id="email" class="input" name="email" placeholder="Your Email.."  autocomplete="off" required/>
  				
  				<p>Specialisation</p>
-    			<select id="specialisation" name="specialisation" required>
+    			<select id="specialisationList" name="specialisation" required>
+       				 
+    			</select>
+    			<br>
+    			<br>
+    			<p>Specialisation Level</p>
+    			<select id="specialisationLavelList" name="specialisation" required>
        				 <option value="australia">Junior</option>
        				 <option value="canada">Middle</option>
        				 <option value="usa">Senior</option>
        				 
     			</select>
-
+    			<br>
+    			<br>
     			<p>Country</p>
-    			<select id="country" name="country" required>
+    			<select id="countryList" name="country" required>
        				 <option value="australia">Australia</option>
        				 <option value="canada">Canada</option>
        				 <option value="usa">USA</option>
        				 <option value="romania">Romania</option>
        				 <option value="ungaria">Ungaria</option>
     			</select>
+
+    			
  			</div>
   			<div class="InLineDiv-StAdmPg">
+  				
      			<p>County</p>
      			<input type="text" id="county" class="input" name="county" placeholder="Your County.."  autocomplete="off" required/>
      
@@ -120,12 +132,16 @@
      
      			<p>Appartment Number</p>
      			<input type="text" id="appno" class="input" name="appno" placeholder="Your Appartment Number.."  autocomplete="off" required/>
+    			
+    			<p>Contract Number</p>
+     			<input type="text" id="contractno" class="input" name="contractno" placeholder="Your Appartment Number.."  autocomplete="off" required/>
+    		
     		</div>
         </div>
         <div class="modal-footer">
         
           <button id="savebutton" type="button" class="btn btn-default">Save</button>
-          <button id="deletebutton" type="button" class="btn btn-default">Delete</button>
+          
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -133,6 +149,78 @@
     </div>
   </div>
   </div>
+  </div>
+  
+ <!--  ---------------- -->
+ <!-- details Modal -->
+ <!--  ---------------- -->
+  	<div class="modal fade modalTD" id="myModalDetails" role="dialog">
+    <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Create New Employee</h4>
+        </div>
+        <div class="modal-body">
+          <div class="modalcontent " >
+          	<div class="InLineDiv-StAdmPg ">
+          		<h2>Employee Details</h2>
+              		<h4>ID </h4>
+          	 		<p id="employeeid"></p> 
+          	 		
+          	 		<h4>Name </h4>
+          	 		<p id="empname"></p>
+          	 		
+          	 		<h4>Specialisation </h4>
+          	 		<p id="empspl"></p>
+          	 		
+          	 		<h4>Specialisation Level </h4>
+          	 		<p id="empspllev"></p>
+          	 		
+          	 		<h4>Email </h4>
+          	 		<p id="empemail"></p>
+          	 		
+          	 		<h4>Username </h4>
+          	 		<p id="empuser"></p>
+          	 		
+          	 		<h4>Address </h4>
+          	 		<p id="empaddress"></p> 
+          	</div> 
+          	<div class="InLineDiv-StAdmPg ">
+          		<h2>Contract Emplyee Details</h2>
+              		<h4>Contract Id</h4>
+              		<p id="contractid"></p>
+              		
+          	 		<h4>Status </h4>
+          	 		<p id="contractstatus"></p>
+          	 		
+          	 		<h4>Salary </h4>
+          	 		<p id="empsalary"></p>
+          	 		
+          	 		<h4>Curency </h4>
+          	 		<p id="salarycurency"></p>
+          	 		
+          	 		<h4>Start Date </h4>
+          	 		<p id="stdate"></p>
+          	 		
+          	 		<h4>Expiration Date </h4>
+          	 		<p id="expdate"></p>
+          	 		
+          	</div> 
+          </div>
+        <div class="modal-footer">
+        
+          <button id="deletebutton" type="button" class="btn btn-default">Delete</button>
+          
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  </div>
+  
 	
 </body>
 </html>

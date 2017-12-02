@@ -12,5 +12,9 @@ public interface EmployeeRepository extends CrudRepository<Employee , String>{
 	@Query(value="SELECT * FROM employee WHERE IDEMPLOYEE=?;",nativeQuery=true)
 	public Employee getEmployeeById(int id);
 	
+	
+	
+	
+	
 
 }

@@ -36,4 +36,10 @@ public class EmployeeService {
 		return employeeRepository.getIdEmployeeByName(a, b);
 	}
 	
+	public void save(Employee e){
+		employeeRepository.save(e);
+	}
+	
+	
+	
 }

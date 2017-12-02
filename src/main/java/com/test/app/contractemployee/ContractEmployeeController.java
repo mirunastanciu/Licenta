@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.test.app.contractemployeestatus.ContractEmployeeStatusService;
@@ -37,6 +38,28 @@ public class ContractEmployeeController {
 			contrcatEmployeeDetailsList.add(ced);
 		}
 		return contrcatEmployeeDetailsList;
+	}
+	
+	@RequestMapping(path="/saveNewEmployeeContract" , method=RequestMethod.POST)
+	public void addNewEmployeeContract(@RequestParam(value="salary") double salary,
+									   @RequestParam(value="status") String status,
+									   @RequestParam(value="signaturedate") String signaturedate,
+									   @RequestParam(value="startdate") String startdate,
+									   @RequestParam(value="expirationdate") String expirationdate){
+		
+		ContractEmployee ce = new ContractEmployee();
+		ce.setSalary(salary);
+		java.sql.Date parseDate = java.sql.Date.valueOf(signaturedate);
+		ce.setSignature(parseDate);
+		parseDate = java.sql.Date.valueOf(startdate);
+		ce.setStartdate(parseDate);
+		parseDate = java.sql.Date.valueOf(expirationdate);
+		ce.setExpirationdate(parseDate);
+		ce.setIdstatus(contractEmployeeStatusService.getEmployeeContractStatusIdByName(status));
+		ce.setCurency("EUR");
+		
+		contractEmployeeService.save(ce);
+		
 	}
 
 }

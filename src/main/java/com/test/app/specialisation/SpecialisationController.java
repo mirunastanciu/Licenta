@@ -1,5 +1,7 @@
 package com.test.app.specialisation;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,5 +19,10 @@ public class SpecialisationController {
 	public Specialisation getSpecialisationById(@RequestParam(name="idspecialisation") int a){
 		
 		return specialisationService.getSpecialisationById(a);
+	}
+	
+	@RequestMapping(path="/getSpNames",method=RequestMethod.GET)
+	public ArrayList<String> getSpNames(){
+		return specialisationService.getSpecialisationNames();
 	}
 }

@@ -23,5 +23,15 @@ public class AccountService {
 		 accountRepository.save(account);
 	}
 	
+	public String getUsernameByIdAccount(int a){
+		return accountRepository.getUsernameByIdAccount(a);
+	}
+	
+	public int getIdAddressByIdAccount(int a){
+		return accountRepository.getIdAddressByIdAccount(a);
+	}
+	
+	
+	
 
 }

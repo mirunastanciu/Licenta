@@ -9,14 +9,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 public class AccountController {
 
 	@Autowired
 	private AccountService accountService;
-	private ModelAndView model;
+	
 
 	@RequestMapping("/accounts")
 	public List<Account> getAllAccounts() {
@@ -63,10 +62,9 @@ public class AccountController {
 
 	}
 	
-/*	@SuppressWarnings("rawtypes")
-	@RequestMapping(value="/uniqueUser" , method=RequestMethod.POST)
 	
-	public ResponseEntity uniquerUserCheck(@RequestParam(value="username") String username){
+	@RequestMapping(value="/uniqueUser" , method=RequestMethod.POST)
+	public String uniquerUserCheck(@RequestParam(value="username") String username){
 		ArrayList<Account> accountList = accountService.getAllAccounts();
 		// 0-faild ; 1-success;
 		int response = 1;
@@ -77,13 +75,14 @@ public class AccountController {
 		}
 		
 		if(response == 1){
-			return new ResponseEntity(HttpStatus.NOT_FOUND);
+			return "success";
 		}else{
-			return new ResponseEntity(HttpStatus.OK);
+			return "faild";
 		}
 		
 		
 		
+		
 	}
-*/
+
 }

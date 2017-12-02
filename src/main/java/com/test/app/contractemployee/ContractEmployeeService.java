@@ -27,5 +27,9 @@ public class ContractEmployeeService {
 		contractEmployeeRepository.delete(ce);
 		
 	}
+	
+	public ContractEmployee getContractById(int a){
+		return contractEmployeeRepository.getContractById(a);
+	}
 
 }

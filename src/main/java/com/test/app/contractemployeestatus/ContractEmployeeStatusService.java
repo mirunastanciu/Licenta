@@ -23,5 +23,21 @@ public class ContractEmployeeStatusService {
 		
 		
 	}
+	
+	public ArrayList<String> getContractEmployeeStatusNamesS(){
+		ArrayList<String> List = new ArrayList<>();
+		contrcatEmployeeStatusRepository.getContractEmployeeStatusNames().forEach(List::add);
+		return List;
+		
+	}
+	
+   public int getEmployeeContractStatusIdByName(String a){
+	   return contrcatEmployeeStatusRepository.getContractEmployeeStatusIdByName(a);
+	   
+   }
+   
+   public String getContractEmployeeStatusNameById(int a){
+	   return contrcatEmployeeStatusRepository.getContractEmployeeStatusNameById(a);
+   }
 
 }

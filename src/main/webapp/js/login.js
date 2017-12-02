@@ -13,6 +13,7 @@
 			success: function(data, status, xhr){
 				if(data == "http://localhost:8080/registerAccount"){
 					alert("This account dosn't exist ! Please register...");
+					location = data;
 				}else{
 				 window.location.replace(data); 
 				}

@@ -26,5 +26,15 @@ public class SpecialisationService {
 		 }
 		return null;
 	}
+	
+	public ArrayList<String> getSpecialisationNames(){
+		ArrayList<String> spList = new ArrayList<>();
+		specialisationRepository.getSpecialisationNames().forEach(spList::add);
+		return spList;
+	}
+	
+	public int getSpIdByName(String a){
+		return specialisationRepository.getSpecialisationIdByNames(a);
+	}
 
 }

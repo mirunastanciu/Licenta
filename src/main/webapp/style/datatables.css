@@ -5994,6 +5994,10 @@ button.close {
   .modal-sm {
     width: 300px;
   }
+  
+   .modal-normal {
+    width: 500px;
+  }
 }
 @media (min-width: 992px) {
   .modal-lg {

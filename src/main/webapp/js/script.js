@@ -459,10 +459,7 @@ $(document).ready( function () {
 		});
 });
 //Change Project Type on Edit mode
-function projectTypeChange()
-{
-
-
+function projectTypeChange(){
 	$.ajax("/allProjectTypesName",
 		       { type: 'GET',
 		 		 success: function (data) {
@@ -479,8 +476,7 @@ function projectTypeChange()
 
 }
 //Change Status on Edit mode
-function statusChange()
-{
+function statusChange(){
 
 	$.ajax("/getAllTicketStatusNames",
 		       { type: 'GET',
