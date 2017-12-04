@@ -1,5 +1,5 @@
 $(window).resize(function(){location.reload();});
-
+//Dev table
 $(document).ready( function () {
 
 	 var table = $('#employeeTable').dataTable({
@@ -142,3 +142,21 @@ function CreateNewEmployeeModal(){
 	
 	  
 }
+//Clients table
+$(document).ready( function () {
+
+	 var table = $('#clientTable').dataTable({
+			"sAjaxSource": "/getAllClients",
+			"sAjaxDataProp": "",
+			"responsive": true,
+			"order": [[ 0, "asc" ]],
+			"aoColumns": [
+			              	{"mData": "id"},
+						    {"mData": "firstname"},
+						    {"mData": "lastname"},
+						    {"defaultContent": '<button class="btn-details" type="button">Details</button>'}
+						    ]
+	 });
+});
+	 
+	 

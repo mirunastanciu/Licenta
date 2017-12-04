@@ -20,7 +20,7 @@ public class ClientService {
 	public Client getClientById(int a){
 		ArrayList<Client> clientList = getAllClients();
 		for(int i=0;i<clientList.size();i++){
-			 if(clientList.get(i).getIdclent() == a){
+			 if(clientList.get(i).getId() == a){
 				 return clientList.get(i);
 			 }
 		 }
@@ -34,9 +34,9 @@ public class ClientService {
 	public int getClientIdByName(String a){
 		ArrayList<Client> clist = getAllClients();
 		for(int i =0;i<clist.size();i++){
-			String name = clist.get(i).getFisrtname()+" "+clist.get(i).getLastname();
+			String name = clist.get(i).getFirstname()+" "+clist.get(i).getLastname();
 			if(name.equals(a)){
-				return clist.get(i).getIdclent();
+				return clist.get(i).getId();
 			}
 		}
 		return 0;

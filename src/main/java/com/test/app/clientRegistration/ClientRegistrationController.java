@@ -82,7 +82,7 @@ public class ClientRegistrationController {
 			accountService.saveAccount(account);
 		
 			Client client = new Client();
-			client.setFisrtname(firstname);
+			client.setFirstname(firstname);
 			client.setLastname(lastname);
 			client.setEmail(email);
 			ArrayList<Account> accountList = accountService.getAllAccounts();

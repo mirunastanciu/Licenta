@@ -184,7 +184,7 @@ public class TicketController {
 		 tkd.setEmployeename(employeeName);
 		 tkd.setEmployeeemail( employeeService.getEmployeeById(tk.getIdemployee()).getEmail());
 		 tkd.setEmployeespecialisation(specialisationService.getSpecialisationById((employeeService.getEmployeeById(tk.getIdemployee())).getIdspecialisation()).getName());
-		 String clientName = clientService.getClientById(tk.getIdclient()).getFisrtname()
+		 String clientName = clientService.getClientById(tk.getIdclient()).getFirstname()
 				 +" "+clientService.getClientById(tk.getIdclient()).getLastname();
 		 tkd.setClientname(clientName);
 		 tkd.setClientemail(clientService.getClientById(tk.getIdclient()).getEmail());

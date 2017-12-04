@@ -11,10 +11,10 @@ public class Client {
 
 	@Id
 	@Column(name="IDCLIENT")
-	private int idclent;
+	private int id;
 	
 	@Column(name="CLIENTFIRSTNAME")
-	private String fisrtname;
+	private String firstname;
 	
 	@Column(name="CLIENTLASTNAME")
 	private String lastname;
@@ -25,20 +25,20 @@ public class Client {
 	@Column(name="CLIENTEMAIL")
 	private String email;
 
-	public int getIdclent() {
-		return idclent;
+	public int getId() {
+		return id;
 	}
 
-	public void setIdclent(int idclent) {
-		this.idclent = idclent;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getFisrtname() {
-		return fisrtname;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setFisrtname(String fisrtname) {
-		this.fisrtname = fisrtname;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
 	public String getLastname() {

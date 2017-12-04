@@ -13,31 +13,29 @@ public class ClientController {
 	@Autowired
 	ClientService clientService;
 	
+	@RequestMapping(path="/getAllClients" ,method=RequestMethod.GET)
+	public ArrayList<Client> getAllClients(){
+		return clientService.getAllClients();
+	}
+	
 	@RequestMapping(value="/saveClient")
 	public void saveClient(Client client){
 		clientService.saveClient(client);
 	}
-	
-/*	@RequestMapping(path="/getClientsFirstName", method=RequestMethod.GET)
-	public ArrayList<String> getClientsFirstNames(){
-		return clientService.getClientsFirstName();
-	}
-	
-	@RequestMapping(path="/getClientsLastName", method=RequestMethod.GET)
-	public ArrayList<String> getClientsLastNames(){
-		return clientService.getClientsLastName();
-	}*/
+
 	
 	@RequestMapping(path="/getClientsName", method=RequestMethod.GET)
 	public ArrayList<String> getClientsLastNames(){
 		ArrayList<Client> l = clientService.getAllClients();
 		ArrayList<String> cname = new ArrayList<>();
 		for(int i=0;i<l.size();i++){
-			String a = l.get(i).getFisrtname()+" "+l.get(i).getLastname();
+			String a = l.get(i).getFirstname()+" "+l.get(i).getLastname();
 			cname.add(a);
 		}
 		return cname;
 	}
+	
+	
 	
 	
 	

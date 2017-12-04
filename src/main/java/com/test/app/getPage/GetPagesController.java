@@ -38,9 +38,9 @@ public class GetPagesController {
 	}
 	
 
-	@RequestMapping("/employeesPage")
+	@RequestMapping("/accountsPage")
 	public ModelAndView getEmployeesPage() {
-		ModelAndView m = new ModelAndView("Employees");
+		ModelAndView m = new ModelAndView("Accounts");
 		return m;
 	}
 	
