@@ -30,4 +30,15 @@ public class ClientService {
 	public void saveClient(Client c){
 		 clientRepository.save(c);
 	}
+	
+	public int getClientIdByName(String a){
+		ArrayList<Client> clist = getAllClients();
+		for(int i =0;i<clist.size();i++){
+			String name = clist.get(i).getFisrtname()+" "+clist.get(i).getLastname();
+			if(name.equals(a)){
+				return clist.get(i).getIdclent();
+			}
+		}
+		return 0;
+	}
 }

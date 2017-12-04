@@ -1,4 +1,5 @@
 $(window).resize(function(){location.reload();});
+
 // employee contracts table
 $(document).ready( function () {
 
@@ -23,7 +24,7 @@ $(document).ready( function () {
 
 // clients contrcats table
 $(document).ready( function () {
-
+	
 	 var table = $('#clientContractTable').dataTable({
 			"sAjaxSource": "/getClientContracts/Details",
 			"sAjaxDataProp": "",
@@ -44,15 +45,16 @@ $(document).ready( function () {
 
 // create new employee contract modal function
 function modalEmployeeContract(){
+	var options;
 	 $('#myModalEmployeeContract').modal('show');
-	 var options1;
+	 
 		$.ajax("/getEmployeeContractStatuses",
 			       { type: 'GET',
 			 		 success: function (data) {
-					       options1 = data;
+			 			options = data;
 
 					       	$('#statusList').empty();
-					       	$.each(options1, function(i, p) {
+					       	$.each(options, function(i, p) {
 					       	$('#statusList').append($('<option></option>').val(p).html(p));
 					       	});
 			       }
@@ -65,6 +67,12 @@ function modalEmployeeContract(){
 			var signaturedate = $('.modalcontent #signdate').val();
 			var startdate =$('.modalcontent #startdate').val();
 			var expirationdate =$('.modalcontent #expdate').val();
+			
+	if($.trim($(".modalcontent #salary").val()) === ''|| $.trim($('.modalcontent #signdate').val()) === ''||
+	   $.trim($('.modalcontent #startdate').val()) === ''){
+						
+		alert("There are one or more mandatory fields to be fill in !");
+	}else{						
 		
 			$.ajax({
 				method: "POST",
@@ -85,6 +93,82 @@ function modalEmployeeContract(){
 						alert("error on saving new contract");
 						}
 			});
+	}
+ });		              
+	  
+}
+
+//create new client contract modal function
+function modalClientContract(){
+	 $('#myModalClientContract').modal('show');
+	 var options;
+		$.ajax("/getClientsName",
+			       { type: 'GET',
+			 		 success: function (data) {
+			 			options = data;
+
+					       	$('#clientsList').empty();
+					       	$.each(options, function(i, p) {
+					       	$('#clientsList').append($('<option></option>').val(p).html(p));
+					       	});
+			       }
+
+			       });
+			     
+	 
+		$.ajax("/getClientContractstatusNames",
+			       { type: 'GET',
+			 		 success: function (data) {			 			
+			 			options = data;
+
+					       	$('#statusList1').empty();
+					       	$.each(options, function(i, p) {
+					       	 
+					       	$('#statusList1').append($('<option></option>').val(p).html(p));
+					       	});
+			       }
+
+			       });
+	       
+			       
+			       
+   //Save Fuction
+	$('.modal-footer').on('click', '#savebutton', function (){
+			var amount = $(".modalcontent #amount").val();
+			var status = $("#statusList1 option:selected" ).text();
+			var client = $("#clientsList option:selected").text();
+			var signaturedate = $('.modalcontent #signdate1').val();
+			var startdate =$('.modalcontent #startdate1').val();
+			var expirationdate =$('.modalcontent #expdate1').val();
+			
+	if($.trim($(".modalcontent #amount").val()) === ''|| $.trim($('.modalcontent #signdate1').val()) === ''||
+	   $.trim($('.modalcontent #startdate1').val()) === ''){
+										
+			alert("There are one or more mandatory fields to be fill in !");
+	}else{		
+				
+		
+			$.ajax({
+				method: "POST",
+				url: "saveNewClientContract",
+				data:
+					{"client": client,
+					 "amount": amount,
+					 "status": status,
+					 "signaturedate": signaturedate,
+					 "startdate": startdate,
+					 "expirationdate": expirationdate
+					},
+					success: function(data, status, xhr){
+						alert("The contract has been saved successfull");
+						$('#getEmployeeContractStatuses').modal('hide');
+						 location.reload();
+						
+					}, error: function(){
+						alert("error on saving new contract");
+						}
+			});
+	}
 		});		              
 	  
 }

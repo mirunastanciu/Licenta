@@ -53,8 +53,10 @@ public class ContractEmployeeController {
 		ce.setSignature(parseDate);
 		parseDate = java.sql.Date.valueOf(startdate);
 		ce.setStartdate(parseDate);
-		parseDate = java.sql.Date.valueOf(expirationdate);
-		ce.setExpirationdate(parseDate);
+		if(expirationdate.equals("")==false){
+		    parseDate = java.sql.Date.valueOf(expirationdate);
+		    ce.setExpirationdate(parseDate);
+	     }
 		ce.setIdstatus(contractEmployeeStatusService.getEmployeeContractStatusIdByName(status));
 		ce.setCurency("EUR");
 		

@@ -56,7 +56,7 @@
 		</table>
 		
 		<h2>Client Contracts</h2>
-		<button id="createNewClientContract" onclick="">Create New Client Contract</button>
+		<button id="createNewClientContract" onclick="modalClientContract()">Create New Client Contract</button>
 		<br> 
 		<table id="clientContractTable" class="table " class="row-border">
 			<thead>
@@ -88,10 +88,12 @@
 		          <div class="modalcontent " >
 		             <div id="d1" class="InLineDiv-StAdmPg ">
 		    			<p>Salary</p>
-		    			<input type="text" id="salary" class="input" name="salary" placeholder="Salary.."  autocomplete="off" required/>
+		    			<input type="number" id="salary" class="input" name="salary" placeholder="Salary.."  autocomplete="off" required/>
 		
 		 				<p>Status</p>
 		    			<select id="statusList" name="status"  required></select>
+		    			<br>
+		    			<br>
 					 </div>
 					 <div id="d2" class="InLineDiv-StAdmPg ">
 					 	<p>Signature Date</p>
@@ -121,6 +123,59 @@
 	  </div>
   </div>
  </div>
-<!-- create new employee Contract modal -->		
+<!-- create new client Contract modal -->	
+	<div class="modal fade modalTD" id="myModalClientContract" role="dialog">
+   	 <div class="modal-dialog modal-lg">
+   		 <!-- Modal content-->
+    	<div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">New Client Contract</h4>
+	        </div>
+	        <div class="modal-body">
+	          <div >
+	         	  <br>
+		          <div class="modalcontent " >
+		             <div id="d1" class="InLineDiv-StAdmPg ">
+		             	<p>Client</p>
+		             	<select id="clientsList" name="clients"  required></select>
+		             	<br>
+		             	<br>
+		             	<p>Amount</p>
+		    			<input type="number" id="amount" class="input" name="amount" placeholder="Amount.."  autocomplete="off" required/>
+		
+		 				<p>Status</p>
+		    			<select id="statusList1" name="status"  required></select>
+		    			<br>
+		    			<br>
+					 </div>
+					 <div id="d2" class="InLineDiv-StAdmPg ">
+					 	<p>Signature Date</p>
+		    			<input type="date" id="signdate1" class="input" name="signdate" autocomplete="off" required/>
+						<br>	
+						<br>
+		    			<p>Start Date</p>
+		    			<input type="date" id="startdate1" class="input" name="startdate" autocomplete="off" required/>
+		    			<br>
+		    			<br>
+		    			<p>Expiration Date</p>
+		    			<input type="date" id="expdate1" class="input" name="expdate" autocomplete="off" required/>
+		    
+		     			
+		    		</div>
+		
+		        </div>
+		        <div class="modal-footer">
+		        
+		          <button id="savebutton" type="button" class="btn btn-default">Save</button>
+		     
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+  </div>
+ </div>	
 </body>
 </html>
