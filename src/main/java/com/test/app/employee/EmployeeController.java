@@ -21,43 +21,43 @@ import com.test.app.specialisation.SpecialisationService;
 
 @RestController
 public class EmployeeController {
-	
+
 	@Autowired
 	EmployeeService employeeService;
-	
+
 	@Autowired
 	AddressService addresService;
-	
+
 	@Autowired
 	AccountService accountService;
-	
+
 	@Autowired
 	SpecialisationService specialosationService;
-	
-	@Autowired 
+
+	@Autowired
 	ContractEmployeeService contractEmployeeService;
-	
+
 	@Autowired
 	ContractEmployeeStatusService contractEmployeeStatusService;
-	
+
 	@RequestMapping(path="/getAllEmployees", method=RequestMethod.GET )
 	public ArrayList<Employee> getAllEmployies(){
 		return employeeService.getAllEmployies();
 	}
-	
+
 	@RequestMapping(path="/getAllEmployiesName" , method=RequestMethod.GET)
 	public ArrayList<String> getAllEmployiesName(){
-		
+
 		ArrayList<Employee> l = employeeService.getAllEmployies();
 		ArrayList<String> result = new ArrayList<>();
 		for(int i=0;i<l.size();i++){
-			
+
 			String a = l.get(i).getFirstname()+" "+l.get(i).getLastname();
 			result.add(a);
 		}
 		return result;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value ="/getEmployeeByName" , method=RequestMethod.POST)
 	public Employee getEmployeeByName(@RequestParam(value = "name") String name){
@@ -68,26 +68,26 @@ public class EmployeeController {
 	public ArrayList<EmployeeDetails> getEmployeeDetails(){
 		ArrayList<Employee> employeeList = getAllEmployies();
 		ArrayList<EmployeeDetails> employeeDetailsList = new ArrayList<>();
-		
+
 		Iterator<Employee> it = employeeList.iterator();
 		while (it.hasNext()) {
 			Employee emp = it.next();
 			EmployeeDetails empd = new EmployeeDetails();
-			
+
 			empd.setId(emp.getId());
-			
+
 			String fullname = emp.getFirstname()+" "+emp.getLastname();
 			empd.setName(fullname);
 			empd.setSpecialisation(specialosationService.getSpecialisationById(emp.getIdspecialisation()).getName());
-			empd.setSpecialisationlavel(emp.getSpecialisationlevel());	
+			empd.setSpecialisationlavel(emp.getSpecialisationlevel());
 			employeeDetailsList.add(empd);
-			
+
 		}
 		return employeeDetailsList;
-		
-		
+
+
 	}
-	
+
 	@RequestMapping(path = "/saveEmployee", method = RequestMethod.POST)
 	public void SaveNewEmployee(@RequestParam(value = "firstname") String firstname,
 								@RequestParam(value = "lastname") String lastname,
@@ -104,7 +104,7 @@ public class EmployeeController {
 								@RequestParam(value = "build") int build,
 								@RequestParam(value = "appno") int appno,
 								@RequestParam(value = "contractno") int contractno){
-		
+
 		Address address = new Address();
 		address.setCountry(country);
 		address.setConuty(county);
@@ -113,20 +113,20 @@ public class EmployeeController {
 		address.setStreetnumber(streetno);
 		address.setBuildnumber(build);
 		address.setApartmentnumber(appno);
-	
-	
-	
+
+
+
 		addresService.saveAddress(address);
-	
+
 		Account account = new Account();
 		account.setUsername(username);
 		account.setPassword(password);
-		ArrayList<Address> addressesList = addresService.getAddresses();	
+		ArrayList<Address> addressesList = addresService.getAddresses();
 		account.setIddress(addressesList.get(addressesList.size()-1).getIdaddress());
 		account.setIdaccounttype(3);//Employee account type = 3
-	
+
 		accountService.saveAccount(account);
-	
+
 		Employee employee = new Employee();
 		employee.setFirstname(firstname);
 		employee.setLastname(lastname);
@@ -136,23 +136,23 @@ public class EmployeeController {
 		employee.setIdspecialisation(specialosationService.getSpIdByName(specialisation));
 		employee.setSpecialisationlevel(specialisationLavel);
 		employee.setIdcontract(contractno);
-		
+
 		employeeService.save(employee);
 	}
-	
+
 	@RequestMapping(path = "/getModalDetails" , method = RequestMethod.POST)
 	public EmployeeDetails getModalDetails(@RequestParam(value = "idEmployee") int idEmployee){
 		Employee emp = employeeService.getEmployeeById(idEmployee);
 		EmployeeDetails empd = new EmployeeDetails();
-		
+
 		empd.setId(emp.getId());
 		String fullname = emp.getFirstname()+" "+emp.getLastname();
 		empd.setName(fullname);
 		empd.setSpecialisation(specialosationService.getSpecialisationById(emp.getIdspecialisation()).getName());
 		empd.setSpecialisationlavel(emp.getSpecialisationlevel());
 		empd.setEmail(emp.getEmail());
-		empd.setUsername(accountService.getUsernameByIdAccount(emp.getId()));
-		Address address = addresService.getAddressById(accountService.getIdAddressByIdAccount(emp.getIdaccount()));	
+		empd.setUsername(accountService.getUsernameByIdAccount(emp.getIdaccount()));
+		Address address = addresService.getAddressById(accountService.getIdAddressByIdAccount(emp.getIdaccount()));
 		String address1 = address.getCountry()+", "+address.getConuty()+", "+address.getTown()+", "+
 						  address.getStreet()+" "+address.getStreetnumber()+", Build Number : "+address.getBuildnumber()+
 						  ", App No : "+address.getApartmentnumber();
@@ -164,7 +164,7 @@ public class EmployeeController {
 		empd.setCurency(contract.getCurency());
 		empd.setStartdate(contract.getStartdate());
 		empd.setExpirationdate(contract.getExpirationdate());
-		
+
 		return empd;
 	}
 
