@@ -23,5 +23,10 @@ public class ContractClientStatusService {
 	public int getStatusIdByName(String a){
 		return contractClientStatusRepository.getStatusIdByName(a);
 	}
+	
+	public String getContractClientStatusNameById(int a){
+		   return contractClientStatusRepository.getContractClientStatusNameById(a);
+	   }
+
 
 }

@@ -27,5 +27,9 @@ public class ContractClientService {
 		contractClientRepository.delete(ce);
 		
 	}
+	
+	public ContractClient getContractByIdClient(int a){
+		return contractClientRepository.getContractClientByIdClient(a);
+	}
 
 }

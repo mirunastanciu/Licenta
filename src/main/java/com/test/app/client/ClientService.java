@@ -18,13 +18,7 @@ public class ClientService {
 	}
 	
 	public Client getClientById(int a){
-		ArrayList<Client> clientList = getAllClients();
-		for(int i=0;i<clientList.size();i++){
-			 if(clientList.get(i).getId() == a){
-				 return clientList.get(i);
-			 }
-		 }
-		return null;
+		return clientRepository.getClientById(a);
 	}
 	
 	public void saveClient(Client c){

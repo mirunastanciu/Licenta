@@ -157,6 +157,39 @@ $(document).ready( function () {
 						    {"defaultContent": '<button class="btn-details" type="button">Details</button>'}
 						    ]
 	 });
+	 //Details button function
+	 $('#clientTable').on('click', '.btn-details', function () {
+		 
+		 var tr = $(this).closest('tr');
+		 var idClient = tr.children('td:eq(0)').text();//get the id (from db)
+		 
+		
+		 $.ajax({
+			   method: "POST",
+			   url: "getClientDetails",
+			   data: {idClient: idClient},
+			   success: function(data, status, xhr){
+					
+					$(".modal-body #clid").html(data.id);
+		            $(".modal-body #clname").html(data.name);
+		            $(".modal-body #clemail").html(data.email);
+		            $(".modal-body #cluser").html(data.username);
+		            $(".modal-body #claddress").html(data.address);
+		           
+		            
+		            $(".modal-body #contractidcl").html(data.idcontract);
+		            $(".modal-body #contractstatus1").html(data.contractstatus);
+		            $(".modal-body #amount").html(data.amount);
+		            //$(".modal-body #availableamount").html(data.curency);
+		            $(".modal-body #curency").html(data.curency);
+		            $(".modal-body #stdate1").html(data.startdate);
+		           
+
+				   $('#myModalDetails').modal('show');
+			   }
+		 });	
+})	
+	 
 });
 	 
 	 
