@@ -20,7 +20,7 @@ $(document).ready( function () {
 	 $('#employeeTable').on('click', '.btn-details', function () {
 		 
 		 var tr = $(this).closest('tr');
-		 idEmployee = tr.children('td:eq(0)').text();//get the id (from db)
+		 var idEmployee = tr.children('td:eq(0)').text();//get the id (from db)
 		 
 		
 		 $.ajax({
@@ -44,14 +44,14 @@ $(document).ready( function () {
 		            $(".modal-body #stdate").html(data.startdate);
 		            $(".modal-body #expdate").html(data.expirationdate);
 
-				   $('#myModalDetails').modal('show');
+				   $('#myModalEmployeeDetails').modal('show');
 			   }
 		 });	
 })	
 })	
 
 function CreateNewEmployeeModal(){
-	 $('#myModal').modal('show');
+	 $('#ModalCreateNewEmployee').modal('show');
 	 var options1;
 		$.ajax("/getSpNames",
 			       { type: 'GET',
@@ -185,7 +185,7 @@ $(document).ready( function () {
 		            $(".modal-body #stdate1").html(data.startdate);
 		           
 
-				   $('#myModalDetails').modal('show');
+				   $('#myModalClientDetails').modal('show');
 			   }
 		 });	
 })	
