@@ -37,7 +37,12 @@ public class ContractClientController {
 			 ccd.setAmount(contractClientList.get(i).getAmount());
 			 ccd.setCurency(contractClientList.get(i).getCurency());
 			 ccd.setStartdate(contractClientList.get(i).getStartdate());
-			 ccd.setExpirationdate(contractClientList.get(i).getExpirationdate());
+			 if(contractClientList.get(i).getExpirationdate() == null){
+				    ccd.setExpirationdate("Unlimited");
+				}else{
+					ccd.setExpirationdate(contractClientList.get(i).getExpirationdate().toString());
+				}
+			 
 
 			 contractClientDetailsList.add(ccd);
 
@@ -85,7 +90,12 @@ public class ContractClientController {
 			ccd.setAmount(contract.getAmount());
 			ccd.setCurency(contract.getCurency());
 			ccd.setStartdate(contract.getStartdate());
-			ccd.setExpirationdate(contract.getExpirationdate());
+			 if(contract.getExpirationdate() == null){
+				    ccd.setExpirationdate("Unlimited");
+				}else{
+					ccd.setExpirationdate(contract.getExpirationdate().toString());
+				}
+			
 			ccd.setSigndate(contract.getSignature());
 
 

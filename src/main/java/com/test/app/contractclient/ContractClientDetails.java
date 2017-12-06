@@ -9,7 +9,7 @@ public class ContractClientDetails {
 	private double amount;
 	private String curency;
 	private Date startdate;
-	private Date expirationdate;
+	private String expirationdate;
 	private Date signdate;
 
 	public int getId() {
@@ -52,11 +52,11 @@ public class ContractClientDetails {
 		this.startdate = startdate;
 	}
 
-	public Date getExpirationdate() {
+	public String getExpirationdate() {
 		return expirationdate;
 	}
 
-	public void setExpirationdate(Date expirationdate) {
+	public void setExpirationdate(String expirationdate) {
 		this.expirationdate = expirationdate;
 	}
 

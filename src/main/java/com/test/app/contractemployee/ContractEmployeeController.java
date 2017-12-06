@@ -1,5 +1,6 @@
 package com.test.app.contractemployee;
 
+
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,13 @@ public class ContractEmployeeController {
 			ced.setSalary(contractEmployeeList.get(i).getSalary());
 			ced.setCurency(contractEmployeeList.get(i).getCurency());
 			ced.setStartdate(contractEmployeeList.get(i).getStartdate());
-			ced.setExpirationdate(contractEmployeeList.get(i).getExpirationdate());
+			
+			if(contractEmployeeList.get(i).getExpirationdate() == null){
+				ced.setExpirationdate("Unlimited");
+			}else{
+				ced.setExpirationdate(contractEmployeeList.get(i).getExpirationdate().toString());
+			}
+			
 			contrcatEmployeeDetailsList.add(ced);
 		}
 		return contrcatEmployeeDetailsList;
@@ -74,7 +81,12 @@ public class ContractEmployeeController {
 			ced.setSalary(contract.getSalary());
 			ced.setCurency(contract.getCurency());
 			ced.setStartdate(contract.getStartdate());
-			ced.setExpirationdate(contract.getExpirationdate());
+			if(contract.getExpirationdate() == null){
+				ced.setExpirationdate("Unlimited");
+			}else{
+				ced.setExpirationdate(contract.getExpirationdate().toString());
+			}
+			
 			ced.setSigndate(contract.getSignature());
 
 

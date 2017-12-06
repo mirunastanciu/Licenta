@@ -341,11 +341,11 @@ function statusChange(){
 function SalaryChange(){
 
 	$("#SLRY").click(function(e) {
-		var desc = $("#salaryE").text();
-		var descedit = document.getElementById("salaryEdit");
-		 if(desc !== descedit && $(descedit).val().length !== 0 ){
+		var salary = $("#salaryE").text();
+		var salaryedit = document.getElementById("salaryEdit");
+		 if(salary !== salaryedit && $(salaryedit).val().length !== 0 ){
 			 if(e.target.id !== "salaryEdit"){
-				$(".modal-body #salaryE").html(descedit.value);
+				$(".modal-body #salaryE").html(salaryedit.value);
 
 	    		}
 			 }
@@ -356,15 +356,17 @@ function SalaryChange(){
 function expDateChange(){
 
 	$("#EXPD").click(function(e) {
-		var duedate =  $("#expdateE").text();
-	    var duedateedit = document.getElementById("expDateEdit");
-	    if(duedate.value !== duedateedit.value /* && $(duedateedit).val().length !== 0*/ ){
+		var expdate =  $("#expdateE").text();
+	    var expdateedit = document.getElementById("expDateEdit");
+	    if(expdate.value !== expdateedit.value /* && $(duedateedit).val().length !== 0*/ ){
 	    	if(e.target.id !== "expDateEdit" ){
-	    		if($(duedateedit).val().length == 0){
+	    		if($(expdateedit).val().length == 0){
 	    			$(".modal-body #expdateE").html("Unlimited");
 	    		}else{
-	    			$(".modal-body #expdateE").html(duedateedit.value);
+	    			$(".modal-body #expdateE").html(expdateedit.value);
 	    		}
+	    			
+	    		
 
 	    	 }
 		}
@@ -394,11 +396,11 @@ function statusChange1(){
 function SalaryChange1(){
 
 	$("#SLRY1").click(function(e) {
-		var desc = $("#amountEC").text();
-		var descedit = document.getElementById("amountEdit");
-		 if(desc !== descedit && $(descedit).val().length !== 0 ){
+		var amount = $("#amountEC").text();
+		var amountedit = document.getElementById("amountEdit");
+		 if(amount !== amountedit && $(amountedit).val().length !== 0 ){
 			 if(e.target.id !== "amountEdit"){
-				$(".modal-body #amountEC").html(descedit.value);
+				$(".modal-body #amountEC").html(amountedit.value);
 
 	    		}
 			 }
@@ -409,14 +411,14 @@ function SalaryChange1(){
 function expDateChange1(){
 
 	$("#EXPD1").click(function(e) {
-		var duedate =  $("#expdateEC").text();
-	    var duedateedit = document.getElementById("expDateEditC");
-	    if(duedate.value !== duedateedit.value /* && $(duedateedit).val().length !== 0*/ ){
+		var expdate =  $("#expdateEC").text();
+	    var expdateedit = document.getElementById("expDateEditC");
+	    if(expdate.value !== expdateedit.value /* && $(duedateedit).val().length !== 0*/ ){
 	    	if(e.target.id !== "expDateEditC" ){
-	    		if($(duedateedit).val().length == 0){
+	    		if($(expdateedit).val().length == 0){
 	    			$(".modal-body #expdateEC").html("Unlimited");
 	    		}else{
-	    			$(".modal-body #expdateEC").html(duedateedit.value);
+	    			$(".modal-body #expdateEC").html(expdateedit.value);
 	    		}
 
 	    	 }
