@@ -143,6 +143,15 @@ input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button;
   cursor: pointer;
+
+
+    color: white;
+    padding: 1px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #339fb7;
+    display: block;
 }
 button[disabled],
 html input[disabled] {
@@ -5994,7 +6003,7 @@ button.close {
   .modal-sm {
     width: 300px;
   }
-  
+
    .modal-normal {
     width: 500px;
   }

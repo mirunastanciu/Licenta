@@ -12,21 +12,21 @@ import com.test.app.contractemployeestatus.ContractEmployeeStatusService;
 
 @RestController
 public class ContractEmployeeController {
-	
-	@Autowired 
+
+	@Autowired
 	ContractEmployeeService contractEmployeeService;
-	
+
 	@Autowired
 	ContractEmployeeStatusService contractEmployeeStatusService;
-	
 
-	
+
+
 
 	@RequestMapping(path="/getEmployeeContracts/Details", method=RequestMethod.GET)
 	public ArrayList<ContractEmployeeDetails> getAllEmployeeClients(){
 		ArrayList<ContractEmployee> contractEmployeeList = contractEmployeeService.getAllEmployeeContracts();
 		ArrayList<ContractEmployeeDetails> contrcatEmployeeDetailsList = new ArrayList<>();
-		
+
 		for(int i=0;i<contractEmployeeList.size();i++){
 			ContractEmployeeDetails ced = new ContractEmployeeDetails();
 			ced.setId(contractEmployeeList.get(i).getId());
@@ -39,14 +39,14 @@ public class ContractEmployeeController {
 		}
 		return contrcatEmployeeDetailsList;
 	}
-	
+
 	@RequestMapping(path="/saveNewEmployeeContract" , method=RequestMethod.POST)
 	public void addNewEmployeeContract(@RequestParam(value="salary") double salary,
 									   @RequestParam(value="status") String status,
 									   @RequestParam(value="signaturedate") String signaturedate,
 									   @RequestParam(value="startdate") String startdate,
 									   @RequestParam(value="expirationdate") String expirationdate){
-		
+
 		ContractEmployee ce = new ContractEmployee();
 		ce.setSalary(salary);
 		java.sql.Date parseDate = java.sql.Date.valueOf(signaturedate);
@@ -59,9 +59,46 @@ public class ContractEmployeeController {
 	     }
 		ce.setIdstatus(contractEmployeeStatusService.getEmployeeContractStatusIdByName(status));
 		ce.setCurency("EUR");
-		
+
 		contractEmployeeService.save(ce);
-		
+
 	}
+
+	@RequestMapping(path="/getEmployeeContract/DetailsForModal", method=RequestMethod.POST)
+	public ContractEmployeeDetails getAllEmployeeContract(@RequestParam(value="idContract") int id){
+		ContractEmployee contract = contractEmployeeService.getContractById(id);
+
+			ContractEmployeeDetails ced = new ContractEmployeeDetails();
+			ced.setId(contract.getId());
+			ced.setStatus(contractEmployeeStatusService.getContractEmployeeStatusById(contract.getId()).getStatusname());
+			ced.setSalary(contract.getSalary());
+			ced.setCurency(contract.getCurency());
+			ced.setStartdate(contract.getStartdate());
+			ced.setExpirationdate(contract.getExpirationdate());
+			ced.setSigndate(contract.getSignature());
+
+
+		return ced;
+	}
+
+	@RequestMapping(path="/updateContractEmployee" , method=RequestMethod.POST)
+	public void update(@RequestParam(value="idContract") int id,
+					   @RequestParam(value="status") String status,
+					   @RequestParam(value="salary") double salary,
+					   @RequestParam(value="expdate") String expdate) {
+
+		ContractEmployee ce = contractEmployeeService.getContractById(id);
+
+		ce.setIdstatus(contractEmployeeStatusService.getEmployeeContractStatusIdByName(status));
+		ce.setSalary(salary);
+		if(expdate.equals("Unlimited") == false) {
+			java.sql.Date parseDate = java.sql.Date.valueOf(expdate);
+			ce.setExpirationdate(parseDate);
+		}
+		contractEmployeeService.save(ce);
+
+
+	}
+
 
 }

@@ -15,7 +15,7 @@ public class AccountController {
 
 	@Autowired
 	private AccountService accountService;
-	
+
 
 	@RequestMapping("/accounts")
 	public List<Account> getAllAccounts() {
@@ -37,32 +37,32 @@ public class AccountController {
 			if (username.equals(l.get(i).getUsername())
 					&& password.equals(l.get(i).getPassword())) {
 				if (l.get(i).validateAdmin()) {
-					response =  "http://localhost:8080/administratorStartPage";
+					response =  "http://localhost:8082/administratorStartPage";
 					//model = new ModelAndView("redirect:/administratorStartPage");
 					// return "redirect:AdminStartPage.html";
 					break;
 				}else if(l.get(i).validateClient()){
-					response = "http://localhost:8080/clientStartPage";
+					response = "http://localhost:8082/clientStartPage";
 					//model = new ModelAndView("redirect:/clientStartPage");
 					break;
 				}else if(l.get(i).validateEmployee()){
-					response = "http://localhost:8080/administratorPage";
+					response = "http://localhost:8082/administratorPage";
 					//model = new ModelAndView("redirect:/administratorPage");
 					break;
-					
+
 				}
 			} else {
-				response = "http://localhost:8080/registerAccount";
+				response = "http://localhost:8082/registerAccount";
 				//model = new ModelAndView("redirect:/registerAccount");
 				// return "redirect:Register.html";
 			}
 		}
 		return response;
-		
+
 
 	}
-	
-	
+
+
 	@RequestMapping(value="/uniqueUser" , method=RequestMethod.POST)
 	public String uniquerUserCheck(@RequestParam(value="username") String username){
 		ArrayList<Account> accountList = accountService.getAllAccounts();
@@ -73,16 +73,16 @@ public class AccountController {
 				response = 0;
 			}
 		}
-		
+
 		if(response == 1){
 			return "success";
 		}else{
 			return "faild";
 		}
-		
-		
-		
-		
+
+
+
+
 	}
 
 }

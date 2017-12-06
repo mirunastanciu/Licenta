@@ -10,6 +10,7 @@ public class ContractEmployeeDetails {
 	private String curency;
 	private Date startdate;
 	private Date expirationdate;
+	private Date signdate;
 
 	public int getId() {
 		return id;
@@ -58,5 +59,14 @@ public class ContractEmployeeDetails {
 	public void setExpirationdate(Date expirationdate) {
 		this.expirationdate = expirationdate;
 	}
+
+	public Date getSigndate() {
+		return signdate;
+	}
+
+	public void setSigndate(Date signdate) {
+		this.signdate = signdate;
+	}
+
 
 }

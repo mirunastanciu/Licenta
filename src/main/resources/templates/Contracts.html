@@ -50,6 +50,7 @@
 					<th>Curency</th>
 					<th>Start Date</th>
 					<th>Expiration Date</th>
+					<th></th>
 					
 				</tr>
 			</thead>
@@ -67,6 +68,7 @@
 					<th>Curency</th>
 					<th>Start Date</th>
 					<th>Expiration Date</th>
+					<th></th>
 				</tr>
 			</thead>
 		</table>
@@ -87,24 +89,24 @@
 	         	  <br>
 		          <div class="modalcontent " >
 		             <div id="d1" class="InLineDiv-StAdmPg ">
-		    			<p>Salary</p>
+		    			<h4>Salary</h4>
 		    			<input type="number" id="salary" class="input" name="salary" placeholder="Salary.."  autocomplete="off" required/>
 		
-		 				<p>Status</p>
+		 				<h4>Status</h4>
 		    			<select id="statusList" name="status"  required></select>
 		    			<br>
 		    			<br>
 					 </div>
 					 <div id="d2" class="InLineDiv-StAdmPg ">
-					 	<p>Signature Date</p>
+					 	<h4>Signature Date</h4>
 		    			<input type="date" id="signdate" class="input" name="signdate" autocomplete="off" required/>
 						<br>	
 						<br>
-		    			<p>Start Date</p>
+		    			<h4>Start Date</h4>
 		    			<input type="date" id="startdate" class="input" name="startdate" autocomplete="off" required/>
 		    			<br>
 		    			<br>
-		    			<p>Expiration Date</p>
+		    			<h4>Expiration Date</h4>
 		    			<input type="date" id="expdate" class="input" name="expdate" autocomplete="off" required/>
 		    
 		     			
@@ -137,28 +139,28 @@
 	         	  <br>
 		          <div class="modalcontent " >
 		             <div id="d1" class="InLineDiv-StAdmPg ">
-		             	<p>Client</p>
+		             	<h4>Client</h4>
 		             	<select id="clientsList" name="clients"  required></select>
 		             	<br>
 		             	<br>
-		             	<p>Amount</p>
+		             	<h4>Amount</h4>
 		    			<input type="number" id="amount" class="input" name="amount" placeholder="Amount.."  autocomplete="off" required/>
 		
-		 				<p>Status</p>
+		 				<h4>Status</h4>
 		    			<select id="statusList1" name="status"  required></select>
 		    			<br>
 		    			<br>
 					 </div>
 					 <div id="d2" class="InLineDiv-StAdmPg ">
-					 	<p>Signature Date</p>
+					 	<h4>Signature Date</h4>
 		    			<input type="date" id="signdate1" class="input" name="signdate" autocomplete="off" required/>
 						<br>	
 						<br>
-		    			<p>Start Date</p>
+		    			<h4>Start Date</h4>
 		    			<input type="date" id="startdate1" class="input" name="startdate" autocomplete="off" required/>
 		    			<br>
 		    			<br>
-		    			<p>Expiration Date</p>
+		    			<h4>Expiration Date</h4>
 		    			<input type="date" id="expdate1" class="input" name="expdate" autocomplete="off" required/>
 		    
 		     			
@@ -177,5 +179,61 @@
 	  </div>
   </div>
  </div>	
+ 
+ <!-- EDIT employee Contract modal -->		
+	<div class="modal fade modalTD" id="EditModalEmployeeContract" role="dialog">
+   	 <div class="modal-dialog modal-normal">
+   		 <!-- Modal content-->
+    	<div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">New Employee Contract</h4>
+	        </div>
+	        <div class="modal-body">
+	          <div >
+	         	  <br>
+		          <div class="modalcontent " >
+		             <h4>Id</h4>
+		             <p id="idE"></p>
+		             
+		             <h4>Status</h4>
+		             <p id="statusE"></p>
+		             <select id="StatusList" style="width:50%;" onchange="statusChange();"></select>
+		             
+		             <div id="SLRY" onchange="SalaryChange()">
+		             	<h4>Salary</h4>
+		             	<p id="salaryE"></p>
+		             	<input style="width:50%;" type="number" id="salaryEdit" class="input " name="expdate"  autocomplete="off"/>
+		             </div>
+		             
+		             <h4>Curency</h4>
+		             <p id="curencyE"></p>	             
+		             
+		             <h4>Signature Date</h4>
+		             <p id="signdateE"></p> 
+		             
+		             <h4>Start Date</h4>
+		             <p id="startdateE"></p>  
+		             
+		             <div id="EXPD" onchange="expDateChange()">
+		            	 <h4>Expiration Date</h4>
+		             	 <p id="expdateE"></p>  
+		             	 <input style="width:50%;" type="date" id="expDateEdit" class="input" name="expdate" autocomplete="off"/> 
+		             </div>
+		             
+		
+		          </div>
+		        <div class="modal-footer">
+		        
+		          <button id="savebutton" type="button" class="btn btn-default">Save</button>
+		     
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+  </div>
+ </div>
 </body>
 </html>
