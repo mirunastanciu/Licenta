@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.test.app.client.ClientService;
 import com.test.app.contractclientstatus.ContractClientStatusService;
 
+
 @RestController
 public class ContractClientController {
 
@@ -71,6 +72,44 @@ public class ContractClientController {
 		ce.setCurency("EUR");
 
 		contractClientService.save(ce);
+
+	}
+
+	@RequestMapping(path="/getClientContract/DetailsForModal", method=RequestMethod.POST)
+	public ContractClientDetails getAllEmployeeContract(@RequestParam(value="idContract") int id){
+		ContractClient contract = contractClientService.getContractById(id);
+
+			ContractClientDetails ccd = new ContractClientDetails();
+			ccd.setId(contract.getId());
+			ccd.setStatus(contractClientStatusService.getContractClientStatusById(contract.getId()).getStatusname());
+			ccd.setAmount(contract.getAmount());
+			ccd.setCurency(contract.getCurency());
+			ccd.setStartdate(contract.getStartdate());
+			ccd.setExpirationdate(contract.getExpirationdate());
+			ccd.setSigndate(contract.getSignature());
+
+
+		return ccd;
+	}
+
+	@RequestMapping(path="/updateContractClient" , method=RequestMethod.POST)
+	public void update(@RequestParam(value="idContract") int id,
+					   @RequestParam(value="status") String status,
+					   @RequestParam(value="amount") double amount,
+					   @RequestParam(value="expdate") String expdate) {
+
+		ContractClient ce = contractClientService.getContractById(id);
+
+		ce.setIdstatus(contractClientStatusService.getStatusIdByName(status));
+		ce.setAmount(amount);
+		if(expdate.equals("Unlimited") ) {
+			ce.setExpirationdate(null);
+		}else {
+			java.sql.Date parseDate = java.sql.Date.valueOf(expdate);
+			ce.setExpirationdate(parseDate);
+		}
+		contractClientService.save(ce);
+
 
 	}
 

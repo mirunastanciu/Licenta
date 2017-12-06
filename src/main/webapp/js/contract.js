@@ -1,6 +1,6 @@
 $(window).resize(function(){location.reload();});
 
-// employee contracts table
+// --------------employee contracts table-------------------\\
 $(document).ready( function () {
 
 	 var table = $('#employeeContractTable').dataTable({
@@ -20,7 +20,7 @@ $(document).ready( function () {
 						  ]
 	 });
 
-	//Edit function
+	//Edit function//
 	 $('#employeeContractTable').on('click', '.btn-details', function () {
 		 var tr = $(this).closest('tr');
 		 idContract = tr.children('td:eq(0)').text();//get the id (from db)
@@ -62,7 +62,7 @@ $(document).ready( function () {
 
 			   });
 
-		 //Update function
+		 //Update function//
          $('.modal-footer').on('click', '#savebutton', function () {
 
         	 var status =  $(".modalcontent #statusE").text();
@@ -95,7 +95,7 @@ $(document).ready( function () {
 
 });
 
-// clients contrcats table
+// --------------clients contracts table---------------\\
 $(document).ready( function () {
 
 	 var table = $('#clientContractTable').dataTable({
@@ -114,12 +114,82 @@ $(document).ready( function () {
 						    ]
 	 });
 
+		//Edit function//
+	 $('#clientContractTable').on('click', '.btn-details', function () {
+		 var tr = $(this).closest('tr');
+		 var idContract = tr.children('td:eq(0)').text();//get the id (from db)
+		 $.ajax({
+			   method: "POST",
+			   url: "getClientContract/DetailsForModal",
+			   data: {idContract: idContract},
+			   success: function(data, status, xhr){
 
+				    $(".modal-body #idEC").html(data.id);
+					$(".modal-body #statusEC").html(data.status);
+		            $(".modal-body #amountEC").html(data.amount);
+		            $(".modal-body #curencyEC").html(data.curency);
+		            $(".modal-body #signdateEC").html(data.signdate);
+		            $(".modal-body #startdateEC").html(data.startdate);
+		            if(data.expirationdate === null){
+		              $(".modal-body #expdateEC").html("Unlimited");
+		            }else{
+		            	$(".modal-body #expdateEC").html(data.expirationdate);
+		            }
+
+		            $.ajax("/getClientContractstatusNames",
+		 			       { type: 'GET',
+		 			 		 success: function (data) {
+		 			 			options = data;
+
+		 					       	$('#StatusListC').empty();
+		 					       	$.each(options, function(i, p) {
+		 					       	$('#StatusListC').append($('<option></option>').val(p).html(p));
+		 					       	});
+		 			       }
+
+		 			       })
+
+		            $('#EditModalClientContract').modal('show');
+
+		        }
+
+
+			   });
+
+		 //Update function//
+         $('.modal-footer').on('click', '#savebutton', function () {
+
+        	 var status =  $(".modalcontent #statusEC").text();
+        	 var amount =  $(".modalcontent #amountEC").text();
+        	 var expdate =  $(".modalcontent #expdateEC").text();
+
+        	 $.ajax({
+				   method: "POST",
+				   url: "updateContractClient",
+				   data:
+				          {"idContract": idContract,
+					   	  "status": status,
+					   	  "amount": amount,
+					   	  "expdate": expdate
+					   	  }
+					   		,
+				   success: function(data, status, xhr){
+
+					   $('#EditModalClientContract').modal('hide');
+					   location.reload();
+				   }, error: function(){
+					   alert("error Update Method");
+					   }
+				   });
+
+
+		   });
+		});
 
 
 });
 
-// create new employee contract modal function
+// ------------create new employee contract modal function-----------\\
 function modalEmployeeContract(){
 	var options;
 	 $('#myModalEmployeeContract').modal('show');
@@ -136,7 +206,7 @@ function modalEmployeeContract(){
 			       }
 
 			       })
-   //Save Fuction
+   //Save Fuction//
 	$('.modal-footer').on('click', '#savebutton', function (){
 			var salary = $(".modalcontent #salary").val();
 			var status = $("#statusList option:selected" ).text();
@@ -174,7 +244,7 @@ function modalEmployeeContract(){
 
 }
 
-//create new client contract modal function
+//----------create new client contract modal function--------------\\
 function modalClientContract(){
 	 $('#myModalClientContract').modal('show');
 	 var options;
@@ -208,7 +278,7 @@ function modalClientContract(){
 
 
 
-   //Save Fuction
+   //Save Fuction//
 	$('.modal-footer').on('click', '#savebutton', function (){
 			var amount = $(".modalcontent #amount").val();
 			var status = $("#statusList1 option:selected" ).text();
@@ -248,8 +318,8 @@ function modalClientContract(){
 		});
 
 }
-
-//Change Status on Edit mode
+//----------- Employee Contract functions-------------------\\
+//Change Status on Edit mode//
 function statusChange(){
 
 	$.ajax("/getEmployeeContractStatuses",
@@ -267,7 +337,7 @@ function statusChange(){
 	})
 }
 
-//Change salary on Edit mode
+//Change salary on Edit mode//
 function SalaryChange(){
 
 	$("#SLRY").click(function(e) {
@@ -282,7 +352,7 @@ function SalaryChange(){
 	});
 }
 
-//Change Expiration Date
+//Change Expiration Date//
 function expDateChange(){
 
 	$("#EXPD").click(function(e) {
@@ -301,3 +371,55 @@ function expDateChange(){
 	});
 }
 
+//----------- Client Contract functions-------------------\\
+//Change Status on Edit mode//
+function statusChange1(){
+
+	$.ajax("/getEmployeeContractStatuses",
+		       { type: 'GET',
+		 		 success: function (data) {
+
+				       for(var i in data){
+				    	   sel = document.getElementById("StatusListC"); //
+				    	    var status = document.getElementById("statusEC");
+				    	    if ( sel.options[sel.selectedIndex].value == data[i] ) {
+				    	    	status.innerHTML = sel.options[sel.selectedIndex].value;
+				    	    }
+				       }
+				 }
+	})
+}
+
+//Change salary on Edit mode//
+function SalaryChange1(){
+
+	$("#SLRY1").click(function(e) {
+		var desc = $("#amountEC").text();
+		var descedit = document.getElementById("amountEdit");
+		 if(desc !== descedit && $(descedit).val().length !== 0 ){
+			 if(e.target.id !== "amountEdit"){
+				$(".modal-body #amountEC").html(descedit.value);
+
+	    		}
+			 }
+	});
+}
+
+//Change Expiration Date//
+function expDateChange1(){
+
+	$("#EXPD1").click(function(e) {
+		var duedate =  $("#expdateEC").text();
+	    var duedateedit = document.getElementById("expDateEditC");
+	    if(duedate.value !== duedateedit.value /* && $(duedateedit).val().length !== 0*/ ){
+	    	if(e.target.id !== "expDateEditC" ){
+	    		if($(duedateedit).val().length == 0){
+	    			$(".modal-body #expdateEC").html("Unlimited");
+	    		}else{
+	    			$(".modal-body #expdateEC").html(duedateedit.value);
+	    		}
+
+	    	 }
+		}
+	});
+}

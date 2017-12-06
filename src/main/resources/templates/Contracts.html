@@ -75,7 +75,7 @@
 
 
 	</div>
-<!-- create new employee Contract modal -->		
+<!-- ==========create new employee Contract modal ====================-->		
 	<div class="modal fade modalTD" id="myModalEmployeeContract" role="dialog">
    	 <div class="modal-dialog modal-lg">
    		 <!-- Modal content-->
@@ -125,7 +125,7 @@
 	  </div>
   </div>
  </div>
-<!-- create new client Contract modal -->	
+<!-- ===========create new client Contract modal============== -->	
 	<div class="modal fade modalTD" id="myModalClientContract" role="dialog">
    	 <div class="modal-dialog modal-lg">
    		 <!-- Modal content-->
@@ -180,14 +180,14 @@
   </div>
  </div>	
  
- <!-- EDIT employee Contract modal -->		
+ <!--========= EDIT employee Contract modal =============-->		
 	<div class="modal fade modalTD" id="EditModalEmployeeContract" role="dialog">
    	 <div class="modal-dialog modal-normal">
    		 <!-- Modal content-->
     	<div class="modal-content">
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">New Employee Contract</h4>
+	          <h4 class="modal-title">Edit Employee Contract</h4>
 	        </div>
 	        <div class="modal-body">
 	          <div >
@@ -219,6 +219,62 @@
 		            	 <h4>Expiration Date</h4>
 		             	 <p id="expdateE"></p>  
 		             	 <input style="width:50%;" type="date" id="expDateEdit" class="input" name="expdate" autocomplete="off"/> 
+		             </div>
+		             
+		
+		          </div>
+		        <div class="modal-footer">
+		        
+		          <button id="savebutton" type="button" class="btn btn-default">Save</button>
+		     
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+  </div>
+ </div>
+ 
+  <!--========= EDIT client Contract modal =============-->		
+	<div class="modal fade modalTD" id="EditModalClientContract" role="dialog">
+   	 <div class="modal-dialog modal-normal">
+   		 <!-- Modal content-->
+    	<div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Edit Employee Contract</h4>
+	        </div>
+	        <div class="modal-body">
+	          <div >
+	         	  <br>
+		          <div class="modalcontent " >
+		             <h4>Id</h4>
+		             <p id="idEC"></p>
+		             
+		             <h4>Status</h4>
+		             <p id="statusEC"></p>
+		             <select id="StatusListC" style="width:50%;" onchange="statusChange1();"></select>
+		             
+		             <div id="SLRY1" onchange="SalaryChange1()">
+		             	<h4>Amount</h4>
+		             	<p id="amountEC"></p>
+		             	<input style="width:50%;" type="number" id="amountEdit" class="input " name="expdate"  autocomplete="off"/>
+		             </div>
+		             
+		             <h4>Curency</h4>
+		             <p id="curencyEC"></p>	             
+		             
+		             <h4>Signature Date</h4>
+		             <p id="signdateEC"></p> 
+		             
+		             <h4>Start Date</h4>
+		             <p id="startdateEC"></p>  
+		             
+		             <div id="EXPD1" onchange="expDateChange1()">
+		            	 <h4>Expiration Date</h4>
+		             	 <p id="expdateEC"></p>  
+		             	 <input style="width:50%;" type="date" id="expDateEditC" class="input" name="expdate" autocomplete="off"/> 
 		             </div>
 		             
 		
