@@ -25,23 +25,25 @@
 	</div> 
 
 <div class="container">  
-	<form  name="addTicket" action="/addTicket" >
+	<div>
 	
-    	<p>Project Type</p>
-    	<p> <select id="projecttypelist" name="projecttype" ></select></p>
+    	<h4>Project Type</h4>
+    	<select id="projecttypelist" name="projecttype"></select>
     	
-        <p>Description <input class="input"  type="text" name="description" autocomplete="off"  required/></p>
+        <h4>Description</h4>
+        <input id="desc" class="input"  type="text" name="description" autocomplete="off" required/>
         
-        <p>Assigne Persson</p>
-        <p> <select id="assigne" name="assignpersson"></select></p>
+        <h4>Assigne Persson</h4>
+        <select id="assignep" name="assignpersson"></select>
         
-        <div>
-        	<p>Due Date <input class="input"  type="date" name="duedate" autocomplete="off" required /></p>
+        <h4>Due Date </h4>
+        <input id = "duedate" class="input"  type="date" name="duedate" autocomplete="off" required />
+        <br>
+        <br>
+        <br>
              
-        </div>      
-        
-        <p><input type="submit" value="Add Ticket" /></p>
-    </form>
+        <button id="createNewTicket" onclick="saveTicket()" >Add Ticket</button>     
+    </div>
  
 </div>
 </body>

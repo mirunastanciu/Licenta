@@ -41,7 +41,7 @@ public class TicketController {
 
 	@Autowired
 	SpecialisationService specialisationService;
-	
+
 
 	@RequestMapping(path = "/ticketsToDo", method = RequestMethod.GET)
 	public List<TicketDetails> getAllTicketsToDo() {
@@ -58,7 +58,7 @@ public class TicketController {
 				tkd.setStatus(ticketStatusService.getTicketStatusById(ttodo.get(i).getIdstatus()).getStatusname());
 				td.add(tkd);
 			}
-		
+
 		return td;
 	}
 
@@ -67,7 +67,7 @@ public class TicketController {
 		List<Ticket> tInProgress = ticketService.getTicketsInProgress();
 		List<TicketDetails> td = new ArrayList<>();
 		for(int i=0;i<tInProgress.size();i++){
-			
+
 				TicketDetails tkd = new TicketDetails();
 				tkd.setIdticket(tInProgress.get(i).getId());
 				tkd.setDescription(tInProgress.get(i).getDescription());
@@ -76,7 +76,7 @@ public class TicketController {
 				tkd.setStatus(ticketStatusService.getTicketStatusById(tInProgress.get(i).getIdstatus()).getStatusname());
 				td.add(tkd);
 			}
-		
+
 		return td;
 	}
 
@@ -94,34 +94,37 @@ public class TicketController {
 				td.add(tkd);
 			}
 
-		
+
 		return td;
 	}
 
-	@RequestMapping(value = "/addTicket")
-	public ModelAndView addTicket(@RequestParam("projecttype") String projecttype ,
+	@RequestMapping(path = "/addTicket" , method=RequestMethod.POST)
+	public String addTicket(@RequestParam("projecttype") String projecttype ,
 							@RequestParam("description") String description,
-							@RequestParam("assignpersson") String assignpersson,
-							@RequestParam("duedate") Date duedate){
+							@RequestParam("assignpers") String assignpers,
+							@RequestParam("duedate") String duedate){
 		Ticket t = new Ticket();
 		t.setDescription(description);
 		t.setProjcttype(projectTypetService.getIdProjectTypeByName(projecttype));
-		t.setIdemployee(getIdEmployeeByName(assignpersson));
-		t.setDuedate(duedate);
+		t.setIdemployee(getIdEmployeeByName(assignpers));
+		java.sql.Date parseDate = java.sql.Date.valueOf(duedate);
+		t.setDuedate(parseDate);
 		t.setIdclient(1);
-        t.setCreationdate(Date.valueOf(LocalDate.now()));
-		t.setIdstatus(1);
-		
+		t.setCreationdate(Date.valueOf(LocalDate.now()));
+		t.setIdstatus(1);//TO DO
+
 		ticketService.addTicket(t);
-		ModelAndView model = new ModelAndView("redirect:/administratorStartPage");
-		return model;
+
+		//String response = "http://localhost:8082/administratorStartPage";
+		//return response;
+		return null;
 
 
 
 	}
-	
+
 	@RequestMapping(value = "/updateTicket" , method=RequestMethod.POST)
-	public ModelAndView updateTicket(@RequestParam(value="idTicket") int idTicket ,
+	public void updateTicket(@RequestParam(value="idTicket") int idTicket ,
 							@RequestParam(value="projecttype") String projecttype,
 							@RequestParam(value="status") String status,
 							@RequestParam(value="projectdescription") String projectdescription,
@@ -153,8 +156,8 @@ public class TicketController {
 		t.setIdstatus(ticketStatusService.getStatusIdByName(status));
 		ticketService.addTicket(t);
 
-		ModelAndView model = new ModelAndView("redirect:/administratorStartPage");
-		return model;
+		/*String model = new ModelAndView("http://localhost:8082/administratorStartPage");
+		return model;*/
 	}
 
 
@@ -179,11 +182,15 @@ public class TicketController {
 		 tkd.setIdticket(tk.getId());
 		 tkd.setProjecttypename(projectTypetService.getProjectTypeById(tk.getProjcttype()).getProjtypename());
 		 tkd.setStatus(ticketStatusService.getTicketStatusById(tk.getIdstatus()).getStatusname());
-		 String employeeName = employeeService.getEmployeeById(tk.getIdemployee()).getFirstname()
-				 +" "+employeeService.getEmployeeById(tk.getIdemployee()).getLastname();
-		 tkd.setEmployeename(employeeName);
-		 tkd.setEmployeeemail( employeeService.getEmployeeById(tk.getIdemployee()).getEmail());
-		 tkd.setEmployeespecialisation(specialisationService.getSpecialisationById((employeeService.getEmployeeById(tk.getIdemployee())).getIdspecialisation()).getName());
+
+		 if(tk.getIdemployee()!= 0) {
+			 String employeeName = employeeService.getEmployeeById(tk.getIdemployee()).getFirstname()
+					 				+" "+employeeService.getEmployeeById(tk.getIdemployee()).getLastname();
+		     tkd.setEmployeename(employeeName);
+		     tkd.setEmployeeemail( employeeService.getEmployeeById(tk.getIdemployee()).getEmail());
+			 tkd.setEmployeespecialisation(specialisationService.getSpecialisationById((employeeService.getEmployeeById(tk.getIdemployee())).getIdspecialisation()).getName());
+		 }
+
 		 String clientName = clientService.getClientById(tk.getIdclient()).getFirstname()
 				 +" "+clientService.getClientById(tk.getIdclient()).getLastname();
 		 tkd.setClientname(clientName);
@@ -196,10 +203,10 @@ public class TicketController {
 		return tkd;
 
 	    }
-	 
+
 	 @RequestMapping(value ="/deleteTicket" , method=RequestMethod.POST )
 	 public void deleteTicket(@RequestParam(value = "idTicket") int id){
-		
+
 		 ticketService.delete(ticketService.getTicketById(id));
 	 }
 

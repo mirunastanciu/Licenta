@@ -11,11 +11,11 @@
 			 "password": password
 			},
 			success: function(data, status, xhr){
-				if(data == "http://localhost:8080/registerAccount"){
+				if(data == "http://localhost:8082/registerAccount"){
 					alert("This account dosn't exist ! Please register...");
 					location = data;
 				}else{
-				 window.location.replace(data); 
+				 window.location.replace(data);
 				}
 			}, error: function(){
 				alert("error on Login");

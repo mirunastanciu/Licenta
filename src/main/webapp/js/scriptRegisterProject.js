@@ -1,42 +1,60 @@
-$(document).ready(function () {       
+$(document).ready(function () {
     var options;
-	$.ajax("/allProjectTypesName", 
+	$.ajax("/allProjectTypesName",
 		       { type: 'GET',
-		 		 success: function (data) {		        	 
+		 		 success: function (data) {
 				       options = data;
 				       	$('#projecttypelist').empty();
 				       	$.each(options, function(i, p) {
 				       	$('#projecttypelist').append($('<option></option>').val(p).html(p));
 				       	});
-		       } 
-		         
+		       }
+
 		       })
-		      
+
 });
 
-$(document).ready(function () {       
+$(document).ready(function () {
     var options;
-	$.ajax("/getAllEmployiesName", 
+	$.ajax("/getAllEmployiesName",
 		       { type: 'GET',
-		 		 success: function (data) {		        	 
+		 		 success: function (data) {
 				       options = data;
-				       
+
 				       	$('#assigne').empty();
 				       	$.each(options, function(i, p) {
 				       	$('#assigne').append($('<option></option>').val(p).html(p));
 				       	});
-		       } 
-		         
+		       }
+
 		       })
-		      
+
 });
 
 
-/*function ValidateForm(){
-	var a=document.forms["addTicket"]["description"].value;
-	var b=document.forms["addTicket"]["duedate"].value;
-	
-	if(a == "" || b==""){
-		alert("You have some empty fields !!!")
-	}
-};*/
+function saveTicket(){
+	var projecttype = $("#projecttypelist option:selected" ).text();
+	var description = $("#desc").val();
+	var assignpers = $("#assignep option:selected" ).text();
+	var duedate = $("#duedate").val();
+
+		$.ajax({
+			method: "POST",
+			url: "addTicket",
+			data:
+				{"projecttype": projecttype,
+				 "description": description,
+				 "assignpers": assignpers,
+				 "duedate": duedate
+				},
+				success: function(data, status, xhr){
+					alert("The Ticket has been saved successfull");
+					location = data;
+
+
+				}, error: function(){
+					alert("error on saving new ticket");
+					}
+		});
+
+}
