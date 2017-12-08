@@ -106,7 +106,7 @@ public class TicketController {
 		Ticket t = new Ticket();
 		t.setDescription(description);
 		t.setProjcttype(projectTypetService.getIdProjectTypeByName(projecttype));
-		t.setIdemployee(getIdEmployeeByName(assignpers));
+		//t.setIdemployee(getIdEmployeeByName(assignpers));
 		java.sql.Date parseDate = java.sql.Date.valueOf(duedate);
 		t.setDuedate(parseDate);
 		t.setIdclient(1);
@@ -183,12 +183,16 @@ public class TicketController {
 		 tkd.setProjecttypename(projectTypetService.getProjectTypeById(tk.getProjcttype()).getProjtypename());
 		 tkd.setStatus(ticketStatusService.getTicketStatusById(tk.getIdstatus()).getStatusname());
 
-		 if(tk.getIdemployee()!= 0) {
+		 if(tk.getIdemployee() != 0) {
 			 String employeeName = employeeService.getEmployeeById(tk.getIdemployee()).getFirstname()
 					 				+" "+employeeService.getEmployeeById(tk.getIdemployee()).getLastname();
 		     tkd.setEmployeename(employeeName);
 		     tkd.setEmployeeemail( employeeService.getEmployeeById(tk.getIdemployee()).getEmail());
 			 tkd.setEmployeespecialisation(specialisationService.getSpecialisationById((employeeService.getEmployeeById(tk.getIdemployee())).getIdspecialisation()).getName());
+		 }else {
+			 tkd.setEmployeename("Unassigned");
+			 tkd.setEmployeeemail("");
+			 tkd.setEmployeespecialisation("");
 		 }
 
 		 String clientName = clientService.getClientById(tk.getIdclient()).getFirstname()

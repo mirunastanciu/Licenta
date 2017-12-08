@@ -125,14 +125,14 @@
           		<p id="ticketid"></p>
           		<h4>Type Project </h4>
           		<p id="projecttype"></p>
-          		<p> <select id="projecttypelist" name="projecttype" onchange="projectTypeChange();"></select></p>
+          		<p> <select id="projecttypelist" name="projecttype" onchange="projectTypeChange();" style="width:30%;"></select></p>
           		<h4>Status </h4>
           		<p id="status"></p>
-          		<p> <select id="statuslist" name="status" onchange="statusChange();"></select></p>
+          		<p> <select id="statuslist" name="status" onchange="statusChange();" style="width:30%;"></select></p>
           		<div id="desc" onchange="descriptionChange()">
           			<h4>Project Description </h4>
           			<p id="projectdescription"></p>
-          			<input id="description" class="input"  type="text" name="description" autocomplete="off" />
+          			<input id="description" class="input"  type="text" name="description" autocomplete="off" style="height: 300px;width:600px;"/>
           		</div>  
           	</div>	  
           	<div id="div2" class="InLineDiv-StAdmPg">     		
@@ -167,9 +167,9 @@
              		<p id="employeename"></p>
              		<p> <select id="employeelist" name="employee" onchange="assignementChange()"></select></p>
              	</div>
-             	<h4>Employee Email</h4>
+             	<h4 id="empE">Employee Email</h4>
              	<p id="employeeemail"></p>
-             	<h4>Employee Specialisation </h4>
+             	<h4 id="empS">Employee Specialisation </h4>
              	<p id="employeespecialisation"></p>
              </div>
              </div>

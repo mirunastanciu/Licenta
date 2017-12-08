@@ -8,6 +8,9 @@ $(document).ready( function () {
 	 var table = $('#ticketsTable').dataTable({
 			"sAjaxSource": "/ticketsToDo",
 			"sAjaxDataProp": "",
+			"columnDefs": [
+				  {'width': '50%', 'targets': 1}
+			  ],
 			"responsive": true,
 			"order": [[ 0, "asc" ]],
 			"aoColumns": [	/*{"mData": "tr.index()"},*/
@@ -17,9 +20,9 @@ $(document).ready( function () {
 						    {"mData": "duedate"},
 						    {"mData": "status"},
 						    {"defaultContent": '<button class="btn-details" type="button">Details</button>'} ],
-		
-	 });	
-	
+
+	 });
+
 	 //Details button function
 	 $('#ticketsTable').on('click', '.btn-details', function () {
 		 var tr = $(this).closest('tr');
@@ -37,7 +40,7 @@ $(document).ready( function () {
 					$("#startdateedit").hide();
 					$("#finishdateedit").hide();
 					$("#employeelist").hide();
-					
+
 					$(".modal-body #ticketid").html(data.idticket);
 		            $(".modal-body #projecttype").html(data.projecttypename);
 		            $(".modal-body #status").html(data.status);
@@ -47,9 +50,20 @@ $(document).ready( function () {
 		            $(".modal-body #startdate").html(data.startdate);
 		            $(".modal-body #finishdate").html(data.finishdate);
 
-		            $(".modal-body #employeename").html(data.employeename);
-		            $(".modal-body #employeeemail").html(data.employeeemail);
-		            $(".modal-body #employeespecialisation").html(data.employeespecialisation);
+					if(data.employeename === "Unassigned"){
+						$(".modal-body #employeeemail").html(data.employeeemail);
+				        $(".modal-body #employeespecialisation").html(data.employeespecialisation);
+					    $(".modal-body #employeename").html(data.employeename);
+					    $("#empE").hide();
+						$("#empS").hide();
+					}else{
+						$("#empE").show();
+						$("#empS").show();
+			            $(".modal-body #employeename").html(data.employeename);
+			            $(".modal-body #employeeemail").html(data.employeeemail);
+			            $(".modal-body #employeespecialisation").html(data.employeespecialisation);
+					}
+
 
 		            $(".modal-body #clientname").html(data.clientname);
 		            $(".modal-body #clientemail").html(data.clientemail);
@@ -142,10 +156,10 @@ $(document).ready( function () {
 								   }
 							   });
 					});
-								
+
 					//Delete fuction
-					$('.modal-footer').on('click', '#deletebutton', function () {	
-						
+					$('.modal-footer').on('click', '#deletebutton', function () {
+
 						 $.ajax({
 							   method: "POST",
 							   url: "deleteTicket",
@@ -154,15 +168,15 @@ $(document).ready( function () {
 								   alert("The tickes has been deleted");
 								   $('#myModal').modal('hide');
 								   location.reload();
-							   
+
 							   },error:function(){
 								   alert("Error on delet ticket !!!");
 								   }
-							   
+
 					  });
-					
+
 					});
-								
+
 
 				}, error: function(){
 					alert("error opening modal");
@@ -177,9 +191,13 @@ $(document).ready( function () {
 	 var table = $('#getAllTicketsAssigned').dataTable({
 			"sAjaxSource": "/ticketsInProgress",
 			"sAjaxDataProp": "",
+			"columnDefs": [
+				  {'width': '50%', 'targets': 1},
+				  {'width': '10%', 'targets': 4}
+			  ],
 			"responsive": true,
 			"order": [[ 0, "asc" ]],
-			"aoColumns": [ 
+			"aoColumns": [
 			              { "mData": "idticket"},
 			              { "mData": "description"},
 			              { "mData": "projecttypename"},
@@ -321,6 +339,9 @@ $(document).ready( function () {
 	 var table = $('#getAllTicketsDone').dataTable({
 			"sAjaxSource": "/ticketsDone",
 			"sAjaxDataProp": "",
+			"columnDefs": [
+				  {'width': '50%', 'targets': 1}
+			  ],
 			"responsive": true,
 			"order": [[ 0, "asc" ]],
 			"aoColumns": [
