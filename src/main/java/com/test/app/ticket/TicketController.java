@@ -2,6 +2,7 @@ package com.test.app.ticket;
 
 import java.sql.Date;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.test.app.client.ClientService;
 import com.test.app.employee.Employee;
 import com.test.app.employee.EmployeeService;
-
 import com.test.app.projecttype.ProjectTypeService;
 import com.test.app.specialisation.SpecialisationService;
 import com.test.app.ticketstatus.TicketStatusService;
@@ -109,9 +109,9 @@ public class TicketController {
 		t.setIdemployee(getIdEmployeeByName(assignpersson));
 		t.setDuedate(duedate);
 		t.setIdclient(1);
-
+        t.setCreationdate(Date.valueOf(LocalDate.now()));
 		t.setIdstatus(1);
-
+		
 		ticketService.addTicket(t);
 		ModelAndView model = new ModelAndView("redirect:/administratorStartPage");
 		return model;

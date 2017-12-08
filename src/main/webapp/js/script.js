@@ -179,13 +179,11 @@ $(document).ready( function () {
 			"sAjaxDataProp": "",
 			"responsive": true,
 			"order": [[ 0, "asc" ]],
-			"aoColumns": [ /* { "mData": "id"},*/
+			"aoColumns": [ 
 			              { "mData": "idticket"},
 			              { "mData": "description"},
-			              /* { "mData": "projcttype"},*/
 			              { "mData": "projecttypename"},
 			              { "mData": "duedate"},
-			              /*{ "mData": "idstatus"},*/
 			              {"mData": "status"},
 			    {"defaultContent": '<button class="btn-details" type="button">Details</button>'}]
 	 });
