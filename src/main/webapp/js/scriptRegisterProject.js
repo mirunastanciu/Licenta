@@ -21,9 +21,9 @@ $(document).ready(function () {
 		 		 success: function (data) {
 				       options = data;
 
-				       	$('#assigne').empty();
+				       	$('#assignep').empty();
 				       	$.each(options, function(i, p) {
-				       	$('#assigne').append($('<option></option>').val(p).html(p));
+				       	$('#assignep').append($('<option></option>').val(p).html(p));
 				       	});
 		       }
 

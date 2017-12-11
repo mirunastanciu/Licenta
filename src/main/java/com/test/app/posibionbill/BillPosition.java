@@ -1,14 +1,20 @@
 package com.test.app.posibionbill;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="positionbill")
 public class BillPosition {
 
 	@Id
+	@Column(name="IDPOSITION")
 	private int idposition;
+	@Column(name="IDBILL")
 	private int idbill;
+	@Column(name="IDSERVICE")
 	private int idservice;
 
 	public int getIdposition() {

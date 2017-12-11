@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Invoices</title>
+
+<!-- Ajax -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.dataTables.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../js/jquery/bootstrap.js"></script>
+<script src="../js/invoice.js"></script>
+
+<link rel="stylesheet" href="../style/stylesheet.css">
+<!-- Responsive -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+<script type="text/javascript" src="../js/jquery/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../style/bootstrap.css">
+<link rel="stylesheet" href="../style/datatables.css">
+<link rel="stylesheet" href="../style/jquery.dataTables.css">
+<link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+
+
+<script src="../js/nav.js"></script>
+</head>
+<body>
+	<div class="centred ">
+		<nav class="nav">
+			<a class="text-nav" id="startpage" href="/administratorStartPage">START PAGE</a> 
+			<a class="text-nav" id="myaccount" href="/adminiAccountPage" >MY ACOUNT</a> 
+			<a class="text-nav" id="newticket" href="/newTicketPage" >NEW TICKET</a>
+			<a class="text-nav" id="accounts" href="/accountsPage" >ACCOUNTS</a>
+			<a class="text-nav" id="contracts" href="/contractsPage" >CONTRACTS</a>
+			<a class="text-nav" id="invoice" href="/invoicePage" >INVOICE</a>
+
+
+		</nav>
+	</div>
+	
+	
+	<div >
+	
+	
+		<div class="divpaddin">
+<button id="addInv">Create New Invoice</button>
+			<h2>Unpaid Invoices</h2>
+			<br> 
+			<table id="unpaidInvoiceTable" class="table " class="row-border">
+				<thead>
+					<tr>
+					    
+						<th>Id</th>
+						<th>Creation Date</th>
+						<th>Amount</th>
+						<th>Currency</th>
+						<th>Due Date</th>
+						<th>Status</th>
+						<th></th>
+						
+					</tr>
+				</thead>
+			</table>
+
+
+		</div>
+
+		<div class="divpaddin" >
+			<h2>Paid invoices</h2>
+				<br> 
+			<table id="paidInvoiceTable" class="table " class="row-border">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Creation Date</th>
+						<th>Amount</th>
+						<th>Currency</th>
+						<th>Due Date</th>
+						<th>Status</th>
+						<th></th>
+					</tr>
+				</thead>
+			</table>
+
+		</div>
+</div>
+</body>
+</html>		

@@ -1,33 +1,22 @@
 package com.test.app.bill;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+public class BillDetails {
 
-@Entity
-@Table(name = "bill")
-public class Bill {
-
-	@Id
-	@Column(name = "IDBILL")
 	private int idbill;
-	@Column(name = "AMOUNT")
 	private double amount;
-	@Column(name = "CURENCY")
 	private String curency;
-	@Column(name = "CREATINDATE")
 	private Date creationdate;
-	@Column(name = "DUEDATE")
 	private Date duedate;
-	@Column(name = "IDCONTRACT")
 	private int idcontract;
-	@Column(name = "PENALTIES")
 	private double penalties;
-	@Column(name = "IDSTATUS")
-	private int idstatus;
+	private String status;
+	
+	private ArrayList<Integer> Services ;
+	
+	
 
 	public int getIdbill() {
 		return idbill;
@@ -85,14 +74,22 @@ public class Bill {
 		this.penalties = penalties;
 	}
 
-	public int getIdstatus() {
-		return idstatus;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setIdstatus(int idstatus) {
-		this.idstatus = idstatus;
+	public void setStatus(String idstatus) {
+		this.status = idstatus;
 	}
 
+	public ArrayList<Integer> getServices() {
+		return Services;
+	}
 
+	public void setServices(ArrayList<Integer> services) {
+		Services = services;
+	}
+	
+	
 
 }

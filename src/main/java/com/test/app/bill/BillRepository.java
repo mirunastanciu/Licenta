@@ -1,7 +1,16 @@
 package com.test.app.bill;
 
+import java.util.ArrayList;
+
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 public interface BillRepository extends CrudRepository<Bill , String>{
+	
+	@Query(value="SELECT * FROM bill WHERE IDSTATUS=2",nativeQuery=true)
+	public ArrayList<Bill> getAllUnpaidInvoices();
+	
+	@Query(value="SELECT * FROM bill WHERE IDSTATUS=1",nativeQuery=true)
+	public ArrayList<Bill> getAllPaidInvoices();
 
 }

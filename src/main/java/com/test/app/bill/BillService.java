@@ -1,5 +1,27 @@
 package com.test.app.bill;
 
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 public class BillService {
+	
+	@Autowired
+	BillRepository billRepository;
+	
+	
+	public ArrayList<Bill> getAllUnpaidInvoices(){
+		ArrayList<Bill> invoices = new ArrayList<>();
+		billRepository.getAllUnpaidInvoices().forEach(invoices::add);
+		return invoices;
+	}
+	
+	public ArrayList<Bill> getAllPaidInvoices(){
+		ArrayList<Bill> invoices = new ArrayList<>();
+		billRepository.getAllPaidInvoices().forEach(invoices::add);
+		return invoices;
+	}
 
 }
