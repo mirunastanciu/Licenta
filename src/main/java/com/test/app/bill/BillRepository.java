@@ -12,5 +12,10 @@ public interface BillRepository extends CrudRepository<Bill , String>{
 	
 	@Query(value="SELECT * FROM bill WHERE IDSTATUS=1",nativeQuery=true)
 	public ArrayList<Bill> getAllPaidInvoices();
+	
+	@Query(value="SELECT * FROM bill WHERE IDBILL=?",nativeQuery=true)
+	public Bill getBillById(int a);
+	
+	
 
 }

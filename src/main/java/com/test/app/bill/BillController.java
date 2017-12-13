@@ -62,8 +62,11 @@ public class BillController {
 		return paidInvoiceD;
 	}
 	
-	/*@RequestMapping(path = "/InvoiceDetailsModal", method = RequestMethod.POST)
-	public BillDetails getBillDetails(@RequestParam(value="idBill") int id){
+	@RequestMapping(path = "/getInvoiceInfo", method = RequestMethod.POST)
+	public Bill getBillDetails(@RequestParam(value="invoiceId") int id){
+		return billService.getBillByID(id);
 		
-	}*/
+	}
+	
+	
 }

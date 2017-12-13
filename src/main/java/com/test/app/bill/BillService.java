@@ -23,5 +23,9 @@ public class BillService {
 		billRepository.getAllPaidInvoices().forEach(invoices::add);
 		return invoices;
 	}
+	
+	public Bill getBillByID(int a){
+		return billRepository.getBillById(a);
+	}
 
 }

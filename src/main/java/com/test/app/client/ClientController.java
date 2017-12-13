@@ -14,7 +14,7 @@ import com.test.app.address.AddressService;
 import com.test.app.contractclient.ContractClient;
 import com.test.app.contractclient.ContractClientService;
 import com.test.app.contractclientstatus.ContractClientStatusService;
-import com.test.app.contractemployeestatus.ContractEmployeeStatusService;
+
 
 @RestController
 public class ClientController {
@@ -80,6 +80,11 @@ public class ClientController {
 		clientDetails.setContractstatus(contractClientStatusService.getContractClientStatusNameById(contract.getIdstatus()));
 		
 		return clientDetails;
+	}
+	
+	@RequestMapping(path = "/getBillClientInfo" , method=RequestMethod.POST)
+	public Client getBillClientInfo(@RequestParam(value="invoiceId") int id){
+		return clientService.getClientByIdBill(id);
 	}
 	
 	

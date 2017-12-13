@@ -1,0 +1,20 @@
+package com.test.app.posibionbill;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class BillPositionService {
+	
+	@Autowired
+	BillPositionRepository billPositionRepository;
+	
+	public ArrayList<BillPosition> getAllPosPerBill(int a){
+		ArrayList<BillPosition> pb = new ArrayList<>();
+		billPositionRepository.getBillPosByIdBill(a).forEach(pb::add);
+	 return pb;	
+	}
+
+}

@@ -35,4 +35,8 @@ public class ClientService {
 		}
 		return 0;
 	}
+	
+	public Client getClientByIdBill(int a){
+		return clientRepository.getClientByIdBill(a);
+	}
 }

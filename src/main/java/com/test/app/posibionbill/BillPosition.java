@@ -6,16 +6,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="positionbill")
+@Table(name = "positionbill")
 public class BillPosition {
 
 	@Id
-	@Column(name="IDPOSITION")
+	@Column(name = "IDPOSITION")
 	private int idposition;
-	@Column(name="IDBILL")
+	@Column(name = "IDBILL")
 	private int idbill;
-	@Column(name="IDSERVICE")
+	@Column(name = "IDSERVICE")
 	private int idservice;
+	@Column(name = "IDTICKET")
+	private int idticket;
 
 	public int getIdposition() {
 		return idposition;
@@ -39,6 +41,14 @@ public class BillPosition {
 
 	public void setIdservice(int idservice) {
 		this.idservice = idservice;
+	}
+
+	public int getIdticket() {
+		return idticket;
+	}
+
+	public void setIdticket(int idticket) {
+		this.idticket = idticket;
 	}
 
 }
