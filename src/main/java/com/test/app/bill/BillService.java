@@ -27,5 +27,13 @@ public class BillService {
 	public Bill getBillByID(int a){
 		return billRepository.getBillById(a);
 	}
+	
+	public void save(Bill b){
+		billRepository.save(b);
+	}
+	
+	public int lastBillId(){
+		return billRepository.getLastBillId();
+	}
 
 }

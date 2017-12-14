@@ -20,4 +20,8 @@ public class BillPositionService {
 	public void save(BillPosition bp) {
 		billPositionRepository.save(bp);
 	}
+	
+	public ArrayList<BillPosition> getBillPostByIdBill0() {
+		return billPositionRepository.getBillPosByIdBill0();
+	}
 }

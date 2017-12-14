@@ -18,12 +18,6 @@ $.ajax("/getClientsName",
 	       }
 
 	       });
-
-
-
-
-
-
 function addPos(){
 
 	var clientname = $("#clientlist option:selected").text();
@@ -116,7 +110,7 @@ function addPos(){
 								        { data: "idticket"}
 								    ]
 
-							 });
+							    });
 
 								$.ajax({
 									method: "POST",
@@ -139,12 +133,42 @@ function addPos(){
 
 
 			   }, error: function(){
-				   alert("error Update Method");
+				   alert("error on saving positions");
 				   }
 			   });
 
 
  }
+ 
+ function saveInvoice(){
+	 var clientname = $("#clientlist option:selected").text();
+	 var duedate =	 $("#duedate").val();
+     var total = $("#total").text();	
+     
+     $.ajax({
+ 		method: "POST",
+ 		url: "saveInvoice",
+ 		data:
+ 			{"clientname": clientname,
+ 			 "duedate": duedate,
+ 			 "total": total}
+ 			,success: function(data, status, xhr){
+ 				 window.location.replace(data);
+
+ 			}, error: function(){
+ 				alert("error save Invoice");
+ 				}
+ 	});
+
+    
+     
+     
+     
+     
+	 
+	 
+ }
+
 
 
 

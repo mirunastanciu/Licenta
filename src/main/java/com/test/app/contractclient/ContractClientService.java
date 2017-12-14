@@ -35,5 +35,9 @@ public class ContractClientService {
 	public ContractClient getContractById(int a) {
 		return contractClientRepository.getContractById(a);
 	}
+	
+	public int getIdContractByIdClient(int a) {
+		return contractClientRepository.getIdContractByIdClient(a);
+	}
 
 }

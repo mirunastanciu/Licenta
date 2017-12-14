@@ -10,6 +10,9 @@ public interface ContractClientRepository extends CrudRepository<ContractClient 
 
 	@Query(value="SELECT * FROM contractclient WHERE IDCONTRACTCLIENT=?;",nativeQuery=true)
 	public ContractClient getContractById(int a);
+	
+	@Query(value="SELECT IDCONTRACTCLIENT FROM contractclient WHERE IDCLIENT=?;",nativeQuery=true)
+	public int getIdContractByIdClient(int a);
 
 
 

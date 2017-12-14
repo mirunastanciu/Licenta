@@ -2,14 +2,19 @@ package com.test.app.bill;
 
 import java.sql.Date;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
+
 @Entity
 @Table(name = "bill")
 public class Bill {
+	
+
 
 	@Id
 	@Column(name = "IDBILL")
@@ -91,6 +96,12 @@ public class Bill {
 
 	public void setIdstatus(int idstatus) {
 		this.idstatus = idstatus;
+	}
+	
+	public String getEmailContent(){
+		String content = "The invoice number "+this.getIdbill()+ " with total amount "+this.getAmount()+" EUR, was relesed on "+
+						this.getCreationdate()+",and is due on "+this.getDuedate()+"."+"\n"+"\n"+"\n"+"\n"+"\n" ; 
+		return content;
 	}
 
 
