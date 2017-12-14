@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.test.app.client.Client;
 import com.test.app.client.ClientService;
 import com.test.app.employee.Employee;
 import com.test.app.employee.EmployeeService;
@@ -213,6 +214,24 @@ public class TicketController {
 
 		 ticketService.delete(ticketService.getTicketById(id));
 	 }
+
+
+	 @RequestMapping(value ="/getIdTByIdCl" , method=RequestMethod.POST )
+	 public ArrayList<Integer> getIdTByIdCl(@RequestParam(value = "clientname") String name){
+		 int idCl = 0;
+		 ArrayList<Client> cl = clientService.getAllClients();
+		 for(int i=0;i<cl.size();i++) {
+			 String fullname = cl.get(i).getFirstname()+" "+cl.get(i).getLastname();
+			 if(fullname.equals(name)) {
+				 idCl =  cl.get(i).getId();
+			 }
+		 }
+
+		 return ticketService.getTicketsIdByIdClient(idCl);
+
+
+	 }
+
 
 
 

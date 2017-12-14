@@ -16,47 +16,62 @@ public class BillPositionController {
 
 	@Autowired
 	BillPositionService billPositionService;
-	
+
 	@Autowired
 	ServiceService serviceService;
-	
-	
-	
+
+
+
 	@RequestMapping(path = "/getBillPositions" , method=RequestMethod.POST)
 	public ArrayList<BillPositionDetails> getBillPosition(@RequestParam(value="invoiceId") int id){
-		
+
 		ArrayList<BillPosition> posList =  billPositionService.getAllPosPerBill(id);
 		ArrayList<BillPositionDetails> posListDetails = new ArrayList<>();
-		
+
 		for(int i=0;i<posList.size();i++){
 			BillPositionDetails bpd = new BillPositionDetails();
-			
+
 			bpd.setServicename(serviceService.getServiceById(posList.get(i).getIdservice()).getNeme());
 			bpd.setPrice(serviceService.getServiceById(posList.get(i).getIdservice()).getPrice());
 			bpd.setCurrency("EUR");
 			bpd.setIdticket(posList.get(i).getIdticket());
-			 
+
 			posListDetails.add(bpd);
-			
+
 		}
-		
+
 		return posListDetails;
 	}
-	
+
 	@RequestMapping(path = "/totalInvoice" , method=RequestMethod.POST)
 	public double getTotal(@RequestParam(value="invoiceId") int id){
 		double total =0;
-		
+
 		ArrayList<BillPosition> posList =  billPositionService.getAllPosPerBill(id);
 		for(int i=0;i<posList.size();i++){
 			double price = serviceService.getServiceById(posList.get(i).getIdservice()).getPrice();
 			total = total+price;
 		}
-		
+
 		return total;
-		
+
 	}
-	
-	
-	
+
+	@RequestMapping(path = "/saveBillPosition" , method = RequestMethod.POST)
+	public void Saveposition(@RequestParam(value = "servicename") String servicename ,
+							 @RequestParam(value = "idticket") int idticket) {
+
+		BillPosition pb = new BillPosition();
+
+		pb.setIdbill(0);
+		pb.setIdservice(serviceService.getIdServiceByName(servicename));
+		pb.setIdticket(idticket);
+
+		billPositionService.save(pb);
+
+	}
+
+
+
+
 }

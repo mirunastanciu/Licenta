@@ -149,7 +149,7 @@ input[type=submit]:hover {
     text-align: center;
 }
  */
- 
+
 .InLineDiv-StAdmPg{
     display: inline-block;
     vertical-align:top;
@@ -277,7 +277,8 @@ input:required:focus {
 .inLine1{
 	display: inline-block;
     vertical-align:top;
-    
+    width:50%;
+
 }
 
 .inLine input{
@@ -330,6 +331,27 @@ input:required:focus {
     display: block;
 }
 
+#addpos{.
+	color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #339fb7;
+    display: block;
+
+}
+
+#saveinvoice{
+	color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #339fb7;
+    display: block;
+}
+
 .editContractinput{
 	width="50%"
 }
@@ -338,3 +360,6 @@ input:required:focus {
 	padding: 12px 20px;
 }
 
+.paddingtop{
+	padding-top:100px;
+}

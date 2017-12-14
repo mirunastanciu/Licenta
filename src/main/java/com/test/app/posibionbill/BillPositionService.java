@@ -7,14 +7,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BillPositionService {
-	
+
 	@Autowired
 	BillPositionRepository billPositionRepository;
-	
+
 	public ArrayList<BillPosition> getAllPosPerBill(int a){
 		ArrayList<BillPosition> pb = new ArrayList<>();
 		billPositionRepository.getBillPosByIdBill(a).forEach(pb::add);
-	 return pb;	
+	 return pb;
 	}
 
+	public void save(BillPosition bp) {
+		billPositionRepository.save(bp);
+	}
 }

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+
+<!-- Ajax -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.dataTables.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../js/jquery/bootstrap.js"></script>
+<script type="text/javascript" src="../js/jquery/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="../style/stylesheet.css">
+<!-- Responsive -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+
+<link rel="stylesheet" href="../style/bootstrap.css">
+<link rel="stylesheet" href="../style/datatables.css">
+<link rel="stylesheet" href="../style/jquery.dataTables.css">
+<link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+
+
+<script src="../js/newInvoice.js"></script>
+</head>
+<body>
+
+	<div class="divpaddin">
+		
+		<br> 
+		<div style="width:70%;" class="centred">
+			 <div class="inLine1">
+				<h4>Client</h4>
+				<select id="clientlist" style="width:40%;"  required></select>
+			 </div>
+			 
+			 <div class="inLine1">
+				<h4>Due Date</h4>
+				<input id="duedate" type="date" class="input"  autocomplete=off style="width:40%;" required/>
+	 		 </div>	
+ 		 
+ 		
+ 		 
+		 <div class="paddingtop" >
+			    <button id="addpos" onclick="addPos();">Add position</button>
+			    <br>
+				<table id="positionList" class="table " style="width:95%;" class="row-border " >
+					<thead>
+						<tr>
+							<th>Service Name</th>
+							<th>Price</th>
+							<th>Currency</th>
+							<th>Ticket</th>
+							
+						</tr>
+					</thead>
+				</table>
+		</div>
+		<br>
+		<br>
+		<br>
+		<div class="centred " class="inLine1" style="width:40%;">
+			<h4>TOTAL</h4>
+			<p id="total"></p>
+		</div>
+		<div class="inLine1" style="width:40%;">
+			 <button id="saveinvoice">Save</button>
+		 </div>
+	</div>
+		 
+	</div>
+	
+<!-- //Add Pos pop-up -->
+	<div class="modal fade modalTD" id="addPosModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Position</h4>
+        </div>
+        <div class="modal-body">
+            <div >
+	       		<h4>Service </h4>
+	       		<select id="serviceList" required style="width:90%;"></select>
+       		</div>
+       		<br>
+       		<br>
+       		<br>
+       		<div >	
+				<h4>Ticket</h4>
+				<select id="ticketlist" required style="width:90%;"></select>
+			</div>	
+			<br>
+			<br>
+			<br>
+       		
+        
+       </div>
+        <div class="modal-footer">
+          <button type="button" id="save" class="btn btn-default" data-dismiss="modal" onclick="savepos();">Save</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  
+</div>
+	</body>
+</html>
