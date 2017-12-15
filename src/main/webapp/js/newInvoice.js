@@ -61,15 +61,13 @@ function addPos(){
 		       }
 
 		       });
-
-
 	//$('#addPosModal').modal({backdrop: 'static', keyboard: false});//nu se inchide la click
-	$('#addPosModal').modal('show');
-
-
-
-
-
+	//$('#addPosModal').modal('show');
+	$("#addPosModal").modal({
+	    backdrop: 'static',
+	    keyboard: false,
+	    show: true
+	});
 }
 
 //save pos function
@@ -82,12 +80,13 @@ function savePos() {
 
 
 	 if( $("#serviceList option:selected").text() === "" || $("#ticketlist option:selected").text() === ""){
-		  alert("You must select a client and a ticket");
-		 // addPos();
-		  $('#addPosModal').on('hidden.bs.modal', function() {
+			  
+			  alert("You must select a client and a ticket");
+			  addPos();
+		 /* $('#addPosModal').on('hidden.bs.modal', function() {
 			  addPos();
 		 	});
-
+*/
 		}else{
 				$.ajax({
 					   method: "POST",
@@ -142,52 +141,78 @@ function savePos() {
 
 					});
 
-
+					$('#addPosModal').modal('hide');
 
 			   }, error: function(){
 				   alert("error on saving positions");
 				   }
 			   });
 			 }
-
-
  }
-
-
-
-
 
  function saveInvoice(){
 	 var clientname = $("#clientlist option:selected").text();
 	 var duedate =	 $("#duedate").val();
      var total = $("#total").text();
+     var table = $('#positionList').DataTable();
+     
+     
+     if( clientname === "" || duedate === "" || table.data().count() ===0 ){
+    	 alert ("You have empty fields")
+     }else{
+    	 $.ajax({
+    	 		method: "POST",
+    	 		url: "saveInvoice",
+    	 		data:
+    	 			{"clientname": clientname,
+    	 			 "duedate": duedate,
+    	 			 "total": total}
+    	 			,success: function(data, status, xhr){
+    	 				 window.location.replace(data);
 
+    	 			}, error: function(){
+    	 				alert("error save Invoice");
+    	 				}
+    	 	});
+     }
+
+     
+
+
+ }
+ 
+ function cancel(){
+     var del="delete"
      $.ajax({
  		method: "POST",
- 		url: "saveInvoice",
- 		data:
- 			{"clientname": clientname,
- 			 "duedate": duedate,
- 			 "total": total}
+ 		url: "deleteDraft",
+ 		data:{"del" :del}
  			,success: function(data, status, xhr){
  				 window.location.replace(data);
 
  			}, error: function(){
- 				alert("error save Invoice");
+ 				alert("error cancel Invoice");
  				}
  	});
-
-
-
-
-
-
-
-
  }
 
+ $(window).bind('beforeunload', function(){
+    //alert("loasing all data")
 
+	 var del="delete"
+	     $.ajax({
+	 		method: "POST",
+	 		url: "deleteDraft",
+	 		data:{"del" :del}
+	 			,success: function(data, status, xhr){
+	 				
 
+	 			}, error: function(){
+	 				
+	 				}
+	 	});
+
+ });
 
 
 

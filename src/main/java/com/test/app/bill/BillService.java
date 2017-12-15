@@ -35,5 +35,7 @@ public class BillService {
 	public int lastBillId(){
 		return billRepository.getLastBillId();
 	}
+	
+	
 
 }

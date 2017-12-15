@@ -24,4 +24,8 @@ public class BillPositionService {
 	public ArrayList<BillPosition> getBillPostByIdBill0() {
 		return billPositionRepository.getBillPosByIdBill0();
 	}
+	
+	public void delete(BillPosition bp){
+		billPositionRepository.delete(bp);
+	}
 }

@@ -70,6 +70,18 @@ public class BillPositionController {
 		billPositionService.save(pb);
 
 	}
+	
+	@RequestMapping(path = "/deleteDraft", method = RequestMethod.POST)
+	public String deleteDraft(@RequestParam(value="del") String del){
+		if(del.equals("delete")){
+			ArrayList<BillPosition> bp = billPositionService.getBillPostByIdBill0();
+			for(int i=0;i<bp.size();i++){
+				billPositionService.delete(bp.get(i));
+			}
+		}
+		return "http://localhost:8080/invoicePage";
+		
+	}
 
 
 

@@ -61,12 +61,15 @@
 		<br>
 		<br>
 		<br>
-		<div class="centred " class="inLine1" style="width:40%;">
+		<div class="centred " class="inLine1" style="width:30%;">
 			<h4>TOTAL</h4>
 			<p id="total"></p>
 		</div>
-		<div class="inLine1" style="width:40%;">
+		<div class="inLine1" style="width:30%;">
 			 <button id="saveinvoice" onclick="saveInvoice();">Save</button>
+		 </div>
+		 <div class="inLine1" style="width:30%;">
+			 <button id="cancelinvoice" onclick="cancel();">Cancel</button>
 		 </div>
 	</div>
 		 
@@ -102,8 +105,9 @@
         
        </div>
         <div class="modal-footer">
-          <button type="button" id="save" class="btn btn-default" data-dismiss="modal" onclick="savePos();">Save</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" id="save" class="btn btn-default"  onclick="savePos();">Save</button>
+         <!--  <button type="button" id="close" class="btn btn-default" onclick="close();">Close</button>
+          data-dismiss="modal" -->
         </div>
       </div>
       
