@@ -18,6 +18,7 @@ $.ajax("/getClientsName",
 	       }
 
 	       });
+
 function addPos(){
 
 	var clientname = $("#clientlist option:selected").text();
@@ -52,9 +53,6 @@ function addPos(){
 		 			 for(i in data){
 		 				options2[i] = data[i].neme;
 		 			 }
-
-
-
 				       	$('#serviceList').empty();
 				       	$('#serviceList').append($('<option></option>').html(""));
 				       	$.each(options2, function(i, p) {
@@ -65,52 +63,65 @@ function addPos(){
 		       });
 
 
-
+	//$('#addPosModal').modal({backdrop: 'static', keyboard: false});//nu se inchide la click
 	$('#addPosModal').modal('show');
+
+
+
+
+
 }
 
+//save pos function
+function savePos() {
 
- function savepos(){
-	 var servicename="";
-	 var idticket=0;
+	 var invoiceId = 0;
 
-	 servicename = $("#serviceList option:selected").text();
-	 idticket = $("#ticketlist option:selected").text();
+	 var servicename = $("#serviceList option:selected").text();
+	 var idticket = $("#ticketlist option:selected").text();
 
-		 $.ajax({
-			   method: "POST",
-			   url: "saveBillPosition",
-			   data:{"servicename": servicename,
-				   	  "idticket": idticket}
-				   		,
-			   success: function(data, status, xhr){
 
-				    var invoiceId = 0;
+	 if( $("#serviceList option:selected").text() === "" || $("#ticketlist option:selected").text() === ""){
+		  alert("You must select a client and a ticket");
+		 // addPos();
+		  $('#addPosModal').on('hidden.bs.modal', function() {
+			  addPos();
+		 	});
 
-				    $.ajax({
-						method: "POST",
-						url: "getBillPositions",
-						data:{"invoiceId": invoiceId}
-							,success: function(data, status, xhr){
+		}else{
+				$.ajax({
+					   method: "POST",
+					   url: "saveBillPosition",
+					   data:{"servicename": servicename,
+						   	  "idticket": idticket}
+						   		,
+					   success: function(data, status, xhr){
+						    $.ajax({
+								method: "POST",
+								url: "getBillPositions",
+								data:{"invoiceId": invoiceId}
+									,success: function(data, status, xhr){
 
-								var table = $('#positionList').dataTable({
-									"sAjaxDataProp": "",
-									"bFilter": false,
-									"bPaginate": false,
-									"bInfo": false,
-									"responsive": true,
-									"bSort" : false,
-									"destroy": true,
-									"order": [[ 0, "asc" ]],
-									"data": data,
-								    "columns": [
-								        { data: "servicename" },
-								        { data: "price" },
-								        { data: "currency" },
-								        { data: "idticket"}
-								    ]
+										var table = $('#positionList').dataTable({
+											"sAjaxDataProp": "",
+											"bFilter": false,
+											"bPaginate": false,
+											"bInfo": false,
+											"responsive": true,
+											"bSort" : false,
+											"destroy": true,
+											"order": [[ 0, "asc" ]],
+											"data": data,
+										    "columns": [
+										        { data: "servicename" },
+										        { data: "price" },
+										        { data: "currency" },
+										        { data: "idticket"}
+										    ]
 
-							    });
+									    });
+
+
 
 								$.ajax({
 									method: "POST",
@@ -132,19 +143,25 @@ function addPos(){
 					});
 
 
+
 			   }, error: function(){
 				   alert("error on saving positions");
 				   }
 			   });
+			 }
 
 
  }
- 
+
+
+
+
+
  function saveInvoice(){
 	 var clientname = $("#clientlist option:selected").text();
 	 var duedate =	 $("#duedate").val();
-     var total = $("#total").text();	
-     
+     var total = $("#total").text();
+
      $.ajax({
  		method: "POST",
  		url: "saveInvoice",
@@ -160,13 +177,13 @@ function addPos(){
  				}
  	});
 
-    
-     
-     
-     
-     
-	 
-	 
+
+
+
+
+
+
+
  }
 
 
