@@ -87,4 +87,17 @@ public class Account {
 			return false;
 		}
 	}
+	
+	/*public boolean isEmpty(){
+		boolean isEmpty = false;
+		if(this.){
+			isEmpty = true;
+		}
+		return isEmpty;
+	}*/
+
+	
+	
+	
+	
 }

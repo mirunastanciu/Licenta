@@ -1,9 +1,11 @@
 package com.test.app.account;
 
+
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class AccountService {
@@ -29,6 +31,35 @@ public class AccountService {
 	
 	public int getIdAddressByIdAccount(int a){
 		return accountRepository.getIdAddressByIdAccount(a);
+	}
+	
+	public boolean existAccountById(int a){
+		boolean exist = false;
+		ArrayList<Account> ac = getAllAccounts();
+		for(int i=0;i<ac.size();i++){
+			if(ac.get(i).getIdaccount() == a){
+				exist = true;
+			}
+		}
+		return exist;
+		
+	}
+	
+	public boolean existAccountByUsername(String a){
+		boolean exist = false;
+		
+			ArrayList<Account> ac = getAllAccounts();
+			for(int i=0;i<ac.size();i++){
+				if(ac.get(i).getUsername().equals(a)){
+					exist = true;
+				}
+			}
+			return exist;
+				
+	}
+	
+	public Account getAccountById(int a){
+		return accountRepository.getAccountByIdAccount(a);
 	}
 	
 	

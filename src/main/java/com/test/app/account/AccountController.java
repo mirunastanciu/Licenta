@@ -10,11 +10,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.test.app.mail.Mail;
+import com.test.app.mail.MailService;
+
 @RestController
 public class AccountController {
 
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired
+    private MailService emailService;
 
 
 	@RequestMapping("/accounts")
@@ -37,22 +43,22 @@ public class AccountController {
 			if (username.equals(l.get(i).getUsername())
 					&& password.equals(l.get(i).getPassword())) {
 				if (l.get(i).validateAdmin()) {
-					response =  "http://localhost:8082/administratorStartPage";
+					response =  "http://localhost:8080/administratorStartPage";
 					//model = new ModelAndView("redirect:/administratorStartPage");
 					// return "redirect:AdminStartPage.html";
 					break;
 				}else if(l.get(i).validateClient()){
-					response = "http://localhost:8082/clientStartPage";
+					response = "http://localhost:8080/clientStartPage";
 					//model = new ModelAndView("redirect:/clientStartPage");
 					break;
 				}else if(l.get(i).validateEmployee()){
-					response = "http://localhost:8082/administratorPage";
+					response = "http://localhost:8080/administratorPage";
 					//model = new ModelAndView("redirect:/administratorPage");
 					break;
 
 				}
 			} else {
-				response = "http://localhost:8082/registerAccount";
+				response = "http://localhost:8080/registerAccount";
 				//model = new ModelAndView("redirect:/registerAccount");
 				// return "redirect:Register.html";
 			}
@@ -79,10 +85,42 @@ public class AccountController {
 		}else{
 			return "faild";
 		}
-
-
-
-
 	}
+	
+	@RequestMapping(path = "/forgotPassword", method = RequestMethod.POST)
+	public String ChangePassword(@RequestParam(value = "username")String username,
+								 @RequestParam(value = "idaccount")int idaccount,
+								 @RequestParam(value = "newpass")String password,
+								 @RequestParam(value = "passretype")String passwordretype,
+								 @RequestParam(value = "email")String email){
+		
+		
+		String response = null;
+		if( accountService.existAccountById(idaccount)){
+			Account ac = accountService.getAccountById(idaccount);
+			if(ac.getUsername().equals(username) && password.equals(passwordretype)){
+				//Account ac = accountService.getAccountById(idaccount);
+				ac.setPassword(password);
+				accountService.saveAccount(ac);
+				
+				 Mail mail = new Mail();
+				 mail.setFrom("miruna.anna@gmail.com");
+			     mail.setTo(email);
+			     mail.setSubject("New Password");
+			     mail.setContent("The new Password is : "+ password);
 
+			     emailService.sendSimpleMessage(mail);
+					
+				response = "The new password was saved successfully";
+			}else if(accountService.existAccountByUsername(username) == false ){
+						response ="2";// "The username doesn't exist ! ";
+						}else if(password.equals(passwordretype)== false){
+							response = "3";//parole nu corespund";
+						}
+		}else{
+			response = "1";//The Id account doesn't exist ! ";
+		}
+		return response;				
+			
+		}
 }
