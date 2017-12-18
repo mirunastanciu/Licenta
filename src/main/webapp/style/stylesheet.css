@@ -139,7 +139,7 @@ input[type=submit]:hover {
 .containerLogin{
 	border-radius: 5px;
     background-color: rgba(242, 242, 242, 0.42);
-    padding: 20px;
+    padding: 50px;
     display: table;
     margin: 0 auto;
     margin-top: 100px;
@@ -362,6 +362,16 @@ input:required:focus {
 }
 
 #login{
+	color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #339fb7;
+    display: block;
+}
+
+#logout{
 	color: white;
     padding: 12px 20px;
     border: none;

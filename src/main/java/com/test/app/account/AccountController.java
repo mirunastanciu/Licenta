@@ -18,7 +18,7 @@ public class AccountController {
 
 	@Autowired
 	private AccountService accountService;
-	
+
 	@Autowired
     private MailService emailService;
 
@@ -43,22 +43,22 @@ public class AccountController {
 			if (username.equals(l.get(i).getUsername())
 					&& password.equals(l.get(i).getPassword())) {
 				if (l.get(i).validateAdmin()) {
-					response =  "http://localhost:8080/administratorStartPage";
+					response =  "http://localhost:8082/administratorStartPage";
 					//model = new ModelAndView("redirect:/administratorStartPage");
 					// return "redirect:AdminStartPage.html";
 					break;
 				}else if(l.get(i).validateClient()){
-					response = "http://localhost:8080/clientStartPage";
+					response = "http://localhost:8082/clientStartPage";
 					//model = new ModelAndView("redirect:/clientStartPage");
 					break;
 				}else if(l.get(i).validateEmployee()){
-					response = "http://localhost:8080/administratorPage";
+					response = "http://localhost:8082/administratorPage";
 					//model = new ModelAndView("redirect:/administratorPage");
 					break;
 
 				}
 			} else {
-				response = "http://localhost:8080/registerAccount";
+				response = "http://localhost:8082/registerAccount";
 				//model = new ModelAndView("redirect:/registerAccount");
 				// return "redirect:Register.html";
 			}
@@ -86,15 +86,15 @@ public class AccountController {
 			return "faild";
 		}
 	}
-	
+
 	@RequestMapping(path = "/forgotPassword", method = RequestMethod.POST)
 	public String ChangePassword(@RequestParam(value = "username")String username,
 								 @RequestParam(value = "idaccount")int idaccount,
 								 @RequestParam(value = "newpass")String password,
 								 @RequestParam(value = "passretype")String passwordretype,
 								 @RequestParam(value = "email")String email){
-		
-		
+
+
 		String response = null;
 		if( accountService.existAccountById(idaccount)){
 			Account ac = accountService.getAccountById(idaccount);
@@ -102,7 +102,7 @@ public class AccountController {
 				//Account ac = accountService.getAccountById(idaccount);
 				ac.setPassword(password);
 				accountService.saveAccount(ac);
-				
+
 				 Mail mail = new Mail();
 				 mail.setFrom("miruna.anna@gmail.com");
 			     mail.setTo(email);
@@ -110,7 +110,7 @@ public class AccountController {
 			     mail.setContent("The new Password is : "+ password);
 
 			     emailService.sendSimpleMessage(mail);
-					
+
 				response = "The new password was saved successfully";
 			}else if(accountService.existAccountByUsername(username) == false ){
 						response ="2";// "The username doesn't exist ! ";
@@ -120,7 +120,7 @@ public class AccountController {
 		}else{
 			response = "1";//The Id account doesn't exist ! ";
 		}
-		return response;				
-			
+		return response;
+
 		}
 }

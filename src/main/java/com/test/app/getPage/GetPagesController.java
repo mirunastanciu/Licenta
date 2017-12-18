@@ -62,4 +62,10 @@ public class GetPagesController {
 		return m;
 	}
 
+	@RequestMapping("/indexPage")
+	public ModelAndView getindexPage() {
+		ModelAndView m = new ModelAndView("redirect:index.html");
+		return m;
+	}
+
 }
