@@ -35,6 +35,8 @@ public class ClientRegistrationController {
 	ClientService clientService;
 	ModelAndView model;
 	
+
+	
 	@RequestMapping(value = "/saveClientAccount" , method = RequestMethod.POST)
 	public String saveCleint(@RequestParam(value="firstname") String firstname,
 						   @RequestParam(value="lastname") String lastname,

@@ -68,4 +68,16 @@ public class GetPagesController {
 		return m;
 	}
 
+
+	@RequestMapping("/registationRequestPage")
+	public ModelAndView getRegistrationRequestPage() {
+		ModelAndView m = new ModelAndView("RegistrationRequest");
+		return m;
+	}
+	
+	@RequestMapping("/registationRequestPageList")
+	public ModelAndView getRegistrationRequestPageList() {
+		ModelAndView m = new ModelAndView("RegistrationRequestsPage");
+		return m;
+	}
 }

@@ -11,6 +11,17 @@
 	<script type="text/javascript" src="../js/login.js"></script>
 	<script type="text/javascript" src="../js/nav.js"></script>
 	<link rel="stylesheet" href="../style/datatables.css">
+	
+	<script type="text/javascript" src="../js/jquery/jquery.dataTables.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../js/jquery/bootstrap.js"></script>
+<script type="text/javascript" src="../js/jquery/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="../style/bootstrap.css">
+<link rel="stylesheet" href="../style/datatables.css">
+<link rel="stylesheet" href="../style/jquery.dataTables.css">
+<link rel="stylesheet" href="../style/jquery.dataTables.min.css">
+
 </head>
 <body class="login">
 
@@ -28,16 +39,62 @@
     	<p>Username :</p>
     	<input  id="username" class="input" type="text" name="username" autocomplete="off" />
         <p>Password :</p>
-        <input id="password" class="input"  type="password" name="password" autocomplete="off" />
+        <input id="password" class="input"  type="password" name="password" autocomplete="off"   />
         
         <button id="loginButton" class = "CustomButton" type="button" onclick="Login()">Login</button>
 </div>
-<div class="centred">
-	<a id="text-nav" href="/forgotPasswordPage"><button class="passwordbutton">Forgot Passowrd</button></a>
+<div class="centred ">
+	<button class="passwordbutton" onclick="redirectForgotPass();">Forgot Passowrd</button>
 </div>	
-<div class="centred">
-	<a id="text-nav" href="/registerAccount"><button class="passwordbutton">Register Account</button></a>
+<div class="centred ">
+	<button class="passwordbutton" onclick="openValidationSecureCodeModal();">Register Account</button>
 </div>
+<div class="centred ">
+	<button class="passwordbutton" onclick="redirectRegistrationRequest();">Registration Request</button>
+</div>
+
+<!-- //validate secure code -->
+	<div class="modal fade modalTD" id="validateSecureCodeModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Secure Code</h4>
+        </div>
+        <div class="modal-body">
+            <div >
+	       		<h4>Id Request </h4>
+	       		<input type="number" id="idrequest" class="input" name="salary" placeholder="Salary.."  autocomplete="off" required/>
+	       		
+       		</div>
+       		<br>
+       		<br>
+       		<br>
+       		<div >	
+				<h4>Secure Code</h4>
+				<input type="number" id="securecode" class="input" name="salary" placeholder="Salary.."  autocomplete="off" required/>
+				
+			</div>	
+			<br>
+			<br>
+			<br>
+       		
+        
+       </div>
+        <div class="modal-footer">
+          <button type="button" id="save" class="btn btn-default"  onclick="validateSecureCode();">Validate</button>
+         <!--  <button type="button" id="close" class="btn btn-default" onclick="close();">Close</button>
+          data-dismiss="modal" -->
+        </div>
+      </div>
+      
+    </div>
+  
+</div>
+
 </body>
 
 </html>
