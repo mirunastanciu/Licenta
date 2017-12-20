@@ -27,19 +27,19 @@ public class BillController {
 
 	@Autowired
 	BillStatusService billStatusService;
-	
+
 	@Autowired
 	ClientService clientService;
-	
-	@Autowired 
-	ContractClientService contractClientService; 
-	
+
+	@Autowired
+	ContractClientService contractClientService;
+
 	@Autowired
 	BillPositionService billPositionService;
-	
+
 	@Autowired
     private MailService emailService;
-	
+
 	@Autowired
 	ServiceService serviceService;
 
@@ -97,9 +97,9 @@ public class BillController {
 	public String saveInvoice(@RequestParam(value="clientname") String clientname,
 							  @RequestParam(value="duedate") String duedate,
 							  @RequestParam(value="total") double total) {
-		
+
 		Bill bill = new Bill();
-		
+
 		bill.setAmount(total);
 		bill.setCurency("EUR");
 		bill.setCreationdate(Date.valueOf(LocalDate.now()));
@@ -108,16 +108,16 @@ public class BillController {
 		bill.setIdstatus(2);//unpaid
 		bill.setPenalties(0);
 		bill.setIdcontract(contractClientService.getIdContractByIdClient(clientService.getClientIdByName(clientname)));
-		
+
 		billService.save(bill);
-		
+
 		ArrayList<BillPosition> billposDraft = billPositionService.getBillPostByIdBill0();
-		
+
 		for(int i=0;i<billposDraft.size();i++){
 		     billposDraft.get(i).setIdbill(billService.lastBillId());
 		     billPositionService.save(billposDraft.get(i));
 		}
-		
+
 		Mail mail = new Mail();
         mail.setFrom("miruna.anna@gmail.com");
         mail.setTo(clientService.getClientById(clientService.getClientIdByName(clientname)).getEmail());
@@ -132,14 +132,14 @@ public class BillController {
         mail.setContent(content);
 
         emailService.sendSimpleMessage(mail);
-		
-		
+
+
 		return "http://localhost:8080/invoicePage";
 
 	}
-	
-	
-	
+
+
+
 
 
 }

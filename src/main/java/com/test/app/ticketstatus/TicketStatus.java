@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="statusticket")
+@Table(name="statustichet")
 public class TicketStatus {
 
 	@Id

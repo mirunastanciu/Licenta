@@ -168,4 +168,16 @@ public class EmployeeController {
 		return empd;
 	}
 
+	@RequestMapping(path = "/deleteEmployee" , method = RequestMethod.POST)
+	public void delete(@RequestParam(value = "idEmployee") int idEmployee){
+		Employee emp = employeeService.getEmployeeById(idEmployee);
+		//int id = Integer.parseInt(idEmployee);
+		addresService.delete(addresService.getAddressById(accountService.getIdAddressByIdAccount(employeeService.getEmployeeById(idEmployee).getIdaccount())));
+		employeeService.delete(employeeService.getEmployeeById(idEmployee));
+		accountService.delete(accountService.getAccountById(emp.getIdaccount()));
+						   //(accountService.getAccountById(employeeService.getEmployeeById(idEmployee).getIdaccount()).getIddress())
+	}
+
+
+
 }

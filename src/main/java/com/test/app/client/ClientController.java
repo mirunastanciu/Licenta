@@ -16,35 +16,36 @@ import com.test.app.contractclient.ContractClientService;
 import com.test.app.contractclientstatus.ContractClientStatusService;
 
 
+
 @RestController
 public class ClientController {
-	
+
 	@Autowired
 	ClientService clientService;
-	
-	@Autowired 
+
+	@Autowired
 	ContractClientService contractClientService;
-	
+
 	@Autowired
 	AccountService accountService;
-	
+
 	@Autowired
 	AddressService addresService;
-	
+
 	@Autowired
 	ContractClientStatusService contractClientStatusService;
-	
+
 	@RequestMapping(path="/getAllClients" ,method=RequestMethod.GET)
 	public ArrayList<Client> getAllClients(){
 		return clientService.getAllClients();
 	}
-	
+
 	@RequestMapping(value="/saveClient")
 	public void saveClient(Client client){
 		clientService.saveClient(client);
 	}
 
-	
+
 	@RequestMapping(path="/getClientsName", method=RequestMethod.GET)
 	public ArrayList<String> getClientsLastNames(){
 		ArrayList<Client> l = clientService.getAllClients();
@@ -55,12 +56,12 @@ public class ClientController {
 		}
 		return cname;
 	}
-	
+
 	@RequestMapping(path="/getClientDetails", method=RequestMethod.POST)
 	public ClientDetails getClientDetails(@RequestParam(value="idClient") int id){
 		Client client = clientService.getClientById(id);
 		ClientDetails clientDetails = new ClientDetails();
-		
+
 		clientDetails.setId(client.getId());
 		String fullname =  client.getFirstname()+" "+client.getLastname();
 		clientDetails.setName(fullname);
@@ -71,25 +72,39 @@ public class ClientController {
 						  address.getStreet()+" "+address.getStreetnumber()+", Build Number : "+address.getBuildnumber()+
 						  ", App No : "+address.getApartmentnumber();
 		clientDetails.setAddress(address1);
-		
+
 		ContractClient contract = contractClientService.getContractByIdClient(client.getId());
 		clientDetails.setIdcontract(contract.getId());
 		clientDetails.setAmount(contract.getAmount());
 		clientDetails.setCurency(contract.getCurency());
 		clientDetails.setStartdate(contract.getStartdate());
 		clientDetails.setContractstatus(contractClientStatusService.getContractClientStatusNameById(contract.getIdstatus()));
-		
+
 		return clientDetails;
 	}
-	
+
 	@RequestMapping(path = "/getBillClientInfo" , method=RequestMethod.POST)
 	public Client getBillClientInfo(@RequestParam(value="invoiceId") int id){
 		return clientService.getClientByIdBill(id);
 	}
-	
-	
-	
-	
-	
+
+
+	@RequestMapping(path = "/deleteClient" , method = RequestMethod.POST)
+	public void delete(@RequestParam(value = "idClient") int idClient){
+		Client cl = clientService.getClientById(idClient);
+
+		ContractClient cc = contractClientService.getContractByIdClient(idClient);
+		cc.setIdclient(0);
+		contractClientService.save(cc);
+
+		addresService.delete(addresService.getAddressById(accountService.getIdAddressByIdAccount(clientService.getClientById(idClient).getIdaccount())));
+		clientService.delete(clientService.getClientById(idClient));
+		accountService.delete(accountService.getAccountById(cl.getIdaccount()));
+						   //(accountService.getAccountById(employeeService.getEmployeeById(idEmployee).getIdaccount()).getIddress())
+	}
+
+
+
+
 
 }

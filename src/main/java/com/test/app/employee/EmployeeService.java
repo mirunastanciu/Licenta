@@ -6,21 +6,21 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EmployeeService {
-	
+
 	@Autowired
 	EmployeeRepository employeeRepository;
-	
+
 	public ArrayList<Employee> getAllEmployies(){
 		ArrayList<Employee> l = new ArrayList<>();
 		employeeRepository.findAll().forEach(l::add);
 		return l;
 	}
-	
+
 
 	public  Employee getEmployeeById(int a){
 		return employeeRepository.getEmployeeById(a);
 	}
-	
+
 	public  Employee getEmployeeByName(String a){
 		ArrayList<Employee> e = getAllEmployies();
 		 for(int i=0;i<e.size();i++){
@@ -31,15 +31,18 @@ public class EmployeeService {
 		 }
 		return null;
 	}
-	
+
 	public int getIdEmployeeByName(String a , String b){
 		return employeeRepository.getIdEmployeeByName(a, b);
 	}
-	
+
 	public void save(Employee e){
 		employeeRepository.save(e);
 	}
-	
-	
-	
+
+	public void delete(Employee e) {
+		employeeRepository.delete(e);
+	}
+
+
 }

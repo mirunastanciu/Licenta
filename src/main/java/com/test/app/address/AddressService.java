@@ -12,20 +12,24 @@ public class AddressService {
 
 	@Autowired
 	AddressRepository addressRepository;
-	
+
 	public ArrayList<Address> getAddresses(){
 		ArrayList<Address> addressList = new ArrayList<>();
 		addressRepository.findAll()
 		.forEach(addressList::add);
-		
+
 		return addressList;
 	}
-	
+
 	public void saveAddress(Address address){
 		addressRepository.save(address);
 	}
-	
+
 	public Address getAddressById(int a){
 		return addressRepository.getAddresById(a);
+	}
+
+	public void delete(Address a) {
+		addressRepository.delete(a);
 	}
 }
