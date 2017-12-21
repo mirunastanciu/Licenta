@@ -36,6 +36,13 @@ public class BillService {
 		return billRepository.getLastBillId();
 	}
 	
+	public ArrayList<Bill> getBillsPaiedByIdContract(int a){
+		return billRepository.getBillsPiedByIdContract(a);
+	}
+	
+	public void delete(Bill b){
+		billRepository.delete(b);
+	}
 	
 
 }

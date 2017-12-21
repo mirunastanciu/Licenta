@@ -175,6 +175,12 @@ public class EmployeeController {
 		addresService.delete(addresService.getAddressById(accountService.getIdAddressByIdAccount(employeeService.getEmployeeById(idEmployee).getIdaccount())));
 		employeeService.delete(employeeService.getEmployeeById(idEmployee));
 		accountService.delete(accountService.getAccountById(emp.getIdaccount()));
+		
+		ContractEmployee ce = contractEmployeeService.getContractById(emp.getIdcontract());
+		ce.setIdstatus(5);
+		contractEmployeeService.save(ce);
+		
+	
 						   //(accountService.getAccountById(employeeService.getEmployeeById(idEmployee).getIdaccount()).getIddress())
 	}
 

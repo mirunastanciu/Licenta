@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.test.app.account.AccountService;
 import com.test.app.address.Address;
 import com.test.app.address.AddressService;
+import com.test.app.bill.Bill;
+import com.test.app.bill.BillService;
 import com.test.app.contractclient.ContractClient;
 import com.test.app.contractclient.ContractClientService;
 import com.test.app.contractclientstatus.ContractClientStatusService;
@@ -31,6 +33,9 @@ public class ClientController {
 
 	@Autowired
 	AddressService addresService;
+	
+	@Autowired
+	BillService billService;
 
 	@Autowired
 	ContractClientStatusService contractClientStatusService;
@@ -90,21 +95,35 @@ public class ClientController {
 
 
 	@RequestMapping(path = "/deleteClient" , method = RequestMethod.POST)
-	public void delete(@RequestParam(value = "idClient") int idClient){
-		Client cl = clientService.getClientById(idClient);
-
+	public String delete(@RequestParam(value = "idClient") int idClient){
+		String response =  "allPaied";
+	    Client cl = clientService.getClientById(idClient);
 		ContractClient cc = contractClientService.getContractByIdClient(idClient);
-		cc.setIdclient(0);
-		contractClientService.save(cc);
+		
+		ArrayList<Bill> bills = billService.getAllUnpaidInvoices();
+		for(int i=0;i<bills.size();i++){
+			if(bills.get(i).getIdcontract() == contractClientService.getIdContractByIdClient(idClient)){
+				response = "existBillUnpaid";
+				break;
+			}
+		}
+		if(response.equals("allPaied") )	{
+				addresService.delete(addresService.getAddressById(accountService.getIdAddressByIdAccount(clientService.getClientById(idClient).getIdaccount())));
+				ArrayList<Bill> billspaied = billService.getBillsPaiedByIdContract(contractClientService.getContractByIdClient(idClient).getId());
+				for(int j=0;j<billspaied.size();j++){
+					billService.delete(billspaied.get(j));
+				}
+				contractClientService.delete(cc);
+				clientService.delete(clientService.getClientById(idClient));
+				accountService.delete(accountService.getAccountById(cl.getIdaccount()));
+				return response;
+			}else{
+				return response;
+			}
+			  
+		
 
-		addresService.delete(addresService.getAddressById(accountService.getIdAddressByIdAccount(clientService.getClientById(idClient).getIdaccount())));
-		clientService.delete(clientService.getClientById(idClient));
-		accountService.delete(accountService.getAccountById(cl.getIdaccount()));
-						   //(accountService.getAccountById(employeeService.getEmployeeById(idEmployee).getIdaccount()).getIddress())
 	}
-
-
-
 
 
 }

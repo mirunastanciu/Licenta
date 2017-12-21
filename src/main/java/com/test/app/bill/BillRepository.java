@@ -19,6 +19,9 @@ public interface BillRepository extends CrudRepository<Bill , String>{
 	@Query(value="SELECT IDBILL FROM bill ORDER BY IDBILL DESC LIMIT 1;",nativeQuery=true)
 	public int getLastBillId();
 	
+	@Query(value="SELECT * FROM bill WHERE IDSTATUS=1 AND IDCONTRACT=?;",nativeQuery=true)
+	public ArrayList<Bill> getBillsPiedByIdContract(int a);
+	
 	
 	
 	

@@ -217,8 +217,13 @@ $(document).ready( function () {
 				   url: "deleteClient",
 				   data: {"idClient": idClient},
 				   success: function(data, status, xhr){
-					   alert("The Client witd id : "+idClient+" was deleted !")
-					   location.reload();
+					   if(data === "existBillUnpaid"){
+						   alert("This account cannot be deleted because exist invoice/s unpaied !")
+					   }else{
+						   alert("The Client witd id : "+idClient+" was deleted !")
+						   location.reload();
+					   }
+					  
 				   },error: function(){
 					   alert("error on deleteing client")
 				   }
