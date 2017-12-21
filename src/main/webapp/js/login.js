@@ -1,8 +1,13 @@
- function Login(){
+
+function Login(){
+	 
 	var username = $('#username').val();
-	 var password = $('#password').val();
-	console.log(username);
-	console.log(password);
+	var password = $('#password').val();
+	
+	document.cookie = "loged_username="+username; 
+	//console.log(document.cookie);
+	
+
 	$.ajax({
 		method: "POST",
 		url: "accountvalidation",

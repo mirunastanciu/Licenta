@@ -80,4 +80,10 @@ public class GetPagesController {
 		ModelAndView m = new ModelAndView("RegistrationRequestsPage");
 		return m;
 	}
+	
+	@RequestMapping("/myAccountPage")
+	public ModelAndView getMyAccountPage() {
+		ModelAndView m = new ModelAndView("MyAccountPage");
+		return m;
+	}
 }

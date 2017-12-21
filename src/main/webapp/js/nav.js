@@ -29,4 +29,9 @@
 	  });
 
 	 });
+ 
+ function Logout(){
+	 document.cookie = "loged_username=;"
+	 location="http://localhost:8080/index.html";
+ }
 
