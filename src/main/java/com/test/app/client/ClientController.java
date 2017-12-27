@@ -16,6 +16,7 @@ import com.test.app.bill.BillService;
 import com.test.app.contractclient.ContractClient;
 import com.test.app.contractclient.ContractClientService;
 import com.test.app.contractclientstatus.ContractClientStatusService;
+import com.test.app.ticket.TicketService;
 
 
 
@@ -36,6 +37,9 @@ public class ClientController {
 	
 	@Autowired
 	BillService billService;
+	
+	@Autowired
+	TicketService ticketService;
 
 	@Autowired
 	ContractClientStatusService contractClientStatusService;
@@ -116,6 +120,8 @@ public class ClientController {
 				contractClientService.delete(cc);
 				clientService.delete(clientService.getClientById(idClient));
 				accountService.delete(accountService.getAccountById(cl.getIdaccount()));
+				
+				ticketService.deleteTicketsByIdClient(idClient);
 				return response;
 			}else{
 				return response;

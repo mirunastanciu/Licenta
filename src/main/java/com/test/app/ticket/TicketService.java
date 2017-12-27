@@ -59,6 +59,10 @@ public class TicketService {
 	public ArrayList<Integer> getTicketsIdByIdClient(int a){
 		return ticketRepository.getIdticketsByIdClient(a);
 	}
+	
+	public void deleteTicketsByIdClient(int a){
+		ticketRepository.deleteAllTicketsByIdClient(a);
+	}
 
 
 

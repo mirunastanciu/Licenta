@@ -26,7 +26,9 @@ $(document).ready( function () {
 	 //Details button function
 	 $('#ticketsTable').on('click', '.btn-details', function () {
 		 var tr = $(this).closest('tr');
+		
 		 idTicket = tr.children('td:eq(0)').text();//get the id (from db)
+		 console.log(idTicket)
 		 $.ajax({
 			   method: "POST",
 			   url: "getDetailsByIdTicket",

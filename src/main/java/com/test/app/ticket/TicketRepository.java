@@ -20,5 +20,9 @@ public interface TicketRepository extends CrudRepository<Ticket , String>{
 
 	@Query(value="SELECT IDTICKET FROM ticket WHERE IDCLIENT =?;",nativeQuery=true)
 	public ArrayList<Integer> getIdticketsByIdClient(int a);
+	
+	@Query(value="DELETE FROM ticket WHERE IDCLIENT=?;",nativeQuery=true)
+	public void deleteAllTicketsByIdClient(int a);
+
 
 }

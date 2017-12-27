@@ -16,7 +16,7 @@ public interface ContractClientStatusRepository extends CrudRepository<ContractC
 	@Query(value="SELECT IDSTATUS FROM statuscontractclient WHERE STATUSNAME=?",nativeQuery=true)
 	public int getStatusIdByName(String a);
 	
-	@Query(value="Select STATUSNAME from statuscontractclient where IDSTATUS=?;",nativeQuery=true)
+	@Query(value="SELECT STATUSNAME FROM statuscontractclient WHERE IDSTATUS=?;",nativeQuery=true)
 	public String getContractClientStatusNameById(int a);
 
 }

@@ -33,7 +33,7 @@ public class ContractClientController {
 		 for(int i=0;i<contractClientList.size();i++){
 			 ContractClientDetails ccd = new ContractClientDetails();
 			 ccd.setId(contractClientList.get(i).getId());
-			 ccd.setStatus(contractClientStatusService.getContractClientStatusById(contractClientList.get(i).getId()).getStatusname());
+			 ccd.setStatus(contractClientStatusService.getContractClientStatusById(contractClientList.get(i).getIdstatus()).getStatusname());
 			 ccd.setAmount(contractClientList.get(i).getAmount());
 			 ccd.setCurency(contractClientList.get(i).getCurency());
 			 ccd.setStartdate(contractClientList.get(i).getStartdate());

@@ -110,7 +110,7 @@ public class TicketController {
 		//t.setIdemployee(getIdEmployeeByName(assignpers));
 		java.sql.Date parseDate = java.sql.Date.valueOf(duedate);
 		t.setDuedate(parseDate);
-		t.setIdclient(1);
+		t.setIdclient(0);
 		t.setCreationdate(Date.valueOf(LocalDate.now()));
 		t.setIdstatus(1);//TO DO
 
@@ -195,11 +195,17 @@ public class TicketController {
 			 tkd.setEmployeeemail("");
 			 tkd.setEmployeespecialisation("");
 		 }
-
-		 String clientName = clientService.getClientById(tk.getIdclient()).getFirstname()
-				 +" "+clientService.getClientById(tk.getIdclient()).getLastname();
-		 tkd.setClientname(clientName);
-		 tkd.setClientemail(clientService.getClientById(tk.getIdclient()).getEmail());
+		 if(tk.getIdclient() != 0){
+			 String clientName = clientService.getClientById(tk.getIdclient()).getFirstname()
+					 +" "+clientService.getClientById(tk.getIdclient()).getLastname();
+			 tkd.setClientname(clientName);
+			 tkd.setClientemail(clientService.getClientById(tk.getIdclient()).getEmail());
+		 }else{
+			 tkd.setClientname("System");
+			 tkd.setClientemail("");
+		 }
+		
+		
 		 tkd.setCreationdate(tk.getCreationdate());
 		 tkd.setDuedate(tk.getDuedate());
 		 tkd.setStartdate(tk.getStartdate());
