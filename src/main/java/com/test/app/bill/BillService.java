@@ -44,5 +44,14 @@ public class BillService {
 		billRepository.delete(b);
 	}
 	
+	public ArrayList<Bill> getWaitingBillsByClient(String a){
+		return billRepository.getWaitingBillByClient(a);
+	}
+	
+	public ArrayList<Bill> getPrecessdBillsByClient(String a){
+		return billRepository.getProcessedBillByClient(a);
+	}
+	
+	
 
 }

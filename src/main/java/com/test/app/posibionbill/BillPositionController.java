@@ -79,7 +79,7 @@ public class BillPositionController {
 				billPositionService.delete(bp.get(i));
 			}
 		}
-		return "http://localhost:8082/invoicePage";
+		return "http://localhost:8080/invoicePage";
 
 	}
 

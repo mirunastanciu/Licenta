@@ -2,9 +2,26 @@ $(window).resize(function(){
 	location.reload();
 });
 
+var logeduser = $.cookie("loged_username");
+var acctype = $.cookie("accounting_type");
+
 $(document).ready( function () {
 
-	 var table = $('#unpaidInvoiceTable').dataTable({
+		   			if(acctype == 2 || acctype == 3){
+		   				$("#accounts").hide();
+		   				$("#contracts").hide();
+		   				$("#registartionreq").hide();
+		   				$("#addInv").hide();
+		   				
+		   			}
+
+});
+
+
+$(document).ready( function () {
+//if user ia admin	
+  if(acctype == 1){
+	  var table = $('#unpaidInvoiceTable').dataTable({
 			"sAjaxSource": "/getAllUnpaidInvoices",
 			"sAjaxDataProp": "",
 			"responsive": true,
@@ -20,10 +37,48 @@ $(document).ready( function () {
 
 						  ]
 	 });
+//if user is client
+  }else if(acctype == 2){
+	  $.ajax({
+			method: "POST",
+			url: "getWaitingInvoicesByClient",
+			data:{"logeduser": logeduser}
+				,success: function(data, status, xhr){
+
+					var table = $('#unpaidInvoiceTable').dataTable({
+						"responsive": true,
+						"order": [[ 0, "asc" ]],
+						"data": data,
+					    "columns": [
+					        { data: "idbill" },
+					        { data: "creationdate" },
+					        { data: "amount" },
+					        { data: "curency"},
+					        { data: "duedate"},
+					        { data: "status"},
+					        {"defaultContent": '<button class="btn-details" type="button">Details</button>'}
+					    ]
+
+				    });
+		            }, error: function(){
+		            		alert("error Update Method");
+		            	}
+				});
+  }
+ 
+	
 		//Details Pop-up
 	 $('#unpaidInvoiceTable').on('click', '.btn-details', function () {
 		 var tr = $(this).closest('tr');
 		 invoiceId = tr.children('td:eq(0)').text();//get the id (from db)
+		 $("#approve").show();
+		 $("#reject").show();
+			
+		if(acctype == 1){
+			$("#approve").hide();
+			$("#reject").hide();
+		}
+	
 
 		 $.ajax({
 				method: "POST",
@@ -110,7 +165,8 @@ $(document).ready( function () {
  });
 
 $(document).ready( function () {
-
+//if user ia admin	
+if(acctype == 1){
 	 var table = $('#paidInvoiceTable').dataTable({
 			"sAjaxSource": "/getAllPaidInvoices",
 			"sAjaxDataProp": "",
@@ -127,12 +183,50 @@ $(document).ready( function () {
 
 						  ]
 	 });
+//if user is client
+}else if(acctype == 2){
+	$.ajax({
+		method: "POST",
+		url: "getProcessedInvoicesByClient",
+		data:{"logeduser": logeduser}
+			,success: function(data, status, xhr){
+
+				var table = $('#paidInvoiceTable').dataTable({
+					"responsive": true,
+					"order": [[ 0, "asc" ]],
+					"data": data,
+				    "columns": [
+				        { data: "idbill" },
+				        { data: "creationdate" },
+				        { data: "amount" },
+				        { data: "curency"},
+				        { data: "duedate"},
+				        { data: "status"},
+				        {"defaultContent": '<button class="btn-details" type="button">Details</button>'}
+				    ]
+
+			    });
+	            }, error: function(){
+	            		alert("error Update Method");
+	            	}
+			});
+}
+
 
 	//Details Pop-up
 	 $('#paidInvoiceTable').on('click', '.btn-details', function () {
 		 var tr = $(this).closest('tr');
 		 invoiceId = tr.children('td:eq(0)').text();//get the id (from db)
-
+		 var status = tr.children('td:eq(5)').text();
+		
+		$("#approve").hide();
+		$("#reject").hide();
+		
+		if(acctype == 2 && status === "REJECTED"){
+			$("#approve").show();
+			
+		}
+		
 		 $.ajax({
 				method: "POST",
 				url: "getBillPositions",
@@ -212,6 +306,38 @@ $(document).ready( function () {
 			});
 		 $('#invoiceModal').modal('show');
 	 });
+	 
+	 
+	 //approve invoice
+     $('.modal-footer').on('click', '#approve', function () {
+    	 $.ajax({
+				method: "POST",
+				url: "approveInvoice",
+				data:{"invoiceId": invoiceId}
+    	 ,success: function(data, status, xhr){
+    		 $('#invoiceModal').modal('hide');
+    		 location.reload();
+    	 }, error: function(){
+				alert("error on aprrove invoice");
+			}
+     });
+     });
+     
+   //reject invoice
+     $('.modal-footer').on('click', '#reject', function () {
+    	 $.ajax({
+				method: "POST",
+				url: "rejectInvoice",
+				data:{"invoiceId": invoiceId}
+ 	 ,success: function(data, status, xhr){
+ 		 $('#invoiceModal').modal('hide');
+ 		location.reload();
+ 	 }, error: function(){
+				alert("error on reject invoice");
+			}
+     });
 });
+});
+
 
 

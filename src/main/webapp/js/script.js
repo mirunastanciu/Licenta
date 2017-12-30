@@ -1,27 +1,81 @@
 var idTicket;
+var logeduser = $.cookie("loged_username");
+var acctype = $.cookie("accounting_type");
+
 
 $(window).resize(function(){location.reload();});
 
-//To Do table
 $(document).ready( function () {
 
-	 var table = $('#ticketsTable').dataTable({
-			"sAjaxSource": "/ticketsToDo",
-			"sAjaxDataProp": "",
-			"columnDefs": [
-				  {'width': '50%', 'targets': 1}
-			  ],
-			"responsive": true,
-			"order": [[ 0, "asc" ]],
-			"aoColumns": [	/*{"mData": "tr.index()"},*/
-			              	{"mData": "idticket"},
-						    {"mData": "description"},
-						    {"mData": "projecttypename"},
-						    {"mData": "duedate"},
-						    {"mData": "status"},
-						    {"defaultContent": '<button class="btn-details" type="button">Details</button>'} ],
+		   			if(acctype == 2 || acctype == 3){
+		   				$("#accounts").hide();
+		   				$("#contracts").hide();
+		   				$("#registartionreq").hide();
+		   			
+		   		}
+     
+});
 
-	 });
+
+//To Do table
+$(document).ready( function () {
+	
+	
+	//if user is admin	
+		   		    if(acctype == 1){
+		   				var table = $('#ticketsTable').dataTable({
+		   					"sAjaxSource": "/ticketsToDo",
+		   					"sAjaxDataProp": "",
+		   					"columnDefs": [
+		   						  {'width': '50%', 'targets': 1}
+		   					  ],
+		   					"responsive": true,
+		   					"order": [[ 0, "asc" ]],
+		   					"aoColumns": [	/*{"mData": "tr.index()"},*/
+		   					              	{"mData": "idticket"},
+		   								    {"mData": "description"},
+		   								    {"mData": "projecttypename"},
+		   								    {"mData": "duedate"},
+		   								    {"mData": "status"},
+		   								    {"defaultContent": '<button class="btn-details" type="button">Details</button>'} ],
+
+		   			    });
+	//if user is client		   				
+		   			}else if(acctype == 2){
+		   				$.ajax({
+							method: "POST",
+							url: "ticketsToDoByClient",
+							data:{"logeduser": logeduser}
+								,success: function(data, status, xhr){
+
+									var table = $('#ticketsTable').dataTable({
+										"responsive": true,
+										"columnDefs": [
+								   						  {'width': '50%', 'targets': 1}
+								   					  ],
+										"order": [[ 0, "asc" ]],
+										"data": data,
+									    "columns": [
+									        { data: "idticket" },
+									        { data: "description" },
+									        { data: "projecttypename" },
+									        { data: "duedate"},
+									        { data: "status"},
+									        {"defaultContent": '<button class="btn-details" type="button">Details</button>'} 
+									    ]
+
+								    });
+		   			            }, error: function(){
+		   			            		alert("error Update Method");
+		   			            	}
+		   					});
+	//if user is employee	
+		   			}else{
+		   				
+		   			}
+		   		
+
+	
 
 	 //Details button function
 	 $('#ticketsTable').on('click', '.btn-details', function () {
@@ -71,16 +125,24 @@ $(document).ready( function () {
 		            $(".modal-body #clientemail").html(data.clientemail);
 
 		            $('#myModal').modal('show');
+	//if user is client or employee no edit right , no delete right	            
+		            if(acctype == 2 || acctype == 3){
+		            	$("#editbutton").hide();
+		            	$("#savebutton").hide();
+		            	$("#deletebutton").hide();
+		            }
 		            //Edit function
 		            $('.modal-footer').on('click', '#editbutton', function () {
-
-		            	$("#projecttypelist").show();
-		            	$("#statuslist").show();
-		            	$("#description").show();
-		            	$("#duedateedit").show();
-		            	$("#startdateedit").show();
-		            	$("#finishdateedit").show();
-		            	$("#employeelist").show();
+		            	
+		            		$("#projecttypelist").show();
+			            	$("#statuslist").show();
+			            	$("#description").show();
+			            	$("#duedateedit").show();
+			            	$("#startdateedit").show();
+			            	$("#finishdateedit").show();
+			            	$("#employeelist").show();
+		            	
+		            	
 		            });
 
 						 var options;
@@ -190,23 +252,64 @@ $(document).ready( function () {
 
 //Assigned Table
 $(document).ready( function () {
-	 var table = $('#getAllTicketsAssigned').dataTable({
-			"sAjaxSource": "/ticketsInProgress",
-			"sAjaxDataProp": "",
-			"columnDefs": [
-				  {'width': '50%', 'targets': 1},
-				  {'width': '10%', 'targets': 4}
-			  ],
-			"responsive": true,
-			"order": [[ 0, "asc" ]],
-			"aoColumns": [
-			              { "mData": "idticket"},
-			              { "mData": "description"},
-			              { "mData": "projecttypename"},
-			              { "mData": "duedate"},
-			              {"mData": "status"},
-			    {"defaultContent": '<button class="btn-details" type="button">Details</button>'}]
-	 });
+	 
+	//if user is admin	
+		   		    if(acctype == 1){
+							var table = $('#getAllTicketsAssigned').dataTable({
+									"sAjaxSource": "/ticketsInProgress",
+											"sAjaxDataProp": "",
+												"columnDefs": [
+												               {'width': '50%', 'targets': 1},
+												               {'width': '10%', 'targets': 4}
+															  ],			
+												"responsive": true,
+												"order": [[ 0, "asc" ]],
+												"aoColumns": [
+															  { "mData": "idticket"},
+															  { "mData": "description"},
+															  { "mData": "projecttypename"},
+															  { "mData": "duedate"},
+															  {"mData": "status"},
+															  {"defaultContent": '<button class="btn-details" type="button">Details</button>'}]
+													 });								
+							
+	
+	//if user is client		   				
+	   			  }else if(acctype == 2){
+	   				$.ajax({
+						method: "POST",
+						url: "ticketsInProgressByClient",
+						data:{"logeduser": logeduser}
+							,success: function(data, status, xhr){
+					   				var table = $('#getAllTicketsAssigned').dataTable({
+										
+												   "sAjaxDataProp": "",
+													"columnDefs": [
+													               {'width': '50%', 'targets': 1},
+													              /* {'width': '10%', 'targets': 4}*/
+																  ],			
+													"responsive": true,
+													"order": [[ 0, "asc" ]],
+													"data": data,
+												    "columns": [
+												        { data: "idticket" },
+												        { data: "description" },
+												        { data: "projecttypename" },
+												        { data: "duedate"},
+												        { data: "status"},
+												        {"defaultContent": '<button class="btn-details" type="button">Details</button>'} 
+												        ]
+											});
+							}
+					});
+	//if user is employee	
+		         }else{
+			
+		         	}
+	
+
+
+	
 	 //Details button function
 	 $('#getAllTicketsAssigned').on('click', '.btn-details', function () {
 		 var tr = $(this).closest('tr');
@@ -242,6 +345,13 @@ $(document).ready( function () {
 		            $(".modal-body #clientemail").html(data.clientemail);
 
 		            $('#myModal').modal('show');
+		            
+		//if user is client or employee no edit right , no delete right	            
+		            if(acctype == 2 || acctype == 3){
+		            	$("#editbutton").hide();
+		            	$("#savebutton").hide();
+		            	$("#deletebutton").hide();
+		            }
 		            //Edit function
 		            $('.modal-footer').on('click', '#editbutton', function () {
 		            	$("#projecttypelist").show();
@@ -338,22 +448,57 @@ $(document).ready( function () {
 //Done Table
 $(document).ready( function () {
 
-	 var table = $('#getAllTicketsDone').dataTable({
-			"sAjaxSource": "/ticketsDone",
-			"sAjaxDataProp": "",
-			"columnDefs": [
-				  {'width': '50%', 'targets': 1}
-			  ],
-			"responsive": true,
-			"order": [[ 0, "asc" ]],
-			"aoColumns": [
-			              { "mData": "idticket"},
-			              { "mData": "description"},
-			              { "mData": "projecttypename"},
-			              { "mData": "duedate"},
-			              {"mData": "status"},
-			    {"defaultContent": '<button class="btn-details" type="button">Details</button>'}]
-	 });
+	//if user is admin	
+		   		    if(acctype == 1){
+							 var table = $('#getAllTicketsDone').dataTable({
+									"sAjaxSource": "/ticketsDone",
+									"sAjaxDataProp": "",
+									"columnDefs": [
+										  {'width': '50%', 'targets': 1}
+									  ],
+									"responsive": true,
+									"order": [[ 0, "asc" ]],
+									"aoColumns": [
+									              { "mData": "idticket"},
+									              { "mData": "description"},
+									              { "mData": "projecttypename"},
+									              { "mData": "duedate"},
+									              {"mData": "status"},
+									    {"defaultContent": '<button class="btn-details" type="button">Details</button>'}]
+							 });
+	//if user is client		   				
+		   			  }else if(acctype == 2){
+		   				$.ajax({
+							method: "POST",
+							url: "ticketsDoneByClient",
+							data:{"logeduser": logeduser}
+								,success: function(data, status, xhr){
+									var table = $('#getAllTicketsDone').dataTable({
+										"responsive": true,
+										"columnDefs": [
+								   						  {'width': '50%', 'targets': 1}
+								   					  ],
+										"order": [[ 0, "asc" ]],
+										"data": data,
+									    "columns": [
+									        { data: "idticket" },
+									        { data: "description" },
+									        { data: "projecttypename" },
+									        { data: "duedate"},
+									        { data: "status"},
+									        {"defaultContent": '<button class="btn-details" type="button">Details</button>'} 
+									    ]
+
+								    });
+								}
+		   				});
+		   			  
+	//if user is employee	
+		         }else{
+			
+		         	}
+		   			  
+		   									 
 	 //Details button function
 	 $('#getAllTicketsDone').on('click', '.btn-details', function () {
 		 var tr = $(this).closest('tr');
@@ -389,6 +534,14 @@ $(document).ready( function () {
 		            $(".modal-body #clientemail").html(data.clientemail);
 
 		            $('#myModal').modal('show');
+		            
+		          //if user is client or employee no edit right , no delete right	            
+		            if(acctype == 2 || acctype == 3){
+		            	$("#editbutton").hide();
+		            	$("#savebutton").hide();
+		            	$("#deletebutton").hide();
+		            }
+		            
 		            //Edit function
 		            $('.modal-footer').on('click', '#editbutton', function () {
 		            	$("#projecttypelist").show();

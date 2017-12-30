@@ -5,8 +5,17 @@ function Login(){
 	var password = $('#password').val();
 	
 	document.cookie = "loged_username="+username; 
-	//console.log(document.cookie);
 	
+	var logeduser = $.cookie("loged_username");
+
+	 $.ajax({
+		   method: "POST",
+		   url: "accountType",
+		   data:{"logeduser": logeduser},
+		   		success: function(data, status, xhr){
+		   			document.cookie = "accounting_type="+data;
+		   		}
+	 });
 
 	$.ajax({
 		method: "POST",

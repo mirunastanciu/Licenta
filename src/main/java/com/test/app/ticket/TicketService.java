@@ -64,7 +64,17 @@ public class TicketService {
 		ticketRepository.deleteAllTicketsByIdClient(a);
 	}
 
-
+    public ArrayList<Ticket> getTicketsToDoByIdClient(int a){
+    	return ticketRepository.getTicketsToDoByIdClient(a);
+    }
+    
+    public ArrayList<Ticket> getTicketsInProgressByIdClient(int a){
+    	return ticketRepository.getTicketsInProgressByIdClient(a);
+    }
+    
+    public ArrayList<Ticket> getTicketsDoneByIdClient(int a){
+    	return ticketRepository.getTicketsDoneByIdClient(a);
+    }
 
 
 }

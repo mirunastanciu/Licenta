@@ -1,3 +1,23 @@
+var logeduser = $.cookie("loged_username");
+
+$(document).ready( function () {
+	$.ajax({
+		   method: "POST",
+		   url: "accountType",
+		   data:{"logeduser": logeduser},
+		   		success: function(data, status, xhr){
+		   			console.log(data)
+		   			if(data === 2 || data === 3){
+		   				$("#accounts").hide();
+		   				$("#contracts").hide();
+		   				$("#registartionreq").hide();
+		   				$("#assignpersson").hide();
+		   			}
+		   		}
+     });
+});
+
+
 $(document).ready(function () {
     var options;
 	$.ajax("/allProjectTypesName",
@@ -22,6 +42,7 @@ $(document).ready(function () {
 				       options = data;
 
 				       	$('#assignep').empty();
+				       	$('#assignep').append($('<option></option>').html(""));
 				       	$.each(options, function(i, p) {
 				       	$('#assignep').append($('<option></option>').val(p).html(p));
 				       	});
@@ -45,7 +66,8 @@ function saveTicket(){
 				{"projecttype": projecttype,
 				 "description": description,
 				 "assignpers": assignpers,
-				 "duedate": duedate
+				 "duedate": duedate,
+				 "logeduser": logeduser
 				},
 				success: function(data, status, xhr){
 					alert("The Ticket has been saved successfull");

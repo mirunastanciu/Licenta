@@ -5,9 +5,11 @@
 <title>Invoices</title>
 
 <script type="text/javascript" src="../js/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.cookie.js"></script>
 <script type="text/javascript" src="../js/jquery/jquery.dataTables.js"></script>	
 <script type="text/javascript" src="../js/jquery/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../js/jquery/bootstrap.js"></script>
+
 <script src="../js/invoice.js"></script>
 
 <link rel="stylesheet" href="../style/stylesheet.css">
@@ -24,7 +26,9 @@
 <script src="../js/nav.js"></script>
 </head>
 <body>
-
+    <div id="logedusernamediv" style="margin-top:10px;margin-left:10px;">
+		<h4 id="logedusername"></h4>
+	</div>
      <div style="margin-right:10px;margin-top:10px;">
 		<button  class = "loginbtn" id="logout" onclick="Logout();">Logout</button>
 	</div>
@@ -53,7 +57,7 @@
 			
 			<a href="/CreateNewInvoicePage"><button id="addInv">Create New Invoice</button></a>
 			
-			<h2>Unpaid Invoices</h2>
+			<h2>Waiting to be processed</h2>
 			<br> 
 			<table id="unpaidInvoiceTable" class="table " class="row-border">
 				<thead>
@@ -75,7 +79,7 @@
 		</div>
 
 		<div class="divpaddin" >
-			<h2>Paid invoices</h2>
+			<h2>Approved for payment</h2>
 				<br> 
 			<table id="paidInvoiceTable" class="table " class="row-border">
 				<thead>
@@ -155,7 +159,8 @@
         
        </div>
         <div class="modal-footer">
-        
+          <button id="approve" type="button" class="btn btn-default" style="background-color:green;" >APPROVE</button>
+          <button id="reject" type="button" class="btn btn-default" style="background-color:red;" >REJECT</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.test.app.administrator.AdministratorService;
 import com.test.app.billstatus.BillStatusService;
 import com.test.app.client.ClientService;
 import com.test.app.contractclient.ContractClientService;
@@ -42,12 +43,36 @@ public class BillController {
 
 	@Autowired
 	ServiceService serviceService;
+	
+	@Autowired
+	AdministratorService administratorService;
 
 
 
 	@RequestMapping(value ="/getAllUnpaidInvoices" , method = RequestMethod.GET)
 	public ArrayList<BillDetails> getAllUnpaidInvoices(){
 		ArrayList<Bill> unpaidInvoice =  billService.getAllUnpaidInvoices();
+		ArrayList<BillDetails> unpaidInvoiceD = new ArrayList<>();
+		for(int i=0;i<unpaidInvoice.size();i++){
+			BillDetails bd = new BillDetails();
+
+			bd.setAmount(unpaidInvoice.get(i).getAmount());
+			bd.setCreationdate(unpaidInvoice.get(i).getCreationdate());
+			bd.setCurency(unpaidInvoice.get(i).getCurency());
+			bd.setDuedate(unpaidInvoice.get(i).getDuedate());
+			bd.setIdbill(unpaidInvoice.get(i).getIdbill());
+			bd.setIdcontract(unpaidInvoice.get(i).getIdcontract());
+			bd.setPenalties(unpaidInvoice.get(i).getPenalties());
+			bd.setStatus(billStatusService.getStatusNameById(unpaidInvoice.get(i).getIdstatus()));
+
+			unpaidInvoiceD.add(bd);
+		}
+		return unpaidInvoiceD;
+	}
+	
+	@RequestMapping(value ="/getWaitingInvoicesByClient" , method = RequestMethod.POST)
+	public ArrayList<BillDetails> getAllWaitingInvoicesByclient(@RequestParam(value="logeduser") String user){
+		ArrayList<Bill> unpaidInvoice =  billService.getWaitingBillsByClient(user);
 		ArrayList<BillDetails> unpaidInvoiceD = new ArrayList<>();
 		for(int i=0;i<unpaidInvoice.size();i++){
 			BillDetails bd = new BillDetails();
@@ -86,6 +111,27 @@ public class BillController {
 		}
 		return paidInvoiceD;
 	}
+	
+	@RequestMapping(value ="/getProcessedInvoicesByClient" , method = RequestMethod.POST)
+	public ArrayList<BillDetails> getProcessedInvoicesByClient(@RequestParam(value="logeduser") String user){
+		ArrayList<Bill> paidInvoice =  billService.getPrecessdBillsByClient(user);
+		ArrayList<BillDetails> paidInvoiceD = new ArrayList<>();
+		for(int i=0;i<paidInvoice.size();i++){
+			BillDetails bd = new BillDetails();
+
+			bd.setAmount(paidInvoice.get(i).getAmount());
+			bd.setCreationdate(paidInvoice.get(i).getCreationdate());
+			bd.setCurency(paidInvoice.get(i).getCurency());
+			bd.setDuedate(paidInvoice.get(i).getDuedate());
+			bd.setIdbill(paidInvoice.get(i).getIdbill());
+			bd.setIdcontract(paidInvoice.get(i).getIdcontract());
+			bd.setPenalties(paidInvoice.get(i).getPenalties());
+			bd.setStatus(billStatusService.getStatusNameById(paidInvoice.get(i).getIdstatus()));
+
+			paidInvoiceD.add(bd);
+		}
+		return paidInvoiceD;
+	}
 
 	@RequestMapping(path = "/getInvoiceInfo", method = RequestMethod.POST)
 	public Bill getBillDetails(@RequestParam(value="invoiceId") int id){
@@ -105,7 +151,7 @@ public class BillController {
 		bill.setCreationdate(Date.valueOf(LocalDate.now()));
 		java.sql.Date parseDate = java.sql.Date.valueOf(duedate);
 		bill.setDuedate(parseDate);
-		bill.setIdstatus(2);//unpaid
+		bill.setIdstatus(1);//waiting
 		bill.setPenalties(0);
 		bill.setIdcontract(contractClientService.getIdContractByIdClient(clientService.getClientIdByName(clientname)));
 
@@ -137,7 +183,39 @@ public class BillController {
 		return "http://localhost:8080/invoicePage";
 
 	}
-
+	
+	@RequestMapping(path = "/approveInvoice",  method = RequestMethod.POST)
+	public void approveInvoice(@RequestParam(value="invoiceId") int id){
+		Bill b = billService.getBillByID(id);
+		b.setIdstatus(2);
+		billService.save(b);
+		
+		Mail mail = new Mail();
+		mail.setFrom("miruna.anna@gmail.com");
+	    mail.setTo(administratorService.getAdminemail());
+	    mail.setSubject("Approved Invoice");
+	    String content = "The invoice number "+ id +" was APPROVED ." ;
+	    mail.setContent(content);
+	    emailService.sendSimpleMessage(mail);
+		
+	}
+	
+	@RequestMapping(path = "/rejectInvoice",  method = RequestMethod.POST)
+	public void rejectInvoice(@RequestParam(value="invoiceId") int id){
+		Bill b = billService.getBillByID(id);
+		b.setIdstatus(3);
+		billService.save(b);
+		
+		Mail mail = new Mail();
+		mail.setFrom("miruna.anna@gmail.com");
+	    mail.setTo(administratorService.getAdminemail());
+	    mail.setSubject("Rejected Invoice");
+	    String content = "The invoice number "+ id +" was REJECTED ." ;
+	    mail.setContent(content);
+	    emailService.sendSimpleMessage(mail);
+	}
+	
+ 
 
 
 

@@ -5,6 +5,7 @@
 <title>Employee Page</title>
 
 <script type="text/javascript" src="../js/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.cookie.js"></script>
 <script type="text/javascript" src="../js/jquery/jquery.dataTables.js"></script>
 <script type="text/javascript" src="../js/jquery/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../js/jquery/bootstrap.js"></script>
@@ -25,7 +26,9 @@
 
 </head>
 <body>
-
+<div id="logedusernamediv" style="margin-top:10px;margin-left:10px;">
+		<h4 id="logedusername"></h4>
+	</div>
     <div style="margin-right:10px;margin-top:10px;">
 		<button  class = "loginbtn" id="logout" onclick="Logout();">Logout</button>
 	</div>

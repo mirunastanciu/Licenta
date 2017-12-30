@@ -130,6 +130,11 @@ public class ClientController {
 		
 
 	}
+	
+	@RequestMapping(path = "/getClientName" , method=RequestMethod.POST)
+	public String getClientName(@RequestParam(value="logeduser") String user){
+		return clientService.getNameByUsername(user);
+	}
 
 
 }

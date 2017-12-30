@@ -1,16 +1,24 @@
 package com.test.app.administrator;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="administrator")
 public class Administrator {
 
 	@Id
+	@Column(name="IDADMIN")
 	private int id;
+	@Column(name="ADMINFIRSTNAME")
 	private String firstname;
+	@Column(name="ADMINLASTNAME")
 	private String lastname;
+	@Column(name="IDACCOUNT")
 	private int idaccount;
+	@Column(name="ADMINEMAIL")
 	private String email;
 
 	public int getId() {

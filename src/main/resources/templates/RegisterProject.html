@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script type="text/javascript" src="../js/jquery/jquery-3.2.1.min.js"></script>
+ 	<script type="text/javascript" src="../js/jquery/jquery.cookie.js"></script>
 	<link rel="stylesheet" href="../style/stylesheet.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
     
     <script src="../js/scriptRegisterProject.js"></script>
     <script src="../js/nav.js"></script>
+   
     
 
     <link rel="stylesheet" href="../style/datatables.css">
@@ -15,6 +17,9 @@
     
 </head>
 <body>
+<div id="logedusernamediv" style="margin-top:10px;margin-left:10px;">
+		<h4 id="logedusername"></h4>
+	</div>
     <div style="margin-right:10px;margin-top:10px;">
 		<a href="/indexPage"><button  class = "loginbtn" id="logout">Logout</button></a>
 	</div>
@@ -28,7 +33,7 @@
 			<a class="text-nav" id="newticket" href="/newTicketPage">NEW TICKET</a>
 			<a class="text-nav" id="accounts" href="/accountsPage">ACCOUNTS</a>
 			<a class="text-nav" id="contracts" href="/contractsPage">CONTRACTS</a>
-			<a class="text-nav" id="invoice" href="">INVOICE</a>
+			<a class="text-nav" id="invoice" href="/invoicePage">INVOICE</a>
 			<a class="text-nav" id="registartionreq" href="/registationRequestPageList" >REQUESTS</a>
           
           
@@ -44,8 +49,10 @@
         <h4>Description</h4>
         <input id="desc" class="input"  type="text" name="description" autocomplete="off" required style="height:400px;width:80%;"/>
         
-        <h4>Assigne Persson</h4>
-        <select id="assignep" name="assignpersson" style="width:30%;"></select>
+        <div id="assignpersson">
+	        <h4>Assigne Persson</h4>
+	        <select id="assignep" name="assignpersson" style="width:30%;"></select>
+        </div>
         
         <h4>Due Date </h4>
         <input id = "duedate" class="input"  type="date" name="duedate" autocomplete="off" required style="width:30%;"/>

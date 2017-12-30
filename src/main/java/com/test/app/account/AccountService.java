@@ -61,15 +61,26 @@ public class AccountService {
 
 	public Account getAccountById(int a){
 		return accountRepository.getAccountByIdAccount(a);
-
-
-
-
 	}
-
-
+	
 	public void delete(Account a) {
 		accountRepository.delete(a);
+	}
+	
+	public int getAccountTypeByUsername(String a){
+		int actype = accountRepository.getAccountTypeByUsername(a);
+		
+		if( actype == 1){
+			return 1;//admin
+		}else if(actype == 2){
+			return 2;//client
+		}else{
+			return 3;//employee
+		}
+	}
+	
+	public Account getAccByUsrename(String a){
+		return accountRepository.getAccountByUsername(a);
 	}
 
 

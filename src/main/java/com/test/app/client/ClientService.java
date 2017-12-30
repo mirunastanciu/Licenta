@@ -43,4 +43,16 @@ public class ClientService {
 	public void delete(Client c) {
 		clientRepository.delete(c);
 	}
+	
+	public int getIdClByUsername(String a){
+		return clientRepository.getIdClientByUsername(a);
+	}
+	
+	public String getNameByUsername(String a){
+		String fname = clientRepository.getClientFNameByUsername(a);
+		String lname = clientRepository.getClientLNameByUsername(a);
+		String fullname =fname+" "+lname;
+		 
+		return fullname;
+	}
 }

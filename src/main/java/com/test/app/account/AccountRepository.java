@@ -17,5 +17,10 @@ public interface AccountRepository extends CrudRepository<Account, String>{
 	@Query(value="SELECT * FROM account WHERE USERNAME=?;",nativeQuery=true)
 	public Account getAccountByUsername(String a);
 	
+	@Query(value="SELECT IDACCOUNTTYPE FROM account WHERE USERNAME=?;",nativeQuery=true)
+	public int getAccountTypeByUsername(String a);
+	
+	
+	
 
 }

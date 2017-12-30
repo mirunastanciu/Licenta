@@ -48,7 +48,7 @@ public class AccountController {
 					// return "redirect:AdminStartPage.html";
 					break;
 				}else if(l.get(i).validateClient()){
-					response = "http://localhost:8080/clientStartPage";
+					response = "http://localhost:8080/administratorStartPage";
 					//model = new ModelAndView("redirect:/clientStartPage");
 					break;
 				}else if(l.get(i).validateEmployee()){
@@ -123,4 +123,9 @@ public class AccountController {
 		return response;
 
 		}
+	
+	@RequestMapping(value = "/accountType", method = RequestMethod.POST)
+	public int accountType(@RequestParam(value = "logeduser") String username) {
+		return accountService.getAccountTypeByUsername(username);
+	}
 }
