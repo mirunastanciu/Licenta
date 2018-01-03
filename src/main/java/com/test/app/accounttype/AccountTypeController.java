@@ -9,13 +9,13 @@ import org.springframework.web.servlet.ModelAndView;
 public class AccountTypeController {
 
 	
-	@RequestMapping("/administratorStartPage")
+	@RequestMapping("/startPage")
 	public ModelAndView getAdminPage() {
-		ModelAndView m = new ModelAndView("AdminStartPage");
+		ModelAndView m = new ModelAndView("StartPage");
 		return m;
 	}
 	
-	@RequestMapping("/clientStartPage")
+	/*@RequestMapping("/clientStartPage")
 	public ModelAndView getClientStartPage() {
 		ModelAndView m = new ModelAndView("ClientStartPage");
 		return m;
@@ -25,7 +25,7 @@ public class AccountTypeController {
 	public ModelAndView getEmployeePage() {
 		ModelAndView m = new ModelAndView("AdminStartPage");
 		return m;
-	}
+	}*/
 	
 	
 	

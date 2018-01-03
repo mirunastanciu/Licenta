@@ -183,6 +183,12 @@ public class EmployeeController {
 	
 						   //(accountService.getAccountById(employeeService.getEmployeeById(idEmployee).getIdaccount()).getIddress())
 	}
+	
+
+	@RequestMapping(path = "/getEmployeeName" , method=RequestMethod.POST)
+	public String getEmpName(@RequestParam(value="logeduser") String user){
+		return employeeService.getNameByUsername(user);
+	}
 
 
 

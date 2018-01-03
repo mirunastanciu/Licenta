@@ -1,6 +1,6 @@
  var current ;
- var logeduser = $.cookie("loged_username");
- var acctype = $.cookie("accounting_type");
+var logeduser = $.cookie("loged_username");
+var acctype = $.cookie("accounting_type");
 
  $(document).ready(function () {
    $('.text-nav').on('click', function (e) {
@@ -33,12 +33,13 @@
 	 });
  
  function Logout(){
-	 document.cookie = "loged_username=;"
-	 document.cookie = "accounting_type=;"
+	 document.cookie = "loged_username=;";
+	 document.cookie = "accounting_type=;";
 	 location="http://localhost:8080/index.html";
  }
  
  $(document).ready(function () {
+	
 	if(acctype == 1){
 		logeduser = $.cookie("loged_username");
 		 $.ajax({
@@ -56,6 +57,17 @@
 			   url: "getClientName",
 			   data: {"logeduser": logeduser},
 			   success: function(data, status, xhr){
+				   $("#logedusernamediv #logedusername").html(data);
+			   }
+			   });
+	}else{
+		logeduser = $.cookie("loged_username");
+		 $.ajax({
+			   method: "POST",
+			   url: "getEmployeeName",
+			   data: {"logeduser": logeduser},
+			   success: function(data, status, xhr){
+				   
 				   $("#logedusernamediv #logedusername").html(data);
 			   }
 			   });

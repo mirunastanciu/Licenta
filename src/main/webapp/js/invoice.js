@@ -2,11 +2,12 @@ $(window).resize(function(){
 	location.reload();
 });
 
-var logeduser = $.cookie("loged_username");
-var acctype = $.cookie("accounting_type");
+	var logeduser = $.cookie('loged_username');
+	var acctype = $.cookie('accounting_type');
+
 
 $(document).ready( function () {
-
+	
 		   			if(acctype == 2 || acctype == 3){
 		   				$("#accounts").hide();
 		   				$("#contracts").hide();
@@ -19,6 +20,7 @@ $(document).ready( function () {
 
 
 $(document).ready( function () {
+	
 //if user ia admin	
   if(acctype == 1){
 	  var table = $('#unpaidInvoiceTable').dataTable({

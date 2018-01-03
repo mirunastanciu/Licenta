@@ -32,4 +32,14 @@ public interface TicketRepository extends CrudRepository<Ticket , String>{
 	
 	@Query(value="SELECT * FROM ticket WHERE IDSTATUS = 5 AND IDCLIENT =?;",nativeQuery=true)
 	public ArrayList<Ticket> getTicketsDoneByIdClient(int a);
+	
+	@Query(value="SELECT * FROM ticket WHERE IDPROJECTTYPE = ? AND IDSTATUS = 1;",nativeQuery=true)
+	public ArrayList<Ticket> getTicketsToDoByIdEmp(int a);
+	
+	@Query(value="SELECT * FROM ticket WHERE IDEMPLOYEE = ? AND IDSTATUS != 1;",nativeQuery=true)
+	public ArrayList<Ticket> getTicketsAssigneByIdEmp(int a );
+	
+	
+	
+	
 }

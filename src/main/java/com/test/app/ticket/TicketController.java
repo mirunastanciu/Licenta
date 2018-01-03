@@ -85,6 +85,27 @@ public class TicketController {
 
 		return td;
 	}
+	
+	@RequestMapping(path = "/ticketsToDoByEmp", method = RequestMethod.POST)
+	public List<TicketDetails> getAllTicketsToDoByEmp(@RequestParam(value="logeduser") String username){
+    	int idemp = employeeService.getIdEmpByUsername(username);
+    	int empspecialisationid = employeeService.getSpecialisationByIdEmp(idemp);
+		List<Ticket> ttodo = ticketService.getTicketsToDoByIdEmp(empspecialisationid);
+		List<TicketDetails> td = new ArrayList<>();
+
+		for(int i=0;i<ttodo.size();i++){
+
+				TicketDetails tkd = new TicketDetails();
+				tkd.setIdticket(ttodo.get(i).getId());
+				tkd.setDescription(ttodo.get(i).getDescription());
+				tkd.setProjecttypename(projectTypetService.getProjectTypeById(ttodo.get(i).getProjcttype()).getProjtypename());
+				tkd.setDuedate(ttodo.get(i).getDuedate());
+				tkd.setStatus(ticketStatusService.getTicketStatusById(ttodo.get(i).getIdstatus()).getStatusname());
+				td.add(tkd);
+			}
+
+		return td;
+	}
 
 	@RequestMapping(path = "/ticketsInProgress", method = RequestMethod.GET)
 	public List<TicketDetails> getAllTicketsAssigned() {
@@ -109,6 +130,26 @@ public class TicketController {
 	public List<TicketDetails> getAllTicketsInProgressByClient(@RequestParam(value="logeduser") String username){
     	int idcl = clientService.getIdClByUsername(username) ;
 		List<Ticket> tInProgress = ticketService.getTicketsInProgressByIdClient(idcl);
+		List<TicketDetails> td = new ArrayList<>();
+
+		for(int i=0;i<tInProgress.size();i++){
+
+				TicketDetails tkd = new TicketDetails();
+				tkd.setIdticket(tInProgress.get(i).getId());
+				tkd.setDescription(tInProgress.get(i).getDescription());
+				tkd.setProjecttypename(projectTypetService.getProjectTypeById(tInProgress.get(i).getProjcttype()).getProjtypename());
+				tkd.setDuedate(tInProgress.get(i).getDuedate());
+				tkd.setStatus(ticketStatusService.getTicketStatusById(tInProgress.get(i).getIdstatus()).getStatusname());
+				td.add(tkd);
+			}
+
+		return td;
+	}
+	
+	@RequestMapping(path = "/ticketsAssignedByIdEmp", method = RequestMethod.POST)
+	public List<TicketDetails> getAllTicketsAssignedByIdEmp(@RequestParam(value="logeduser") String username){
+    	int idemp = employeeService.getIdEmpByUsername(username);
+		List<Ticket> tInProgress = ticketService.getTicketsAssignedByIdEmp(idemp);
 		List<TicketDetails> td = new ArrayList<>();
 
 		for(int i=0;i<tInProgress.size();i++){
@@ -318,7 +359,29 @@ public class TicketController {
 
 	 }
 
+	 
+	 @RequestMapping(value ="/assignToMe" , method=RequestMethod.POST )
+	 public void assignToMe(@RequestParam(value = "logeduser") String logeduser,
+			 				@RequestParam(value = "idTicket") int idTicket){
+		 
+		 Ticket t = ticketService.getTicketById(idTicket);
+		 int emp = employeeService.getIdEmpByUsername(logeduser);
+		 
+		 t.setIdemployee(emp);
+		 
+		 ticketService.addTicket(t);
+	 }
+	 
+	 @RequestMapping(value ="/unassign" , method=RequestMethod.POST )
+	 public void unassign(@RequestParam(value = "idTicket") int idTicket){
+		 
+		 Ticket t = ticketService.getTicketById(idTicket);
+		 t.setIdemployee(0);
+		 
+		 ticketService.addTicket(t);
+	 }
 
+     
 
 
 }

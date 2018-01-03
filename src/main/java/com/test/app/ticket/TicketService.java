@@ -75,6 +75,14 @@ public class TicketService {
     public ArrayList<Ticket> getTicketsDoneByIdClient(int a){
     	return ticketRepository.getTicketsDoneByIdClient(a);
     }
+    
+    public ArrayList<Ticket> getTicketsToDoByIdEmp(int a ){
+    	return ticketRepository.getTicketsToDoByIdEmp(a);
+    }
+    
+    public ArrayList<Ticket> getTicketsAssignedByIdEmp(int a ){
+    	return ticketRepository.getTicketsAssigneByIdEmp(a);
+    }
 
 
 }

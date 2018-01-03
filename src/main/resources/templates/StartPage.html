@@ -4,6 +4,7 @@
 <head>
 <title>Admin Start Page</title>
     <script type="text/javascript" src="../js/jquery/jquery-3.2.1.min.js"></script>
+<!--     <script type="text/javascript" src="../js/jquery/jquery-3.2.1.js"></script> -->
 	<script type="text/javascript" src="../js/jquery/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="../js/jquery/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="../js/jquery/bootstrap.js"></script>
@@ -34,8 +35,8 @@
 	<div class="centred ">
 		<nav class="nav">
 			 
-			<a class="text-nav" id="startpage" href="/administratorStartPage">START PAGE</a> 
-			<a class="text-nav" id="myaccount" href="myAccountPage">MY ACOUNT</a> 
+			<a class="text-nav" id="startpage" href="/startPage">START PAGE</a> 
+			<a class="text-nav" id="myaccount" href="myAccountPage">MY ACCOUNT</a> 
 			<a class="text-nav" id="newticket" href="/newTicketPage">NEW TICKET</a>
 			<a class="text-nav" id="accounts" href="/accountsPage">ACCOUNTS</a>
 			<a class="text-nav" id="contracts" href="/contractsPage">CONTRACTS</a>
@@ -47,7 +48,7 @@
 	<div >
 		<div class="divpaddin">
 
-			<h2>To Do Tickets</h2>
+			<h2 id="todotext">To Do Tickets</h2>
 			<br> 
 			<table id="ticketsTable" class="table " class="row-border">
 				<thead>
@@ -69,7 +70,7 @@
 		</div>
 
 		<div class="divpaddin" >
-			<h2>In Progress Tickets</h2>
+			<h2 id="inP">In Progress Tickets</h2>
 				<br> 
 			<table id="getAllTicketsAssigned" class="table " class="row-border">
 				<thead>
@@ -88,7 +89,7 @@
 
 		<div class="divpaddin" >
 			
-			<h2>Done Tickets</h2>
+			<h2 id="done">Done Tickets</h2>
 				<br> 
 			<table id="getAllTicketsDone" class="table " class="row-border">
 				<thead>
@@ -194,7 +195,8 @@
         
        </div>
         <div class="modal-footer">
-        
+        <button id="assigntome" type="button" class="btn btn-default">Assigne To Me</button>
+         <button id="unassign" type="button" class="btn btn-default">Unassign</button>
           <button id="editbutton" type="button" class="btn btn-default">Edit</button>
           <button id="savebutton" type="button" class="btn btn-default">Save</button>
           <button id="deletebutton" type="button" class="btn btn-default">Delete</button>

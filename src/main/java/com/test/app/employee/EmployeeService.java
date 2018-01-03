@@ -1,6 +1,7 @@
 package com.test.app.employee;
 
 import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +43,23 @@ public class EmployeeService {
 
 	public void delete(Employee e) {
 		employeeRepository.delete(e);
+	}
+	
+	public String getNameByUsername(String a){
+		String fname = employeeRepository.getEmpFNameByUsername(a);
+		String lname = employeeRepository.getEmpLNameByUsername(a);
+		String fullname =fname+" "+lname;
+		System.out.println(fullname);
+		 
+		return fullname;
+	}
+	
+	public int getIdEmpByUsername(String a){
+		return employeeRepository.getEmpIdByUsername(a);
+	}
+	
+	public int getSpecialisationByIdEmp(int a){
+		return employeeRepository.getEmpSpecialisationById(a);
 	}
 
 

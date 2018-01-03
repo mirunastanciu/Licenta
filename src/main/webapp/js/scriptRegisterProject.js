@@ -7,11 +7,18 @@ $(document).ready( function () {
 		   data:{"logeduser": logeduser},
 		   		success: function(data, status, xhr){
 		   			console.log(data)
-		   			if(data === 2 || data === 3){
+		   			if(data === 2 ){
 		   				$("#accounts").hide();
 		   				$("#contracts").hide();
 		   				$("#registartionreq").hide();
 		   				$("#assignpersson").hide();
+		   			}
+		   			if(acctype == 3){
+		   				$("#accounts").hide();
+		   				$("#contracts").hide();
+		   				$("#registartionreq").hide();
+		   				$("#assignpersson").hide();
+		   				$("#invoice").hide();
 		   			}
 		   		}
      });

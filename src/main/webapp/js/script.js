@@ -7,12 +7,17 @@ $(window).resize(function(){location.reload();});
 
 $(document).ready( function () {
 
-		   			if(acctype == 2 || acctype == 3){
+		   			if(acctype == 2 ){
 		   				$("#accounts").hide();
 		   				$("#contracts").hide();
 		   				$("#registartionreq").hide();
-		   			
-		   		}
+		   			}
+		   			if(acctype == 3){
+		   				$("#accounts").hide();
+		   				$("#contracts").hide();
+		   				$("#registartionreq").hide();
+		   				$("#invoice").hide();
+		   			}
      
 });
 
@@ -71,6 +76,33 @@ $(document).ready( function () {
 		   					});
 	//if user is employee	
 		   			}else{
+		   				$.ajax({
+							method: "POST",
+							url: "ticketsToDoByEmp",
+							data:{"logeduser": logeduser}
+								,success: function(data, status, xhr){
+
+									var table = $('#ticketsTable').dataTable({
+										"responsive": true,
+										"columnDefs": [
+								   						  {'width': '50%', 'targets': 1}
+								   					  ],
+										"order": [[ 0, "asc" ]],
+										"data": data,
+									    "columns": [
+									        { data: "idticket" },
+									        { data: "description" },
+									        { data: "projecttypename" },
+									        { data: "duedate"},
+									        { data: "status"},
+									        {"defaultContent": '<button class="btn-details" type="button">Details</button>'} 
+									    ]
+
+								    });
+		   			            }, error: function(){
+		   			            		alert("error Update Method");
+		   			            	}
+		   					});
 		   				
 		   			}
 		   		
@@ -126,25 +158,158 @@ $(document).ready( function () {
 
 		            $('#myModal').modal('show');
 	//if user is client or employee no edit right , no delete right	            
-		            if(acctype == 2 || acctype == 3){
+		            if(acctype == 2 ){
 		            	$("#editbutton").hide();
 		            	$("#savebutton").hide();
 		            	$("#deletebutton").hide();
+		            	$("#assigntome").hide();
+		            	$("#unassign").hide();
+		            }
+		            if(acctype == 3){
+		            	$("#deletebutton").hide();
+		            	$("#assigntome").show();
+		            	$("#unassign").show();
+		            	
+		            }
+		            if(acctype == 1){
+		            	$("#assigntome").hide();
+		            	$("#unassign").hide();
 		            }
 		            //Edit function
 		            $('.modal-footer').on('click', '#editbutton', function () {
 		            	
-		            		$("#projecttypelist").show();
-			            	$("#statuslist").show();
-			            	$("#description").show();
-			            	$("#duedateedit").show();
-			            	$("#startdateedit").show();
+		            	if(acctype == 3){
+		            		$("#statuslist").show();
+		            		$("#startdateedit").show();
 			            	$("#finishdateedit").show();
-			            	$("#employeelist").show();
+				            }else{
+				            	$("#projecttypelist").show();
+				            	$("#description").show();
+				            	$("#duedateedit").show();
+				            	$("#statuslist").show();
+				            	$("#startdateedit").show();
+				            	$("#finishdateedit").show();
+				            	$("#employeelist").show();
+				            }
+			            	
 		            	
 		            	
 		            });
+                    //Assign to me
+		            $('.modal-footer').on('click', '#assigntome', function () {
+		            	 $.ajax({
+							   method: "POST",
+							   url: "assignToMe",
+							   data:
+							          {"logeduser": logeduser,
+								       "idTicket": idTicket
+							          },
+		            	       success: function(data, status, xhr){
+		            	    	   $.ajax({
+		            				   method: "POST",
+		            				   url: "getDetailsByIdTicket",
+		            				   data: {idTicket: idTicket},
+		            				   success: function(data, status, xhr){
 
+		            					   	$("#projecttypelist").hide();
+		            						$("#statuslist").hide();
+		            						$("#description").hide();
+		            						$("#duedateedit").hide();
+		            						$("#startdateedit").hide();
+		            						$("#finishdateedit").hide();
+		            						$("#employeelist").hide();
+
+		            						$(".modal-body #ticketid").html(data.idticket);
+		            			            $(".modal-body #projecttype").html(data.projecttypename);
+		            			            $(".modal-body #status").html(data.status);
+		            			            $(".modal-body #projectdescription").html(data.description);
+		            			            $(".modal-body #creationdate").html(data.creationdate);
+		            			            $(".modal-body #duedate").html(data.duedate);
+		            			            $(".modal-body #startdate").html(data.startdate);
+		            			            $(".modal-body #finishdate").html(data.finishdate);
+
+		            						if(data.employeename === "Unassigned"){
+		            							$(".modal-body #employeeemail").html(data.employeeemail);
+		            					        $(".modal-body #employeespecialisation").html(data.employeespecialisation);
+		            						    $(".modal-body #employeename").html(data.employeename);
+		            						    $("#empE").hide();
+		            							$("#empS").hide();
+		            						}else{
+		            							$("#empE").show();
+		            							$("#empS").show();
+		            				            $(".modal-body #employeename").html(data.employeename);
+		            				            $(".modal-body #employeeemail").html(data.employeeemail);
+		            				            $(".modal-body #employeespecialisation").html(data.employeespecialisation);
+		            						}
+
+
+		            			            $(".modal-body #clientname").html(data.clientname);
+		            			            $(".modal-body #clientemail").html(data.clientemail);
+
+		            			            //$('#myModal').modal('show');
+		            				   }
+		            	    	   });
+		            			            
+		            	       }, error: function(){
+							       alert("error assign to me");
+						        }
+		            });
+			   });
+		            
+		            //Unassign
+		            $('.modal-footer').on('click', '#unassign', function () {
+		            	 $.ajax({
+							   method: "POST",
+							   url: "unassign",
+							   data:{"idTicket": idTicket},
+		            	       success: function(data, status, xhr){
+		            	    	   $.ajax({
+		            				   method: "POST",
+		            				   url: "getDetailsByIdTicket",
+		            				   data: {idTicket: idTicket},
+		            				   success: function(data, status, xhr){
+
+		            					   	$("#projecttypelist").hide();
+		            						$("#statuslist").hide();
+		            						$("#description").hide();
+		            						$("#duedateedit").hide();
+		            						$("#startdateedit").hide();
+		            						$("#finishdateedit").hide();
+		            						$("#employeelist").hide();
+
+		            						$(".modal-body #ticketid").html(data.idticket);
+		            			            $(".modal-body #projecttype").html(data.projecttypename);
+		            			            $(".modal-body #status").html(data.status);
+		            			            $(".modal-body #projectdescription").html(data.description);
+		            			            $(".modal-body #creationdate").html(data.creationdate);
+		            			            $(".modal-body #duedate").html(data.duedate);
+		            			            $(".modal-body #startdate").html(data.startdate);
+		            			            $(".modal-body #finishdate").html(data.finishdate);
+
+		            						if(data.employeename === "Unassigned"){
+		            							$(".modal-body #employeeemail").html(data.employeeemail);
+		            					        $(".modal-body #employeespecialisation").html(data.employeespecialisation);
+		            						    $(".modal-body #employeename").html(data.employeename);
+		            						    $("#empE").hide();
+		            							$("#empS").hide();
+		            						}else{
+		            							$("#empE").show();
+		            							$("#empS").show();
+		            				            $(".modal-body #employeename").html(data.employeename);
+		            				            $(".modal-body #employeeemail").html(data.employeeemail);
+		            				            $(".modal-body #employeespecialisation").html(data.employeespecialisation);
+		            						}
+
+
+		            			            $(".modal-body #clientname").html(data.clientname);
+		            			            $(".modal-body #clientemail").html(data.clientemail);
+
+		            			            //$('#myModal').modal('show');
+		            				   }
+		            	    	   });
+		            	       }
+		            });
+		            });
 						 var options;
 							$.ajax("/allProjectTypesName",
 								       { type: 'GET',
@@ -304,7 +469,34 @@ $(document).ready( function () {
 					});
 	//if user is employee	
 		         }else{
-			
+		        	 $("#inP").html("Assigne To Me");
+		        	 
+		        	 $.ajax({
+							method: "POST",
+							url: "ticketsAssignedByIdEmp",
+							data:{"logeduser": logeduser}
+								,success: function(data, status, xhr){
+						   				var table = $('#getAllTicketsAssigned').dataTable({
+											
+													   "sAjaxDataProp": "",
+														"columnDefs": [
+														               {'width': '50%', 'targets': 1},
+														              /* {'width': '10%', 'targets': 4}*/
+																	  ],			
+														"responsive": true,
+														"order": [[ 0, "asc" ]],
+														"data": data,
+													    "columns": [
+													        { data: "idticket" },
+													        { data: "description" },
+													        { data: "projecttypename" },
+													        { data: "duedate"},
+													        { data: "status"},
+													        {"defaultContent": '<button class="btn-details" type="button">Details</button>'} 
+													        ]
+												});
+								}
+						});
 		         	}
 	
 
@@ -347,10 +539,23 @@ $(document).ready( function () {
 		            $('#myModal').modal('show');
 		            
 		//if user is client or employee no edit right , no delete right	            
-		            if(acctype == 2 || acctype == 3){
+		            
+		            if(acctype == 2 ){
 		            	$("#editbutton").hide();
 		            	$("#savebutton").hide();
 		            	$("#deletebutton").hide();
+		            	$("#assigntome").hide();
+		            	$("#unassign").hide();
+		            }
+		            if(acctype == 3){
+		            	$("#deletebutton").hide();
+		            	$("#assigntome").hide();
+		            	$("#unassign").show();
+		            	
+		            }
+		            if(acctype == 1){
+		            	$("#assigntome").hide();
+		            	$("#unassign").hide();
 		            }
 		            //Edit function
 		            $('.modal-footer').on('click', '#editbutton', function () {
@@ -495,7 +700,8 @@ $(document).ready( function () {
 		   			  
 	//if user is employee	
 		         }else{
-			
+		        	 $("#done").hide();
+		        	 $("#getAllTicketsDone").hide();
 		         	}
 		   			  
 		   									 
@@ -536,12 +742,29 @@ $(document).ready( function () {
 		            $('#myModal').modal('show');
 		            
 		          //if user is client or employee no edit right , no delete right	            
-		            if(acctype == 2 || acctype == 3){
+		          /*  if(acctype == 2 || acctype == 3){
 		            	$("#editbutton").hide();
 		            	$("#savebutton").hide();
 		            	$("#deletebutton").hide();
 		            }
-		            
+		            */
+		            if(acctype == 2 ){
+		            	$("#editbutton").hide();
+		            	$("#savebutton").hide();
+		            	$("#deletebutton").hide();
+		            	$("#assigntome").hide();
+		            	$("#unassign").hide();
+		            }
+		            if(acctype == 3){
+		            	$("#deletebutton").hide();
+		            	$("#assigntome").show();
+		            	$("#unassign").show();
+		            	
+		            }
+		            if(acctype == 1){
+		            	$("#assigntome").hide();
+		            	$("#unassign").hide();
+		            }
 		            //Edit function
 		            $('.modal-footer').on('click', '#editbutton', function () {
 		            	$("#projecttypelist").show();

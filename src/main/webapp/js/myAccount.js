@@ -8,10 +8,16 @@ $(document).ready( function () {
 		   url: "accountType",
 		   data:{"logeduser": logeduser},
 		   		success: function(data, status, xhr){
-		   			if(data === 2 || data === 3){
+		   			if(data === 2){
 		   				$("#accounts").hide();
 		   				$("#contracts").hide();
 		   				$("#registartionreq").hide();
+		   			}
+		   			if(data == 3){
+		   				$("#accounts").hide();
+		   				$("#contracts").hide();
+		   				$("#registartionreq").hide();
+		   				$("#invoice").hide();
 		   			}
 		   		}
      });

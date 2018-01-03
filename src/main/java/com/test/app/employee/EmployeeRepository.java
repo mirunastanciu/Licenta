@@ -12,6 +12,17 @@ public interface EmployeeRepository extends CrudRepository<Employee , String>{
 	@Query(value="SELECT * FROM employee WHERE IDEMPLOYEE=?;",nativeQuery=true)
 	public Employee getEmployeeById(int id);
 	
+	@Query(value="SELECT EMPLFIRSTNAME FROM employee WHERE IDACCOUNT = (SELECT IDACCOUNT FROM account WHERE USERNAME=?);",nativeQuery=true)
+	public String getEmpFNameByUsername(String a);
+	
+	@Query(value="SELECT EMPLLASTNAME FROM employee WHERE IDACCOUNT = (SELECT IDACCOUNT FROM account WHERE USERNAME=?);",nativeQuery=true)
+	public String getEmpLNameByUsername(String a);
+	
+	@Query(value="SELECT IDEMPLOYEE FROM employee WHERE IDACCOUNT = (SELECT IDACCOUNT FROM account WHERE USERNAME=?);",nativeQuery=true)
+	public int getEmpIdByUsername(String a);
+	
+	@Query(value="SELECT IDSPECIALISATION FROM employee WHERE IDEMPLOYEE = ?;",nativeQuery=true)
+	public int getEmpSpecialisationById(int a);
 	
 	
 	
