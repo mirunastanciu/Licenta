@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>Admin Start Page</title>
+
     <script type="text/javascript" src="../js/jquery/jquery-3.2.1.min.js"></script>
-<!--     <script type="text/javascript" src="../js/jquery/jquery-3.2.1.js"></script> -->
+    <script type="text/javascript" src="../js/jquery/jquery-3.2.1.js"></script>
 	<script type="text/javascript" src="../js/jquery/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="../js/jquery/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="../js/jquery/bootstrap.js"></script>
@@ -17,8 +17,8 @@
 	<link rel="stylesheet" href="../style/jquery.dataTables.css">
 	<link rel="stylesheet" href="../style/jquery.dataTables.min.css">
 	
-	<script src="../js/script.js"></script>
-	<script src="../js/nav.js"></script>
+	<script type="text/javascript" src="../js/script.js"></script>
+	<script type="text/javascript" src="../js/nav.js"></script>
 <!-- Responsive -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
 </head>
@@ -133,10 +133,10 @@
           		<p id="ticketid"></p>
           		<h4>Type Project </h4>
           		<p id="projecttype"></p>
-          		<p> <select id="projecttypelist" name="projecttype" onchange="projectTypeChange();" style="width:30%;"></select></p>
+          		<p> <select id="projecttypelist" name="projecttype" onchange="projectTypeChange()" style="width:30%;"></select></p>
           		<h4>Status </h4>
           		<p id="status"></p>
-          		<p> <select id="statuslist" name="status" onchange="statusChange();" style="width:30%;"></select></p>
+          		<p> <select id="statuslist" name="status" onchange="statusChange()" style="width:30%;"></select></p>
           		<div id="desc" onchange="descriptionChange()">
           			<h4>Project Description </h4>
           			<p id="projectdescription"></p>
@@ -200,7 +200,7 @@
           <button id="editbutton" type="button" class="btn btn-default">Edit</button>
           <button id="savebutton" type="button" class="btn btn-default">Save</button>
           <button id="deletebutton" type="button" class="btn btn-default">Delete</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button id="close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
       

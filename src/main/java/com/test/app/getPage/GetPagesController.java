@@ -86,4 +86,10 @@ public class GetPagesController {
 		ModelAndView m = new ModelAndView("MyAccountPage");
 		return m;
 	}
+	
+	@RequestMapping("/unauthorized")
+	public ModelAndView getUnauthorized() {
+		ModelAndView m = new ModelAndView("Unauthorized");
+		return m;
+	}
 }

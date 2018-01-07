@@ -25,7 +25,7 @@ function Login(){
 			 "password": password
 			},
 			success: function(data, status, xhr){
-				if(data == "http://localhost:8080/registerAccount"){
+				if(data == "/registerAccount"){
 					alert("This account dosn't exist ! Please register...");
 					location = data;
 				}else{
@@ -37,15 +37,15 @@ function Login(){
 	});
 };
 function redirectForgotPass(){
-	location="http://localhost:8080/forgotPasswordPage";
+	location="/forgotPasswordPage";
 }
 
 function redirectRegisterAcc(){
-	location="http://localhost:8080/registerAccount";
+	location="/registerAccount";
 }
 
 function redirectRegistrationRequest(){
-	location="http://localhost:8080/registationRequestPage";
+	location="/registationRequestPage";
 }
 
 

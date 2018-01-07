@@ -1,6 +1,14 @@
+/*$(document).ready( function () {
+	if( $.cookie("loged_username") == "" ){
+		location="/unauthorized";
+	}
+});*/
+	
 var idTicket;
 var logeduser = $.cookie("loged_username");
 var acctype = $.cookie("accounting_type");
+
+
 
 
 $(window).resize(function(){location.reload();});
@@ -245,7 +253,7 @@ $(document).ready( function () {
 
 		            			            $(".modal-body #clientname").html(data.clientname);
 		            			            $(".modal-body #clientemail").html(data.clientemail);
-
+		            			           
 		            			            //$('#myModal').modal('show');
 		            				   }
 		            	    	   });
@@ -255,6 +263,11 @@ $(document).ready( function () {
 						        }
 		            });
 			   });
+		            
+		            /*
+		            $('.modal-footer').on('click', '#close', function () {
+		            	 location.reload();
+		            });*/
 		            
 		            //Unassign
 		            $('.modal-footer').on('click', '#unassign', function () {
@@ -303,7 +316,7 @@ $(document).ready( function () {
 
 		            			            $(".modal-body #clientname").html(data.clientname);
 		            			            $(".modal-body #clientemail").html(data.clientemail);
-
+		            			           
 		            			            //$('#myModal').modal('show');
 		            				   }
 		            	    	   });
@@ -316,6 +329,7 @@ $(document).ready( function () {
 								 		 success: function (data) {
 										       options = data;
 										       	$('#projecttypelist').empty();
+										      	$('#projecttypelist').append($('<option></option>').html(""));
 										       	$.each(options, function(i, p) {
 										       	$('#projecttypelist').append($('<option></option>').val(p).html(p));
 										       	});
@@ -330,6 +344,7 @@ $(document).ready( function () {
 											       options1 = data;
 
 											       	$('#employeelist').empty();
+											       	$('#employeelist').append($('<option></option>').html(""));
 											       	$.each(options1, function(i, p) {
 											       	$('#employeelist').append($('<option></option>').val(p).html(p));
 											       	});
@@ -343,6 +358,7 @@ $(document).ready( function () {
 											       options2 = data;
 
 											       	$('#statuslist').empty();
+											       	$('#statuslist').append($('<option></option>').html(""));
 											       	$.each(options2, function(i, p) {
 											       	$('#statuslist').append($('<option></option>').val(p).html(p));
 											       	});
@@ -478,12 +494,12 @@ $(document).ready( function () {
 								,success: function(data, status, xhr){
 						   				var table = $('#getAllTicketsAssigned').dataTable({
 											
-													   "sAjaxDataProp": "",
+						   								"responsive": true,
 														"columnDefs": [
 														               {'width': '50%', 'targets': 1},
 														              /* {'width': '10%', 'targets': 4}*/
 																	  ],			
-														"responsive": true,
+														
 														"order": [[ 0, "asc" ]],
 														"data": data,
 													    "columns": [
@@ -567,6 +583,66 @@ $(document).ready( function () {
 		            	$("#finishdateedit").show();
 		            	$("#employeelist").show();
 		            });
+		            
+		            
+		            $('.modal-footer').on('click', '#close', function () {
+		            	 location.reload();
+		            });
+		           
+		            //Unassign
+		            $('.modal-footer').on('click', '#unassign', function () {
+		            	 $.ajax({
+							   method: "POST",
+							   url: "unassign",
+							   data:{"idTicket": idTicket},
+		            	       success: function(data, status, xhr){
+		            	    	   $.ajax({
+		            				   method: "POST",
+		            				   url: "getDetailsByIdTicket",
+		            				   data: {idTicket: idTicket},
+		            				   success: function(data, status, xhr){
+
+		            					   	$("#projecttypelist").hide();
+		            						$("#statuslist").hide();
+		            						$("#description").hide();
+		            						$("#duedateedit").hide();
+		            						$("#startdateedit").hide();
+		            						$("#finishdateedit").hide();
+		            						$("#employeelist").hide();
+
+		            						$(".modal-body #ticketid").html(data.idticket);
+		            			            $(".modal-body #projecttype").html(data.projecttypename);
+		            			            $(".modal-body #status").html(data.status);
+		            			            $(".modal-body #projectdescription").html(data.description);
+		            			            $(".modal-body #creationdate").html(data.creationdate);
+		            			            $(".modal-body #duedate").html(data.duedate);
+		            			            $(".modal-body #startdate").html(data.startdate);
+		            			            $(".modal-body #finishdate").html(data.finishdate);
+
+		            						if(data.employeename === "Unassigned"){
+		            							$(".modal-body #employeeemail").html(data.employeeemail);
+		            					        $(".modal-body #employeespecialisation").html(data.employeespecialisation);
+		            						    $(".modal-body #employeename").html(data.employeename);
+		            						    $("#empE").hide();
+		            							$("#empS").hide();
+		            						}else{
+		            							$("#empE").show();
+		            							$("#empS").show();
+		            				            $(".modal-body #employeename").html(data.employeename);
+		            				            $(".modal-body #employeeemail").html(data.employeeemail);
+		            				            $(".modal-body #employeespecialisation").html(data.employeespecialisation);
+		            						}
+
+
+		            			            $(".modal-body #clientname").html(data.clientname);
+		            			            $(".modal-body #clientemail").html(data.clientemail);
+		            			           
+		            			            //$('#myModal').modal('show');
+		            				   }
+		            	    	   });
+		            	       }
+		            });
+		            });
 
 						 var options;
 							$.ajax("/allProjectTypesName",
@@ -574,6 +650,7 @@ $(document).ready( function () {
 								 		 success: function (data) {
 										       options = data;
 										       	$('#projecttypelist').empty();
+										      	$('#projecttypelist').append($('<option></option>').html(""));
 										       	$.each(options, function(i, p) {
 										       	$('#projecttypelist').append($('<option></option>').val(p).html(p));
 										       	});
@@ -588,6 +665,7 @@ $(document).ready( function () {
 											       options1 = data;
 
 											       	$('#employeelist').empty();
+											       	$('#employeelist').append($('<option></option>').html(""));
 											       	$.each(options1, function(i, p) {
 											       	$('#employeelist').append($('<option></option>').val(p).html(p));
 											       	});
@@ -602,6 +680,7 @@ $(document).ready( function () {
 											       options2 = data;
 
 											       	$('#statuslist').empty();
+											       	$('#statuslist').append($('<option></option>').html(""));
 											       	$.each(options2, function(i, p) {
 											       	$('#statuslist').append($('<option></option>').val(p).html(p));
 											       	});
@@ -782,6 +861,7 @@ $(document).ready( function () {
 								 		 success: function (data) {
 										       options = data;
 										       	$('#projecttypelist').empty();
+										    	$('#projecttypelist').append($('<option></option>').html(""));
 										       	$.each(options, function(i, p) {
 										       	$('#projecttypelist').append($('<option></option>').val(p).html(p));
 										       	});
@@ -796,6 +876,7 @@ $(document).ready( function () {
 											       options1 = data;
 
 											       	$('#employeelist').empty();
+											       	$('#employeelist').append($('<option></option>').html(""));
 											       	$.each(options1, function(i, p) {
 											       	$('#employeelist').append($('<option></option>').val(p).html(p));
 											       	});
@@ -810,12 +891,18 @@ $(document).ready( function () {
 											       options2 = data;
 
 											       	$('#statuslist').empty();
+											     	$('#statuslist').append($('<option></option>').html(""));
 											       	$.each(options2, function(i, p) {
 											       	$('#statuslist').append($('<option></option>').val(p).html(p));
 											       	});
 									       }
 
 									       });
+								
+								 $('.modal-footer').on('click', '#close', function () {
+					            	 location.reload();
+					            });
+								 
 								//update function
 								$('.modal-footer').on('click', '#savebutton', function () {
 									console.log(idTicket)//get the id (from db)
@@ -973,7 +1060,6 @@ function assignementChange(){
 	}
 	 })
 }
-
 
 
 

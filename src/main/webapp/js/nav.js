@@ -60,7 +60,7 @@ var acctype = $.cookie("accounting_type");
 				   $("#logedusernamediv #logedusername").html(data);
 			   }
 			   });
-	}else{
+	}else if(acctype == 3){
 		logeduser = $.cookie("loged_username");
 		 $.ajax({
 			   method: "POST",
