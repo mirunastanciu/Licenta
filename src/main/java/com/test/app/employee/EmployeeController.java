@@ -196,6 +196,23 @@ public class EmployeeController {
 		
 		return emp;
 	}
+	
+	@RequestMapping(path = "/updateEmpMyAcc", method = RequestMethod.POST)
+	public void updateEmpMyAcc(@RequestParam(value = "fname") String fname,
+							  @RequestParam(value = "lname") String lname,
+							  @RequestParam(value = "email") String email,
+							  @RequestParam(value = "logeduser") String user) {	
+		
+		int id = employeeService.getIdEmpByUsername(user);
+		Employee e = employeeService.getEmployeeById(id)	;	
+		
+		e.setFirstname(fname);
+		e.setLastname(lname);
+		e.setEmail(email);
+		
+		employeeService.save(e);
+		
+	}
 
 
 

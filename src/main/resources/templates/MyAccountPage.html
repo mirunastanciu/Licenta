@@ -45,39 +45,78 @@
 	</div>
 	
 	<div>
-      	<div id="personalinfo" class="InLineDiv-StAdmPg " >
+	<br>
+	<br>
+	<br>	
+      	<div id="personalinfo" class="inLine" >
 	      	<h2>Account Informations</h2>
 	      	<br>
 	      	 <h4>Id Account </h4>
           	<p id="idacc"></p>
           	
-            <h4>First name </h4>
-          	<p id="fname"></p>
-          	<input id="fnameedit" class="input"  type="text" autocomplete="off" style="width:30%;"/>
+          	<div id="firstname" onchange="firstNameChange()">
+	            <h4>First name </h4>
+	          	<p id="fname"></p>
+	          	<input id="fnameedit" class="input"  type="text" autocomplete="off" style="width:50%;"/>
+          	</div>
           	
-          	<h4>Last name </h4>
-          	<p id="lname"></p>
-          	<input id="lnameedit" class="input"  type="text" autocomplete="off" style="width:30%;"/>
+          	<div id="lastname" onchange="lastNameChange()">
+	          	<h4>Last name </h4>
+	          	<p id="lname"></p>
+	          	<input id="lnameedit" class="input"  type="text" autocomplete="off" style="width:50%;"/>
+          	</div>
           	
+          	<div id="addressdiv" onchange="addressChange()">
           	<h4>Address</h4>
           	<p id="address"></p>
-          	<input id="counrty" class="input"  type="text" autocomplete="off" style="width:20%;"/>
-          	<input id="county" class="input"  type="text" autocomplete="off" style="width:20%;"/>
-          	<input id="town" class="input"  type="text" autocomplete="off" style="width:20%;"/>
-          	<input id="street" class="input"  type="text" autocomplete="off" style="width:20%;"/>
-          	<input id="streetno" class="input"  type="number" autocomplete="off" style="width:10%;"/>
-          	<input id="buildno" class="input"  type="number" autocomplete="off" style="width:10%;"/>
-          	<input id="appno" class="input"  type="number" autocomplete="off" style="width:10%;"/>
           	
-          	<h4>Email</h4>
-          	<p id="email"></p>
-          	<input id="emailedit" class="input"  type="text" autocomplete="off" style="width:30%;"/>
+	          	<div id="addressedit1" >
+	          	<br>
+		          	<div  class="inLine2">
+		          		<p>Country</p><input id="counrty" class="input"  type="text" autocomplete="off" style="width:90%;" />
+		          	</div>   
+		          	       	
+		          	<div  class="inLine2">
+		          		<p>County</p><input id="county" class="input"  type="text" autocomplete="off" style="width:90%;"/>
+		          	</div>          	
+		          	
+		          	<div  class="inLine2">
+		          		<p>Town</p><input id="town" class="input"  type="text" autocomplete="off" style="width:90%;"/>
+		          	</div>
+	          	</div>
+	          	<div id="addressedit2">
+		          	<div class="inLine2">
+		          		<p>Street</p><input id="street" class="input"  type="text" autocomplete="off" style="width:90%;"/>
+		          	</div>
+		          	
+		          	<div class="inLine2" style="width:17%;">
+		          		<p>Street No.</p><input id="streetno" class="input"  type="number" autocomplete="off" style="width:90%;"/>
+		          	</div>
+		          	
+		          	<div class="inLine2" style="width:17%;">
+		          		<p>Build No.</p><input id="buildno" class="input"  type="number" autocomplete="off" style="width:90%;"/>
+		          	</div>
+		          	
+		          	<div class="inLine2" style="width:17%;">
+		          		<p>Apartment No.</p><input id="appno" class="input"  type="number" autocomplete="off" style="width:90%;"/>
+		          	</div>
+	          	</div>
+          	</div>
+          	
+          	<div id="email1" onchange="emailChange()">
+	          	<h4>Email</h4>
+	          	<p id="email"></p>
+	          	<input id="emailedit" class="input"  type="email" autocomplete="off" style="width:50%;"/>
+          	</div>
           	<br>
           	<br>
           	<button id="editaccinfo" onclick="edit();">Edit Accounting Information</button>
+          	<button id="save" onclick="save();">Save</button>
+          	<br>
+          	<br>
          </div> 
          
-         <div id="contractinfo" class="InLineDiv-StAdmPg " >
+         <div id="contractinfo" class="inLine" >
 	      	<h2>Contract Informations</h2>
 	      	<br>
             <h4>Contract ID </h4>

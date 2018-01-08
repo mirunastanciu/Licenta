@@ -146,5 +146,24 @@ public class ClientController {
 		return cl;
 		
 	}
+	
+	@RequestMapping(path = "/updateClMyAcc", method = RequestMethod.POST)
+	public void updateClMyAcc(@RequestParam(value = "fname") String fname,
+							  @RequestParam(value = "lname") String lname,
+							  @RequestParam(value = "email") String email,
+							  @RequestParam(value = "logeduser") String user) {	
+		
+		int id = clientService.getIdClByUsername(user);
+		Client c = clientService.getClientById(id);		
+		
+		c.setFirstname(fname);
+		c.setLastname(lname);
+		c.setEmail(email);
+		
+		clientService.saveClient(c);
+		
+	}
+	
+	
 
 }

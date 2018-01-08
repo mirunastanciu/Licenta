@@ -20,5 +20,10 @@ public interface ClientRepository extends CrudRepository<Client , String> {
 	@Query(value="SELECT CLIENTLASTNAME FROM client WHERE IDACCOUNT = (SELECT IDACCOUNT FROM account WHERE USERNAME=?)",nativeQuery=true)
 	public String getClientLNameByUsername(String a);
 	
+	@Query(value="UPDATE client SET CLIENTFIRSTNAME = ?, CLIENTLASTNAME = ?, CLIENTEMAIL = ? WHERE IDCLIENT = ?;",nativeQuery=true)
+	public void updateClientMyAcc(String fname, String lname,String email,int id);
+	
+	
+	
 	
 }

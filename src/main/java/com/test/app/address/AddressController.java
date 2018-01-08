@@ -24,5 +24,29 @@ public class AddressController {
 						ad.getStreetnumber() + ", Build Number: " + ad.getBuildnumber() + ",  App No:" + ad.getApartmentnumber();
 		return address;
 	}
+	
+	@RequestMapping(path="/changeAddressMyAcc", method=RequestMethod.POST)
+	public void changeAddressMyAcc(@RequestParam(value="country2") String country,
+							       @RequestParam(value="county2") String county,
+							       @RequestParam(value="town2") String town,
+							       @RequestParam(value="street2") String street,
+							       @RequestParam(value="streetno2") int streetno,
+							       @RequestParam(value="buildno2") int buildno,
+							       @RequestParam(value="appno2") int appno,
+							       @RequestParam(value="logeduser") String logeduser){
+		
+		 
+		Address address = addressService.getAddressById(accountService.getAccByUsrename(logeduser).getIddress());
+		address.setCountry(country);
+		address.setConuty(county);
+		address.setTown(town);
+		address.setStreet(street);
+		address.setStreetnumber(streetno);
+		address.setBuildnumber(buildno);
+		address.setApartmentnumber(appno);
+		
+		addressService.saveAddress(address);
+		
+	}
 
 }

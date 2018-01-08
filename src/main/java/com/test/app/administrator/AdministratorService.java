@@ -24,4 +24,8 @@ public class AdministratorService {
 	public Administrator getAdminByUsername(String a){
 		return administratorRepository.getAdminByUsername(a);
 	}
+	
+	public void save(Administrator s){
+		administratorRepository.save(s);
+	}
 }

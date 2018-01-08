@@ -281,9 +281,22 @@ input:required:focus {
     width:50%;
 
 }
+.inLine{
+	display: inline-block;
+    vertical-align:top;
+    width:45%;
+    margin-left: 50px;
+}
+
+.inLine2{
+	display: inline-block;
+	   
+}
+
 
 .inLine input{
 	width:60%;
+	
 }
 
 #country{

@@ -55,4 +55,8 @@ public class ClientService {
 		 
 		return fullname;
 	}
+	
+	/*public void updateClMyAcc(String fname , String lname,String email,int id){
+		clientRepository.updateClientMyAcc(fname, lname, email, id);
+	}*/
 }

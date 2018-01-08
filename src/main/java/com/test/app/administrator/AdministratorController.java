@@ -23,7 +23,23 @@ public class AdministratorController {
 		return admin;
 	}
 	
-	
+	@RequestMapping(path = "/updateAdminMyAcc", method = RequestMethod.POST)
+	public void updateEmpMyAcc(@RequestParam(value = "fname") String fname,
+							  @RequestParam(value = "lname") String lname,
+							  @RequestParam(value = "email") String email,
+							  @RequestParam(value = "logeduser") String user) {	
+		
+		Administrator admin = adminService.getAdminByUsername(user);
+		//Employee e = adminService.getEmployeeById(id)	;	
+		
+		admin.setFirstname(fname);
+		admin.setLastname(lname);
+		admin.setEmail(email);
+		
+		adminService.save(admin);
+		
+	}
+
 
 
 }
