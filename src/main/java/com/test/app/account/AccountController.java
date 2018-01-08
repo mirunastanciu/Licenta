@@ -2,12 +2,15 @@ package com.test.app.account;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.test.app.client.ClientService;
 import com.test.app.mail.Mail;
 import com.test.app.mail.MailService;
 
@@ -19,6 +22,9 @@ public class AccountController  {
 
 	@Autowired
     private MailService emailService;
+	
+	@Autowired
+    private ClientService clientService;
 
 
 	@RequestMapping("/accounts")
@@ -129,4 +135,7 @@ public class AccountController  {
 	public int accountType(@RequestParam(value = "logeduser") String username) {
 		return accountService.getAccountTypeByUsername(username);
 	}
+	
+	
+			
 }

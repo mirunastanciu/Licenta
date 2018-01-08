@@ -14,7 +14,10 @@ public interface AdministratorRepository extends CrudRepository<Administrator, S
 	@Query(value="SELECT ADMINLASTNAME FROM administrator WHERE IDACCOUNT = (SELECT IDACCOUNT FROM account WHERE USERNAME=?)",nativeQuery=true)
 	public String getAdminLNameByUsername(String a);
 	
-
+	@Query(value = "SELECT * FROM administrator WHERE IDACCOUNT = (SELECT IDACCOUNT FROM account WHERE USERNAME=?);",nativeQuery=true)
+	public Administrator getAdminByUsername(String a);
+ 
+	
 	
 	
 	

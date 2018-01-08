@@ -20,4 +20,8 @@ public class AdministratorService {
 		 
 		return fullname;
 	}
+	
+	public Administrator getAdminByUsername(String a){
+		return administratorRepository.getAdminByUsername(a);
+	}
 }

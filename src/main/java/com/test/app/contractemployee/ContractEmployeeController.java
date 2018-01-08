@@ -10,15 +10,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.test.app.contractemployeestatus.ContractEmployeeStatusService;
+import com.test.app.employee.EmployeeService;
 
 @RestController
 public class ContractEmployeeController {
 
 	@Autowired
-	ContractEmployeeService contractEmployeeService;
+	private ContractEmployeeService contractEmployeeService;
 
 	@Autowired
-	ContractEmployeeStatusService contractEmployeeStatusService;
+	private ContractEmployeeStatusService contractEmployeeStatusService;
+	
+	@Autowired 
+	private EmployeeService employeeService;
 
 
 
@@ -112,5 +116,28 @@ public class ContractEmployeeController {
 
 	}
 
+	
+	@RequestMapping(path="/getEmployeeContractDetailsForMyAcc", method=RequestMethod.POST)
+	public ContractEmployeeDetails getEmployeeContractDetailsForMyAcc(@RequestParam(value="logeduser") String logeduser){
+		int id = employeeService.getEmployeeById(employeeService.getIdEmpByUsername(logeduser)).getIdcontract();
+		ContractEmployee contract = contractEmployeeService.getContractById(id);
+
+			ContractEmployeeDetails ced = new ContractEmployeeDetails();
+			ced.setId(contract.getId());
+			ced.setStatus(contractEmployeeStatusService.getContractEmployeeStatusById(contract.getId()).getStatusname());
+			ced.setSalary(contract.getSalary());
+			ced.setCurency(contract.getCurency());
+			ced.setStartdate(contract.getStartdate());
+			if(contract.getExpirationdate() == null){
+				ced.setExpirationdate("Unlimited");
+			}else{
+				ced.setExpirationdate(contract.getExpirationdate().toString());
+			}
+			
+			ced.setSigndate(contract.getSignature());
+
+
+		return ced;
+	}
 
 }

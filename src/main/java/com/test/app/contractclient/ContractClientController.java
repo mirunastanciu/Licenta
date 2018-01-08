@@ -122,6 +122,30 @@ public class ContractClientController {
 
 
 	}
+	
+	@RequestMapping(path="/getClientContractDetailsForMyAcc", method=RequestMethod.POST)
+	public ContractClientDetails getAllEmployeeContract(@RequestParam(value="logeduser") String logeduser){
+		
+		int id = contractClientService.getIdContractByIdClient(clientService.getIdClByUsername(logeduser));
+		ContractClient contract = contractClientService.getContractById(id);
+
+			ContractClientDetails ccd = new ContractClientDetails();
+			ccd.setId(contract.getId());
+			ccd.setStatus(contractClientStatusService.getContractClientStatusById(contract.getId()).getStatusname());
+			ccd.setAmount(contract.getAmount());
+			ccd.setCurency(contract.getCurency());
+			ccd.setStartdate(contract.getStartdate());
+			 if(contract.getExpirationdate() == null){
+				    ccd.setExpirationdate("Unlimited");
+				}else{
+					ccd.setExpirationdate(contract.getExpirationdate().toString());
+				}
+			
+			ccd.setSigndate(contract.getSignature());
+
+
+		return ccd;
+	}
 
 
 }

@@ -16,6 +16,14 @@ public class AdministratorController {
 	public String getCAdminName(@RequestParam(value="logeduser") String user){
 		return adminService.getAdminNameByUsername(user);
 	}
+	
+	@RequestMapping(path = "/getAdminDetails" , method=RequestMethod.POST)
+	public Administrator getAdminDetails(@RequestParam(value="logeduser") String user){
+		Administrator admin = adminService.getAdminByUsername(user);
+		return admin;
+	}
+	
+	
 
 
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.test.app.account.AccountService;
 import com.test.app.address.Address;
 import com.test.app.address.AddressService;
@@ -45,7 +46,7 @@ public class ClientController {
 	ContractClientStatusService contractClientStatusService;
 
 	@RequestMapping(path="/getAllClients" ,method=RequestMethod.GET)
-	public ArrayList<Client> getAllClients(){
+	public ArrayList<com.test.app.client.Client> getAllClients(){
 		return clientService.getAllClients();
 	}
 
@@ -135,6 +136,15 @@ public class ClientController {
 	public String getClientName(@RequestParam(value="logeduser") String user){
 		return clientService.getNameByUsername(user);
 	}
-
+	
+	
+	@RequestMapping(path = "/clientDetailsForMyAcc", method = RequestMethod.POST)
+	public Client accountDetails(@RequestParam(value = "logeduser") String username) {
+		
+		Client cl = clientService.getClientById(clientService.getIdClByUsername(username));
+		
+		return cl;
+		
+	}
 
 }

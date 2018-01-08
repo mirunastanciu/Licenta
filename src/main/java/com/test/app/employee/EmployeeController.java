@@ -189,6 +189,13 @@ public class EmployeeController {
 	public String getEmpName(@RequestParam(value="logeduser") String user){
 		return employeeService.getNameByUsername(user);
 	}
+	
+	@RequestMapping(path = "/employeeDetailsForMyAcc" , method=RequestMethod.POST)
+	public Employee employeeDetail(@RequestParam(value="logeduser") String user){
+		Employee emp = employeeService.getEmployeeById(employeeService.getIdEmpByUsername(user));
+		
+		return emp;
+	}
 
 
 
