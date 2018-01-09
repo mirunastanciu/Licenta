@@ -3,7 +3,7 @@ console.log(x);*/
 var logeduser = $.cookie("loged_username");
 var acctype = $.cookie("accounting_type");
 
-var eladdresslist = []; 
+var eladdresslist = [];
 
 
 $(document).ready( function () {
@@ -35,9 +35,9 @@ $(document).ready( function () {
 	$("#addressedit1").hide();
 	$("#addressedit2").hide();
 	$("#save").hide();
-	
-	
-	
+
+
+
 	if(acctype == 1){
 		$("#contractinfo").hide();
 		$('#personalinfo').removeClass('inLine');
@@ -54,18 +54,18 @@ $(document).ready( function () {
 			   			$("#email").html(data.email);
 			   		}
 		});
-		
+
 		$.ajax({
 			   method: "POST",
 			   url: "getAddressByUser",
 			   data:{"logeduser": logeduser},
 			   		success: function(data, status, xhr){
 			   			$("#address").html(data);
-			   			
+
 			   		}
 		});
-		
-		
+
+
 	}else if(acctype == 2){
 		$.ajax({
 			   method: "POST",
@@ -78,18 +78,18 @@ $(document).ready( function () {
 			   			$("#email").html(data.email);
 			   		}
 		});
-		
+
 		$.ajax({
 			   method: "POST",
 			   url: "getAddressByUser",
 			   data:{"logeduser": logeduser},
 			   		success: function(data, status, xhr){
 			   			$("#address").html(data);
-			   			
+
 			   		}
 		});
-		
-		
+
+
 		$.ajax({
 			   method: "POST",
 			   url: "getClientContractDetailsForMyAcc",
@@ -116,7 +116,7 @@ $(document).ready( function () {
 			   			$("#email").html(data.email);
 			   		}
 		});
-		
+
 		$.ajax({
 			   method: "POST",
 			   url: "getEmployeeContractDetailsForMyAcc",
@@ -131,25 +131,25 @@ $(document).ready( function () {
 			   			$("#expdate").html(data.expirationdate);
 			   		}
 		});
-		
+
 		$.ajax({
 			   method: "POST",
 			   url: "getAddressByUser",
 			   data:{"logeduser": logeduser},
 			   		success: function(data, status, xhr){
 			   			$("#address").html(data);
-			   			
+
 			   		}
 		});
-		
-	
+
+
 		}
 
-	
+
 });
 
 function edit(){
-	
+
 	$("#fnameedit").show();
 	$("#lnameedit").show();
 	$("#addressedit1").show();
@@ -157,7 +157,7 @@ function edit(){
 	$("#emailedit").show();
 	$("#save").show();
 	$("#editaccinfo").hide();
-	
+
 }
 
 
@@ -192,7 +192,7 @@ function lastNameChange(){
 }
 
 function emailChange(){
-	 
+
 
 	$("#email1").click(function(e) {
 		var email = $("#email1 p").text();
@@ -217,30 +217,26 @@ function emailChange(){
 
 function addressChange(){
 
-	$("#addressdiv").click(function(e) {
 		var address = $("#addressdiv p").text();
-		
-		 if(e.target.id !== "counrty" && e.target.id !== "county" && e.target.id !== "town" && 
-				 e.target.id !== "street" && e.target.id !== "streetno" && e.target.id !== "buildno" 
-					 && e.target.id !== "appno" ){
-			 
-			 var country1 = $("div #counrty").val(); 		
-			 var county1 = $("div #county").val();		 
+
+
+			 var country1 = $("div #counrty").val();
+			 var county1 = $("div #county").val();
 			 var town1 = $("div #town").val();
-			 var street1 = $("div #street").val();	
-			 var streetno1 = $("div #streetno").val();		
-			 var buildno1 = $("div #buildno").val();		
+			 var street1 = $("div #street").val();
+			 var streetno1 = $("div #streetno").val();
+			 var buildno1 = $("div #buildno").val();
 			 var appno1 = $("div #appno").val();
-		 
+
 			 if(country1 == "" || county1 == "" || town1 == "" || street1 == "" || streetno1 == "" || buildno1 == "" || appno1 == ""){
-				 
-				 //alert("all fields are mandatory to chante address");
-			 }else{	 
+
+				 alert("all fields are mandatory to chante address");
+			 }else{
 				 var addressedit = country1+", "+county1+", "+town1+", "+street1+" "+streetno1
 					+", Build Number: "+buildno1+", App No:"+appno1;
-				 
+
 				 if(address !== addressedit && addressedit !== ""  ){
-					 
+
 								 eladdresslist.push(country1);
 								 eladdresslist.push(county1);
 								 eladdresslist.push(town1);
@@ -248,12 +244,12 @@ function addressChange(){
 								 eladdresslist.push(streetno1);
 								 eladdresslist.push(buildno1);
 								 eladdresslist.push(appno1);
-								 		
+
 								 localStorage.eladdresslist = JSON.stringify(eladdresslist);
-								 
+
 								   $("#address").html(addressedit);
 									$("div #counrty").val('');
-									$("div #county").val(''); 
+									$("div #county").val('');
 									$("div #town").val('');
 									$("div #street").val('');
 									$("div #streetno").val('');
@@ -262,30 +258,30 @@ function addressChange(){
 
 					}
 		    	}
-		}
-	});
+
+
 }
 
 function save(){
 	var fname = $("#firstname p").text();
 	var lname = $("#lastname p").text();
-	var email = $("#email1 p").text();	
-		
+	var email = $("#email1 p").text();
+
 	var response1=0;
 	var response2=0;
-	
+
 	//console.log(localStorage.getItem("eladdresslist"))
 	var add = JSON.parse(localStorage.eladdresslist);
 	//console.log(add[1])
-	
+
 	var country2 = add[0];
-	var county2 =add[1]; 
+	var county2 =add[1];
 	var town2 = add[2];
 	var street2 = add[3];
-	var streetno2 = add[4]; 
-	var buildno2 = add[5]; 
+	var streetno2 = add[4];
+	var buildno2 = add[5];
 	var appno2 = add[6];
-	
+
 	//
 	if(acctype == 1){
 		$.ajax({
@@ -303,9 +299,9 @@ function save(){
 			   			//location.reload();
 			   		}
 		});
-		
-		
-		 
+
+
+
 		 $.ajax({
 			   method: "POST",
 			   url: "changeAddressMyAcc",
@@ -325,19 +321,19 @@ function save(){
 			   			//location.reload();
 			   		}
 		});
-		 
+
 		 location.reload();
-		
+
 		/* if(response1 === 1 && response2 === 1){
 				alert("The new Account Informations has been saved succesfully .");
 				location.reload();
 			}else{
 				alert("Error on saving new informations");
 			}*/
-		
-		
+
+
 	}else if(acctype == 2){
-		
+
 		$.ajax({
 			   method: "POST",
 			   url: "updateClMyAcc",
@@ -347,13 +343,13 @@ function save(){
 				     "logeduser": logeduser
 			   },
 			   		success: function(data, status, xhr){
-			   			
+
 			   			response1=1;
 			   			//alert("The new Account Informations has been saved succesfully .");
 			   			//location.reload();
 			   		}
 		});
-		
+
 		$.ajax({
 			   method: "POST",
 			   url: "changeAddressMyAcc",
@@ -372,16 +368,16 @@ function save(){
 			   			//location.reload();
 			   		}
 		});
-		
+
 		location.reload();
-		
+
 		/*if(response1 === 1 && response2 === 1){
 			alert("The new Account Informations has been saved succesfully .");
 			location.reload();
 		}else{
 			alert("Error on saving new informations");
 		}*/
-		
+
 	}else{
 
 		$.ajax({
@@ -398,7 +394,7 @@ function save(){
 			   			//location.reload();
 			   		}
 		});
-		
+
 		$.ajax({
 			   method: "POST",
 			   url: "changeAddressMyAcc",
@@ -417,24 +413,24 @@ function save(){
 			   			//location.reload();
 			   		}
 		});
-		
+
 		/*if(response1 === 1 && response2 === 1){
 			alert("The new Account Informations has been saved succesfully .");
 			location.reload();
 		}else{
 			alert("Error on saving new informations");
 		}*/
-		location.reload();	
-		
+		location.reload();
+
 	}
-	
+
 }
 
 
 
-		
-		
-		
-		
+
+
+
+
 
 
