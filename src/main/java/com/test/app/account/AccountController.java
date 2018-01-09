@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,9 @@ import com.test.app.mail.MailService;
 
 @RestController
 public class AccountController  {
+
+	public static String user = "temp";
+	public static String pass = "temp";
 
 	@Autowired
 	private AccountService accountService;
@@ -40,6 +44,8 @@ public class AccountController  {
 			public String accountValidation(
 					@RequestParam(value = "username") String username,
 					@RequestParam(value = "password") String password)  {
+			
+				
 				String response = null;
 				ArrayList<Account> l = accountService.getAllAccounts();
 				for (int i = 0; i < l.size(); i++) {
@@ -47,17 +53,20 @@ public class AccountController  {
 					if (username.equals(l.get(i).getUsername())
 							&& password.equals(l.get(i).getPassword())) {
 						if (l.get(i).validateAdmin()) {
-
+							user = username;
+							pass = password;
 							response =  "/startPage";
 
 							break;
 						}else if(l.get(i).validateClient()){
-
+							user = username;
+							pass = password;
 							response = "/startPage";
 
 							break;
 						}else if(l.get(i).validateEmployee()){
-
+							user = username;
+							pass = password;
 							response = "/startPage";
 
 							break;
@@ -72,8 +81,9 @@ public class AccountController  {
 
 
 			}
-
-
+			
+			
+		    
 
 
 	@RequestMapping(value="/uniqueUser" , method=RequestMethod.POST)

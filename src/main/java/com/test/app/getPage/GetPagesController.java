@@ -13,11 +13,11 @@ public class GetPagesController {
 		return m;
 	}
 
-	@RequestMapping("/adminiAccountPage")
+	/*@RequestMapping("/adminiAccountPage")
 	public ModelAndView getAdminAccountPage() {
 		ModelAndView m = new ModelAndView("AdminAccountPage");
 		return m;
-	}
+	}*/
 
 	@RequestMapping("/loginPage")
 	public ModelAndView getLoginPage() {

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
+
 import com.test.app.account.AccountService;
 import com.test.app.client.Client;
 import com.test.app.client.ClientService;
@@ -48,6 +49,7 @@ public class TicketController {
 	AccountService accountService;
 
 	@RequestMapping(path = "/ticketsToDo", method = RequestMethod.GET)
+	 
 	public List<TicketDetails> getAllTicketsToDo() {
 		List<Ticket> ttodo = ticketService.getTicketsToDo();
 		List<TicketDetails> td = new ArrayList<>();
@@ -224,9 +226,9 @@ public class TicketController {
 		
 		java.sql.Date parseDate = java.sql.Date.valueOf(duedate);
 		t.setDuedate(parseDate);
-		if(accountService.getAccountTypeByUsername(logeduser) == 2){
+		if(accountService.getAccountTypeByUsername(logeduser) == 2 ){
 			t.setIdclient(clientService.getIdClByUsername(logeduser));
-		}else if (accountService.getAccountTypeByUsername(logeduser) == 1){
+		}else if (accountService.getAccountTypeByUsername(logeduser) == 1 || accountService.getAccountTypeByUsername(logeduser) == 3){
 			t.setIdclient(0);
 		}else{
 			t.setIdclient(clientService.getIdClByUsername(logeduser));
@@ -237,7 +239,7 @@ public class TicketController {
 
 		ticketService.addTicket(t);
 
-		String response = "http://localhost:8080/administratorStartPage";
+		String response = "/startPage";
 		return response;
 		
 

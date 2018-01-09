@@ -7,6 +7,14 @@ function Login(){
 	document.cookie = "loged_username="+username; 
 	
 	var logeduser = $.cookie("loged_username");
+	 /*$.ajax({
+         url: "/login",
+         type: 'GET',
+         success: function(res) {
+             console.log(res);
+             alert(res);
+         }
+     });*/
 
 	 $.ajax({
 		   method: "POST",
