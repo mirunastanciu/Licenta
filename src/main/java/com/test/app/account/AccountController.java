@@ -22,7 +22,7 @@ public class AccountController  {
 
 	@Autowired
     private MailService emailService;
-	
+
 	@Autowired
     private ClientService clientService;
 
@@ -33,7 +33,7 @@ public class AccountController  {
 		return accountService.getAllAccounts();
 	}
 
-	
+
 	//User validation
 			@ResponseBody
 			@RequestMapping(value = "/accountvalidation", method = RequestMethod.POST)
@@ -47,34 +47,34 @@ public class AccountController  {
 					if (username.equals(l.get(i).getUsername())
 							&& password.equals(l.get(i).getPassword())) {
 						if (l.get(i).validateAdmin()) {
-							
+
 							response =  "/startPage";
-							
+
 							break;
 						}else if(l.get(i).validateClient()){
-							
+
 							response = "/startPage";
-							
+
 							break;
 						}else if(l.get(i).validateEmployee()){
-							
+
 							response = "/startPage";
-							
+
 							break;
 
 						}
 					} else {
 						response = "/registerAccount";
-						
+
 					}
 				}
 				return response;
 
 
 			}
-			
 
-	
+
+
 
 	@RequestMapping(value="/uniqueUser" , method=RequestMethod.POST)
 	public String uniquerUserCheck(@RequestParam(value="username") String username){
@@ -130,12 +130,40 @@ public class AccountController  {
 		return response;
 
 		}
-	
+
 	@RequestMapping(value = "/accountType", method = RequestMethod.POST)
 	public int accountType(@RequestParam(value = "logeduser") String username) {
 		return accountService.getAccountTypeByUsername(username);
 	}
-	
-	
-			
+
+	@RequestMapping(value = "/checkOldPass", method = RequestMethod.POST)
+	public int checkOldPass(@RequestParam(value = "oldpass") String oldpass,
+			                @RequestParam(value = "logeduser") String username) {
+
+		int response = 0;
+
+		String passByUsername = accountService.getAccByUsrename(username).getPassword();
+		if(passByUsername.equals(oldpass)) {
+			response = 1;
+		}
+
+		return response;
+	}
+
+	@RequestMapping(value = "/updatePass", method = RequestMethod.POST)
+	public void updatePass(@RequestParam(value = "newpass") String newpass,
+			                @RequestParam(value = "logeduser") String username) {
+
+
+           Account ac = accountService.getAccByUsrename(username);
+           ac.setPassword(newpass);
+
+           accountService.saveAccount(ac);
+
+	}
+
+
+
+
+
 }

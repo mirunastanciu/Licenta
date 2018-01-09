@@ -35,6 +35,53 @@ $(document).ready( function () {
 	$("#addressedit1").hide();
 	$("#addressedit2").hide();
 	$("#save").hide();
+	$("#changepassdiv").hide();
+
+	$("#changepass").click(function(){
+		console.log("jh")
+		$("#changepassdiv").show();
+
+	});
+
+	$("#updatepasss").click(function(){
+		var oldpass = $("div #oldpass").val();
+		var newpass = $("div #newpass").val();
+		var retypenewpass = $("div #retypenewpass").val();
+
+		$.ajax({
+			   method: "POST",
+			   url: "checkOldPass",
+			   data:{"oldpass": oldpass,
+				     "logeduser": logeduser},
+			   		success: function(data, status, xhr){
+
+                     if(data == 1 && newpass === retypenewpass){
+                    	 $.ajax({
+			   				   method: "POST",
+			   				   url: "updatePass",
+			   				   data:{"newpass": newpass,
+			   					     "logeduser": logeduser},
+			   				   		success: function(data, status, xhr){
+
+			   				   			$("#changepassdiv").hide();
+			   				   		}
+			   		     });
+
+                     }else{
+                    	 alert("the retype pass or the old password in incorect");
+                     }
+
+
+			   		},error:function(){
+
+			   		}
+	     });
+
+
+
+	});
+
+
 
 
 
@@ -157,6 +204,8 @@ function edit(){
 	$("#emailedit").show();
 	$("#save").show();
 	$("#editaccinfo").hide();
+
+
 
 }
 
@@ -425,6 +474,8 @@ function save(){
 	}
 
 }
+
+
 
 
 
