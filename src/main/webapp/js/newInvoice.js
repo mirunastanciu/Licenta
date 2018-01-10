@@ -1,3 +1,5 @@
+if(!!$.cookie('loged_username') && $.cookie("loged_username") !== "" ){
+
 $(window).resize(function(){
 	location.reload();
 });
@@ -214,6 +216,8 @@ function savePos() {
 
  });
 
-
+}else{
+	location="/unauthorized";
+}
 
 

@@ -1,4 +1,6 @@
- function Save(){
+
+
+function Save(){
 	 var firstname =  $('#fname').val();
 	 var lastname = $('#lname').val();
 	 var email = $('#email').val();
@@ -67,3 +69,4 @@
 	 /*});*/
 	 
  }	 
+

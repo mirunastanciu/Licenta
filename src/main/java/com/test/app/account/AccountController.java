@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,9 +14,11 @@ import com.test.app.client.ClientService;
 import com.test.app.mail.Mail;
 import com.test.app.mail.MailService;
 
+
 @RestController
 public class AccountController  {
 
+	
 	public static String user = "temp";
 	public static String pass = "temp";
 
@@ -37,6 +38,7 @@ public class AccountController  {
 		return accountService.getAllAccounts();
 	}
 
+	
 
 	//User validation
 			@ResponseBody

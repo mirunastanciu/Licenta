@@ -1,5 +1,9 @@
 /*var x = $.cookie("loged_username");
 console.log(x);*/
+
+if( !!$.cookie('loged_username') && $.cookie("loged_username") !== "" ){
+	
+
 var logeduser = $.cookie("loged_username");
 var acctype = $.cookie("accounting_type");
 
@@ -475,7 +479,9 @@ function save(){
 
 }
 
-
+}else{
+	location="/unauthorized";
+}
 
 
 

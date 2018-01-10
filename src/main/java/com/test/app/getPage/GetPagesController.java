@@ -1,6 +1,9 @@
 package com.test.app.getPage;
 
+import java.security.Principal;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -54,6 +57,9 @@ public class GetPagesController {
 	public ModelAndView getInvoicesPage() {
 		ModelAndView m = new ModelAndView("Invoice");
 		return m;
+		/*String name = principal.getName();
+	    model.addAttribute("username", name);
+	    return "Invoice";*/
 	}
 
 	@RequestMapping("/CreateNewInvoicePage")

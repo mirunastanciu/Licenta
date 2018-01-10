@@ -1,4 +1,4 @@
-package com.test.app.security;
+/*package com.test.app.security;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -8,13 +8,13 @@ import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
  
-/**
+*//**
  * Spring Web MVC Security Java Config Demo Project
  * Bootstraps Spring Dispacher Servlet in Servlet 3.0+ environment.
  *
  * @author www.codejava.net
  *
- */
+ *//*
 public class SpringWebAppInitializer implements WebApplicationInitializer {
  
     @Override
@@ -29,4 +29,4 @@ public class SpringWebAppInitializer implements WebApplicationInitializer {
          
     }
  
-}
+}*/

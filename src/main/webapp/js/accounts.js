@@ -1,3 +1,6 @@
+if(!!$.cookie('loged_username') && $.cookie("loged_username") !== "" ){
+	console.log("I'm in")
+
 $(window).resize(function(){location.reload();});
 //Dev table
 $(document).ready( function () {
@@ -233,3 +236,6 @@ $(document).ready( function () {
 
 });
 
+}else{
+	location="/unauthorized";
+}

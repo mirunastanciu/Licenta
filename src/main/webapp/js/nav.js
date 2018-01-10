@@ -1,4 +1,6 @@
- var current ;
+
+
+var current ;
 var logeduser = $.cookie("loged_username");
 var acctype = $.cookie("accounting_type");
 
@@ -35,7 +37,7 @@ var acctype = $.cookie("accounting_type");
  function Logout(){
 	 document.cookie = "loged_username=;";
 	 document.cookie = "accounting_type=;";
-	 location="http://localhost:8080/index.html";
+	 location="/index.html";
  }
  
  $(document).ready(function () {

@@ -1,3 +1,5 @@
+if( !!$.cookie('loged_username') && $.cookie("loged_username") !== "" ){
+
 $(window).resize(function(){
 	location.reload();
 });
@@ -341,5 +343,7 @@ if(acctype == 1){
 });
 });
 
-
+}else{
+	location="/unauthorized";
+}
 

@@ -1,3 +1,5 @@
+if( !!$.cookie('loged_username') && $.cookie("loged_username") !== "" ){
+
 $(window).resize(function(){location.reload();});
 
 // --------------employee contracts table-------------------\\
@@ -424,4 +426,9 @@ function expDateChange1(){
 	    	 }
 		}
 	});
+}
+
+
+}else{
+	location="/unauthorized";
 }

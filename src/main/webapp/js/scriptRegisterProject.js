@@ -1,3 +1,5 @@
+if( $.cookie("loged_username") !== "" ){
+
 var logeduser = $.cookie("loged_username");
 
 $(document).ready( function () {
@@ -86,4 +88,8 @@ function saveTicket(){
 					}
 		});
 
+}
+
+}else{
+	location="/unauthorized";
 }
