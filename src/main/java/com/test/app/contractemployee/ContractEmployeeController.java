@@ -60,6 +60,7 @@ public class ContractEmployeeController {
 
 		ContractEmployee ce = new ContractEmployee();
 		ce.setSalary(salary);
+	
 		java.sql.Date parseDate = java.sql.Date.valueOf(signaturedate);
 		ce.setSignature(parseDate);
 		parseDate = java.sql.Date.valueOf(startdate);

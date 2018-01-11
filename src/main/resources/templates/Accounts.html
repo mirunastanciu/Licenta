@@ -26,27 +26,36 @@
 
 </head>
 <body>
-<div id="logedusernamediv" style="margin-top:10px;margin-left:10px;">
-		<h4 id="logedusername"></h4>
-	</div>
-    <div style="margin-right:10px;margin-top:10px;">
-		<button  class = "loginbtn" id="logout" onclick="Logout();">Logout</button>
+<div>
+<!-- id="logout" 
+style="margin-right:10px;margin-top:10px;width:5%;"--> 
+	<div class = "inLine2 username" >
+		<button   class="username" onclick="Logout();" >Logout</button>
 	</div>
 	<br>
+	
 	<br>
-<div class="centred ">
+	<!-- class="centred " -->
+	<div  class = "inLine2" style="width:90%;">
 		<nav class="nav">
-			
+			 
 			<a class="text-nav" id="startpage" href="/startPage">START PAGE</a> 
-			<a class="text-nav" id="myaccount" href="/myAccountPage" >MY ACCOUNT</a> 
-			<a class="text-nav" id="newticket" href="/newTicketPage" >NEW TICKET</a>
-			<a class="text-nav" id="accounts" href="/accountsPage" >ACCOUNTS</a>
-			<a class="text-nav" id="contracts" href="/contractsPage" >CONTRACTS</a>
-			<a class="text-nav" id="invoice" href="/invoicePage" >INVOICE</a>
+			<a class="text-nav" id="myaccount" href="myAccountPage">MY ACCOUNT</a> 
+			<a class="text-nav" id="newticket" href="/newTicketPage">NEW TICKET</a>
+			<a class="text-nav" id="accounts" href="/accountsPage">ACCOUNTS</a>
+			<a class="text-nav" id="contracts" href="/contractsPage">CONTRACTS</a>
+			<a class="text-nav" id="invoice" href="/invoicePage">INVOICE</a>
 			<a class="text-nav" id="registartionreq" href="/registationRequestPageList" >REQUESTS</a>
 
 		</nav>
 	</div>
+</div>	
+	<!-- style="margin-top:10px;margin-left:0px;" -->
+	<div id="logedusernamediv" class="username">
+		<h4 id="logedusername"></h4>
+	</div>
+	<br>
+	<br>
 	<div class="divpaddin">
 		<h2>Developers</h2>
 		<button id="createNewEmployee" onclick="CreateNewEmployeeModal()">Create new Employee</button>
@@ -98,19 +107,19 @@
           <div class="modalcontent " >
               <div class="InLineDiv-StAdmPg">
     			<p>First Name</p>
-    			<input type="text" id="fname" class="input" name="firstname" placeholder="Your name.."  autocomplete="off" required/>
+    			<input type="text" id="fname" class="input" name="firstname" autocomplete="off" required/>
 
     			<p>Last Name</p>
-    			<input type="text" id="lname" class="input" name="lastname" placeholder="Your last name.."  autocomplete="off" required/>
+    			<input type="text" id="lname" class="input" name="lastname"   autocomplete="off" required/>
 
     			<p>Username</p>
-    			<input type="text" id="Uname" class="input" name="username" placeholder="Your Username.."  autocomplete="off" required/>
+    			<input type="text" id="Uname" class="input" name="username"  autocomplete="off" required/>
 
     			<p>Password</p>
-    			<input type="text" id="Pass" class="input" name="passwoed" placeholder="Your Password.."  autocomplete="off" required/>
+    			<input type="text" id="Pass" class="input" name="passwoed"   autocomplete="off" required/>
     
      			<p>Email</p>
-    			<input type="email" id="email" class="input" name="email" placeholder="Your Email.."  autocomplete="off" required/>
+    			<input type="email" id="email" class="input" name="email" autocomplete="off" required/>
  				
  				<p>Specialisation</p>
     			<select id="specialisationList" name="specialisation" required>
@@ -128,13 +137,15 @@
     			<br>
     			<br>
     			<p>Country</p>
-    			<select id="countryList" name="country" required>
+    			<input type="text" id="countryList" class="input" name="country"   autocomplete="off" required/>
+    			
+    			<!-- <select id="countryList" name="country" required>
        				 <option value="australia">Australia</option>
        				 <option value="canada">Canada</option>
        				 <option value="usa">USA</option>
        				 <option value="romania">Romania</option>
        				 <option value="ungaria">Ungaria</option>
-    			</select>
+    			</select> -->
 
     			
  			</div>

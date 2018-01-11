@@ -23,16 +23,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
 </head>
 <body>
-	<div id="logedusernamediv" style="margin-top:10px;margin-left:10px;">
-		<h4 id="logedusername"></h4>
+<div>
+<!-- id="logout" 
+style="margin-right:10px;margin-top:10px;width:5%;"--> 
+	<div class = "inLine2 username" >
+		<button   class="username" onclick="Logout();" >Logout</button>
 	</div>
-	<div style="margin-right:10px;margin-top:10px;">
-		<button  class = "loginbtn" id="logout" onclick="Logout();">Logout</button>
-	</div>
-	<br>
 	<br>
 	
-	<div class="centred ">
+	<br>
+	<!-- class="centred " -->
+	<div  class = "inLine2" style="width:90%;">
 		<nav class="nav">
 			 
 			<a class="text-nav" id="startpage" href="/startPage">START PAGE</a> 
@@ -45,6 +46,13 @@
 
 		</nav>
 	</div>
+</div>	
+	<!-- style="margin-top:10px;margin-left:0px;" -->
+	<div id="logedusernamediv" class="username">
+		<h4 id="logedusername"></h4>
+	</div>
+	<br>
+	<br>
 	<div >
 		<div class="divpaddin">
 
@@ -140,7 +148,7 @@
           		<div id="desc" onchange="descriptionChange()">
           			<h4>Project Description </h4>
           			<p id="projectdescription"></p>
-          			<input id="description" class="input"  type="text" name="description" autocomplete="off" style="height: 300px;width:600px;"/>
+          			<textarea id="description" class="input"  type="text" name="description" autocomplete="off" style="height: 300px;width:600px;"/></textarea>
           		</div>  
           	</div>	  
           	<div id="div2" class="InLineDiv-StAdmPg">     		

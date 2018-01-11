@@ -25,27 +25,36 @@
 <script src="../js/nav.js"></script>
 </head>
 <body>
-   <div id="logedusernamediv" style="margin-top:10px;margin-left:10px;">
-		<h4 id="logedusername"></h4>
-	</div>
-  <div style="margin-right:10px;margin-top:10px;">
-		<button  class = "loginbtn" id="logout" onclick="Logout();">Logout</button>
+   <div>
+<!-- id="logout" 
+style="margin-right:10px;margin-top:10px;width:5%;"--> 
+	<div class = "inLine2 username" >
+		<button   class="username" onclick="Logout();" >Logout</button>
 	</div>
 	<br>
+	
 	<br>
-<div class="centred ">
+	<!-- class="centred " -->
+	<div  class = "inLine2" style="width:90%;">
 		<nav class="nav">
-			
-			<a class="text-nav" id="startpage"  href="/startPage">START PAGE</a> 
-			<a class="text-nav"  id="myaccount" href="/myAccountPage">MY ACCOUNT</a> 
+			 
+			<a class="text-nav" id="startpage" href="/startPage">START PAGE</a> 
+			<a class="text-nav" id="myaccount" href="myAccountPage">MY ACCOUNT</a> 
 			<a class="text-nav" id="newticket" href="/newTicketPage">NEW TICKET</a>
 			<a class="text-nav" id="accounts" href="/accountsPage">ACCOUNTS</a>
-			<a class="text-nav" id="contracts" href="">CONTRACTS</a>
+			<a class="text-nav" id="contracts" href="/contractsPage">CONTRACTS</a>
 			<a class="text-nav" id="invoice" href="/invoicePage">INVOICE</a>
 			<a class="text-nav" id="registartionreq" href="/registationRequestPageList" >REQUESTS</a>
 
 		</nav>
 	</div>
+</div>	
+	<!-- style="margin-top:10px;margin-left:0px;" -->
+	<div id="logedusernamediv" class="username">
+		<h4 id="logedusername"></h4>
+	</div>
+	<br>
+	<br>
 	<div class="divpaddin">
 		<h2>Employee Contracts</h2>
 		<button id="createNewEmployeeContract" onclick="modalEmployeeContract()">Create New Employee Contract</button>

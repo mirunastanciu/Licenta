@@ -6,8 +6,8 @@ function Save(){
 	 var email = $('#email').val();
 	 var username = $('#Uname').val();
 	 var password = $('#Pass').val();
-	 sel = document.getElementById("country");
-	 var country = sel.options[sel.selectedIndex].value;
+	 
+	 var country = $('#country').val();
 	 var county = $('#county').val();
 	 var town = $('#town').val();
 	 var street = $('#street').val();
@@ -22,7 +22,7 @@ function Save(){
 		          
 		   ,success: function(data, status, xhr){*/
 			   if( $.trim($('#fname').val()) === ''|| $.trim($('#lname').val()) === '' || $.trim($('#email').val()) === '' ||
-						 $.trim($('#Uname').val()) === '' ||  $.trim($('#Pass').val()) === '' ||
+						 $.trim($('#Uname').val()) === '' ||  $.trim($('#Pass').val()) === '' ||  $.trim($('#country').val()) === '' ||
 						 $.trim($('#county').val()) === '' || $.trim($('#town').val()) === '' || $.trim($('#street').val()) === '' ||
 						 $.trim($('#streetno').val()) === '' || $.trim($('#build').val()) === '' || $.trim($('#appno').val()) === ''){
 

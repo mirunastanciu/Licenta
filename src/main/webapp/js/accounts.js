@@ -97,7 +97,7 @@ function CreateNewEmployeeModal(){
 			var email = $(".modalcontent #email").val();
 			var specialisation = $("#specialisationList option:selected" ).text();
 			var specialisationLavel = $("#specialisationLavelList option:selected" ).text();
-			var country = $("#countryList option:selected" ).text();
+			var country = $(".modalcontent #countryList").val();//$("#countryList option:selected" ).text();
 			var county = $(".modalcontent #county").val();
 			var town = $(".modalcontent #town").val();
 			var street = $(".modalcontent #street").val();
@@ -111,7 +111,8 @@ function CreateNewEmployeeModal(){
 		   $.trim($(".modalcontent #email").val()) === ''|| $.trim($(".modalcontent #county").val()) === ''||
 		   $.trim($(".modalcontent #town").val()) === ''|| $.trim($(".modalcontent #street").val()) === ''||
 		   $.trim($(".modalcontent #streetno").val()) === ''|| $.trim($(".modalcontent #build").val()) === ''||
-		   $.trim($(".modalcontent #appno").val()) === ''|| $.trim($(".modalcontent #contractno").val()) === ''){
+		   $.trim($(".modalcontent #appno").val()) === ''|| $.trim($(".modalcontent #contractno").val()) === ''
+			   || $.trim($(".modalcontent #countryList").val()) === ''){
 
 			 alert("There are one or more mandatory fields to be fill in !");
 		}else{

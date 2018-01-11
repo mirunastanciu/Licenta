@@ -50,7 +50,7 @@ body{
 .text-nav{
 	color:white;
 	font-size: 20px;
-	margin: 50px;
+	margin: 30px;
 }
 
 #text-nav:hover{
@@ -93,23 +93,25 @@ body{
 input[type=text],input[type=email],input[type=number],input[type=date], select, textarea {
     width: 100%;
    /*  padding: 12px;  */
-    border: 1px solid #ccc;
+    border: 1px solid #31708f;
     border-radius: 4px;
     box-sizing: border-box;
     margin-top: 6px;
     margin-bottom: 16px;
     resize: vertical;
+    background-color: #f5f5f54f;
 }
 
 input[type=password], select, textarea {
     width: 100%;
    /*  padding: 12px;  */
-    border: 1px solid #ccc;
+    border: 1px solid #31708f;
     border-radius: 4px;
     box-sizing: border-box;
     margin-top: 6px;
     margin-bottom: 16px;
     resize: vertical;
+     background-color: #f5f5f54f;
 }
 
 input[type=submit] {
@@ -174,7 +176,7 @@ input[type=submit]:hover {
 }
 
 .loginbtn{
-	margin-top: 1px;
+	margin-top: 20px;
     margin-right: 2px;
     position: absolute;
     top: 10px;
@@ -216,6 +218,8 @@ input[type=submit]:hover {
 input:required:focus {
   border: 1px solid red;
   outline: none;
+  
+  
 }
 
 /* The Modal (background) */
@@ -440,3 +444,10 @@ input:required:focus {
 	 color:#000080;	
     font-weight:bold;
 }
+
+.username{
+	float: right;
+    margin-right: 10px;
+}
+
+
