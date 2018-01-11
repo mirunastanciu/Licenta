@@ -41,12 +41,12 @@
 				   						  {'width': '50%', 'targets': 1}
 				   					  ],
 				   					"responsive": true,
-				   					"order": [[ 0, "asc" ]],
+				   					"order": [[ 0, "desc" ]],
 				   					"aoColumns": [	/*{"mData": "tr.index()"},*/
 				   					              	{"mData": "idticket"},
 				   								    {"mData": "description"},
 				   								    {"mData": "projecttypename"},
-				   								    {"mData": "duedate"},
+				   								    {"mData": "creationdate"},
 				   								    {"mData": "status"},
 				   								    {"defaultContent": '<button class="btn-details" type="button">Details</button>'} ],
 				   					"fnRowCallback": function( nRow, mData, iDisplayIndex, iDisplayIndexFull ) {

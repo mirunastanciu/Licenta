@@ -60,7 +60,8 @@ public class TicketController {
 				tkd.setIdticket(ttodo.get(i).getId());
 				tkd.setDescription(ttodo.get(i).getDescription());
 				tkd.setProjecttypename(projectTypetService.getProjectTypeById(ttodo.get(i).getProjcttype()).getProjtypename());
-				tkd.setDuedate(ttodo.get(i).getDuedate());
+				//tkd.setDuedate(ttodo.get(i).getDuedate());
+				tkd.setCreationdate(ttodo.get(i).getCreationdate());
 				tkd.setStatus(ticketStatusService.getTicketStatusById(ttodo.get(i).getIdstatus()).getStatusname());
 				td.add(tkd);
 			}

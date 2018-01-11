@@ -34,6 +34,7 @@ $(document).ready(function () {
 		 		 success: function (data) {
 				       options = data;
 				       	$('#projecttypelist').empty();
+				    	$('#projecttypelist').append($('<option></option>').html(""));
 				       	$.each(options, function(i, p) {
 				       	$('#projecttypelist').append($('<option></option>').val(p).html(p));
 				       	});
@@ -67,7 +68,9 @@ function saveTicket(){
 	var description = $("#desc").val();
 	var assignpers = $("#assignep option:selected" ).text();
 	var duedate = $("#duedate").val();
-
+	if(projecttype ==="" || description === "" || assignpers === "" || duedate === ""){
+	   alert("All the fields are mandatory")
+	}else{
 		$.ajax({
 			method: "POST",
 			url: "addTicket",
@@ -87,6 +90,9 @@ function saveTicket(){
 					alert("error on saving new ticket");
 					}
 		});
+	}
+
+		
 
 }
 
