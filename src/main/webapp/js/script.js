@@ -49,6 +49,21 @@
 				   								    {"mData": "duedate"},
 				   								    {"mData": "status"},
 				   								    {"defaultContent": '<button class="btn-details" type="button">Details</button>'} ],
+				   					"fnRowCallback": function( nRow, mData, iDisplayIndex, iDisplayIndexFull ) {
+				   						$('td:eq('+4+')', nRow).addClass('negativeStatus');
+				   						
+				   						/*switch(mData.status){
+				   			            case 'TO DO':
+				   			                $('td:eq('+4+')', nRow).addClass('positiveStatus');
+				   			                break;
+				   			            case 'BBBB':
+				   			                $(nRow).css('color', 'green')
+				   			                break;
+				   			            case 'CCCC':
+				   			                $(nRow).css('color', 'blue')
+				   			                break;
+				   			        }*/
+				   					}
 
 				   			    });
 			//if user is client		   				
@@ -73,7 +88,10 @@
 											        { data: "duedate"},
 											        { data: "status"},
 											        {"defaultContent": '<button class="btn-details" type="button">Details</button>'} 
-											    ]
+											    ],
+											    "fnRowCallback": function( nRow, mData, iDisplayIndex, iDisplayIndexFull ) {
+							   						$('td:eq('+4+')', nRow).addClass('negativeStatus');
+											    }
 
 										    });
 				   			            }, error: function(){
@@ -101,8 +119,12 @@
 											        { data: "projecttypename" },
 											        { data: "duedate"},
 											        { data: "status"},
-											        {"defaultContent": '<button class="btn-details" type="button">Details</button>'} 
-											    ]
+											        {"defaultContent": '<button class="btn-details" type="button">Details</button>'}
+											        
+											    ],
+											    "fnRowCallback": function( nRow, mData, iDisplayIndex, iDisplayIndexFull ) {
+							   						$('td:eq('+4+')', nRow).addClass('negativeStatus');
+											    }
 
 										    });
 				   			            }, error: function(){
@@ -113,7 +135,7 @@
 				   			}
 				   		
 
-			
+			if($("#ticketsTable #stsColor"))
 
 			 //Details button function
 			 $('#ticketsTable').on('click', '.btn-details', function () {
@@ -449,7 +471,10 @@
 																	  { "mData": "projecttypename"},
 																	  { "mData": "duedate"},
 																	  {"mData": "status"},
-																	  {"defaultContent": '<button class="btn-details" type="button">Details</button>'}]
+																	  {"defaultContent": '<button class="btn-details" type="button">Details</button>'}],
+																	  "fnRowCallback": function( nRow, mData, iDisplayIndex, iDisplayIndexFull ) {
+													   						$('td:eq('+4+')', nRow).addClass('inProgressStatuses');
+																	    }
 															 });								
 									
 			
@@ -478,6 +503,10 @@
 														        { data: "status"},
 														        {"defaultContent": '<button class="btn-details" type="button">Details</button>'} 
 														        ]
+														        ,
+																"fnRowCallback": function( nRow, mData, iDisplayIndex, iDisplayIndexFull ) {
+											   						$('td:eq('+4+')', nRow).addClass('inProgressStatuses');
+															    }
 													});
 									}
 							});
@@ -507,7 +536,10 @@
 															        { data: "duedate"},
 															        { data: "status"},
 															        {"defaultContent": '<button class="btn-details" type="button">Details</button>'} 
-															        ]
+															        ],
+															        "fnRowCallback": function( nRow, mData, iDisplayIndex, iDisplayIndexFull ) {
+												   						$('td:eq('+4+')', nRow).addClass('inProgressStatuses');
+																    }
 														});
 										}
 								});
@@ -746,7 +778,10 @@
 											              { "mData": "projecttypename"},
 											              { "mData": "duedate"},
 											              {"mData": "status"},
-											    {"defaultContent": '<button class="btn-details" type="button">Details</button>'}]
+											    {"defaultContent": '<button class="btn-details" type="button">Details</button>'}],
+											    "fnRowCallback": function( nRow, mData, iDisplayIndex, iDisplayIndexFull ) {
+							   						$('td:eq('+4+')', nRow).addClass('positiveStatus');
+											    }
 									 });
 			//if user is client		   				
 				   			  }else if(acctype == 2){
@@ -769,7 +804,10 @@
 											        { data: "duedate"},
 											        { data: "status"},
 											        {"defaultContent": '<button class="btn-details" type="button">Details</button>'} 
-											    ]
+											    ],
+											    "fnRowCallback": function( nRow, mData, iDisplayIndex, iDisplayIndexFull ) {
+							   						$('td:eq('+4+')', nRow).addClass('positiveStatus');
+											    }
 
 										    });
 										}

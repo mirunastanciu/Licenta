@@ -415,7 +415,7 @@ input:required:focus {
 }
 
 .editContractinput{
-	width="50%"
+	width:50%;
 }
 
 #addInv{
@@ -424,4 +424,19 @@ input:required:focus {
 
 .paddingtop{
 	padding-top:100px;
+}
+
+.positiveStatus{
+	color:#006400;
+	font-weight:bold;
+}
+
+.negativeStatus{
+    color:#DC143C;	
+    font-weight:bold;
+}
+
+.inProgressStatuses{
+	 color:#000080;	
+    font-weight:bold;
 }

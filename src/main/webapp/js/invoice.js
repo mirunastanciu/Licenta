@@ -39,7 +39,10 @@ $(document).ready( function () {
 						    {"mData": "status"},
 						    {"defaultContent": '<button class="btn-details" type="button">Details</button>'}
 
-						  ]
+						  ],
+						  "fnRowCallback": function( nRow, mData, iDisplayIndex, iDisplayIndexFull ) {
+		   						$('td:eq('+5+')', nRow).addClass('inProgressStatuses');
+						    }
 	 });
 //if user is client
   }else if(acctype == 2){
@@ -61,7 +64,10 @@ $(document).ready( function () {
 					        { data: "duedate"},
 					        { data: "status"},
 					        {"defaultContent": '<button class="btn-details" type="button">Details</button>'}
-					    ]
+					    ],
+					    "fnRowCallback": function( nRow, mData, iDisplayIndex, iDisplayIndexFull ) {
+	   						$('td:eq('+5+')', nRow).addClass('inProgressStatuses');
+					    }
 
 				    });
 		            }, error: function(){
@@ -185,7 +191,19 @@ if(acctype == 1){
 						    {"mData": "status"},
 						    {"defaultContent": '<button class="btn-details" type="button">Details</button>'}
 
-						  ]
+						  ],
+						  "fnRowCallback": function( nRow, mData, iDisplayIndex, iDisplayIndexFull ) {
+		   								   						
+		   						switch(mData.status){
+		   			            case 'APPROVED':
+		   			                $('td:eq('+5+')', nRow).addClass('positiveStatus');
+		   			                break;
+		   			            case 'REJECTED':
+		   			             $('td:eq('+5+')', nRow).addClass('negativeStatus');
+		   			                break;
+		   			           
+		   			        }
+		   					}
 	 });
 //if user is client
 }else if(acctype == 2){
@@ -207,7 +225,19 @@ if(acctype == 1){
 				        { data: "duedate"},
 				        { data: "status"},
 				        {"defaultContent": '<button class="btn-details" type="button">Details</button>'}
-				    ]
+				    ],
+				    "fnRowCallback": function( nRow, mData, iDisplayIndex, iDisplayIndexFull ) {
+	   						
+   						switch(mData.status){
+   			            case 'APPROVED':
+   			                $('td:eq('+5+')', nRow).addClass('positiveStatus');
+   			                break;
+   			            case 'REJECTED':
+   			             $('td:eq('+5+')', nRow).addClass('negativeStatus');
+   			                break;
+   			           
+   			        }
+   					}
 
 			    });
 	            }, error: function(){
