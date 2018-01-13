@@ -1,17 +1,43 @@
 var counter = 0;
 
 function Login(){
-	
-	 
 	var username = $('#username').val();
 	var password = $('#password').val();
 	
-	
 	if(username === "" ){
-		alert("The username field is mandatory.")
+		$.notify({//options
+					message:"The username field is mandatory.",
+					button: "Confirm"
+				},
+				{//settings
+					type:"danger",
+					allow_dismiss: true,
+					
+					position: "fixed",
+					placement: {
+						from: "top",
+						align: "center"
+					}
+					
+		});
 		counter = counter+1;
+		
 	}else if(password === ""){
-		alert("The password field is mandatory")
+		$.notify({//options
+			message:"The password field is mandatory.",
+			
+		},
+		{//settings
+			type:"danger",
+			allow_dismiss: true,
+			
+			position: "fixed",
+			placement: {
+				from: "top",
+				align: "center"
+			}
+			
+		});
 		counter = counter+1;
 	}
 	
@@ -26,8 +52,24 @@ function Login(){
 				},
 				success: function(data, status, xhr){
 					if(data == -1){
-						alert("This account dosn't exist ! Please register...");
-						location = "registationRequestPage";
+						$.notify({//options
+									message:"This account dosn't exist ! Please register..."
+								},
+								{//settings
+									template: 
+											'<div style="margin-top:2px;" data-notify="container" class="col-xs-11 col-sm-3 s alert-warning" role="alert">'+
+											'<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>'+
+											'<br>'+
+											'<span data-notify="icon"></span>'+
+											'<span data-placement="right"></span>' +
+											'<span data-notify="message">This account dos not exist ! Please register...</span>'+
+											'<br>'+
+											'<br>'+
+											'<p><a href="/registationRequestPage"  data-notify="url"><button>Ok</button></a><p>'+
+											'</div>'
+								}
+					
+						);
 					}else if(data == 1){
 						document.cookie = "loged_username="+username;						
 						var logeduser = $.cookie("loged_username");
@@ -42,23 +84,43 @@ function Login(){
 							   		}
 						 });
 					}
-				}, error: function(){
-					//alert("error on Login");
+		}, error: function(){
+						$.notify({message:"An error ocured. Please try later."},
+							{//settings
+								type:"danger",
+								allow_dismiss: true,
+								
+								position: "fixed",
+								placement: {
+									from: "top",
+									align: "center"
+									}
+							});
+
 					}
 		});
 	
 		
-	}
+	
 	 if(counter === 3){
-		 alert("Please register.")
+		 $.notify({//options
+				message:"Please register.",
+				},
+				{//settings
+					type:"warning",
+					allow_dismiss: true,
+					
+					position: "fixed",
+					placement: {
+						from: "top",
+						align: "center"
+					}
+				});
 		 location="/registationRequestPage";
 	 }
-	
-	
-		
-	
 
-};
+}}
+	
 function redirectForgotPass(){
 	location="/forgotPasswordPage";
 }
@@ -77,7 +139,22 @@ function validateSecureCode() {
 	var securecode = $("#securecode").val();
 
 	if(idrequest === "" || securecode ==="" ){
-		alert("Please complete all mandatory fields.");
+		$.notify({//options
+			message:"Please complete all mandatory fields.",
+			button: "Confirm"
+			},
+			{//settings
+				type:"danger",
+				allow_dismiss: true,
+				
+				position: "fixed",
+				placement: {
+					from: "top",
+					align: "center"
+				}
+			});
+			
+		//alert("Please complete all mandatory fields.");
 	}else{
 		$.ajax({
 			method: "POST",
@@ -88,16 +165,72 @@ function validateSecureCode() {
 				},
 				success: function(data, status, xhr){
 					if(data === "1"){
-						alert("The request number doesn't exist.");
+						$.notify({//options
+							message:"The request number doesn't exist.",
+							button: "Confirm"
+						},
+						{//settings
+							type:"danger",
+							allow_dismiss: true,
+							
+							position: "fixed",
+							placement: {
+								from: "top",
+								align: "center"
+							}
+						});
+						//alert("The request number doesn't exist.");
 					}else if(data === "2"){
-						alert("This secure code is not valid");
+						$.notify({//options
+							message:"This secure code is not valid",
+							button: "Confirm"
+						},
+						{//settings
+							type:"danger",
+							allow_dismiss: true,
+							
+							position: "fixed",
+							placement: {
+								from: "top",
+								align: "center"
+							}
+						});
+						//alert("This secure code is not valid");
 					}else{
-						alert(data);
+						$.notify({//options
+							message:data,
+							button: "Confirm"
+						},
+						{//settings
+							type:"danger",
+							allow_dismiss: true,
+							
+							position: "fixed",
+							placement: {
+								from: "top",
+								align: "center"
+							}
+						});
+						//alert(data);
 						location="/registerAccount"
 					}
 					
 				},error:function(){
-			    	   alert("An error occurred, please try later.")
+					$.notify({//options
+						message:"An error occurred, please try later.",
+						button: "Confirm"
+					},
+					{//settings
+						type:"danger",
+						allow_dismiss: true,
+						
+						position: "fixed",
+						placement: {
+							from: "top",
+							align: "center"
+						}
+					});
+			    	   //alert("An error occurred, please try later.")
 			       }
 		});
 	}
