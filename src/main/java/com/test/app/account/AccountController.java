@@ -43,18 +43,19 @@ public class AccountController  {
 	//User validation
 			@ResponseBody
 			@RequestMapping(value = "/accountvalidation", method = RequestMethod.POST)
-			public String accountValidation(
+			public int accountValidation(
 					@RequestParam(value = "username") String username,
 					@RequestParam(value = "password") String password)  {
 			
 				
-				String response = null;
+				int response = 0;
 				ArrayList<Account> l = accountService.getAllAccounts();
 				for (int i = 0; i < l.size(); i++) {
 
 					if (username.equals(l.get(i).getUsername())
 							&& password.equals(l.get(i).getPassword())) {
-						if (l.get(i).validateAdmin()) {
+						response = 1;
+						/*if (l.get(i).validateAdmin()) {
 							user = username;
 							pass = password;
 							response =  "/startPage";
@@ -73,9 +74,9 @@ public class AccountController  {
 
 							break;
 
-						}
+						}*/
 					} else {
-						response = "/registerAccount";
+						response = -1;
 
 					}
 				}

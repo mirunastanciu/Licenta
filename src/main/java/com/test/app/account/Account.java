@@ -60,7 +60,7 @@ public class Account {
 		this.idadress = iddress;
 	}
 
-	
+	/*
 	public boolean validateAdmin(){
 		if(this.getIdaccounttype() == 1){
 			return true;
@@ -68,9 +68,9 @@ public class Account {
 		}else {
 			return false;
 		}
-	}
+	}*/
 	
-	public boolean validateClient(){
+	/*public boolean validateClient(){
 		if(this.getIdaccounttype() == 2){
 			return true;
 			
@@ -86,7 +86,7 @@ public class Account {
 		}else {
 			return false;
 		}
-	}
+	}*/
 	
 	/*public boolean isEmpty(){
 		boolean isEmpty = false;

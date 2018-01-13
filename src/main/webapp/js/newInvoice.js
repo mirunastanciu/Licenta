@@ -4,6 +4,8 @@ $(window).resize(function(){
 	location.reload();
 });
 
+/*$(document).ready( function () {*/
+	/*document.getElementById("addpos").disabled = true;*/
 
 
 var options;
@@ -25,8 +27,10 @@ $.ajax("/getClientsName",
 	       });
 
 function addPos(){
+	if()
 
 	var clientname = $("#clientlist option:selected").text();
+	console.log(clientname);
 
 
 	var options1;
