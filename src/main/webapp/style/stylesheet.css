@@ -22,10 +22,9 @@ body{
 }
 
 .img-center{
-    position: fixed;
-  	top: 50%;
-  	left: 50%;
-  	transform: translate(-50%, -50%);
+   margin-left: auto;
+	margin-right: auto;
+	display: block;
 }
 
 /*.img-bottom{
@@ -294,7 +293,7 @@ input:required:focus {
 
 .inLine2{
 	display: inline-block;
-	   
+	    vertical-align:top;
 }
 
 
@@ -450,11 +449,7 @@ input:required:focus {
     margin-right: 10px;
 }
 
-	 /* .location{
-	 	position: fixed;
-	 	
-	    bottom: 0;
-	 	width:70%
-	 }
-	 */
-
+.imgmodal{
+	width:100%;
+	
+}

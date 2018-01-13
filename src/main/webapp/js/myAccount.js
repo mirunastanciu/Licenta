@@ -113,6 +113,8 @@ $(document).ready( function () {
 			   		success: function(data, status, xhr){
 			   			$("#address").html(data);
 
+			   		},error:function(){
+			   			
 			   		}
 		});
 
@@ -320,12 +322,12 @@ function save(){
 	var lname = $("#lastname p").text();
 	var email = $("#email1 p").text();
 
-	var response1=0;
-	var response2=0;
+	var response1=1;
+	var response2=1;
 
 	//console.log(localStorage.getItem("eladdresslist"))
 	var add = JSON.parse(localStorage.eladdresslist);
-	//console.log(add[1])
+	console.log(add[0])
 
 	var country2 = add[0];
 	var county2 =add[1];
@@ -350,6 +352,8 @@ function save(){
 			   			alert(response1);*/
 			   			//alert("The new Account Informations has been saved succesfully .");
 			   			//location.reload();
+			   		},error:function(){
+			   			response1=0;
 			   		}
 		});
 
@@ -372,17 +376,19 @@ function save(){
 			   			alert(response2);*/
 			   			//alert("The new Account Informations has been saved succesfully .");
 			   			//location.reload();
+			   		},error:function(){
+			   			response2=0;
 			   		}
 		});
 
-		 location.reload();
+		 
 
-		/* if(response1 === 1 && response2 === 1){
+		 if(response1 === 1 && response2 === 1){
 				alert("The new Account Informations has been saved succesfully .");
 				location.reload();
 			}else{
 				alert("Error on saving new informations");
-			}*/
+			}
 
 
 	}else if(acctype == 2){
@@ -400,6 +406,8 @@ function save(){
 			   			response1=1;
 			   			//alert("The new Account Informations has been saved succesfully .");
 			   			//location.reload();
+			   		},error:function(){
+			   			response1=0;
 			   		}
 		});
 
@@ -416,20 +424,22 @@ function save(){
 				     "logeduser": logeduser
 			   },
 			   		success: function(data, status, xhr){
-			   			response2=1;
+			   			//response2=1;
 			   			//alert("The new Account Informations has been saved succesfully .");
 			   			//location.reload();
+			   		},error:function(){
+			   			response2=0;
 			   		}
 		});
 
-		location.reload();
+		
 
-		/*if(response1 === 1 && response2 === 1){
+		if(response1 === 1 && response2 === 1){
 			alert("The new Account Informations has been saved succesfully .");
 			location.reload();
 		}else{
 			alert("Error on saving new informations");
-		}*/
+		}
 
 	}else{
 
@@ -442,9 +452,11 @@ function save(){
 				     "logeduser": logeduser
 			   },
 			   		success: function(data, status, xhr){
-			   			response1=1;
+			   			//response1=1;
 			   			//alert("The new Account Informations has been saved succesfully .");
 			   			//location.reload();
+			   		},error:function(){
+			   			response1=0;
 			   		}
 		});
 
@@ -461,19 +473,21 @@ function save(){
 				     "logeduser": logeduser
 			   },
 			   		success: function(data, status, xhr){
-			   			response2=1;
+			   			//response2=1;
 			   			//alert("The new Account Informations has been saved succesfully .");
 			   			//location.reload();
+			   		},error:function(){
+			   			response2=0;
 			   		}
 		});
 
-		/*if(response1 === 1 && response2 === 1){
+		if(response1 === 1 && response2 === 1){
 			alert("The new Account Informations has been saved succesfully .");
 			location.reload();
 		}else{
 			alert("Error on saving new informations");
-		}*/
-		location.reload();
+		}
+		
 
 	}
 
