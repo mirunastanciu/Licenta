@@ -33,9 +33,9 @@ $(document).ready( function () {
 					success: function(data, status, xhr){
 						alert("The request was processed !")
 						 location.reload();
-					}, error: function(){
-						alert("error on processing request");
-						}
+					},error:function(){
+			   			alert("An error occurred, please try later")
+			   		}
 			});
 		 
 	 });

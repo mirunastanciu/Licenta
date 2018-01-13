@@ -17,8 +17,11 @@ $.ajax("/getClientsName",
 			       	$.each(options, function(i, p) {
 			       	$('#clientlist').append($('<option></option>').val(p).html(p));
 			       	});
+	       },error:function(){
+	    	   alert("An error occurred, please try later.")
 	       }
 
+	       
 	       });
 
 function addPos(){
@@ -41,9 +44,9 @@ function addPos(){
 		       	$('#ticketlist').append($('<option></option>').val(p).html(p));
 		       	});
 
-			}, error: function(){
-				alert("error on geting tickes id");
-				}
+			},error:function(){
+		    	   alert("An error occurred, please try later.")
+		       }
 	});
 
 
@@ -60,6 +63,8 @@ function addPos(){
 				       	$.each(options2, function(i, p) {
 				       	$('#serviceList').append($('<option></option>').val(p).html(p));
 				       	});
+		       },error:function(){
+		    	   alert("An error occurred, please try later.")
 		       }
 
 		       });
@@ -124,30 +129,30 @@ function savePos() {
 
 
 
-								$.ajax({
-									method: "POST",
-									url: "totalInvoice",
-									data:{"invoiceId": invoiceId}
-										,success: function(data, status, xhr){
-											$("#total").html(data);
+										$.ajax({
+											method: "POST",
+											url: "totalInvoice",
+											data:{"invoiceId": invoiceId}
+												,success: function(data, status, xhr){
+													$("#total").html(data);
+		
+												}, error: function(){
+													alert("error total Invoice");
+													}
+		
+										});
 
-										}, error: function(){
-											alert("error total Invoice");
-											}
-
-								});
-
-							}, error: function(){
-								alert("error louding pos bill");
-								}
+							},error:function(){
+						    	   alert("An error occurred, please try later.")
+						       }
 
 					});
 
 					$('#addPosModal').modal('hide');
 
-			   }, error: function(){
-				   alert("error on saving positions");
-				   }
+			   },error:function(){
+		    	   alert("An error occurred, please try later.")
+		       }
 			   });
 			 }
  }
@@ -173,7 +178,7 @@ function savePos() {
     	 				 window.location.replace(data);
 
     	 			}, error: function(){
-    	 				alert("error save Invoice");
+    	 				alert("The invoice has not been saved. Plase try again.");
     	 				}
     	 	});
      }
@@ -192,9 +197,9 @@ function savePos() {
  			,success: function(data, status, xhr){
  				 window.location.replace(data);
 
- 			}, error: function(){
- 				alert("error cancel Invoice");
- 				}
+ 			},error:function(){
+ 	    	   alert("An error occurred, please try later.")
+ 	       }
  	});
  }
 
@@ -209,9 +214,9 @@ function savePos() {
 	 			,success: function(data, status, xhr){
 	 				
 
-	 			}, error: function(){
-	 				
-	 				}
+	 			},error:function(){
+	 	    	  // alert("An error occurred, please try later.")
+	 	       }
 	 	});
 
  });

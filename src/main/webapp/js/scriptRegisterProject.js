@@ -38,9 +38,11 @@ $(document).ready(function () {
 				       	$.each(options, function(i, p) {
 				       	$('#projecttypelist').append($('<option></option>').val(p).html(p));
 				       	});
-		       }
+		       },error:function(){
+		   			alert("An error occurred, please try later")
+		   		}
 
-		       })
+		       });
 
 });
 
@@ -56,7 +58,9 @@ $(document).ready(function () {
 				       	$.each(options, function(i, p) {
 				       	$('#assignep').append($('<option></option>').val(p).html(p));
 				       	});
-		       }
+		       },error:function(){
+		   			alert("An error occurred, please try later")
+		   		}
 
 		       })
 
@@ -82,13 +86,13 @@ function saveTicket(){
 				 "logeduser": logeduser
 				},
 				success: function(data, status, xhr){
-					alert("The Ticket has been saved successfull");
+					alert("The Ticket has been saved.");
 					location = data;
 
 
-				}, error: function(){
-					alert("error on saving new ticket");
-					}
+				},error:function(){
+		   			alert("An error occurred, please try later")
+		   		}
 		});
 	}
 

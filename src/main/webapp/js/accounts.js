@@ -59,10 +59,10 @@ $(document).ready( function () {
 				   url: "deleteEmployee",
 				   data: {"idEmployee": idEmployee},
 				   success: function(data, status, xhr){
-					   alert("The Employee witd id : "+idEmployee+" was deleted !")
+					   alert("The Employee account "+idEmployee+" has been deleted .")
 					   location.reload();
 				   },error: function(){
-					   alert("error on deleteing employee")
+					   alert("The Employee account "+idEmployee+" has not been deleted . Please try again")
 				   }
 			 });
 	   })
@@ -82,6 +82,7 @@ function CreateNewEmployeeModal(){
 					       options1 = data;
 
 					       	$('#specialisationList').empty();
+					    	$('#specialisationList').append($('<option></option>').html(""));
 					       	$.each(options1, function(i, p) {
 					       	$('#specialisationList').append($('<option></option>').val(p).html(p));
 					       	});
@@ -111,10 +112,11 @@ function CreateNewEmployeeModal(){
 		   $.trim($(".modalcontent #email").val()) === ''|| $.trim($(".modalcontent #county").val()) === ''||
 		   $.trim($(".modalcontent #town").val()) === ''|| $.trim($(".modalcontent #street").val()) === ''||
 		   $.trim($(".modalcontent #streetno").val()) === ''|| $.trim($(".modalcontent #build").val()) === ''||
-		   $.trim($(".modalcontent #appno").val()) === ''|| $.trim($(".modalcontent #contractno").val()) === ''
-			   || $.trim($(".modalcontent #countryList").val()) === ''){
+		   $.trim($(".modalcontent #appno").val()) === ''|| $.trim($(".modalcontent #contractno").val()) === '' || 
+		   $.trim($(".modalcontent #countryList").val()) === '' || specialisation === ""|| 
+		   specialisationLavel === ""){
 
-			 alert("There are one or more mandatory fields to be fill in !");
+			 alert("Please complete all mandaroty fields .");
 		}else{
 			$.ajax({
 				method: "POST",
@@ -145,19 +147,19 @@ function CreateNewEmployeeModal(){
 							 "contractno": contractno
 							},
 							success: function(data, status, xhr){
-								alert("The contract has been saved successfull");
+								alert("The new employee account has been saved . ");
 								$('#myModalEmployeeContract').modal('hide');
 								 location.reload();
 
 							}, error: function(){
-								alert("error on saving new employee");
+								alert("The new employee account has not been saved .Please try again.");
 								}
 					});
 				}else{
-					alert("This user alrady exist !Please try with anothe username !");
+					alert("An error occurred, please try later.");
 				  }
 			}, error: function(){
-				alert("error on uniqueness account");
+				//alert("error on uniqueness account");
 				}
 
 		});
@@ -210,6 +212,8 @@ $(document).ready( function () {
 
 
 				   $('#myModalClientDetails').modal('show');
+			   },error:function(){
+				   alert("An error occurred, please try later")
 			   }
 		 });
 
@@ -224,12 +228,12 @@ $(document).ready( function () {
 					   if(data === "existBillUnpaid"){
 						   alert("This account cannot be deleted because exist invoice/s unpaied !")
 					   }else{
-						   alert("The Client witd id : "+idClient+" was deleted !")
+						   alert("The Client "+idClient+" has been deleted.")
 						   location.reload();
 					   }
 					  
 				   },error: function(){
-					   alert("error on deleteing client")
+					   alert("The Client "+idClient+" has not been deleted .Please try again. ")
 				   }
 			 });
 	   })

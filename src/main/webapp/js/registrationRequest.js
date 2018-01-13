@@ -4,22 +4,27 @@ function sent(){
 	var phone =  $("#phone").val();
 	
 	if(name === "" || email ==="" || phone === ""){
-		alert("All fields are mandatory");
+		alert("Please complete all mandatory fields.");
 	}else{
-		$.ajax({
-			method: "POST",
-			url: "registrationRequest",
-			data:
-				{"name": name,
-				 "email": email,
-				 "phone": phone
-				},
-				success: function(data, status, xhr){
-					alert("The request was sant ");
-					location="http://localhost:8080/loginPage";
-				}, error: function(){
-					alert("error change password");
-					}
-		});
+		if(document.getElementById("email").checkValidity()){
+			$.ajax({
+				method: "POST",
+				url: "registrationRequest",
+				data:
+					{"name": name,
+					 "email": email,
+					 "phone": phone
+					},
+					success: function(data, status, xhr){
+						alert("The request has been sant.");
+						location="http://localhost:8080/loginPage";
+					}, error: function(){
+						alert("The request has not been sant.");
+						}
+			});
+		}else{
+			alert("The e-mail is not valid.");
+		}
+		
 	}
 } 

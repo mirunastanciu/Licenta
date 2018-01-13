@@ -27,6 +27,8 @@ $(document).ready( function () {
 		   				$("#registartionreq").hide();
 		   				$("#invoice").hide();
 		   			}
+		   		},error:function(){
+		   			alert("An error occurred, please try later")
 		   		}
      });
 });
@@ -72,12 +74,12 @@ $(document).ready( function () {
 			   		     });
 
                      }else{
-                    	 alert("the retype pass or the old password in incorect");
+                    	 alert("The new passwords do not match.");
                      }
 
 
 			   		},error:function(){
-
+			   			alert("An error occurred, please try later")
 			   		}
 	     });
 
@@ -103,6 +105,8 @@ $(document).ready( function () {
 			   			$("#fname").html(data.firstname);
 			   			$("#lname").html(data.lastname);
 			   			$("#email").html(data.email);
+			   		},error:function(){
+			   			alert("An error occurred, please try later")
 			   		}
 		});
 
@@ -115,6 +119,8 @@ $(document).ready( function () {
 
 			   		},error:function(){
 			   			
+			   		},error:function(){
+			   			alert("An error occurred, please try later")
 			   		}
 		});
 
@@ -129,6 +135,8 @@ $(document).ready( function () {
 			   			$("#fname").html(data.firstname);
 			   			$("#lname").html(data.lastname);
 			   			$("#email").html(data.email);
+			   		},error:function(){
+			   			alert("An error occurred, please try later")
 			   		}
 		});
 
@@ -139,6 +147,8 @@ $(document).ready( function () {
 			   		success: function(data, status, xhr){
 			   			$("#address").html(data);
 
+			   		},error:function(){
+			   			alert("An error occurred, please try later")
 			   		}
 		});
 
@@ -155,6 +165,8 @@ $(document).ready( function () {
 			   			$("#signdate").html(data.signdate);
 			   			$("#startdate").html(data.startdate);
 			   			$("#expdate").html(data.expirationdate);
+			   		},error:function(){
+			   			alert("An error occurred, please try later")
 			   		}
 		});
 	}else if(acctype == 3){
@@ -167,6 +179,8 @@ $(document).ready( function () {
 			   			$("#fname").html(data.firstname);
 			   			$("#lname").html(data.lastname);
 			   			$("#email").html(data.email);
+			   		},error:function(){
+			   			alert("An error occurred, please try later")
 			   		}
 		});
 
@@ -182,6 +196,8 @@ $(document).ready( function () {
 			   			$("#signdate").html(data.signdate);
 			   			$("#startdate").html(data.startdate);
 			   			$("#expdate").html(data.expirationdate);
+			   		},error:function(){
+			   			alert("An error occurred, please try later")
 			   		}
 		});
 
@@ -192,6 +208,8 @@ $(document).ready( function () {
 			   		success: function(data, status, xhr){
 			   			$("#address").html(data);
 
+			   		},error:function(){
+			   			alert("An error occurred, please try later")
 			   		}
 		});
 

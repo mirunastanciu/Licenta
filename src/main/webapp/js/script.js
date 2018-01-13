@@ -94,9 +94,9 @@
 											    }
 
 										    });
-				   			            }, error: function(){
-				   			            		alert("error Update Method");
-				   			            	}
+				   			            },error:function(){
+				   				   			alert("An error occurred, please try later")
+				   				   		}
 				   					});
 			//if user is employee	
 				   			}else{
@@ -127,9 +127,9 @@
 											    }
 
 										    });
-				   			            }, error: function(){
-				   			            		alert("error Update Method");
-				   			            	}
+				   			            },error:function(){
+				   				   			alert("An error occurred, please try later")
+				   				   		}
 				   					});
 				   				
 				   			}
@@ -275,12 +275,14 @@
 				            			            $(".modal-body #clientemail").html(data.clientemail);
 				            			           
 				            			            //$('#myModal').modal('show');
-				            				   }
+				            				   },error:function(){
+										   			alert("An error occurred, please try later")
+										   		}
 				            	    	   });
 				            			            
-				            	       }, error: function(){
-									       alert("error assign to me");
-								        }
+				            	       },error:function(){
+				       		   			alert("An error occurred, please try later")
+				       		   		}
 				            });
 					   });
 				            
@@ -340,7 +342,9 @@
 				            			            //$('#myModal').modal('show');
 				            				   }
 				            	    	   });
-				            	       }
+				            	       },error:function(){
+								   			alert("An error occurred, please try later")
+								   		}
 				            });
 				            });
 								 var options;
@@ -353,7 +357,9 @@
 												       	$.each(options, function(i, p) {
 												       	$('#projecttypelist').append($('<option></option>').val(p).html(p));
 												       	});
-										       }
+										       },error:function(){
+										   			alert("An error occurred, please try later")
+										   		}
 
 										       });
 
@@ -368,7 +374,9 @@
 													       	$.each(options1, function(i, p) {
 													       	$('#employeelist').append($('<option></option>').val(p).html(p));
 													       	});
-											       }
+											       },error:function(){
+											   			alert("An error occurred, please try later")
+											   		}
 
 											       })
 									var options2;
@@ -382,7 +390,9 @@
 													       	$.each(options2, function(i, p) {
 													       	$('#statuslist').append($('<option></option>').val(p).html(p));
 													       	});
-											       }
+											       },error:function(){
+											   			alert("An error occurred, please try later")
+											   		}
 
 											       })
 							//update function
@@ -416,9 +426,9 @@
 														   console.log(finishdate);
 										   $('#myModal').modal('hide');
 										   location.reload();
-									   }, error: function(){
-										   alert("error Update Method");
-										   }
+									   },error:function(){
+								   			alert("An error occurred, please try later")
+								   		}
 									   });
 							});
 
@@ -435,17 +445,17 @@
 										   location.reload();
 
 									   },error:function(){
-										   alert("Error on delet ticket !!!");
-										   }
+								   			alert("An error occurred, please try later")
+								   		}
 
 							  });
 
 							});
 
 
-						}, error: function(){
-							alert("error opening modal");
-						  }
+						},error:function(){
+				   			alert("An error occurred, please try later")
+				   		}
 				});
 			});
 		});
@@ -508,7 +518,9 @@
 											   						$('td:eq('+4+')', nRow).addClass('inProgressStatuses');
 															    }
 													});
-									}
+									},error:function(){
+							   			alert("An error occurred, please try later")
+							   		}
 							});
 			//if user is employee	
 				         }else{
@@ -541,7 +553,9 @@
 												   						$('td:eq('+4+')', nRow).addClass('inProgressStatuses');
 																    }
 														});
-										}
+										},error:function(){
+								   			alert("An error occurred, please try later")
+								   		}
 								});
 				         	}
 			
@@ -668,7 +682,9 @@
 				            			            $(".modal-body #clientemail").html(data.clientemail);
 				            			           
 				            			            //$('#myModal').modal('show');
-				            				   }
+				            				   },error:function(){
+										   			alert("An error occurred, please try later")
+										   		}
 				            	    	   });
 				            	       }
 				            });
@@ -684,7 +700,9 @@
 												       	$.each(options, function(i, p) {
 												       	$('#projecttypelist').append($('<option></option>').val(p).html(p));
 												       	});
-										       }
+										       },error:function(){
+										   			alert("An error occurred, please try later")
+										   		}
 
 										       });
 
@@ -699,7 +717,9 @@
 													       	$.each(options1, function(i, p) {
 													       	$('#employeelist').append($('<option></option>').val(p).html(p));
 													       	});
-											       }
+											       },error:function(){
+											   			alert("An error occurred, please try later")
+											   		}
 
 											       });
 
@@ -714,7 +734,9 @@
 													       	$.each(options2, function(i, p) {
 													       	$('#statuslist').append($('<option></option>').val(p).html(p));
 													       	});
-											       }
+											       },error:function(){
+											   			alert("An error occurred, please try later")
+											   		}
 
 											       });
 
@@ -745,15 +767,14 @@
 												   success: function(data, status, xhr){
 													   $('#myModal').modal('hide');
 													   location.reload();
-												   }, error: function(){
-													   alert("error Update Method");
-													   }
+												   },error:function(){
+											   			alert("An error occurred, please try later")
+											   		}
 												   });
 										});
-				        },
-				        error: function(){
-				            alert("error");
-				        }
+				        },error:function(){
+				   			alert("An error occurred, please try later")
+				   		}
 				 });
 			});
 		});
@@ -810,7 +831,9 @@
 											    }
 
 										    });
-										}
+										},error:function(){
+								   			alert("An error occurred, please try later")
+								   		}
 				   				});
 				   			  
 			//if user is employee	
@@ -901,7 +924,9 @@
 												       	$.each(options, function(i, p) {
 												       	$('#projecttypelist').append($('<option></option>').val(p).html(p));
 												       	});
-										       }
+										       },error:function(){
+										   			alert("An error occurred, please try later")
+										   		}
 
 										       });
 
@@ -916,7 +941,9 @@
 													       	$.each(options1, function(i, p) {
 													       	$('#employeelist').append($('<option></option>').val(p).html(p));
 													       	});
-											       }
+											       },error:function(){
+											   			alert("An error occurred, please try later")
+											   		}
 
 											       });
 
@@ -931,7 +958,9 @@
 													       	$.each(options2, function(i, p) {
 													       	$('#statuslist').append($('<option></option>').val(p).html(p));
 													       	});
-											       }
+											       },error:function(){
+											   			alert("An error occurred, please try later")
+											   		}
 
 											       });
 										
@@ -966,15 +995,14 @@
 												   success: function(data, status, xhr){
 													   $('#myModal').modal('hide');
 													   location.reload();
-												   }, error: function(){
-													   alert("error Update Method");
-													   }
+												   },error:function(){
+											   			alert("An error occurred, please try later")
+											   		}
 												   });
 										});
-				        },
-				        error: function(){
-				            alert("error");
-				        }
+				        },error:function(){
+				   			alert("An error occurred, please try later")
+				   		}
 				 });
 				});
 		});
@@ -991,7 +1019,9 @@
 						    	    	projecttype.innerHTML = sel.options[sel.selectedIndex].value;
 						    	    }
 						       }
-						 }
+						 },error:function(){
+					   			alert("An error occurred, please try later")
+					   		}
 			})
 
 		}
@@ -1009,7 +1039,9 @@
 						    	    	status.innerHTML = sel.options[sel.selectedIndex].value;
 						    	    }
 						       }
-						 }
+						 },error:function(){
+					   			alert("An error occurred, please try later")
+					   		}
 			})
 		}
 
@@ -1093,7 +1125,9 @@
 							   $(".modal-body #employeespecialisation").html(data.name);
 						 }
 					  })
-			}
+			},error:function(){
+	   			alert("An error occurred, please try later")
+	   		}
 			 })
 		}
 

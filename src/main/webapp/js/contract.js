@@ -59,6 +59,8 @@ $(document).ready( function () {
 
 		            $('#EditModalEmployeeContract').modal('show');
 
+		        },error:function(){
+		        	alert("An error occurred, please try later.");
 		        }
 
 
@@ -86,7 +88,7 @@ $(document).ready( function () {
 					   $('#EditModalEmployeeContract').modal('hide');
 					   location.reload();
 				   }, error: function(){
-					   alert("error Update Method");
+					   alert("An error occurred, please try later.");
 					   }
 				   });
 
@@ -147,12 +149,16 @@ $(document).ready( function () {
 		 					       	$.each(options, function(i, p) {
 		 					       	$('#StatusListC').append($('<option></option>').val(p).html(p));
 		 					       	});
+		 			       },error:function(){
+		 			    	  alert("An error occurred, please try later.");
 		 			       }
 
-		 			       })
+		 			       });
 
 		            $('#EditModalClientContract').modal('show');
 
+		        },error:function(){
+		        	alert("An error occurred, please try later.");
 		        }
 
 
@@ -180,7 +186,7 @@ $(document).ready( function () {
 					   $('#EditModalClientContract').modal('hide');
 					   location.reload();
 				   }, error: function(){
-					   alert("error Update Method");
+					   alert("An error occurred, please try later.");
 					   }
 				   });
 
@@ -202,9 +208,12 @@ function modalEmployeeContract(){
 			 			options = data;
 
 					       	$('#statusList').empty();
+					    	$('#statusList').append($('<option></option>').html(""));
 					       	$.each(options, function(i, p) {
 					       	$('#statusList').append($('<option></option>').val(p).html(p));
 					       	});
+			       },error:function(){
+			    	   alert("An error occurred, please try later.");
 			       }
 
 			       })
@@ -217,7 +226,7 @@ function modalEmployeeContract(){
 			var expirationdate =$('.modalcontent #expdate').val();
 
 	if($.trim($(".modalcontent #salary").val()) === ''|| $.trim($('.modalcontent #signdate').val()) === ''||
-	   $.trim($('.modalcontent #startdate').val()) === ''){
+	   $.trim($('.modalcontent #startdate').val()) === '' || status === ""){
 
 		alert("There are one or more mandatory fields to be fill in !");
 	}else{
@@ -233,12 +242,12 @@ function modalEmployeeContract(){
 					 "expirationdate": expirationdate
 					},
 					success: function(data, status, xhr){
-						alert("The contract has been saved successfull");
+						alert("The new contract has been saved.");
 						$('#myModalEmployeeContract').modal('hide');
 						 location.reload();
 
 					}, error: function(){
-						alert("error on saving new contract");
+						alert("The new contract has not been saved," );
 						}
 			});
 	}
@@ -256,9 +265,12 @@ function modalClientContract(){
 			 			options = data;
 
 					       	$('#clientsList').empty();
+					     	$('#clientsList').append($('<option></option>').html(""));
 					       	$.each(options, function(i, p) {
 					       	$('#clientsList').append($('<option></option>').val(p).html(p));
 					       	});
+			       },error:function(){
+			    	   alert("The contract has been saved successfull")
 			       }
 
 			       });
@@ -270,10 +282,13 @@ function modalClientContract(){
 			 			options = data;
 
 					       	$('#statusList1').empty();
+					       	$('#statusList1').append($('<option></option>').html(""));
 					       	$.each(options, function(i, p) {
 
 					       	$('#statusList1').append($('<option></option>').val(p).html(p));
 					       	});
+			       },error:function(){
+			    	   alert("The contract has been saved successfull")
 			       }
 
 			       });
@@ -290,9 +305,9 @@ function modalClientContract(){
 			var expirationdate =$('.modalcontent #expdate1').val();
 
 	if($.trim($(".modalcontent #amount").val()) === ''|| $.trim($('.modalcontent #signdate1').val()) === ''||
-	   $.trim($('.modalcontent #startdate1').val()) === ''){
+	   $.trim($('.modalcontent #startdate1').val()) === '' || client === "" || status === ""){
 
-			alert("There are one or more mandatory fields to be fill in !");
+			alert("Please complete all mandaroty fields .");
 	}else{
 
 
@@ -308,12 +323,12 @@ function modalClientContract(){
 					 "expirationdate": expirationdate
 					},
 					success: function(data, status, xhr){
-						alert("The contract has been saved successfull");
+						alert("The new contract has been saved .");
 						$('#getEmployeeContractStatuses').modal('hide');
 						 location.reload();
 
 					}, error: function(){
-						alert("error on saving new contract");
+						alert("The new contract has not been saved .");
 						}
 			});
 	}
@@ -335,8 +350,11 @@ function statusChange(){
 				    	    	status.innerHTML = sel.options[sel.selectedIndex].value;
 				    	    }
 				       }
-				 }
-	})
+				       },error:function(){
+				    	   alert("An error occurred, please try later.")
+				       }
+		       })
+	
 }
 
 //Change salary on Edit mode//
@@ -389,7 +407,9 @@ function statusChange1(){
 				    	    if ( sel.options[sel.selectedIndex].value == data[i] ) {
 				    	    	status.innerHTML = sel.options[sel.selectedIndex].value;
 				    	    }
-				       }
+				       }alert("An error occurred, please try later.");
+				 },errot:function(){
+					 alert("An error occurred, please try later.");
 				 }
 	})
 }

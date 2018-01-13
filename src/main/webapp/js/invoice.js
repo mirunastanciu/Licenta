@@ -71,7 +71,7 @@ $(document).ready( function () {
 
 				    });
 		            }, error: function(){
-		            		alert("error Update Method");
+		            		alert("An error occurred, please try later");
 		            	}
 				});
   }
@@ -116,7 +116,7 @@ $(document).ready( function () {
 					 });
 
 					}, error: function(){
-						alert("error louding pos bill");
+						alert("An error occurred, please try later");
 						}
 
 			});
@@ -133,7 +133,7 @@ $(document).ready( function () {
 			            $(".modal-body #clemail").html(data.email);
 
 					}, error: function(){
-						alert("error louding client info");
+						alert("An error occurred, please try later");
 						}
 
 			});
@@ -149,7 +149,7 @@ $(document).ready( function () {
 			            $(".modal-body #invduedate").html(data.duedate);
 
 					}, error: function(){
-						alert("error louding invoice info");
+						alert("An error occurred, please try later");
 						}
 
 			});
@@ -163,7 +163,7 @@ $(document).ready( function () {
 						$(".modal-body #total").html(data+" EUR");
 
 					}, error: function(){
-						alert("error total calculation");
+						alert("An error occurred, please try later");
 						}
 
 			});
@@ -241,7 +241,7 @@ if(acctype == 1){
 
 			    });
 	            }, error: function(){
-	            		alert("error Update Method");
+	            	alert("An error occurred, please try later");
 	            	}
 			});
 }
@@ -287,7 +287,7 @@ if(acctype == 1){
 					 });
 
 					}, error: function(){
-						alert("error louding pos bill");
+						alert("An error occurred, please try later");
 						}
 
 			});
@@ -304,7 +304,7 @@ if(acctype == 1){
 			            $(".modal-body #clemail").html(data.email);
 
 					}, error: function(){
-						alert("error louding client info");
+						alert("An error occurred, please try later");
 						}
 
 			});
@@ -320,7 +320,7 @@ if(acctype == 1){
 			            $(".modal-body #invduedate").html(data.duedate);
 
 					}, error: function(){
-						alert("error louding invoice info");
+						alert("An error occurred, please try later");
 						}
 
 			});
@@ -334,7 +334,7 @@ if(acctype == 1){
 						$(".modal-body #total").html(data+" EUR");
 
 					}, error: function(){
-						alert("error total calculation");
+						alert("An error occurred, please try later");
 						}
 
 			});
@@ -352,7 +352,7 @@ if(acctype == 1){
     		 $('#invoiceModal').modal('hide');
     		 location.reload();
     	 }, error: function(){
-				alert("error on aprrove invoice");
+    		 alert("An error occurred, please try later");
 			}
      });
      });
@@ -367,7 +367,7 @@ if(acctype == 1){
  		 $('#invoiceModal').modal('hide');
  		location.reload();
  	 }, error: function(){
-				alert("error on reject invoice");
+ 		alert("An error occurred, please try later");
 			}
      });
 });

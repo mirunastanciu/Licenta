@@ -40,7 +40,7 @@ function Login(){
 				 window.location.replace(data);
 				}
 			}, error: function(){
-				alert("error on Login");
+				//alert("error on Login");
 				}
 	});
 };
@@ -62,7 +62,7 @@ function validateSecureCode() {
 	var securecode = $("#securecode").val();
 
 	if(idrequest === "" || securecode ==="" ){
-		alert("All fields are mandatory");
+		alert("Please complete all mandatory fields.");
 	}else{
 		$.ajax({
 			method: "POST",
@@ -73,17 +73,17 @@ function validateSecureCode() {
 				},
 				success: function(data, status, xhr){
 					if(data === "1"){
-						alert("The request doesn't exist !");
+						alert("The request number doesn't exist.");
 					}else if(data === "2"){
-						alert("This secure code is incorrect");
+						alert("This secure code is not valid");
 					}else{
 						alert(data);
-						location="http://localhost:8080/registerAccount"
+						location="/registerAccount"
 					}
 					
-				}, error: function(){
-					alert("error on validation secure code");
-					}
+				},error:function(){
+			    	   alert("An error occurred, please try later.")
+			       }
 		});
 	}
 }

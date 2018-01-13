@@ -92,7 +92,9 @@ body{
 input[type=text],input[type=email],input[type=number],input[type=date], select, textarea {
     width: 100%;
    /*  padding: 12px;  */
-    border: 1px solid #31708f;
+    border-top: 1px solid #31708f;
+    border-left: 1px solid #31708f;
+    border-right: 1px solid #31708f;
     border-radius: 4px;
     box-sizing: border-box;
     margin-top: 6px;
@@ -104,7 +106,9 @@ input[type=text],input[type=email],input[type=number],input[type=date], select, 
 input[type=password], select, textarea {
     width: 100%;
    /*  padding: 12px;  */
-    border: 1px solid #31708f;
+     border-top: 1px solid #31708f;
+    border-left: 1px solid #31708f;
+    border-right: 1px solid #31708f;
     border-radius: 4px;
     box-sizing: border-box;
     margin-top: 6px;
@@ -452,4 +456,8 @@ input:required:focus {
 .imgmodal{
 	width:100%;
 	
+}
+
+.mandatory{
+	    border-bottom-color: red;
 }

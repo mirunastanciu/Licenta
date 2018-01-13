@@ -26,41 +26,45 @@ function Save(){
 						 $.trim($('#county').val()) === '' || $.trim($('#town').val()) === '' || $.trim($('#street').val()) === '' ||
 						 $.trim($('#streetno').val()) === '' || $.trim($('#build').val()) === '' || $.trim($('#appno').val()) === ''){
 
-					 alert("There are one or more mandatory fields to be fill in !");
+					 alert("Please complete all mandatory fileds.");
 					 
 				 }else{
-					 $.ajax({
-						   method: "POST",
-						   url: "saveClientAccount",
-						   data: {firstname: firstname,
-						          lastname: lastname,
-						          email: email,
-						          username: username,
-						          password: password,
-						          country: country,
-						          county: county,
-						          town: town,
-						          street: street,
-						          streetno: streetno,
-						          buildno: buildno,
-						          appno: appno}
-						          
-						          ,
-						   success: function(data, status, xhr){
-							   console.log(data);
-							   if(data !== "faild"){
-								   alert("The account have been saved succesfull !");
-								   window.location.replace("http://localhost:8080/loginPage"); 
-
-								   
-							   }else{
-								   alert("The username already exist !");
+					 if(document.getElementById("email").checkValidity()){
+						 $.ajax({
+							   method: "POST",
+							   url: "saveClientAccount",
+							   data: {firstname: firstname,
+							          lastname: lastname,
+							          email: email,
+							          username: username,
+							          password: password,
+							          country: country,
+							          county: county,
+							          town: town,
+							          street: street,
+							          streetno: streetno,
+							          buildno: buildno,
+							          appno: appno}
+							          
+							          ,
+							   success: function(data, status, xhr){
+								   console.log(data);
+								   if(data !== "faild"){
+									   alert("The account have been saved .");
+									   window.location.replace("http://localhost:8080/loginPage"); 
+	
+									   
+								   }else{
+									   alert("This username alrady exist !Please try with another username.");
+								   }
+								   	
+							   },error:function(){
+								   alert("An error occurred, please try later")
 							   }
-							   	
-						   },error: function(){
-							 	alert("Error on saving client accout !!");
-						   }
-					 });
+						 });
+					 }else{
+						 alert("The e-mail is not valid.");
+					 }
 				 }
 
 		  /* },error: function(){
