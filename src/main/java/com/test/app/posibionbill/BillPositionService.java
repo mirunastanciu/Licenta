@@ -28,4 +28,8 @@ public class BillPositionService {
 	public void delete(BillPosition bp){
 		billPositionRepository.delete(bp);
 	}
+	
+	public BillPosition getBillPosDraftByInvpos(int a){
+		return billPositionRepository.getBillPosDraftByInvpos(a);
+	}
 }

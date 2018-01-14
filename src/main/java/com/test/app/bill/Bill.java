@@ -33,6 +33,7 @@ public class Bill {
 	private double penalties;
 	@Column(name = "IDSTATUS")
 	private int idstatus;
+	
 
 	public int getIdbill() {
 		return idbill;

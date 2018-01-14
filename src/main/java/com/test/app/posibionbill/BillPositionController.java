@@ -59,13 +59,15 @@ public class BillPositionController {
 
 	@RequestMapping(path = "/saveBillPosition" , method = RequestMethod.POST)
 	public void Saveposition(@RequestParam(value = "servicename") String servicename ,
-							 @RequestParam(value = "idticket") int idticket) {
+							 @RequestParam(value = "idticket") int idticket,
+							 @RequestParam(value = "invpos") int invpos) {
 
 		BillPosition pb = new BillPosition();
 
 		pb.setIdbill(0);
 		pb.setIdservice(serviceService.getIdServiceByName(servicename));
 		pb.setIdticket(idticket);
+		pb.setInvpos(invpos);
 
 		billPositionService.save(pb);
 
@@ -79,9 +81,21 @@ public class BillPositionController {
 				billPositionService.delete(bp.get(i));
 			}
 		}
-		return "http://localhost:8080/invoicePage";
+		return "/invoicePage";
 
 	}
+	
+	@RequestMapping(path = "/deletePositionDraft", method = RequestMethod.POST)
+	public void deletePositionDraft(@RequestParam(value="posnumber") int posnumber){
+		
+		
+		
+		billPositionService.delete(billPositionService.getBillPosDraftByInvpos(posnumber));
+		
+
+	}
+	
+	
 
 
 

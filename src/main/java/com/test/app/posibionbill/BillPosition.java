@@ -18,6 +18,8 @@ public class BillPosition {
 	private int idservice;
 	@Column(name = "IDTICKET")
 	private int idticket;
+	@Column(name = "INVPOS")
+	private int invpos;
 
 	public int getIdposition() {
 		return idposition;
@@ -49,6 +51,14 @@ public class BillPosition {
 
 	public void setIdticket(int idticket) {
 		this.idticket = idticket;
+	}
+
+	public int getInvpos() {
+		return invpos;
+	}
+
+	public void setInvpos(int invpos) {
+		this.invpos = invpos;
 	}
 
 }

@@ -1,5 +1,6 @@
 if(!!$.cookie('loged_username') && $.cookie("loged_username") !== "" ){
 
+var invpos=0;	
 $(window).resize(function(){
 	location.reload();
 });
@@ -46,44 +47,46 @@ function addPos(){
 	/*if()*/
 
 	var clientname = $("#clientlist option:selected").text();
-	console.log(clientname);
+	
+   if(clientname !== ""){
+	   var options1;
+		$.ajax({
+			method: "POST",
+			url: "getIdTByIdCl",
+			data:
+				{"clientname": clientname}
+				,success: function(data, status, xhr){
+					options1 = data;
 
+					$('#ticketlist').empty();
+					$('#ticketlist').append($('<option></option>').html(""));
+			       	$.each(options1, function(i, p) {
+			       	$('#ticketlist').append($('<option></option>').val(p).html(p));
+			       	});
 
-	var options1;
-	$.ajax({
-		method: "POST",
-		url: "getIdTByIdCl",
-		data:
-			{"clientname": clientname}
-			,success: function(data, status, xhr){
-				options1 = data;
+				},error:function(){
+					$.notify({//options
+	    			    title:"<strong>Error!</strong>",
+	    				message:"An error occurred, please try again later",
+	    					
+	    				},
+	    				{//settings
+	    					allow_dismiss: true,
+	    					element:".modal",	
+	    					type:"danger",
+	    					position: "fixed",
+	    					placement: {
+	    						from: "top",
+	    						align: "center"
+	    					}
+	    				
+	    			});
+			    	   //alert("An error occurred, please try later.")
+			       }
+		});
+   }
 
-				$('#ticketlist').empty();
-				$('#ticketlist').append($('<option></option>').html(""));
-		       	$.each(options1, function(i, p) {
-		       	$('#ticketlist').append($('<option></option>').val(p).html(p));
-		       	});
-
-			},error:function(){
-				$.notify({//options
-    			    title:"<strong>Error!</strong>",
-    				message:"An error occurred, please try again later",
-    					
-    				},
-    				{//settings
-    					allow_dismiss: true,
-    					element:".modal",	
-    					type:"danger",
-    					position: "fixed",
-    					placement: {
-    						from: "top",
-    						align: "center"
-    					}
-    				
-    			});
-		    	   //alert("An error occurred, please try later.")
-		       }
-	});
+	
 
 
 	var options2=[];
@@ -141,7 +144,7 @@ function savePos() {
 	 if( $("#serviceList option:selected").text() === "" || $("#ticketlist option:selected").text() === ""){
 		 $.notify({//options
 			    title:"<strong>Attention!</strong>",
-				message:"Please complete all mandatory fileds.",
+				message:"Please complete all mandatory fileds."
 					
 				},
 				{//settings
@@ -157,19 +160,22 @@ function savePos() {
 				
 			});
 			 // alert("You must select a client and a ticket");
-			  addPos();
+			  //addPos();
 		 /* $('#addPosModal').on('hidden.bs.modal', function() {
 			  addPos();
 		 	});
 */
 		}else{
+			invpos = invpos + 1;
 				$.ajax({
 					   method: "POST",
 					   url: "saveBillPosition",
 					   data:{"servicename": servicename,
-						   	  "idticket": idticket}
+						   	  "idticket": idticket,
+						   	  "invpos": invpos}
 						   		,
 					   success: function(data, status, xhr){
+						   
 						    $.ajax({
 								method: "POST",
 								url: "getBillPositions",
@@ -190,12 +196,13 @@ function savePos() {
 										        { data: "servicename" },
 										        { data: "price" },
 										        { data: "currency" },
-										        { data: "idticket"}
+										        { data: "idticket"},
+										        { "defaultContent": '<button class="btn-details" type="button" onclick="deleteInv();">Delete</button>'}
 										    ]
 
 									    });
-
-
+										
+										 
 
 										$.ajax({
 											method: "POST",
@@ -272,6 +279,63 @@ function savePos() {
 			   });
 			 }
  }
+
+function deleteInv() {
+	
+	 var index =  $('#positionList').closest('tr').index();
+	 console.log(index);
+	 //console.log(posnumber)
+	 var posnumber = index+1;
+	 
+	 
+	 $.ajax({
+			method: "POST",
+			url: "deletePositionDraft",
+			data:{"posnumber": posnumber}
+				,success: function(data, status, xhr){
+					 $.notify({//options
+		    			    title:"<strong>Success!</strong>",
+		    				message:"The selected position has been deleted.",
+		    				
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    					//element:".modal",	
+		    					type:"success",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+					 
+					 location.reload();
+
+				}, error: function(){
+					 $.notify({//options
+		    			    title:"<strong>Error!</strong>",
+		    				message:"An error occurred, please try again later",
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    					element:".modal",	
+		    					type:"danger",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+					//alert("error total Invoice");
+					}
+	 });
+};
+
+
 
  function saveInvoice(){
 	 var clientname = $("#clientlist option:selected").text();
