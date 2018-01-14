@@ -25,8 +25,25 @@ function Save(){
 						 $.trim($('#Uname').val()) === '' ||  $.trim($('#Pass').val()) === '' ||  $.trim($('#country').val()) === '' ||
 						 $.trim($('#county').val()) === '' || $.trim($('#town').val()) === '' || $.trim($('#street').val()) === '' ||
 						 $.trim($('#streetno').val()) === '' || $.trim($('#build').val()) === '' || $.trim($('#appno').val()) === ''){
-
-					 alert("Please complete all mandatory fileds.");
+				   
+				   $.notify({//options
+					    title:"<strong>Attention!</strong>",
+						message:"Please complete all mandaroty fields.",
+							
+						},
+						{//settings
+							allow_dismiss: true,
+								
+							type:"danger",
+							position: "fixed",
+							placement: {
+								from: "top",
+								align: "center"
+							}
+						
+					});
+					
+					 //alert("Please complete all mandatory fileds.");
 					 
 				 }else{
 					 if(document.getElementById("email").checkValidity()){
@@ -50,20 +67,86 @@ function Save(){
 							   success: function(data, status, xhr){
 								   console.log(data);
 								   if(data !== "faild"){
-									   alert("The account have been saved .");
-									   window.location.replace("http://localhost:8080/loginPage"); 
+									   $.notify({//options
+										    title:"<strong>Success!</strong>",
+											message:"The account has been saved .",
+												
+											},
+											{//settings
+												allow_dismiss: true,
+													
+												type:"success",
+												position: "fixed",
+												placement: {
+													from: "top",
+													align: "center"
+												}
+											
+										});
+										
+									   //alert("The account has been saved .");
+									   window.location.replace("/loginPage"); 
 	
 									   
 								   }else{
-									   alert("This username alrady exist !Please try with another username.");
+									   $.notify({//options
+										    title:"<strong>Attention!</strong>",
+											message:"This username alrady exist !Please try with another username.",
+												
+											},
+											{//settings
+												allow_dismiss: true,
+												
+												type:"danger",
+												position: "fixed",
+												placement: {
+													from: "top",
+													align: "center"
+												}
+											
+										});
+									   
+									   //alert("This username alrady exist !Please try with another username.");
 								   }
 								   	
 							   },error:function(){
-								   alert("An error occurred, please try later")
+								   $.notify({//options
+									    title:"<strong>Attention!</strong>",
+										message:"This username alrady exist !Please try with another username.",
+											
+										},
+										{//settings
+											allow_dismiss: true,
+											
+											type:"danger",
+											position: "fixed",
+											placement: {
+												from: "top",
+												align: "center"
+											}
+										
+									});
+								   //alert("An error occurred, please try later")
 							   }
 						 });
 					 }else{
-						 alert("The e-mail is not valid.");
+						 $.notify({//options
+							    title:"<strong>Attention!</strong>",
+								message:"The e-mail is not valid.",
+									
+								},
+								{//settings
+									allow_dismiss: true,
+									
+									type:"danger",
+									position: "fixed",
+									placement: {
+										from: "top",
+										align: "center"
+									}
+								
+							});
+						 //alert("The e-mail is not valid.");
 					 }
 				 }
 

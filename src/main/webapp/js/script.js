@@ -1,14 +1,8 @@
 
 	if( !!$.cookie('loged_username') && $.cookie("loged_username") !== "" ){
-		
-	
 		var idTicket;
 		var logeduser = $.cookie("loged_username");
 		var acctype = $.cookie("accounting_type");
-
-
-
-
 		$(window).resize(function(){location.reload();});
 
 		$(document).ready( function () {
@@ -26,12 +20,14 @@
 				   			}
 		     
 		});
+		
+    /*})*/
+
+		
 
 
 		//To Do table
 		$(document).ready( function () {
-			
-			
 			//if user is admin	
 				   		    if(acctype == 1){
 				   				var table = $('#ticketsTable').dataTable({
@@ -51,20 +47,8 @@
 				   								    {"defaultContent": '<button class="btn-details" type="button">Details</button>'} ],
 				   					"fnRowCallback": function( nRow, mData, iDisplayIndex, iDisplayIndexFull ) {
 				   						$('td:eq('+4+')', nRow).addClass('negativeStatus');
-				   						
-				   						/*switch(mData.status){
-				   			            case 'TO DO':
-				   			                $('td:eq('+4+')', nRow).addClass('positiveStatus');
-				   			                break;
-				   			            case 'BBBB':
-				   			                $(nRow).css('color', 'green')
-				   			                break;
-				   			            case 'CCCC':
-				   			                $(nRow).css('color', 'blue')
-				   			                break;
-				   			        }*/
 				   					}
-
+				   						
 				   			    });
 			//if user is client		   				
 				   			}else if(acctype == 2){
@@ -95,7 +79,23 @@
 
 										    });
 				   			            },error:function(){
-				   				   			alert("An error occurred, please try later")
+				   			            	$.notify({//options
+				   			    			    title:"<strong>Error!</strong>",
+				   			    				message:"An error occurred, please try again later",
+				   			    					
+				   			    				},
+				   			    				{//settings
+				   			    					allow_dismiss: true,
+				   			    					//element:".modal",	
+				   			    					type:"danger",
+				   			    					position: "fixed",
+				   			    					placement: {
+				   			    						from: "top",
+				   			    						align: "center"
+				   			    					}
+				   			    				
+				   			    			});
+				   			            	//alert("An error occurred, please try later")
 				   				   		}
 				   					});
 			//if user is employee	
@@ -128,7 +128,23 @@
 
 										    });
 				   			            },error:function(){
-				   				   			alert("An error occurred, please try later")
+				   			            	$.notify({//options
+				   			    			    title:"<strong>Error!</strong>",
+				   			    				message:"An error occurred, please try again later",
+				   			    					
+				   			    				},
+				   			    				{//settings
+				   			    					allow_dismiss: true,
+				   			    					//element:".modal",	
+				   			    					type:"danger",
+				   			    					position: "fixed",
+				   			    					placement: {
+				   			    						from: "top",
+				   			    						align: "center"
+				   			    					}
+				   			    				
+				   			    			});
+				   			            	//alert("An error occurred, please try later")
 				   				   		}
 				   					});
 				   				
@@ -137,10 +153,12 @@
 
 			if($("#ticketsTable #stsColor"))
 
+				
+		
 			 //Details button function
 			 $('#ticketsTable').on('click', '.btn-details', function () {
 				 var tr = $(this).closest('tr');
-				
+				 
 				 idTicket = tr.children('td:eq(0)').text();//get the id (from db)
 				 console.log(idTicket)
 				 $.ajax({
@@ -185,6 +203,19 @@
 				            $(".modal-body #clientemail").html(data.clientemail);
 
 				            $('#myModal').modal('show');
+				            
+				            
+				        	//reset fields content on close
+				        	$('#myModal').on('hidden.bs.modal', function (e) {
+				        			  $(this)
+				        			    .find("input,textarea,select")
+				        			       .val('')
+				        			       .end()
+				        			    .find("input[type=checkbox], input[type=radio]")
+				        			       .prop("checked", "")
+				        			       .end();
+				        	})
+				            
 			//if user is client or employee no edit right , no delete right	            
 				            if(acctype == 2 ){
 				            	$("#editbutton").hide();
@@ -203,6 +234,10 @@
 				            	$("#assigntome").hide();
 				            	$("#unassign").hide();
 				            }
+				            
+				            
+									
+							
 				            //Edit function
 				            $('.modal-footer').on('click', '#editbutton', function () {
 				            	
@@ -276,12 +311,46 @@
 				            			           
 				            			            //$('#myModal').modal('show');
 				            				   },error:function(){
-										   			alert("An error occurred, please try later")
+				            					   
+				            					   $.notify({//options
+				           		    			    title:"<strong>Error!</strong>",
+				           		    				message:"An error occurred, please try again later",
+				           		    					
+				           		    				},
+				           		    				{//settings
+				           		    					allow_dismiss: true,
+				           		    					element:".modal",	
+				           		    					type:"danger",
+				           		    					position: "fixed",
+				           		    					placement: {
+				           		    						from: "top",
+				           		    						align: "center"
+				           		    					}
+				           		    				
+				           		    			});
+										   			//alert("An error occurred, please try later")
 										   		}
 				            	    	   });
 				            			            
 				            	       },error:function(){
-				       		   			alert("An error occurred, please try later")
+				            	    	   
+				            	    	   $.notify({//options
+				   		    			    title:"<strong>Error!</strong>",
+				   		    				message:"An error occurred, please try again later",
+				   		    					
+				   		    				},
+				   		    				{//settings
+				   		    					allow_dismiss: true,
+				   		    					element:".modal",	
+				   		    					type:"danger",
+				   		    					position: "fixed",
+				   		    					placement: {
+				   		    						from: "top",
+				   		    						align: "center"
+				   		    					}
+				   		    				
+				   		    			});
+				       		   			//alert("An error occurred, please try later")
 				       		   		}
 				            });
 					   });
@@ -343,7 +412,23 @@
 				            				   }
 				            	    	   });
 				            	       },error:function(){
-								   			alert("An error occurred, please try later")
+				            	    	   $.notify({//options
+				   		    			    title:"<strong>Error!</strong>",
+				   		    				message:"An error occurred, please try again later",
+				   		    					
+				   		    				},
+				   		    				{//settings
+				   		    					allow_dismiss: true,
+				   		    					element:".modal",	
+				   		    					type:"danger",
+				   		    					position: "fixed",
+				   		    					placement: {
+				   		    						from: "top",
+				   		    						align: "center"
+				   		    					}
+				   		    				
+				   		    			});
+				            	    	   //alert("An error occurred, please try later")
 								   		}
 				            });
 				            });
@@ -358,7 +443,23 @@
 												       	$('#projecttypelist').append($('<option></option>').val(p).html(p));
 												       	});
 										       },error:function(){
-										   			alert("An error occurred, please try later")
+										    	   $.notify({//options
+									    			    title:"<strong>Error!</strong>",
+									    				message:"An error occurred, please try again later",
+									    					
+									    				},
+									    				{//settings
+									    					allow_dismiss: true,
+									    					element:".modal",	
+									    					type:"danger",
+									    					position: "fixed",
+									    					placement: {
+									    						from: "top",
+									    						align: "center"
+									    					}
+									    				
+									    			});
+										    	  // alert("An error occurred, please try later")
 										   		}
 
 										       });
@@ -375,7 +476,22 @@
 													       	$('#employeelist').append($('<option></option>').val(p).html(p));
 													       	});
 											       },error:function(){
-											   			alert("An error occurred, please try later")
+											    	   $.notify({//options
+										    			    title:"<strong>Error!</strong>",
+										    				message:"An error occurred, please try again later",
+										    					
+										    				},
+										    				{//settings
+										    					allow_dismiss: true,
+										    					element:".modal",	
+										    					type:"danger",
+										    					position: "fixed",
+										    					placement: {
+										    						from: "top",
+										    						align: "center"
+										    					}
+										    				
+										    			});
 											   		}
 
 											       })
@@ -391,7 +507,22 @@
 													       	$('#statuslist').append($('<option></option>').val(p).html(p));
 													       	});
 											       },error:function(){
-											   			alert("An error occurred, please try later")
+											    	   $.notify({//options
+										    			    title:"<strong>Error!</strong>",
+										    				message:"An error occurred, please try again later",
+										    					
+										    				},
+										    				{//settings
+										    					allow_dismiss: true,
+										    					element:".modal",	
+										    					type:"danger",
+										    					position: "fixed",
+										    					placement: {
+										    						from: "top",
+										    						align: "center"
+										    					}
+										    				
+										    			});
 											   		}
 
 											       })
@@ -427,7 +558,22 @@
 										   $('#myModal').modal('hide');
 										   location.reload();
 									   },error:function(){
-								   			alert("An error occurred, please try later")
+										   $.notify({//options
+							    			    title:"<strong>Error!</strong>",
+							    				message:"An error occurred, please try again later",
+							    					
+							    				},
+							    				{//settings
+							    					allow_dismiss: true,
+							    					element:".modal",	
+							    					type:"danger",
+							    					position: "fixed",
+							    					placement: {
+							    						from: "top",
+							    						align: "center"
+							    					}
+							    				
+							    			});
 								   		}
 									   });
 							});
@@ -440,12 +586,45 @@
 									   url: "deleteTicket",
 									   data: {idTicket: idTicket},
 									   success: function(data, status, xhr){
-										   alert("The tickes has been deleted");
+										   $.notify({//options
+							    			    title:"<strong>Success!</strong>",
+							    				message:"The tickes has been deleted",
+							    					
+							    				},
+							    				{//settings
+							    					allow_dismiss: true,
+							    					element:".modal",	
+							    					type:"success",
+							    					position: "fixed",
+							    					placement: {
+							    						from: "top",
+							    						align: "center"
+							    					}
+							    				
+							    			});
+										   //alert("The tickes has been deleted");
 										   $('#myModal').modal('hide');
 										   location.reload();
 
 									   },error:function(){
-								   			alert("An error occurred, please try later")
+										   $.notify({//options
+							    			    title:"<strong>Error!</strong>",
+							    				message:"An error occurred, please try later",
+							    					
+							    				},
+							    				{//settings
+							    					allow_dismiss: true,
+							    					element:".modal",	
+							    					type:"danger",
+							    					position: "fixed",
+							    					placement: {
+							    						from: "top",
+							    						align: "center"
+							    					}
+							    				
+							    			});
+									   
+								   			//alert("An error occurred, please try later")
 								   		}
 
 							  });
@@ -454,10 +633,27 @@
 
 
 						},error:function(){
-				   			alert("An error occurred, please try later")
+							 $.notify({//options
+				    			    title:"<strong>Error!</strong>",
+				    				message:"An error occurred, please try later",
+				    					
+				    				},
+				    				{//settings
+				    					allow_dismiss: true,
+				    					element:".modal",	
+				    					type:"danger",
+				    					position: "fixed",
+				    					placement: {
+				    						from: "top",
+				    						align: "center"
+				    					}
+				    				
+				    			});
 				   		}
-				});
-			});
+				});				 
+				
+			});	
+						
 		});
 
 
@@ -519,7 +715,22 @@
 															    }
 													});
 									},error:function(){
-							   			alert("An error occurred, please try later")
+										 $.notify({//options
+							    			    title:"<strong>Error!</strong>",
+							    				message:"An error occurred, please try later",
+							    					
+							    				},
+							    				{//settings
+							    					allow_dismiss: true,
+							    					element:".modal",	
+							    					type:"danger",
+							    					position: "fixed",
+							    					placement: {
+							    						from: "top",
+							    						align: "center"
+							    					}
+							    				
+							    			});
 							   		}
 							});
 			//if user is employee	
@@ -554,14 +765,30 @@
 																    }
 														});
 										},error:function(){
-								   			alert("An error occurred, please try later")
+											 $.notify({//options
+								    			    title:"<strong>Error!</strong>",
+								    				message:"An error occurred, please try later",
+								    					
+								    				},
+								    				{//settings
+								    					allow_dismiss: true,
+								    					element:".modal",	
+								    					type:"danger",
+								    					position: "fixed",
+								    					placement: {
+								    						from: "top",
+								    						align: "center"
+								    					}
+								    				
+								    			});
 								   		}
 								});
 				         	}
 			
 
 
-			
+				   			
+							
 			 //Details button function
 			 $('#getAllTicketsAssigned').on('click', '.btn-details', function () {
 				 var tr = $(this).closest('tr');
@@ -597,6 +824,18 @@
 				            $(".modal-body #clientemail").html(data.clientemail);
 
 				            $('#myModal').modal('show');
+				            
+				            
+				          //reset fields content on close
+				        	$('#myModal').on('hidden.bs.modal', function (e) {
+				        			  $(this)
+				        			    .find("input,textarea,select")
+				        			       .val('')
+				        			       .end()
+				        			    .find("input[type=checkbox], input[type=radio]")
+				        			       .prop("checked", "")
+				        			       .end();
+				        	})
 				            
 				//if user is client or employee no edit right , no delete right	            
 				            
@@ -683,7 +922,22 @@
 				            			           
 				            			            //$('#myModal').modal('show');
 				            				   },error:function(){
-										   			alert("An error occurred, please try later")
+				            					   $.notify({//options
+									    			    title:"<strong>Error!</strong>",
+									    				message:"An error occurred, please try later",
+									    					
+									    				},
+									    				{//settings
+									    					allow_dismiss: true,
+									    					element:".modal",	
+									    					type:"danger",
+									    					position: "fixed",
+									    					placement: {
+									    						from: "top",
+									    						align: "center"
+									    					}
+									    				
+									    			});
 										   		}
 				            	    	   });
 				            	       }
@@ -701,7 +955,22 @@
 												       	$('#projecttypelist').append($('<option></option>').val(p).html(p));
 												       	});
 										       },error:function(){
-										   			alert("An error occurred, please try later")
+										    	   $.notify({//options
+									    			    title:"<strong>Error!</strong>",
+									    				message:"An error occurred, please try later",
+									    					
+									    				},
+									    				{//settings
+									    					allow_dismiss: true,
+									    					element:".modal",	
+									    					type:"danger",
+									    					position: "fixed",
+									    					placement: {
+									    						from: "top",
+									    						align: "center"
+									    					}
+									    				
+									    			});
 										   		}
 
 										       });
@@ -718,7 +987,22 @@
 													       	$('#employeelist').append($('<option></option>').val(p).html(p));
 													       	});
 											       },error:function(){
-											   			alert("An error occurred, please try later")
+											    	   $.notify({//options
+										    			    title:"<strong>Error!</strong>",
+										    				message:"An error occurred, please try later",
+										    					
+										    				},
+										    				{//settings
+										    					allow_dismiss: true,
+										    					element:".modal",	
+										    					type:"danger",
+										    					position: "fixed",
+										    					placement: {
+										    						from: "top",
+										    						align: "center"
+										    					}
+										    				
+										    			});
 											   		}
 
 											       });
@@ -735,8 +1019,22 @@
 													       	$('#statuslist').append($('<option></option>').val(p).html(p));
 													       	});
 											       },error:function(){
-											   			alert("An error occurred, please try later")
-											   		}
+											    	   $.notify({//options
+										    			    title:"<strong>Error!</strong>",
+										    				message:"An error occurred, please try later",
+										    					
+										    				},
+										    				{//settings
+										    					allow_dismiss: true,
+										    					element:".modal",	
+										    					type:"danger",
+										    					position: "fixed",
+										    					placement: {
+										    						from: "top",
+										    						align: "center"
+										    					}
+										    				
+										    			});											   		}
 
 											       });
 
@@ -768,12 +1066,42 @@
 													   $('#myModal').modal('hide');
 													   location.reload();
 												   },error:function(){
-											   			alert("An error occurred, please try later")
+													   $.notify({//options
+										    			    title:"<strong>Error!</strong>",
+										    				message:"An error occurred, please try later",
+										    					
+										    				},
+										    				{//settings
+										    					allow_dismiss: true,
+										    					element:".modal",	
+										    					type:"danger",
+										    					position: "fixed",
+										    					placement: {
+										    						from: "top",
+										    						align: "center"
+										    					}
+										    				
+										    			});
 											   		}
 												   });
 										});
 				        },error:function(){
-				   			alert("An error occurred, please try later")
+				        	 $.notify({//options
+				    			    title:"<strong>Error!</strong>",
+				    				message:"An error occurred, please try later",
+				    					
+				    				},
+				    				{//settings
+				    					allow_dismiss: true,
+				    					element:".modal",	
+				    					type:"danger",
+				    					position: "fixed",
+				    					placement: {
+				    						from: "top",
+				    						align: "center"
+				    					}
+				    				
+				    			});
 				   		}
 				 });
 			});
@@ -832,7 +1160,22 @@
 
 										    });
 										},error:function(){
-								   			alert("An error occurred, please try later")
+											 $.notify({//options
+								    			    title:"<strong>Error!</strong>",
+								    				message:"An error occurred, please try later",
+								    					
+								    				},
+								    				{//settings
+								    					allow_dismiss: true,
+								    					element:".modal",	
+								    					type:"danger",
+								    					position: "fixed",
+								    					placement: {
+								    						from: "top",
+								    						align: "center"
+								    					}
+								    				
+								    			});
 								   		}
 				   				});
 				   			  
@@ -842,7 +1185,8 @@
 				        	 $("#getAllTicketsDone").hide();
 				         	}
 				   			  
-				   									 
+				   				
+				   		
 			 //Details button function
 			 $('#getAllTicketsDone').on('click', '.btn-details', function () {
 				 var tr = $(this).closest('tr');
@@ -878,6 +1222,18 @@
 				            $(".modal-body #clientemail").html(data.clientemail);
 
 				            $('#myModal').modal('show');
+				            
+				            
+				          //reset fields content on close
+				        	$('#myModal').on('hidden.bs.modal', function (e) {
+				        			  $(this)
+				        			    .find("input,textarea,select")
+				        			       .val('')
+				        			       .end()
+				        			    .find("input[type=checkbox], input[type=radio]")
+				        			       .prop("checked", "")
+				        			       .end();
+				        	})
 				            
 				          //if user is client or employee no edit right , no delete right	            
 				          /*  if(acctype == 2 || acctype == 3){
@@ -925,7 +1281,22 @@
 												       	$('#projecttypelist').append($('<option></option>').val(p).html(p));
 												       	});
 										       },error:function(){
-										   			alert("An error occurred, please try later")
+										    	   $.notify({//options
+									    			    title:"<strong>Error!</strong>",
+									    				message:"An error occurred, please try later",
+									    					
+									    				},
+									    				{//settings
+									    					allow_dismiss: true,
+									    					element:".modal",	
+									    					type:"danger",
+									    					position: "fixed",
+									    					placement: {
+									    						from: "top",
+									    						align: "center"
+									    					}
+									    				
+									    			});
 										   		}
 
 										       });
@@ -942,7 +1313,22 @@
 													       	$('#employeelist').append($('<option></option>').val(p).html(p));
 													       	});
 											       },error:function(){
-											   			alert("An error occurred, please try later")
+											    	   $.notify({//options
+										    			    title:"<strong>Error!</strong>",
+										    				message:"An error occurred, please try later",
+										    					
+										    				},
+										    				{//settings
+										    					allow_dismiss: true,
+										    					element:".modal",	
+										    					type:"danger",
+										    					position: "fixed",
+										    					placement: {
+										    						from: "top",
+										    						align: "center"
+										    					}
+										    				
+										    			});
 											   		}
 
 											       });
@@ -959,7 +1345,22 @@
 													       	$('#statuslist').append($('<option></option>').val(p).html(p));
 													       	});
 											       },error:function(){
-											   			alert("An error occurred, please try later")
+											    	   $.notify({//options
+										    			    title:"<strong>Error!</strong>",
+										    				message:"An error occurred, please try later",
+										    					
+										    				},
+										    				{//settings
+										    					allow_dismiss: true,
+										    					element:".modal",	
+										    					type:"danger",
+										    					position: "fixed",
+										    					placement: {
+										    						from: "top",
+										    						align: "center"
+										    					}
+										    				
+										    			});
 											   		}
 
 											       });
@@ -996,12 +1397,42 @@
 													   $('#myModal').modal('hide');
 													   location.reload();
 												   },error:function(){
-											   			alert("An error occurred, please try later")
+													   $.notify({//options
+										    			    title:"<strong>Error!</strong>",
+										    				message:"An error occurred, please try later",
+										    					
+										    				},
+										    				{//settings
+										    					allow_dismiss: true,
+										    					element:".modal",	
+										    					type:"danger",
+										    					position: "fixed",
+										    					placement: {
+										    						from: "top",
+										    						align: "center"
+										    					}
+										    				
+										    			});
 											   		}
 												   });
 										});
 				        },error:function(){
-				   			alert("An error occurred, please try later")
+				        	 $.notify({//options
+				    			    title:"<strong>Error!</strong>",
+				    				message:"An error occurred, please try later",
+				    					
+				    				},
+				    				{//settings
+				    					allow_dismiss: true,
+				    					element:".modal",	
+				    					type:"danger",
+				    					position: "fixed",
+				    					placement: {
+				    						from: "top",
+				    						align: "center"
+				    					}
+				    				
+				    			});
 				   		}
 				 });
 				});
@@ -1020,7 +1451,22 @@
 						    	    }
 						       }
 						 },error:function(){
-					   			alert("An error occurred, please try later")
+							 $.notify({//options
+				    			    title:"<strong>Error!</strong>",
+				    				message:"An error occurred, please try later",
+				    					
+				    				},
+				    				{//settings
+				    					allow_dismiss: true,
+				    					element:".modal",	
+				    					type:"danger",
+				    					position: "fixed",
+				    					placement: {
+				    						from: "top",
+				    						align: "center"
+				    					}
+				    				
+				    			});
 					   		}
 			})
 
@@ -1040,7 +1486,22 @@
 						    	    }
 						       }
 						 },error:function(){
-					   			alert("An error occurred, please try later")
+							 $.notify({//options
+				    			    title:"<strong>Error!</strong>",
+				    				message:"An error occurred, please try later",
+				    					
+				    				},
+				    				{//settings
+				    					allow_dismiss: true,
+				    					element:".modal",	
+				    					type:"danger",
+				    					position: "fixed",
+				    					placement: {
+				    						from: "top",
+				    						align: "center"
+				    					}
+				    				
+				    			});
 					   		}
 			})
 		}
@@ -1126,7 +1587,22 @@
 						 }
 					  })
 			},error:function(){
-	   			alert("An error occurred, please try later")
+				 $.notify({//options
+	    			    title:"<strong>Error!</strong>",
+	    				message:"An error occurred, please try later",
+	    					
+	    				},
+	    				{//settings
+	    					allow_dismiss: true,
+	    					element:".modal",	
+	    					type:"danger",
+	    					position: "fixed",
+	    					placement: {
+	    						from: "top",
+	    						align: "center"
+	    					}
+	    				
+	    			});
 	   		}
 			 })
 		}

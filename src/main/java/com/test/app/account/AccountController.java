@@ -52,8 +52,7 @@ public class AccountController  {
 				ArrayList<Account> l = accountService.getAllAccounts();
 				for (int i = 0; i < l.size(); i++) {
 
-					if (username.equals(l.get(i).getUsername())
-							&& password.equals(l.get(i).getPassword())) {
+					if (username.equals(l.get(i).getUsername()) && password.equals(l.get(i).getPassword())) {
 						response = 1;
 						/*if (l.get(i).validateAdmin()) {
 							user = username;
@@ -75,11 +74,13 @@ public class AccountController  {
 							break;
 
 						}*/
+						break;
 					} else {
 						response = -1;
 
 					}
 				}
+				System.out.println(response);
 				return response;
 
 
@@ -131,7 +132,7 @@ public class AccountController  {
 
 			     emailService.sendSimpleMessage(mail);
 
-				response = "The new password was saved successfully";
+				response = "The new password has been saved.";
 			}else if(accountService.existAccountByUsername(username) == false ){
 						response ="2";// "The username doesn't exist ! ";
 						}else if(password.equals(passwordretype)== false){

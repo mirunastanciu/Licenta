@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
   <script type="text/javascript" src="../js/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="../js/notify/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="../js/notify/bootstrap-notify.js"></script>
 	<script type="text/javascript" src="../js/jquery/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="../js/jquery/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="../js/jquery/bootstrap.js"></script>
@@ -82,32 +84,32 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
 	          	<div id="addressedit1" >
 	          	<br>
 		          	<div  class="inLine2">
-		          		<p>Country</p><input id="counrty" class="input"  type="text" autocomplete="off" style="width:90%;" />
+		          		<p>Country</p><input id="counrty" class="input mandatory"  type="text" autocomplete="off" style="width:90%;" />
 		          	</div>   
 		          	       	
 		          	<div  class="inLine2">
-		          		<p>County</p><input id="county" class="input"  type="text" autocomplete="off" style="width:90%;"/>
+		          		<p>County</p><input id="county" class="input mandatory"  type="text" autocomplete="off" style="width:90%;"/>
 		          	</div>          	
 		          	
 		          	<div  class="inLine2">
-		          		<p>Town</p><input id="town" class="input"  type="text" autocomplete="off" style="width:90%;"/>
+		          		<p>Town</p><input id="town" class="input mandatory"  type="text" autocomplete="off" style="width:90%;"/>
 		          	</div>
 	          	</div>
 	          	<div id="addressedit2">
 		          	<div class="inLine2">
-		          		<p>Street</p><input id="street" class="input"  type="text" autocomplete="off" style="width:90%;"/>
+		          		<p>Street</p><input id="street" class="input mandatory"  type="text" autocomplete="off" style="width:90%;"/>
 		          	</div>
 		          	
 		          	<div class="inLine2" style="width:17%;">
-		          		<p>Street No.</p><input id="streetno" class="input"  type="number" autocomplete="off" style="width:90%;"/>
+		          		<p>Street No.</p><input id="streetno" class="input mandatory"  type="number" autocomplete="off" style="width:90%;"/>
 		          	</div>
 		          	
 		          	<div class="inLine2" style="width:17%;">
-		          		<p>Build No.</p><input id="buildno" class="input"  type="number" autocomplete="off" style="width:90%;"/>
+		          		<p>Build No.</p><input id="buildno" class="input mandatory"  type="number" autocomplete="off" style="width:90%;"/>
 		          	</div>
 		          	
 		          	<div class="inLine2" style="width:17%;">
-		          		<p>Apartment No.</p><input id="appno" class="input"  type="number" autocomplete="off" style="width:90%;"/>
+		          		<p>Apartment No.</p><input id="appno" class="input mandatory"  type="number" autocomplete="off" style="width:90%;"/>
 		          	</div>
 		          	<button id="updateaddress" onclick="addressChange()">Update</button>
 	          	</div>
@@ -137,7 +139,7 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
 	          	<h4>Retype New Password </h4>
 	          	<input id="retypenewpass" class="input"  type="password" autocomplete="off" style="width:50%;"/>
 	          	<br>
-	          	<button id="updatepasss" onclick="()">Update</button>
+	          	<button id="updatepasss" >Update</button>
 	          	<br>
 	          	<br>
           	</div>

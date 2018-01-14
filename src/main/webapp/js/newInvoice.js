@@ -20,14 +20,30 @@ $.ajax("/getClientsName",
 			       	$('#clientlist').append($('<option></option>').val(p).html(p));
 			       	});
 	       },error:function(){
-	    	   alert("An error occurred, please try later.")
+	    	   $.notify({//options
+   			    title:"<strong>Error!</strong>",
+   				message:"An error occurred, please try again later",
+   					
+   				},
+   				{//settings
+   					allow_dismiss: true,
+   						
+   					type:"danger",
+   					position: "fixed",
+   					placement: {
+   						from: "top",
+   						align: "center"
+   					}
+   				
+   			});
+	    	   //alert("An error occurred, please try later.")
 	       }
 
 	       
 	       });
 
 function addPos(){
-	if()
+	/*if()*/
 
 	var clientname = $("#clientlist option:selected").text();
 	console.log(clientname);
@@ -49,7 +65,23 @@ function addPos(){
 		       	});
 
 			},error:function(){
-		    	   alert("An error occurred, please try later.")
+				$.notify({//options
+    			    title:"<strong>Error!</strong>",
+    				message:"An error occurred, please try again later",
+    					
+    				},
+    				{//settings
+    					allow_dismiss: true,
+    					element:".modal",	
+    					type:"danger",
+    					position: "fixed",
+    					placement: {
+    						from: "top",
+    						align: "center"
+    					}
+    				
+    			});
+		    	   //alert("An error occurred, please try later.")
 		       }
 	});
 
@@ -68,7 +100,23 @@ function addPos(){
 				       	$('#serviceList').append($('<option></option>').val(p).html(p));
 				       	});
 		       },error:function(){
-		    	   alert("An error occurred, please try later.")
+		    	   $.notify({//options
+	    			    title:"<strong>Error!</strong>",
+	    				message:"An error occurred, please try again later",
+	    					
+	    				},
+	    				{//settings
+	    					allow_dismiss: true,
+	    					element:".modal",	
+	    					type:"danger",
+	    					position: "fixed",
+	    					placement: {
+	    						from: "top",
+	    						align: "center"
+	    					}
+	    				
+	    			});
+		    	   //alert("An error occurred, please try later.")
 		       }
 
 		       });
@@ -91,8 +139,24 @@ function savePos() {
 
 
 	 if( $("#serviceList option:selected").text() === "" || $("#ticketlist option:selected").text() === ""){
-			  
-			  alert("You must select a client and a ticket");
+		 $.notify({//options
+			    title:"<strong>Attention!</strong>",
+				message:"Please complete all mandatory fileds.",
+					
+				},
+				{//settings
+					element:".modal",	
+					allow_dismiss: true,
+					
+					type:"danger",
+					position: "fixed",
+					placement: {
+						from: "top",
+						align: "center"
+					}
+				
+			});
+			 // alert("You must select a client and a ticket");
 			  addPos();
 		 /* $('#addPosModal').on('hidden.bs.modal', function() {
 			  addPos();
@@ -141,13 +205,45 @@ function savePos() {
 													$("#total").html(data);
 		
 												}, error: function(){
-													alert("error total Invoice");
+													 $.notify({//options
+										    			    title:"<strong>Error!</strong>",
+										    				message:"An error occurred, please try again later",
+										    					
+										    				},
+										    				{//settings
+										    					allow_dismiss: true,
+										    					element:".modal",	
+										    					type:"danger",
+										    					position: "fixed",
+										    					placement: {
+										    						from: "top",
+										    						align: "center"
+										    					}
+										    				
+										    			});
+													//alert("error total Invoice");
 													}
 		
 										});
 
 							},error:function(){
-						    	   alert("An error occurred, please try later.")
+								 $.notify({//options
+					    			    title:"<strong>Error!</strong>",
+					    				message:"An error occurred, please try again later",
+					    					
+					    				},
+					    				{//settings
+					    					allow_dismiss: true,
+					    					element:".modal",	
+					    					type:"danger",
+					    					position: "fixed",
+					    					placement: {
+					    						from: "top",
+					    						align: "center"
+					    					}
+					    				
+					    			});
+						    	   //alert("An error occurred, please try later.")
 						       }
 
 					});
@@ -155,7 +251,23 @@ function savePos() {
 					$('#addPosModal').modal('hide');
 
 			   },error:function(){
-		    	   alert("An error occurred, please try later.")
+				   $.notify({//options
+	    			    title:"<strong>Error!</strong>",
+	    				message:"An error occurred, please try again later",
+	    					
+	    				},
+	    				{//settings
+	    					allow_dismiss: true,
+	    					element:".modal",	
+	    					type:"danger",
+	    					position: "fixed",
+	    					placement: {
+	    						from: "top",
+	    						align: "center"
+	    					}
+	    				
+	    			});
+		    	   //alert("An error occurred, please try later.")
 		       }
 			   });
 			 }
@@ -168,8 +280,24 @@ function savePos() {
      var table = $('#positionList').DataTable();
      
      
-     if( clientname === "" || duedate === "" || table.data().count() ===0 ){
-    	 alert ("You have empty fields")
+     if( clientname === "" || duedate === "" || table.data().count() === 0 ){
+    	 $.notify({//options
+			    title:"<strong>Attention!</strong>",
+				message:"Please complete all mandatory fields.",
+					
+				},
+				{//settings
+					allow_dismiss: true,
+					//element:".modal",	
+					type:"danger",
+					position: "fixed",
+					placement: {
+						from: "top",
+						align: "center"
+					}
+				
+			});
+    	 //alert ("You have empty fields")
      }else{
     	 $.ajax({
     	 		method: "POST",
@@ -182,7 +310,23 @@ function savePos() {
     	 				 window.location.replace(data);
 
     	 			}, error: function(){
-    	 				alert("The invoice has not been saved. Plase try again.");
+    	 				 $.notify({//options
+    		    			    title:"<strong>Error!</strong>",
+    		    				message:"The invoice has not been saved. Plase try again.",
+    		    					
+    		    				},
+    		    				{//settings
+    		    					allow_dismiss: true,
+    		    					//element:".modal",	
+    		    					type:"danger",
+    		    					position: "fixed",
+    		    					placement: {
+    		    						from: "top",
+    		    						align: "center"
+    		    					}
+    		    				
+    		    			});
+    	 				//alert("The invoice has not been saved. Plase try again.");
     	 				}
     	 	});
      }
@@ -202,6 +346,22 @@ function savePos() {
  				 window.location.replace(data);
 
  			},error:function(){
+ 				$.notify({//options
+    			    title:"<strong>Error!</strong>",
+    				message:"An error occurred, please try later.",
+    					
+    				},
+    				{//settings
+    					allow_dismiss: true,
+    					//element:".modal",	
+    					type:"danger",
+    					position: "fixed",
+    					placement: {
+    						from: "top",
+    						align: "center"
+    					}
+    				
+    			});
  	    	   alert("An error occurred, please try later.")
  	       }
  	});

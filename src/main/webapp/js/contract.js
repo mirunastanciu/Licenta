@@ -58,9 +58,36 @@ $(document).ready( function () {
 		 			       })
 
 		            $('#EditModalEmployeeContract').modal('show');
+		            
+		          //reset fields content on close
+		        	$('#EditModalEmployeeContract').on('hidden.bs.modal', function (e) {
+		        			  $(this)
+		        			    .find("input,textarea,select")
+		        			       .val('')
+		        			       .end()
+		        			    .find("input[type=checkbox], input[type=radio]")
+		        			       .prop("checked", "")
+		        			       .end();
+		        	})
 
 		        },error:function(){
-		        	alert("An error occurred, please try later.");
+		        	 $.notify({//options
+						    title:"<strong>Error!</strong>",
+							message:"An error occurred, please try later.",
+								
+							},
+							{//settings
+								allow_dismiss: true,
+								z_index: 2000,
+								type:"danger",
+								position: "fixed",
+								placement: {
+									from: "top",
+									align: "center"
+								}
+							
+						});
+		        	//alert("An error occurred, please try later.");
 		        }
 
 
@@ -88,7 +115,23 @@ $(document).ready( function () {
 					   $('#EditModalEmployeeContract').modal('hide');
 					   location.reload();
 				   }, error: function(){
-					   alert("An error occurred, please try later.");
+					   $.notify({//options
+						    title:"<strong>Error!</strong>",
+							message:"An error occurred, please try later.",
+								
+							},
+							{//settings
+								allow_dismiss: true,
+								z_index: 2000,
+								type:"danger",
+								position: "fixed",
+								placement: {
+									from: "top",
+									align: "center"
+								}
+							
+						});
+					   //alert("An error occurred, please try later.");
 					   }
 				   });
 
@@ -150,15 +193,60 @@ $(document).ready( function () {
 		 					       	$('#StatusListC').append($('<option></option>').val(p).html(p));
 		 					       	});
 		 			       },error:function(){
-		 			    	  alert("An error occurred, please try later.");
+		 			    	  $.notify({//options
+								    title:"<strong>Error!</strong>",
+									message:"An error occurred, please try later.",
+										
+									},
+									{//settings
+										allow_dismiss: true,
+										z_index: 2000,
+										type:"danger",
+										position: "fixed",
+										placement: {
+											from: "top",
+											align: "center"
+										}
+									
+								});
+		 			    	  //alert("An error occurred, please try later.");
 		 			       }
 
 		 			       });
 
 		            $('#EditModalClientContract').modal('show');
+		            
+		          //reset fields content on close
+		        	$('#EditModalEmployeeContract').on('hidden.bs.modal', function (e) {
+		        			  $(this)
+		        			    .find("input,textarea,select")
+		        			       .val('')
+		        			       .end()
+		        			    .find("input[type=checkbox], input[type=radio]")
+		        			       .prop("checked", "")
+		        			       .end();
+		        	})
+		            
+		            
 
 		        },error:function(){
-		        	alert("An error occurred, please try later.");
+		        	$.notify({//options
+					    title:"<strong>Error!</strong>",
+						message:"An error occurred, please try later.",
+							
+						},
+						{//settings
+							allow_dismiss: true,
+							z_index: 2000,
+							type:"danger",
+							position: "fixed",
+							placement: {
+								from: "top",
+								align: "center"
+							}
+						
+					});
+		        	//alert("An error occurred, please try later.");
 		        }
 
 
@@ -186,7 +274,23 @@ $(document).ready( function () {
 					   $('#EditModalClientContract').modal('hide');
 					   location.reload();
 				   }, error: function(){
-					   alert("An error occurred, please try later.");
+					   $.notify({//options
+						    title:"<strong>Error!</strong>",
+							message:"An error occurred, please try later.",
+								
+							},
+							{//settings
+								allow_dismiss: true,
+								z_index: 2000,
+								type:"danger",
+								position: "fixed",
+								placement: {
+									from: "top",
+									align: "center"
+								}
+							
+						});
+					   //alert("An error occurred, please try later.");
 					   }
 				   });
 
@@ -213,12 +317,39 @@ function modalEmployeeContract(){
 					       	$('#statusList').append($('<option></option>').val(p).html(p));
 					       	});
 			       },error:function(){
-			    	   alert("An error occurred, please try later.");
+			    	   $.notify({//options
+						    title:"<strong>Error!</strong>",
+							message:"An error occurred, please try later.",
+								
+							},
+							{//settings
+								allow_dismiss: true,
+								z_index: 2000,
+								type:"danger",
+								position: "fixed",
+								placement: {
+									from: "top",
+									align: "center"
+								}
+							
+						});
+			    	   //alert("An error occurred, please try later.");
 			       }
 
 			       })
+			       
+			       //reset fields content on close
+		        	$('#myModalEmployeeContract').on('hidden.bs.modal', function (e) {
+		        			  $(this)
+		        			    .find("input,textarea,select")
+		        			       .val('')
+		        			       .end()
+		        			    .find("input[type=checkbox], input[type=radio]")
+		        			       .prop("checked", "")
+		        			       .end();
+		        	})
    //Save Fuction//
-	$('.modal-footer').on('click', '#savebutton', function (){
+	$('.modal-footer').on('click', '#savebutton',function(){
 			var salary = $(".modalcontent #salary").val();
 			var status = $("#statusList option:selected" ).text();
 			var signaturedate = $('.modalcontent #signdate').val();
@@ -227,8 +358,26 @@ function modalEmployeeContract(){
 
 	if($.trim($(".modalcontent #salary").val()) === ''|| $.trim($('.modalcontent #signdate').val()) === ''||
 	   $.trim($('.modalcontent #startdate').val()) === '' || status === ""){
+		
+		$.notify({//options
+		    title:"<strong>Attention!</strong>",
+			message:"Please complete all mandatory fileds.",
+				
+			},
+			{//settings
+				//element:".modal",	
+				allow_dismiss: true,
+				 z_index: 2000,
+				type:"danger",
+				position: "fixed",
+				placement: {
+					from: "top",
+					align: "center"
+				}
+			
+		});
 
-		alert("There are one or more mandatory fields to be fill in !");
+		//alert("There are one or more mandatory fields to be fill in !");
 	}else{
 
 			$.ajax({
@@ -242,16 +391,49 @@ function modalEmployeeContract(){
 					 "expirationdate": expirationdate
 					},
 					success: function(data, status, xhr){
-						alert("The new contract has been saved.");
+						$.notify({//options
+						    title:"<strong>Success!</strong>",
+							message:"The new contract has been saved.",
+								
+							},
+							{//settings
+								allow_dismiss: true,
+								z_index: 2000,
+								type:"success",
+								position: "fixed",
+								placement: {
+									from: "top",
+									align: "center"
+								}
+							
+						});
+						//alert("The new contract has been saved.");
 						$('#myModalEmployeeContract').modal('hide');
 						 location.reload();
 
 					}, error: function(){
-						alert("The new contract has not been saved," );
+						$.notify({//options
+						    title:"<strong>Error!</strong>",
+							message:"The new contract has not been saved.",
+								
+							},
+							{//settings
+								allow_dismiss: true,
+								z_index: 2000,
+								type:"danger",
+								position: "fixed",
+								placement: {
+									from: "top",
+									align: "center"
+								}
+							
+						});
+						//alert("The new contract has not been saved," );
 						}
 			});
 	}
- });
+ }
+		);
 
 }
 
@@ -270,7 +452,23 @@ function modalClientContract(){
 					       	$('#clientsList').append($('<option></option>').val(p).html(p));
 					       	});
 			       },error:function(){
-			    	   alert("The contract has been saved successfull")
+			    	   $.notify({//options
+						    title:"<strong>Error!</strong>",
+							message:"An error occurred, please try later.",
+								
+							},
+							{//settings
+								allow_dismiss: true,
+								z_index: 2000,
+								type:"danger",
+								position: "fixed",
+								placement: {
+									from: "top",
+									align: "center"
+								}
+							
+						});
+			    	   	//alert("The contract has been saved successfull")
 			       }
 
 			       });
@@ -288,12 +486,37 @@ function modalClientContract(){
 					       	$('#statusList1').append($('<option></option>').val(p).html(p));
 					       	});
 			       },error:function(){
-			    	   alert("The contract has been saved successfull")
+			    	   $.notify({//options
+						    title:"<strong>Error!</strong>",
+							message:"An error occurred, please try later.",
+								
+							},
+							{//settings
+								allow_dismiss: true,
+								z_index: 2000,
+								type:"danger",
+								position: "fixed",
+								placement: {
+									from: "top",
+									align: "center"
+								}
+							
+						});
+			    	   //alert("The contract has been saved successfull")
 			       }
 
 			       });
 
-
+		//reset fields content on close
+    	$('#myModalClientContract').on('hidden.bs.modal', function (e) {
+    			  $(this)
+    			    .find("input,textarea,select")
+    			       .val('')
+    			       .end()
+    			    .find("input[type=checkbox], input[type=radio]")
+    			       .prop("checked", "")
+    			       .end();
+    	})
 
    //Save Fuction//
 	$('.modal-footer').on('click', '#savebutton', function (){
@@ -307,7 +530,23 @@ function modalClientContract(){
 	if($.trim($(".modalcontent #amount").val()) === ''|| $.trim($('.modalcontent #signdate1').val()) === ''||
 	   $.trim($('.modalcontent #startdate1').val()) === '' || client === "" || status === ""){
 
-			alert("Please complete all mandaroty fields .");
+		$.notify({//options
+		    title:"<strong>Attention!</strong>",
+			message:"Please complete all mandaroty fields .",
+				
+			},
+			{//settings
+				allow_dismiss: true,
+				z_index: 2000,
+				type:"danger",
+				position: "fixed",
+				placement: {
+					from: "top",
+					align: "center"
+				}
+			
+		});
+			//alert("Please complete all mandaroty fields .");
 	}else{
 
 
@@ -323,12 +562,44 @@ function modalClientContract(){
 					 "expirationdate": expirationdate
 					},
 					success: function(data, status, xhr){
-						alert("The new contract has been saved .");
+						$.notify({//options
+						    title:"<strong>Success!</strong>",
+							message:"The new contract has been saved .",
+								
+							},
+							{//settings
+								allow_dismiss: true,
+								z_index: 2000,
+								type:"success",
+								position: "fixed",
+								placement: {
+									from: "top",
+									align: "center"
+								}
+							
+						});
+						//alert("The new contract has been saved .");
 						$('#getEmployeeContractStatuses').modal('hide');
 						 location.reload();
 
 					}, error: function(){
-						alert("The new contract has not been saved .");
+						$.notify({//options
+						    title:"<strong>Error!</strong>",
+							message:"The new contract has not been saved .",
+								
+							},
+							{//settings
+								allow_dismiss: true,
+								z_index: 2000,
+								type:"danger",
+								position: "fixed",
+								placement: {
+									from: "top",
+									align: "center"
+								}
+							
+						});
+						//alert("The new contract has not been saved .");
 						}
 			});
 	}
@@ -351,7 +622,23 @@ function statusChange(){
 				    	    }
 				       }
 				       },error:function(){
-				    	   alert("An error occurred, please try later.")
+				    	   $.notify({//options
+							    title:"<strong>Error!</strong>",
+								message:"An error occurred, please try later..",
+									
+								},
+								{//settings
+									allow_dismiss: true,
+									z_index: 2000,
+									type:"danger",
+									position: "fixed",
+									placement: {
+										from: "top",
+										align: "center"
+									}
+								
+							});
+				    	   //alert("An error occurred, please try later.")
 				       }
 		       })
 	
@@ -407,9 +694,26 @@ function statusChange1(){
 				    	    if ( sel.options[sel.selectedIndex].value == data[i] ) {
 				    	    	status.innerHTML = sel.options[sel.selectedIndex].value;
 				    	    }
-				       }alert("An error occurred, please try later.");
+				       }
+				     
 				 },errot:function(){
-					 alert("An error occurred, please try later.");
+					 $.notify({//options
+						    title:"<strong>Error!</strong>",
+							message:"An error occurred, please try later..",
+								
+							},
+							{//settings
+								allow_dismiss: true,
+								z_index: 2000,
+								type:"danger",
+								position: "fixed",
+								placement: {
+									from: "top",
+									align: "center"
+								}
+							
+						});
+					 //alert("An error occurred, please try later.");
 				 }
 	})
 }

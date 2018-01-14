@@ -28,7 +28,23 @@ $(document).ready( function () {
 		   				$("#invoice").hide();
 		   			}
 		   		},error:function(){
-		   			alert("An error occurred, please try later")
+		   			$.notify({//options
+	    			    title:"<strong>Error!</strong>",
+	    				message:"An error occurred, please try again later",
+	    					
+	    				},
+	    				{//settings
+	    					allow_dismiss: true,
+	    						
+	    					type:"danger",
+	    					position: "fixed",
+	    					placement: {
+	    						from: "top",
+	    						align: "center"
+	    					}
+	    				
+	    			});
+		   			//alert("An error occurred, please try later")
 		   		}
      });
 });
@@ -61,25 +77,95 @@ $(document).ready( function () {
 				     "logeduser": logeduser},
 			   		success: function(data, status, xhr){
 
-                     if(data == 1 && newpass === retypenewpass){
-                    	 $.ajax({
-			   				   method: "POST",
-			   				   url: "updatePass",
-			   				   data:{"newpass": newpass,
-			   					     "logeduser": logeduser},
-			   				   		success: function(data, status, xhr){
-
-			   				   			$("#changepassdiv").hide();
-			   				   		}
-			   		     });
-
-                     }else{
-                    	 alert("The new passwords do not match.");
+                     if(data == 1 ){
+                    	 if(newpass === retypenewpass){
+                    		 $.ajax({
+  			   				   method: "POST",
+  			   				   url: "updatePass",
+  			   				   data:{"newpass": newpass,
+  			   					     "logeduser": logeduser},
+  			   				   		success: function(data, status, xhr){
+  			   				   		 $.notify({//options
+  			  		    			    title:"<strong>Success!</strong>",
+  			  		    				message:"The password has been changed.",
+  			  		    					
+  			  		    				},
+  			  		    				{//settings
+  			  		    					allow_dismiss: true,
+  			  		    						
+  			  		    					type:"success",
+  			  		    					position: "fixed",
+  			  		    					placement: {
+  			  		    						from: "top",
+  			  		    						align: "center"
+  			  		    					}
+  			  		    				
+  			  		    			});
+  			   				   			$("#changepassdiv").hide();
+  			   				   		}
+  			   		     });
+ 
+                     
+                    	 
+                    	 }else{
+                    		 $.notify({//options
+		  		    			    title:"<strong>Attention!</strong>",
+		  		    				message:"The new passwords do not match.",
+		  		    					
+		  		    				},
+		  		    				{//settings
+		  		    					allow_dismiss: true,
+		  		    						
+		  		    					type:"danger",
+		  		    					position: "fixed",
+		  		    					placement: {
+		  		    						from: "top",
+		  		    						align: "center"
+		  		    					}
+		  		    				
+		  		    			});
+                    	 }
+                    	 //alert("The new passwords do not match.");
+                     }else if (data == 0 ){
+                    	 $.notify({//options
+  		    			    title:"<strong>Attention!</strong>",
+  		    				message:"The old password is incorect.",
+  		    					
+  		    				},
+  		    				{//settings
+  		    					allow_dismiss: true,
+  		    						
+  		    					type:"danger",
+  		    					position: "fixed",
+  		    					placement: {
+  		    						from: "top",
+  		    						align: "center"
+  		    					}
+  		    				
+  		    			});
                      }
+                    	 
+                     
 
 
 			   		},error:function(){
-			   			alert("An error occurred, please try later")
+			   			$.notify({//options
+		    			    title:"<strong>Error!</strong>",
+		    				message:"An error occurred, please try again later",
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    						
+		    					type:"danger",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+			   			//alert("An error occurred, please try later")
 			   		}
 	     });
 
@@ -106,7 +192,23 @@ $(document).ready( function () {
 			   			$("#lname").html(data.lastname);
 			   			$("#email").html(data.email);
 			   		},error:function(){
-			   			alert("An error occurred, please try later")
+			   			$.notify({//options
+		    			    title:"<strong>Error!</strong>",
+		    				message:"An error occurred, please try again later",
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    						
+		    					type:"danger",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+			   			//alert("An error occurred, please try later")
 			   		}
 		});
 
@@ -180,7 +282,23 @@ $(document).ready( function () {
 			   			$("#lname").html(data.lastname);
 			   			$("#email").html(data.email);
 			   		},error:function(){
-			   			alert("An error occurred, please try later")
+			   			$.notify({//options
+		    			    title:"<strong>Error!</strong>",
+		    				message:"An error occurred, please try again later",
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    						
+		    					type:"danger",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+			   			//alert("An error occurred, please try later")
 			   		}
 		});
 
@@ -197,7 +315,23 @@ $(document).ready( function () {
 			   			$("#startdate").html(data.startdate);
 			   			$("#expdate").html(data.expirationdate);
 			   		},error:function(){
-			   			alert("An error occurred, please try later")
+			   			$.notify({//options
+		    			    title:"<strong>Error!</strong>",
+		    				message:"An error occurred, please try again later",
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    						
+		    					type:"danger",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+			   			//alert("An error occurred, please try later")
 			   		}
 		});
 
@@ -209,7 +343,23 @@ $(document).ready( function () {
 			   			$("#address").html(data);
 
 			   		},error:function(){
-			   			alert("An error occurred, please try later")
+			   			$.notify({//options
+		    			    title:"<strong>Error!</strong>",
+		    				message:"An error occurred, please try again later",
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    						
+		    					type:"danger",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+			   			//alert("An error occurred, please try later")
 			   		}
 		});
 
@@ -281,7 +431,23 @@ function emailChange(){
 				    		}
 						 }
 			     }else{
-			    	 alert("invalid Email");
+			    	 $.notify({//options
+		    			    title:"<strong>Attention!</strong>",
+		    				message:"The e-mail is invalid.",
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    						
+		    					type:"danger",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+			    	 //alert("invalid Email");
 			    	 document.getElementById("save").disabled = true;
 			     }
 		}
@@ -302,8 +468,24 @@ function addressChange(){
 			 var appno1 = $("div #appno").val();
 
 			 if(country1 == "" || county1 == "" || town1 == "" || street1 == "" || streetno1 == "" || buildno1 == "" || appno1 == ""){
+				 $.notify({//options
+	    			    title:"<strong>Attention!</strong>",
+	    				message:"please complete all mandatory fields.",
+	    					
+	    				},
+	    				{//settings
+	    					allow_dismiss: true,
+	    						
+	    					type:"danger",
+	    					position: "fixed",
+	    					placement: {
+	    						from: "top",
+	    						align: "center"
+	    					}
+	    				
+	    			});
 
-				 alert("all fields are mandatory to chante address");
+				 //alert("all fields are mandatory to chante address");
 			 }else{
 				 var addressedit = country1+", "+county1+", "+town1+", "+street1+" "+streetno1
 					+", Build Number: "+buildno1+", App No:"+appno1;
@@ -344,16 +526,43 @@ function save(){
 	var response2=1;
 
 	//console.log(localStorage.getItem("eladdresslist"))
-	var add = JSON.parse(localStorage.eladdresslist);
-	console.log(add[0])
+	
+	
+	if(eladdresslist.length !== 0){
+		var add = JSON.parse(localStorage.eladdresslist);
+		console.log(add[0])
 
-	var country2 = add[0];
-	var county2 =add[1];
-	var town2 = add[2];
-	var street2 = add[3];
-	var streetno2 = add[4];
-	var buildno2 = add[5];
-	var appno2 = add[6];
+		var country2 = add[0];
+		var county2 =add[1];
+		var town2 = add[2];
+		var street2 = add[3];
+		var streetno2 = add[4];
+		var buildno2 = add[5];
+		var appno2 = add[6];
+		
+		$.ajax({
+			   method: "POST",
+			   url: "changeAddressMyAcc",
+			   data:{"country2": country2,
+				     "county2": county2,
+				     "town2":town2 ,
+				     "street2": street2,
+				     "streetno2": streetno2,
+				     "buildno2": buildno2,
+				     "appno2": appno2,
+				     "logeduser": logeduser
+			   },
+			   		success: function(data, status, xhr){
+			   			/*response2 = 1;
+			   			alert(response2);*/
+			   			//alert("The new Account Informations has been saved succesfully .");
+			   			//location.reload();
+			   		},error:function(){
+			   			response2=0;
+			   		}
+		});
+
+	}
 
 	//
 	if(acctype == 1){
@@ -377,35 +586,47 @@ function save(){
 
 
 
-		 $.ajax({
-			   method: "POST",
-			   url: "changeAddressMyAcc",
-			   data:{"country2": country2,
-				     "county2": county2,
-				     "town2":town2 ,
-				     "street2": street2,
-				     "streetno2": streetno2,
-				     "buildno2": buildno2,
-				     "appno2": appno2,
-				     "logeduser": logeduser
-			   },
-			   		success: function(data, status, xhr){
-			   			/*response2 = 1;
-			   			alert(response2);*/
-			   			//alert("The new Account Informations has been saved succesfully .");
-			   			//location.reload();
-			   		},error:function(){
-			   			response2=0;
-			   		}
-		});
+		 
 
 		 
 
 		 if(response1 === 1 && response2 === 1){
-				alert("The new Account Informations has been saved succesfully .");
+			 $.notify({//options
+ 			    title:"<strong>Success!</strong>",
+ 				message:"The new Account Informations has been saved.",
+ 					
+ 				},
+ 				{//settings
+ 					allow_dismiss: true,
+ 						
+ 					type:"success",
+ 					position: "fixed",
+ 					placement: {
+ 						from: "top",
+ 						align: "center"
+ 					}
+ 				
+ 			});
+				//alert("The new Account Informations has been saved succesfully .");
 				location.reload();
 			}else{
-				alert("Error on saving new informations");
+				$.notify({//options
+    			    title:"<strong>Error!</strong>",
+    				message:"An error occurred, please try again later",
+    					
+    				},
+    				{//settings
+    					allow_dismiss: true,
+    						
+    					type:"danger",
+    					position: "fixed",
+    					placement: {
+    						from: "top",
+    						align: "center"
+    					}
+    				
+    			});
+				//alert("Error on saving new informations");
 			}
 
 
@@ -453,10 +674,42 @@ function save(){
 		
 
 		if(response1 === 1 && response2 === 1){
-			alert("The new Account Informations has been saved succesfully .");
+			$.notify({//options
+			    title:"<strong>Success!</strong>",
+				message:"The new Account Informations has been saved.",
+					
+				},
+				{//settings
+					allow_dismiss: true,
+						
+					type:"danger",
+					position: "fixed",
+					placement: {
+						from: "top",
+						align: "center"
+					}
+				
+			});
+			//alert("The new Account Informations has been saved succesfully .");
 			location.reload();
 		}else{
-			alert("Error on saving new informations");
+			$.notify({//options
+			    title:"<strong>Error!</strong>",
+				message:"An error occurred, please try again later",
+					
+				},
+				{//settings
+					allow_dismiss: true,
+						
+					type:"danger",
+					position: "fixed",
+					placement: {
+						from: "top",
+						align: "center"
+					}
+				
+			});
+			//alert("Error on saving new informations");
 		}
 
 	}else{
@@ -500,10 +753,42 @@ function save(){
 		});
 
 		if(response1 === 1 && response2 === 1){
-			alert("The new Account Informations has been saved succesfully .");
+			$.notify({//options
+			    title:"<strong>Success!</strong>",
+				message:"The new Account Informations has been saved.",
+					
+				},
+				{//settings
+					allow_dismiss: true,
+						
+					type:"success",
+					position: "fixed",
+					placement: {
+						from: "top",
+						align: "center"
+					}
+				
+			});
+			//alert("The new Account Informations has been saved succesfully .");
 			location.reload();
 		}else{
-			alert("Error on saving new informations");
+			$.notify({//options
+			    title:"<strong>Error!</strong>",
+				message:"An error occurred, please try again later",
+					
+				},
+				{//settings
+					allow_dismiss: true,
+						
+					type:"danger",
+					position: "fixed",
+					placement: {
+						from: "top",
+						align: "center"
+					}
+				
+			});
+			//alert("Error on saving new informations");
 		}
 		
 

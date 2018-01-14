@@ -18,6 +18,8 @@ $(document).ready( function () {
 						    {"defaultContent": '<button class="btn-details" type="button">Details</button>'}
 						    ]
 	 });
+	 
+	 
 
 	 //Details button function
 	 $('#employeeTable').on('click', '.btn-details', function () {
@@ -59,10 +61,42 @@ $(document).ready( function () {
 				   url: "deleteEmployee",
 				   data: {"idEmployee": idEmployee},
 				   success: function(data, status, xhr){
-					   alert("The Employee account "+idEmployee+" has been deleted .")
+					   $.notify({//options
+						    title:"<strong>Success!<strong>",
+							message:"The Employee account "+idEmployee+" has been deleted .",
+							button: "Confirm"
+							},
+							{//settings
+								type:"success",
+								allow_dismiss: true,
+								
+								position: "fixed",
+								placement: {
+									from: "top",
+									align: "center"
+								}
+							
+						});
+					   //alert("The Employee account "+idEmployee+" has been deleted .")
 					   location.reload();
 				   },error: function(){
-					   alert("The Employee account "+idEmployee+" has not been deleted . Please try again")
+					   $.notify({//options
+						    title:"<strong>Error!</strong>",
+							message:"The Employee account "+idEmployee+" has not been deleted . Please try again",
+							button: "Confirm"
+							},
+							{//settings
+								type:"danger",
+								allow_dismiss: true,
+								
+								position: "fixed",
+								placement: {
+									from: "top",
+									align: "center"
+								}
+							
+						});
+					  // alert("The Employee account "+idEmployee+" has not been deleted . Please try again")
 				   }
 			 });
 	   })
@@ -89,6 +123,17 @@ function CreateNewEmployeeModal(){
 			       }
 
 			       })
+	//reset fields content on close
+	$('#ModalCreateNewEmployee').on('hidden.bs.modal', function (e) {
+			  $(this)
+			    .find("input,textarea,select")
+			       .val('')
+			       .end()
+			    .find("input[type=checkbox], input[type=radio]")
+			       .prop("checked", "")
+			       .end();
+	})
+	
   //Save Fuction
 	$('.modal-footer').on('click', '#savebutton', function (){
 			var firstname = $(".modalcontent #fname").val();
@@ -115,9 +160,27 @@ function CreateNewEmployeeModal(){
 		   $.trim($(".modalcontent #appno").val()) === ''|| $.trim($(".modalcontent #contractno").val()) === '' || 
 		   $.trim($(".modalcontent #countryList").val()) === '' || specialisation === ""|| 
 		   specialisationLavel === ""){
-
-			 alert("Please complete all mandaroty fields .");
-		}else{
+			
+			$.notify({//options
+			    title:"<strong>Attention!</strong>",
+				message:"Please complete all mandaroty fields.",
+					
+				},
+				{//settings
+					allow_dismiss: true,
+					z_index: 2000,
+					type:"danger",
+					position: "fixed",
+					placement: {
+						from: "top",
+						align: "center"
+					}
+				
+			});
+			
+			 //alert("Please complete all mandaroty fields .");
+		}else if(document.getElementById("email").checkValidity()){
+			
 			$.ajax({
 				method: "POST",
 				url: "uniqueUser",
@@ -147,24 +210,113 @@ function CreateNewEmployeeModal(){
 							 "contractno": contractno
 							},
 							success: function(data, status, xhr){
-								alert("The new employee account has been saved . ");
+								
+								$.notify({//options
+								    title:"<strong>Success!</strong>",
+									message:"The new employee account has been saved . ",
+									
+									},
+									{//settings
+										z_index: 2000,	
+										type:"success",
+										allow_dismiss: true,
+										
+										position: "fixed",
+										placement: {
+											from: "top",
+											align: "center"
+										}
+									
+								});
+								//alert("The new employee account has been saved . ");
 								$('#myModalEmployeeContract').modal('hide');
 								 location.reload();
 
 							}, error: function(){
-								alert("The new employee account has not been saved .Please try again.");
+								$.notify({//options
+								    title:"<strong>Error!</strong>",
+									message:"The new employee account has not been saved .Please try again.",
+									
+									},
+									{//settings
+										z_index: 2000,	
+										type:"danger",
+										allow_dismiss: true,
+										
+										position: "fixed",
+										placement: {
+											from: "top",
+											align: "center"
+										}
+									
+								});
+								//alert("The new employee account has not been saved .Please try again.");
 								}
 					});
 				}else{
-					alert("An error occurred, please try later.");
+					$.notify({//options
+					    title:"<strong>Attention!</strong>",
+						message:"This username already exist.",
+						
+						},
+						{//settings
+							z_index: 2000,	
+							type:"danger",
+							allow_dismiss: true,
+							
+							position: "fixed",
+							placement: {
+								from: "top",
+								align: "center"
+							}
+						
+					});
+					//alert("An error occurred, please try later.");
 				  }
 			}, error: function(){
+				$.notify({//options
+				    title:"<strong>Error!</strong>",
+					message:"An error occurred, please try later.",
+					
+					},
+					{//settings
+						z_index: 2000,
+						type:"danger",
+						allow_dismiss: true,
+						
+						position: "fixed",
+						placement: {
+							from: "top",
+							align: "center"
+						}
+					
+				});
 				//alert("error on uniqueness account");
 				}
 
 		});
-	}
-	});
+	}else{
+		
+		$.notify({//options
+		    title:"<strong>Attention!</strong>",
+			message:"The e-mail is invalid. ",
+			
+			},
+			{//settings
+				z_index: 2000,	
+				type:"danger",
+				allow_dismiss: true,
+				
+				position: "fixed",
+				placement: {
+					from: "top",
+					align: "center"
+				}
+			
+		});
+	}	
+	
+		});
 
 
 }
@@ -213,7 +365,25 @@ $(document).ready( function () {
 
 				   $('#myModalClientDetails').modal('show');
 			   },error:function(){
-				   alert("An error occurred, please try later")
+				   $.notify({//options
+					    title:"<strong>Error!</strong>",
+						message:"An error occurred, please try later.",
+						
+						},
+						{//settings
+							z_index: 2000,
+							type:"danger",
+							allow_dismiss: true,
+							
+							position: "fixed",
+							placement: {
+								from: "top",
+								align: "center"
+							}
+						
+					});
+				   
+				   //alert("An error occurred, please try later")
 			   }
 		 });
 
@@ -226,14 +396,65 @@ $(document).ready( function () {
 				   data: {"idClient": idClient},
 				   success: function(data, status, xhr){
 					   if(data === "existBillUnpaid"){
-						   alert("This account cannot be deleted because exist invoice/s unpaied !")
+						   $.notify({//options
+							    title:"<strong>Attention!</strong>",
+								message:"This account cannot be deleted because there are unpaid bills!",
+								
+								},
+								{//settings
+									z_index: 2000,	
+									type:"danger",
+									allow_dismiss: true,
+									
+									position: "fixed",
+									placement: {
+										from: "top",
+										align: "center"
+									}
+								
+							});
+						   //alert("This account cannot be deleted because exist invoice/s unpaied !")
 					   }else{
-						   alert("The Client "+idClient+" has been deleted.")
+						   $.notify({//options
+							    title:"<strong>Success!</strong>",
+								message:"The Client "+idClient+" has been deleted.",
+								
+								},
+								{//settings
+									z_index: 2000,	
+									type:"success",
+									allow_dismiss: true,
+									
+									position: "fixed",
+									placement: {
+										from: "top",
+										align: "center"
+									}
+								
+							});
+						  // alert("The Client "+idClient+" has been deleted.")
 						   location.reload();
 					   }
 					  
 				   },error: function(){
-					   alert("The Client "+idClient+" has not been deleted .Please try again. ")
+					   $.notify({//options
+						    title:"<strong>Error!</strong>",
+							message:"An error occurred, please try later.",
+							
+							},
+							{//settings
+								z_index: 2000,	
+								type:"danger",
+								allow_dismiss: true,
+								
+								position: "fixed",
+								placement: {
+									from: "top",
+									align: "center"
+								}
+							
+						});
+					  // alert("The Client "+idClient+" has not been deleted .Please try again. ")
 				   }
 			 });
 	   })
@@ -241,6 +462,10 @@ $(document).ready( function () {
 
 });
 
+
+
 }else{
 	location="/unauthorized";
 }
+
+

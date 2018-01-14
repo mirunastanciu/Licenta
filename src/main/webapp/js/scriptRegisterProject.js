@@ -39,7 +39,23 @@ $(document).ready(function () {
 				       	$('#projecttypelist').append($('<option></option>').val(p).html(p));
 				       	});
 		       },error:function(){
-		   			alert("An error occurred, please try later")
+		    	   
+		    	   $.notify({//options
+	    			    title:"<strong>Error!</strong>",
+	    				message:"An error occurred, please try later",
+	    					
+	    				},
+	    				{//settings
+	    					allow_dismiss: true,
+	    					element:".modal",	
+	    					type:"danger",
+	    					position: "fixed",
+	    					placement: {
+	    						from: "top",
+	    						align: "center"
+	    					}
+	    				
+	    			});
 		   		}
 
 		       });
@@ -59,7 +75,22 @@ $(document).ready(function () {
 				       	$('#assignep').append($('<option></option>').val(p).html(p));
 				       	});
 		       },error:function(){
-		   			alert("An error occurred, please try later")
+		    	   $.notify({//options
+	    			    title:"<strong>Error!</strong>",
+	    				message:"An error occurred, please try later",
+	    					
+	    				},
+	    				{//settings
+	    					allow_dismiss: true,
+	    					element:".modal",	
+	    					type:"danger",
+	    					position: "fixed",
+	    					placement: {
+	    						from: "top",
+	    						align: "center"
+	    					}
+	    				
+	    			});
 		   		}
 
 		       })
@@ -72,8 +103,23 @@ function saveTicket(){
 	var description = $("#desc").val();
 	var assignpers = $("#assignep option:selected" ).text();
 	var duedate = $("#duedate").val();
-	if(projecttype ==="" || description === "" || assignpers === "" || duedate === ""){
-	   alert("All the fields are mandatory")
+	if(projecttype ==="" || description === "" || duedate === ""){
+		 $.notify({//options
+			    title:"<strong>Attention!</strong>",
+				message:"Please complete all mandatory fields",
+					
+				},
+				{//settings
+					allow_dismiss: true,
+					//element:".modal",	
+					type:"danger",
+					position: "fixed",
+					placement: {
+						from: "top",
+						align: "center"
+					}
+				
+			});
 	}else{
 		$.ajax({
 			method: "POST",
@@ -86,12 +132,43 @@ function saveTicket(){
 				 "logeduser": logeduser
 				},
 				success: function(data, status, xhr){
-					alert("The Ticket has been saved.");
+					 $.notify({//options
+		    			    title:"<strong>Success!</strong>",
+		    				message:"The Ticket has been saved.",
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    					//element:".modal",	
+		    					type:"success",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+					//alert("The Ticket has been saved.");
 					location = data;
 
 
 				},error:function(){
-		   			alert("An error occurred, please try later")
+					 $.notify({//options
+		    			    title:"<strong>Error!</strong>",
+		    				message:"An error occurred, please try later",
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    					element:".modal",	
+		    					type:"danger",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
 		   		}
 		});
 	}

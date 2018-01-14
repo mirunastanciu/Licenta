@@ -1,5 +1,5 @@
 var counter = 0;
-
+var counter2=0;
 function Login(){
 	var username = $('#username').val();
 	var password = $('#password').val();
@@ -41,6 +41,7 @@ function Login(){
 		counter = counter+1;
 	}
 	
+	
 	if(counter < 3 && username !== "" && password !== ""){
 		
 		$.ajax({
@@ -52,28 +53,49 @@ function Login(){
 				},
 				success: function(data, status, xhr){
 					if(data == -1){
-						$.notify({//options
-									message:"This account dosn't exist ! Please register..."
-								},
-								{//settings
-									template: 
-											'<div style="margin-top:2px;" data-notify="container" class="col-xs-11 col-sm-3 s alert-warning" role="alert">'+
-											'<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>'+
-											'<br>'+
-											'<span data-notify="icon"></span>'+
-											'<span data-placement="right"></span>' +
-											'<span data-notify="message">This account dos not exist ! Please register...</span>'+
-											'<br>'+
-											'<br>'+
-											'<p><a href="/registationRequestPage"  data-notify="url"><button>Ok</button></a><p>'+
-											'</div>'
-								}
-					
-						);
+								counter2=counter2+1;
+								$.notify({//options
+									message:"The username or password are incorect.",
+									button: "Confirm"
+									},
+									{//settings
+										type:"danger",
+										allow_dismiss: true,
+										
+										position: "fixed",
+										placement: {
+											from: "top",
+											align: "center"
+										}
+									
+						         });
+								
+							
+							if(counter2 == 3 ){
+								$.notify({//options
+											title:"<strong>Attention!</strong>",
+											message:"This account dosn't exist ! Please register..."
+										},
+										{//settings
+											template: 
+													'<div style="margin-top:2px;" data-notify="container" class="col-xs-11 col-sm-3 s alert-warning" role="alert">'+
+													'<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>'+
+													'<br>'+
+													'<span data-notify="icon"></span>'+
+													'<span data-placement="right"></span>' +
+													'<span data-notify="message">This account dos not exist ! Please register...</span>'+
+													'<br>'+
+													'<br>'+
+													'<p><a href="/registationRequestPage"  data-notify="url"><button>Ok</button></a><p>'+
+													'</div>'
+										}
+							
+								);
+							}
 					}else if(data == 1){
 						document.cookie = "loged_username="+username;						
 						var logeduser = $.cookie("loged_username");
-						window.location.replace(data);
+						window.location.replace("/startPage");
 						
 						$.ajax({
 							   method: "POST",
@@ -85,7 +107,11 @@ function Login(){
 						 });
 					}
 		}, error: function(){
-						$.notify({message:"An error ocured. Please try later."},
+						$.notify(
+								{
+									title:"<strong>Error!</strong>",
+									message:"An error ocured. Please try later."
+									},
 							{//settings
 								type:"danger",
 								allow_dismiss: true,
@@ -95,9 +121,10 @@ function Login(){
 									from: "top",
 									align: "center"
 									}
-							});
+							}
 
-					}
+					);
+		}
 		});
 	
 		
@@ -146,7 +173,7 @@ function validateSecureCode() {
 			{//settings
 				type:"danger",
 				allow_dismiss: true,
-				
+				element:".modal",
 				position: "fixed",
 				placement: {
 					from: "top",
@@ -166,13 +193,14 @@ function validateSecureCode() {
 				success: function(data, status, xhr){
 					if(data === "1"){
 						$.notify({//options
-							message:"The request number doesn't exist.",
-							button: "Confirm"
+							title:"<strong>Attaention!</strong>",
+							message:"The request number doesn't exist."
+							
 						},
 						{//settings
 							type:"danger",
 							allow_dismiss: true,
-							
+							element:".modal",
 							position: "fixed",
 							placement: {
 								from: "top",
@@ -182,13 +210,14 @@ function validateSecureCode() {
 						//alert("The request number doesn't exist.");
 					}else if(data === "2"){
 						$.notify({//options
-							message:"This secure code is not valid",
-							button: "Confirm"
+							title:"<strong>Attention!</strong>",
+							message:"This secure code is not valid"
+							
 						},
 						{//settings
 							type:"danger",
 							allow_dismiss: true,
-							
+							element:".modal",
 							position: "fixed",
 							placement: {
 								from: "top",
@@ -198,11 +227,12 @@ function validateSecureCode() {
 						//alert("This secure code is not valid");
 					}else{
 						$.notify({//options
-							message:data,
-							button: "Confirm"
+							title:"<strong>Success!</strong>",
+							message:"The code is valid."
+							
 						},
 						{//settings
-							type:"danger",
+							type:"success",
 							allow_dismiss: true,
 							
 							position: "fixed",
@@ -217,13 +247,14 @@ function validateSecureCode() {
 					
 				},error:function(){
 					$.notify({//options
-						message:"An error occurred, please try later.",
-						button: "Confirm"
+						title:"<strong>Error!</strong>",
+						message:"An error occurred, please try later."
+						
 					},
 					{//settings
 						type:"danger",
 						allow_dismiss: true,
-						
+						element:".modal",
 						position: "fixed",
 						placement: {
 							from: "top",

@@ -4,7 +4,23 @@ function sent(){
 	var phone =  $("#phone").val();
 	
 	if(name === "" || email ==="" || phone === ""){
-		alert("Please complete all mandatory fields.");
+		$.notify({//options
+		    title:"<strong>Attention!</strong>",
+			message:"Please complete all mandatory fields."
+				
+			},
+			{//settings
+				allow_dismiss: true,
+					
+				type:"danger",
+				position: "fixed",
+				placement: {
+					from: "top",
+					align: "center"
+				}
+			
+		});
+		//alert("Please complete all mandatory fields.");
 	}else{
 		if(document.getElementById("email").checkValidity()){
 			$.ajax({
@@ -16,14 +32,62 @@ function sent(){
 					 "phone": phone
 					},
 					success: function(data, status, xhr){
-						alert("The request has been sant.");
-						location="http://localhost:8080/loginPage";
+						$.notify({//options
+		    			    title:"<strong>Success!</strong>",
+		    				message:"The request has been sant."
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    					//element:".modal",	
+		    					type:"success",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+						//alert("The request has been sant.");
+						location="loginPage";
 					}, error: function(){
-						alert("The request has not been sant.");
+						$.notify({//options
+		    			    title:"<strong>Error!</strong>",
+		    				message:"The request has not been sant."
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    					
+		    					type:"danger",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+						//alert("The request has not been sant.");
 						}
 			});
 		}else{
-			alert("The e-mail is not valid.");
+			$.notify({//options
+			    title:"<strong>Attention!</strong>",
+				message:"The e-mail is invalid."
+					
+				},
+				{//settings
+					allow_dismiss: true,
+						
+					type:"danger",
+					position: "fixed",
+					placement: {
+						from: "top",
+						align: "center"
+					}
+				
+			});
+			//alert("The request has been sant.");
 		}
 		
 	}

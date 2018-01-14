@@ -71,7 +71,23 @@ $(document).ready( function () {
 
 				    });
 		            }, error: function(){
-		            		alert("An error occurred, please try later");
+		            	$.notify({//options
+		    			    title:"<strong>Error!</strong>",
+		    				message:"An error occurred, please try again later",
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    						
+		    					type:"danger",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+		            		//alert("An error occurred, please try later");
 		            	}
 				});
   }
@@ -116,7 +132,23 @@ $(document).ready( function () {
 					 });
 
 					}, error: function(){
-						alert("An error occurred, please try later");
+						$.notify({//options
+		    			    title:"<strong>Error!</strong>",
+		    				message:"An error occurred, please try again later",
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    					element:".modal",	
+		    					type:"danger",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+						//alert("An error occurred, please try later");
 						}
 
 			});
@@ -133,7 +165,23 @@ $(document).ready( function () {
 			            $(".modal-body #clemail").html(data.email);
 
 					}, error: function(){
-						alert("An error occurred, please try later");
+						$.notify({//options
+		    			    title:"<strong>Error!</strong>",
+		    				message:"An error occurred, please try again later",
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    					element:".modal",
+		    					type:"danger",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+						//alert("An error occurred, please try later");
 						}
 
 			});
@@ -149,7 +197,23 @@ $(document).ready( function () {
 			            $(".modal-body #invduedate").html(data.duedate);
 
 					}, error: function(){
-						alert("An error occurred, please try later");
+						$.notify({//options
+		    			    title:"<strong>Error!</strong>",
+		    				message:"An error occurred, please try again later",
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    					element:".modal",
+		    					type:"danger",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+						//alert("An error occurred, please try later");
 						}
 
 			});
@@ -163,7 +227,23 @@ $(document).ready( function () {
 						$(".modal-body #total").html(data+" EUR");
 
 					}, error: function(){
-						alert("An error occurred, please try later");
+						$.notify({//options
+		    			    title:"<strong>Error!</strong>",
+		    				message:"An error occurred, please try again later",
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    					element:".modal",	
+		    					type:"danger",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+						//alert("An error occurred, please try later");
 						}
 
 			});
@@ -241,7 +321,23 @@ if(acctype == 1){
 
 			    });
 	            }, error: function(){
-	            	alert("An error occurred, please try later");
+	            	$.notify({//options
+	    			    title:"<strong>Error!</strong>",
+	    				message:"An error occurred, please try again later",
+	    					
+	    				},
+	    				{//settings
+	    					allow_dismiss: true,
+	    						
+	    					type:"danger",
+	    					position: "fixed",
+	    					placement: {
+	    						from: "top",
+	    						align: "center"
+	    					}
+	    				
+	    			});
+	            	//alert("An error occurred, please try later");
 	            	}
 			});
 }
@@ -287,7 +383,23 @@ if(acctype == 1){
 					 });
 
 					}, error: function(){
-						alert("An error occurred, please try later");
+						$.notify({//options
+		    			    title:"<strong>Error!</strong>",
+		    				message:"An error occurred, please try again later",
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    						
+		    					type:"danger",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+						//alert("An error occurred, please try later");
 						}
 
 			});
@@ -304,7 +416,23 @@ if(acctype == 1){
 			            $(".modal-body #clemail").html(data.email);
 
 					}, error: function(){
-						alert("An error occurred, please try later");
+						$.notify({//options
+		    			    title:"<strong>Error!</strong>",
+		    				message:"An error occurred, please try again later",
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    						
+		    					type:"danger",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+						//alert("An error occurred, please try later");
 						}
 
 			});
@@ -320,7 +448,23 @@ if(acctype == 1){
 			            $(".modal-body #invduedate").html(data.duedate);
 
 					}, error: function(){
-						alert("An error occurred, please try later");
+						$.notify({//options
+		    			    title:"<strong>Error!</strong>",
+		    				message:"An error occurred, please try again later",
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    						
+		    					type:"danger",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+						//alert("An error occurred, please try later");
 						}
 
 			});
@@ -334,7 +478,23 @@ if(acctype == 1){
 						$(".modal-body #total").html(data+" EUR");
 
 					}, error: function(){
-						alert("An error occurred, please try later");
+						$.notify({//options
+		    			    title:"<strong>Error!</strong>",
+		    				message:"An error occurred, please try again later",
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    						
+		    					type:"danger",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+						//alert("An error occurred, please try later");
 						}
 
 			});
@@ -352,7 +512,23 @@ if(acctype == 1){
     		 $('#invoiceModal').modal('hide');
     		 location.reload();
     	 }, error: function(){
-    		 alert("An error occurred, please try later");
+    		 $.notify({//options
+ 			    title:"<strong>Error!</strong>",
+ 				message:"An error occurred, please try again later",
+ 					
+ 				},
+ 				{//settings
+ 					allow_dismiss: true,
+ 					element:".modal",	
+ 					type:"danger",
+ 					position: "fixed",
+ 					placement: {
+ 						from: "top",
+ 						align: "center"
+ 					}
+ 				
+ 			});
+    		 //alert("An error occurred, please try later");
 			}
      });
      });
@@ -367,7 +543,23 @@ if(acctype == 1){
  		 $('#invoiceModal').modal('hide');
  		location.reload();
  	 }, error: function(){
- 		alert("An error occurred, please try later");
+ 		$.notify({//options
+		    title:"<strong>Error!</strong>",
+			message:"An error occurred, please try again later",
+				
+			},
+			{//settings
+				allow_dismiss: true,
+			    element:".modal",	
+				type:"danger",
+				position: "fixed",
+				placement: {
+					from: "top",
+					align: "center"
+				}
+			
+		});
+ 		//alert("An error occurred, please try later");
 			}
      });
 });

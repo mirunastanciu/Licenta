@@ -31,10 +31,42 @@ $(document).ready( function () {
 				data:
 					{"idRequest": idRequest,},
 					success: function(data, status, xhr){
-						alert("The request was processed !")
+						$.notify({//options
+		    			    title:"<strong>Success!</strong>",
+		    				message:"The request hes been processed .",
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    					//element:".modal",	
+		    					type:"success",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+						//alert("The request hes been processed .")
 						 location.reload();
 					},error:function(){
-			   			alert("An error occurred, please try later")
+						$.notify({//options
+		    			    title:"<strong>Error!</strong>",
+		    				message:"An error occurred, please try again later",
+		    					
+		    				},
+		    				{//settings
+		    					allow_dismiss: true,
+		    					element:".modal",	
+		    					type:"danger",
+		    					position: "fixed",
+		    					placement: {
+		    						from: "top",
+		    						align: "center"
+		    					}
+		    				
+		    			});
+			   			//alert("An error occurred, please try later")
 			   		}
 			});
 		 

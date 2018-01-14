@@ -8,7 +8,24 @@ function save(){
 	var email = $("#email").val();
 	
 	if(username === "" || idaccount ==="" || newpass === "" || passretype === "" || email === ""){
-		alert("Please complete all mandatory fields.");
+		
+		$.notify({//options
+		    title:"<strong>Attention!</strong>",
+			message:"Please complete all mandaroty fields.",
+				
+			},
+			{//settings
+				allow_dismiss: true,
+			    //element: ".modal",		
+				type:"danger",
+				position: "fixed",
+				placement: {
+					from: "top",
+					align: "center"
+				}
+			
+		});
+		//alert("Please complete all mandatory fields.");
 	}else{
 		if(document.getElementById("email").checkValidity()){
 			$.ajax({
@@ -25,24 +42,120 @@ function save(){
 					success: function(data, status, xhr){
 						console.log(data);
 						if(data === "1"){
-							alert("The Id account doesn't exist !");
+							$.notify({//options
+							    title:"<strong>Attention!</strong>",
+								message:"The Id account doesn't exist !",
+									
+								},
+								{//settings
+									allow_dismiss: true,
+										
+									type:"danger",
+									position: "fixed",
+									placement: {
+										from: "top",
+										align: "center"
+									}
+								
+							});
+							//alert("The Id account doesn't exist !");
 						}else if(data === "2"){
-							alert("The username doesn't exist ! ");
+							$.notify({//options
+							    title:"<strong>Attention!</strong>",
+								message:"The username doesn't exist!",
+									
+								},
+								{//settings
+									allow_dismiss: true,
+										
+									type:"danger",
+									position: "fixed",
+									placement: {
+										from: "top",
+										align: "center"
+									}
+								
+							});
+							//alert("The username doesn't exist ! ");
 						}else if(data === "3"){
-							alert("parole nu corespund");	
+							$.notify({//options
+							    title:"<strong>Attention!</strong>",
+								message:"The passwords are not metch!",
+									
+								},
+								{//settings
+									allow_dismiss: true,
+										
+									type:"danger",
+									position: "fixed",
+									placement: {
+										from: "top",
+										align: "center"
+									}
+								
+							});
+							//alert("parole nu corespund");	
 						}else{
-							alert(data);
+							$.notify({//options
+							    title:"<strong>Success!</strong>",
+								message:data,
+									
+								},
+								{//settings
+									allow_dismiss: true,
+										
+									type:"danger",
+									position: "fixed",
+									placement: {
+										from: "top",
+										align: "center"
+									}
+								
+							});
+							//alert(data);
 							location = "/loginPage";
 						}
 						
 	
 	
 					}, error: function(){
-						alert("An error occurred, please try later");
+						$.notify({//options
+						    title:"<strong>Error!</strong>",
+							message:"An error occurred, please try later",
+								
+							},
+							{//settings
+								allow_dismiss: true,
+									
+								type:"danger",
+								position: "fixed",
+								placement: {
+									from: "top",
+									align: "center"
+								}
+							
+						});
+						//alert("An error occurred, please try later");
 						}
 			});
 		}else{
-			alert("The e-mail is not valid.");
+			$.notify({//options
+			    title:"<strong>Attention!</strong>",
+				message:"The e-mail is not valid.",
+					
+				},
+				{//settings
+					allow_dismiss: true,
+						
+					type:"danger",
+					position: "fixed",
+					placement: {
+						from: "top",
+						align: "center"
+					}
+				
+			});
+			//alert("The e-mail is not valid.");
 		}
 	}
 

@@ -5,6 +5,8 @@
 <title>Employee Page</title>
 
 <script type="text/javascript" src="../js/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../js/notify/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="../js/notify/bootstrap-notify.js"></script>
 <script type="text/javascript" src="../js/jquery/jquery.cookie.js"></script>
 <script type="text/javascript" src="../js/jquery/jquery.dataTables.js"></script>
 <script type="text/javascript" src="../js/jquery/jquery.dataTables.min.js"></script>
@@ -153,25 +155,25 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
   			<div class="InLineDiv-StAdmPg">
   				
      			<p>County</p>
-     			<input type="text" id="county" class="input mandatory" name="county" placeholder="Your County.."  autocomplete="off" />
+     			<input type="text" id="county" class="input mandatory" name="county"  autocomplete="off" />
      
      			<p>Town</p>
-     			<input type="text" id="town" class="input mandatory" name="town" placeholder="Your Town.."  autocomplete="off" />
+     			<input type="text" id="town" class="input mandatory" name="town"  autocomplete="off" />
      
      			<p>Street</p>
-     			<input type="text" id="street" class="input mandatory" name="street" placeholder="Your Street.."  autocomplete="off" />
+     			<input type="text" id="street" class="input mandatory" name="street"   autocomplete="off" />
      
      			<p>Street Number</p>
-     			<input type="number" id="streetno" class="input mandatory" name="streetno" placeholder="Your Street Number.."  autocomplete="off" />
+     			<input type="number" id="streetno" class="input mandatory" name="streetno"   autocomplete="off" />
      
      			<p>Build</p>
-     			<input type="text" id="build" class="input mandatory" name="build" placeholder="Your Build.."  autocomplete="off" />
+     			<input type="number" id="build" class="input mandatory" name="build"  autocomplete="off" />
      
      			<p>Appartment Number</p>
-     			<input type="number" id="appno" class="input mandatory" name="appno" placeholder="Your Appartment Number.."  autocomplete="off" />
+     			<input type="number" id="appno" class="input mandatory" name="appno"   autocomplete="off" />
     			
     			<p>Contract Number</p>
-     			<input type="number" id="contractno" class="input mandatory" name="contractno" placeholder="Your Appartment Number.."  autocomplete="off" />
+     			<input type="number" id="contractno" class="input mandatory" name="contractno"   autocomplete="off" />
     		
     		</div>
         </div>
@@ -179,7 +181,7 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
         
           <button id="savebutton" type="button" class="btn btn-default">Save</button>
           
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button id="close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
       
@@ -246,7 +248,7 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
         
           <button id="deletebutton" type="button" class="btn btn-default">Delete</button>
           
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button id="close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
       

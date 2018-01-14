@@ -5,6 +5,8 @@
 <title>Admin Start Page</title>
 
 <script type="text/javascript" src="../js/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../js/notify/bootstrap-notify.min.js"></script>
+<script type="text/javascript" src="../js/notify/bootstrap-notify.js"></script>
 <script type="text/javascript" src="../js/jquery/jquery.cookie.js"></script>
 <script type="text/javascript" src="../js/jquery/jquery.dataTables.js"></script>
 <script type="text/javascript" src="../js/jquery/jquery.dataTables.min.js"></script>
@@ -108,7 +110,7 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
 		          <div class="modalcontent " >
 		             <div id="d1" class="InLineDiv-StAdmPg ">
 		    			<h4>Salary</h4>
-		    			<input type="number" id="salary" class="input mandatory" name="salary" placeholder="Salary.."  autocomplete="off" />
+		    			<input type="number" id="salary" class="input mandatory" name="salary"   autocomplete="off" />
 		
 		 				<h4>Status</h4>
 		    			<select id="statusList" name="status"  class="mandatory"></select>
@@ -125,7 +127,7 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
 		    			<br>
 		    			<br>
 		    			<h4>Expiration Date</h4>
-		    			<input type="date" id="expdate" class="input mandatory" name="expdate" autocomplete="off" />
+		    			<input type="date" id="expdate" class="input " name="expdate" autocomplete="off" style="border-bottom: 1px solid #31708f;"/>
 		    
 		     			
 		    		</div>
@@ -133,7 +135,7 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
 		        </div>
 		        <div class="modal-footer">
 		        
-		          <button id="savebutton" type="button" class="btn btn-default">Save</button>
+		          <button id="savebutton" type="button" class="btn btn-default" >Save</button>
 		     
 		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		        </div>
@@ -158,14 +160,14 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
 		          <div class="modalcontent " >
 		             <div id="d1" class="InLineDiv-StAdmPg ">
 		             	<h4>Client</h4>
-		             	<select id="clientsList" name="clients mandatory"  ></select>
+		             	<select id="clientsList" name="clients" class="mandatory"  ></select>
 		             	<br>
 		             	<br>
 		             	<h4>Amount</h4>
-		    			<input type="number" id="amount" class="input mandatory" name="amount" placeholder="Amount.."  autocomplete="off" />
+		    			<input type="number" id="amount" class="input mandatory" name="amount"   autocomplete="off" />
 		
 		 				<h4>Status</h4>
-		    			<select id="statusList1" name="status mandatory"  ></select>
+		    			<select id="statusList1" name="status" class="mandatory" ></select>
 		    			<br>
 		    			<br>
 					 </div>
@@ -179,7 +181,7 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
 		    			<br>
 		    			<br>
 		    			<h4>Expiration Date</h4>
-		    			<input type="date" id="expdate1" class="input mandatory" name="expdate" autocomplete="off" />
+		    			<input type="date" id="expdate1" class="input" name="expdate" autocomplete="off" style="border-bottom: 1px solid #31708f;"/>
 		    
 		     			
 		    		</div>
@@ -216,12 +218,12 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
 		             
 		             <h4>Status</h4>
 		             <p id="statusE"></p>
-		             <select id="StatusList" style="width:50%;" onchange="statusChange();"></select>
+		             <select id="StatusList" style="width:50%;border-bottom: 1px solid #31708f;" onchange="statusChange();" ></select>
 		             
 		             <div id="SLRY" onchange="SalaryChange()">
 		             	<h4>Salary</h4>
 		             	<p id="salaryE"></p>
-		             	<input style="width:50%;" type="number" id="salaryEdit" class="input " name="expdate"  autocomplete="off"/>
+		             	<input style="width:50%;border-bottom: 1px solid #31708f;" type="number" id="salaryEdit" class="input " name="expdate"  autocomplete="off" />
 		             </div>
 		             
 		             <h4>Curency</h4>
@@ -236,7 +238,7 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
 		             <div id="EXPD" onchange="expDateChange()">
 		            	 <h4>Expiration Date</h4>
 		             	 <p id="expdateE"></p>  
-		             	 <input style="width:50%;" type="date" id="expDateEdit" class="input" name="expdate" autocomplete="off"/> 
+		             	 <input style="width:50%;border-bottom: 1px solid #31708f;" type="date" id="expDateEdit" class="input" name="expdate" autocomplete="off" /> 
 		             </div>
 		             
 		
