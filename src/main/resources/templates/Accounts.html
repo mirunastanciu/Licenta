@@ -60,7 +60,7 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
 	<br>
 	<div class="divpaddin">
 		<h2>Developers</h2>
-		<button id="createNewEmployee" onclick="CreateNewEmployeeModal()">Create new Employee</button>
+		<button id="createNewEmployee" onclick="createContractRemainder()">Create new Employee</button>
 		<br> 
 		<table id="employeeTable" class="table " class="row-border">
 			<thead>
@@ -107,7 +107,7 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
          
           <br>
           <div class="modalcontent " >
-              <div class="InLineDiv-StAdmPg">
+             <div class="inLine2" style="width:30%;margin-right:15px;">
     			<p>First Name</p>
     			<input type="text" id="fname" class="mandatory input " name="firstname" autocomplete="off" />
 
@@ -122,14 +122,20 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
     
      			<p>Email</p>
     			<input type="email" id="email" class="input mandatory" name="email" autocomplete="off" />
+    		</div>
+    		<div class="inLine2" style="width:30%;margin-right:15px;">
+ 				
  				
  				<p>Specialisation</p>
+ 				<br>
     			<select id="specialisationList" name="specialisation" class="mandatory" >
-       				 
+       			<br>	 
     			</select>
     			<br>
     			<br>
+    			<br>
     			<p>Specialisation Level</p>
+    			<br>
     			<select id="specialisationLavelList" name="specialisation" class="mandatory" >
     			     <option value="australia"></option>
        				 <option value="australia">Junior</option>
@@ -151,14 +157,16 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
     			</select> -->
 
     			
- 			</div>
-  			<div class="InLineDiv-StAdmPg">
+ 			
+  			
   				
      			<p>County</p>
      			<input type="text" id="county" class="input mandatory" name="county"  autocomplete="off" />
      
      			<p>Town</p>
      			<input type="text" id="town" class="input mandatory" name="town"  autocomplete="off" />
+     		</div>
+     		<div class="inLine2" style="width:30%;margin-right:15px;">
      
      			<p>Street</p>
      			<input type="text" id="street" class="input mandatory" name="street"   autocomplete="off" />
@@ -327,6 +335,31 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
     </div>
   </div>
   </div>
+  
+  <!-- //create contract remaider -->
+	<div class="modal fade modalTD" id="contractremainder" role="dialog">
+    <div class="modal-dialog modal-sm">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Select Client</h4>
+        </div>
+        <div class="modal-body">
+            <h4>Do you create a contract already ?</h4>
+       		
+        
+       </div>
+        <div class="modal-footer">
+          <button type="button" id="yes" class="btn btn-default" onclick="CreateNewEmployeeModal()" >Yes</button>
+          <button type="button" id="no" class="btn btn-default" data-dismiss="modal">No</button>
+         
+        </div>
+      </div>
+      
+    </div>
   
   
   

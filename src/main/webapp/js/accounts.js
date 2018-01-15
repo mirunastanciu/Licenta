@@ -107,7 +107,18 @@ $(document).ready( function () {
 
 })
 
+function createContractRemainder(){
+	contractremainder
+	//$('#ModalCreateNewEmployee').modal('hide');
+	$('#contractremainder').modal('show');
+	
+	
+}
+
+
+
 function CreateNewEmployeeModal(){
+	 $('#contractremainder').modal("toggle");
 	 $('#ModalCreateNewEmployee').modal('show');
 	 var options1;
 		$.ajax("/getSpNames",
