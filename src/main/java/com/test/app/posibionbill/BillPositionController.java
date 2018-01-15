@@ -88,9 +88,9 @@ public class BillPositionController {
 	@RequestMapping(path = "/deletePositionDraft", method = RequestMethod.POST)
 	public void deletePositionDraft(@RequestParam(value="posnumber") int posnumber){
 		
+		BillPosition pb = billPositionService.getBillPosDraftByInvpos(posnumber);
 		
-		
-		billPositionService.delete(billPositionService.getBillPosDraftByInvpos(posnumber));
+		billPositionService.delete(pb);
 		
 
 	}

@@ -7,8 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-
 import com.test.app.account.Account;
 import com.test.app.account.AccountService;
 
@@ -24,7 +22,7 @@ public class Start{
 
 	}
 
-
+/*
 	@Autowired
 	AccountService accountService;
 
@@ -39,7 +37,7 @@ public class Start{
             }
 
 
-    }
+    }*/
 
 
 }

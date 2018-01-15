@@ -1,6 +1,7 @@
 var counter = 0;
 var counter2=0;
 function Login(){
+	//location="/invoicePage";
 	var username = $('#username').val();
 	var password = $('#password').val();
 	
@@ -91,6 +92,7 @@ function Login(){
 										}
 							
 								);
+								location="/registationRequestPage";
 							}
 					}else if(data == 1){
 						document.cookie = "loged_username="+username;						
@@ -146,7 +148,8 @@ function Login(){
 		 location="/registationRequestPage";
 	 }
 
-}}
+}
+	}
 	
 function redirectForgotPass(){
 	location="/forgotPasswordPage";

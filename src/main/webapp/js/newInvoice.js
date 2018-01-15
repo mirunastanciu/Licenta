@@ -7,7 +7,148 @@ $(window).resize(function(){
 
 /*$(document).ready( function () {*/
 	/*document.getElementById("addpos").disabled = true;*/
+$(document).ready(function(){
+	var invoiceId = 0;
+	 $.ajax({
+			method: "POST",
+			url: "getBillPositions",
+			data:{"invoiceId": invoiceId}
+				,success: function(data, status, xhr){
 
+					var table = $('#positionList').dataTable({
+						"sAjaxDataProp": "",
+						"bFilter": false,
+						"bPaginate": false,
+						"bInfo": false,
+						"responsive": true,
+						"bSort" : false,
+						"destroy": true,
+						"order": [[ 0, "asc" ]],
+						"data": data,
+					    "columns": [
+					        { data: "servicename" },
+					        { data: "price" },
+					        { data: "currency" },
+					        { data: "idticket"},
+					        { "defaultContent": '<button class="remove" type="button";">Delete</button>'}
+					    ]
+
+				    });
+					
+					 
+
+					$.ajax({
+						method: "POST",
+						url: "totalInvoice",
+						data:{"invoiceId": invoiceId}
+							,success: function(data, status, xhr){
+								$("#total").html(data);
+
+							}, error: function(){
+								 $.notify({//options
+					    			    title:"<strong>Error!</strong>",
+					    				message:"An error occurred, please try again later",
+					    					
+					    				},
+					    				{//settings
+					    					allow_dismiss: true,
+					    					element:".modal",	
+					    					type:"danger",
+					    					position: "fixed",
+					    					placement: {
+					    						from: "top",
+					    						align: "center"
+					    					}
+					    				
+					    			});
+								//alert("error total Invoice");
+								}
+
+					});
+				}
+	 });
+	 
+	 $('#positionList').on( 'click', 'button.remove', function (e) {
+	    	//console.log("click delete")
+		 var table =  $('#positionList').DataTable();
+	    	var index =  table.row( $(this).parents('tr') ).index();
+	    	
+	    	 var posnumber = index+1;
+	    	 alert(posnumber);
+	    	 $.ajax({
+					method: "POST",
+					url: "deletePositionDraft",
+					data:{"posnumber": posnumber}
+						,success: function(data, status, xhr){
+							 $.notify({//options
+				    			    title:"<strong>Success!</strong>",
+				    				message:"The selected position has been deleted.",
+				    				
+				    					
+				    				},
+				    				{//settings
+				    					allow_dismiss: true,
+				    					//element:".modal",	
+				    					type:"success",
+				    					position: "fixed",
+				    					placement: {
+				    						from: "top",
+				    						align: "center"
+				    					}
+				    				
+				    			});
+							 
+							 $.ajax({
+									method: "POST",
+									url: "getBillPositions",
+									data:{"invoiceId": invoiceId}
+										,success: function(data, status, xhr){
+
+											var table = $('#positionList').dataTable({
+												"sAjaxDataProp": "",
+												"bFilter": false,
+												"bPaginate": false,
+												"bInfo": false,
+												"responsive": true,
+												"bSort" : false,
+												"destroy": true,
+												"order": [[ 0, "asc" ]],
+												"data": data,
+											    "columns": [
+											        { data: "servicename" },
+											        { data: "price" },
+											        { data: "currency" },
+											        { data: "idticket"},
+											        { "defaultContent": '<button class="remove" type="button";">Delete</button>'}
+											    ]
+
+										    });
+										}
+							 });
+
+						}, error: function(){
+							 $.notify({//options
+				    			    title:"<strong>Error!</strong>",
+				    				message:"An error occurred, please try again later",
+				    					
+				    				},
+				    				{//settings
+				    					allow_dismiss: true,
+				    					element:".modal",	
+				    					type:"danger",
+				    					position: "fixed",
+				    					placement: {
+				    						from: "top",
+				    						align: "center"
+				    					}
+				    				
+				    			});
+							//alert("error total Invoice");
+							}
+			 }); 
+	
+})
+})
 
 var options;
 $.ajax("/getClientsName",
@@ -84,7 +225,7 @@ function addPos(){
 			    	   //alert("An error occurred, please try later.")
 			       }
 		});
-   }
+   
 
 	
 
@@ -130,6 +271,25 @@ function addPos(){
 	    keyboard: false,
 	    show: true
 	});
+	
+   }else{
+	   $.notify({//options
+		    title:"<strong>Attention!</strong>",
+			message:"You must select a client",
+				
+			},
+			{//settings
+				allow_dismiss: true,
+				//element:".modal",	
+				type:"danger",
+				position: "fixed",
+				placement: {
+					from: "top",
+					align: "center"
+				}
+			
+		});
+   }
 }
 
 //save pos function
@@ -166,7 +326,11 @@ function savePos() {
 		 	});
 */
 		}else{
+			
 			invpos = invpos + 1;
+			console.log(servicename)
+			console.log(idticket)
+			console.log(invpos)
 				$.ajax({
 					   method: "POST",
 					   url: "saveBillPosition",
@@ -176,63 +340,69 @@ function savePos() {
 						   		,
 					   success: function(data, status, xhr){
 						   
-						    $.ajax({
-								method: "POST",
-								url: "getBillPositions",
-								data:{"invoiceId": invoiceId}
-									,success: function(data, status, xhr){
+						   $("#addPosModal").modal("hide");
+						   
+							var invoiceId = 0;
+							 $.ajax({
+									method: "POST",
+									url: "getBillPositions",
+									data:{"invoiceId": invoiceId}
+										,success: function(data, status, xhr){
 
-										var table = $('#positionList').dataTable({
-											"sAjaxDataProp": "",
-											"bFilter": false,
-											"bPaginate": false,
-											"bInfo": false,
-											"responsive": true,
-											"bSort" : false,
-											"destroy": true,
-											"order": [[ 0, "asc" ]],
-											"data": data,
-										    "columns": [
-										        { data: "servicename" },
-										        { data: "price" },
-										        { data: "currency" },
-										        { data: "idticket"},
-										        { "defaultContent": '<button class="btn-details" type="button" onclick="deleteInv();">Delete</button>'}
-										    ]
+											var table = $('#positionList').dataTable({
+												"sAjaxDataProp": "",
+												"bFilter": false,
+												"bPaginate": false,
+												"bInfo": false,
+												"responsive": true,
+												"bSort" : false,
+												"destroy": true,
+												"order": [[ 0, "asc" ]],
+												"data": data,
+											    "columns": [
+											        { data: "servicename" },
+											        { data: "price" },
+											        { data: "currency" },
+											        { data: "idticket"},
+											        { "defaultContent": '<button class="remove" type="button" >Delete</button>'}
+											    ]
 
-									    });
-										
-										 
+										    });
+											
+											 
 
-										$.ajax({
-											method: "POST",
-											url: "totalInvoice",
-											data:{"invoiceId": invoiceId}
-												,success: function(data, status, xhr){
-													$("#total").html(data);
-		
-												}, error: function(){
-													 $.notify({//options
-										    			    title:"<strong>Error!</strong>",
-										    				message:"An error occurred, please try again later",
-										    					
-										    				},
-										    				{//settings
-										    					allow_dismiss: true,
-										    					element:".modal",	
-										    					type:"danger",
-										    					position: "fixed",
-										    					placement: {
-										    						from: "top",
-										    						align: "center"
-										    					}
-										    				
-										    			});
-													//alert("error total Invoice");
-													}
-		
-										});
+											$.ajax({
+												method: "POST",
+												url: "totalInvoice",
+												data:{"invoiceId": invoiceId}
+													,success: function(data, status, xhr){
+														$("#total").html(data);
 
+													}, error: function(){
+														 $.notify({//options
+											    			    title:"<strong>Error!</strong>",
+											    				message:"An error occurred, please try again later",
+											    					
+											    				},
+											    				{//settings
+											    					allow_dismiss: true,
+											    					element:".modal",	
+											    					type:"danger",
+											    					position: "fixed",
+											    					placement: {
+											    						from: "top",
+											    						align: "center"
+											    					}
+											    				
+											    			});
+														//alert("error total Invoice");
+														}
+
+											});
+										}
+							 });
+                              
+						   
 							},error:function(){
 								 $.notify({//options
 					    			    title:"<strong>Error!</strong>",
@@ -252,7 +422,9 @@ function savePos() {
 					    			});
 						    	   //alert("An error occurred, please try later.")
 						       }
-
+				});
+		}
+/*
 					});
 
 					$('#addPosModal').modal('hide');
@@ -277,63 +449,9 @@ function savePos() {
 		    	   //alert("An error occurred, please try later.")
 		       }
 			   });
-			 }
+			 }*/
  }
 
-function deleteInv() {
-	
-	 var index =  $('#positionList').closest('tr').index();
-	 console.log(index);
-	 //console.log(posnumber)
-	 var posnumber = index+1;
-	 
-	 
-	 $.ajax({
-			method: "POST",
-			url: "deletePositionDraft",
-			data:{"posnumber": posnumber}
-				,success: function(data, status, xhr){
-					 $.notify({//options
-		    			    title:"<strong>Success!</strong>",
-		    				message:"The selected position has been deleted.",
-		    				
-		    					
-		    				},
-		    				{//settings
-		    					allow_dismiss: true,
-		    					//element:".modal",	
-		    					type:"success",
-		    					position: "fixed",
-		    					placement: {
-		    						from: "top",
-		    						align: "center"
-		    					}
-		    				
-		    			});
-					 
-					 location.reload();
-
-				}, error: function(){
-					 $.notify({//options
-		    			    title:"<strong>Error!</strong>",
-		    				message:"An error occurred, please try again later",
-		    					
-		    				},
-		    				{//settings
-		    					allow_dismiss: true,
-		    					element:".modal",	
-		    					type:"danger",
-		    					position: "fixed",
-		    					placement: {
-		    						from: "top",
-		    						align: "center"
-		    					}
-		    				
-		    			});
-					//alert("error total Invoice");
-					}
-	 });
-};
 
 
 
@@ -452,5 +570,3 @@ function deleteInv() {
 }else{
 	location="/unauthorized";
 }
-
-

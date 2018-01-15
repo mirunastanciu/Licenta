@@ -15,7 +15,7 @@ public interface BillPositionRepository extends CrudRepository<BillPosition, Str
 	@Query(value="SELECT * FROM positionbill WHERE IDBILL=0;", nativeQuery =true)
 	public ArrayList<BillPosition> getBillPosByIdBill0();
 	
-	@Query(value="SELECT * FROM positionbill WHERE IDBILL=0 AND INVPOS = ?;", nativeQuery =true)
+	@Query(value="SELECT * FROM positionbill WHERE INVPOS = ? AND IDBILL=0;", nativeQuery =true)
 	public BillPosition getBillPosDraftByInvpos(int a);
 	
 	
