@@ -77,19 +77,19 @@ public class GetPagesController {
 		ModelAndView m = new ModelAndView("RegistrationRequest");
 		return m;
 	}
-	
+
 	@RequestMapping("/registationRequestPageList")
 	public ModelAndView getRegistrationRequestPageList() {
 		ModelAndView m = new ModelAndView("RegistrationRequestsPage");
 		return m;
 	}
-	
+
 	@RequestMapping("/myAccountPage")
 	public ModelAndView getMyAccountPage() {
 		ModelAndView m = new ModelAndView("MyAccountPage");
 		return m;
 	}
-	
+
 	@RequestMapping("/unauthorized")
 	public ModelAndView getUnauthorized() {
 		ModelAndView m = new ModelAndView("Unauthorized");
