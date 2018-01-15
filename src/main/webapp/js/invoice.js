@@ -252,6 +252,12 @@ $(document).ready( function () {
 		 $('#invoiceModal').modal('show');
 	 });
 
+$("#addInv").click(function(){
+	
+	
+	location="/CreateNewInvoicePage";
+});
+	 
  });
 
 $(document).ready( function () {

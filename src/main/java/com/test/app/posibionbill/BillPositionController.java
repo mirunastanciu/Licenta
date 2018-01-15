@@ -89,6 +89,11 @@ public class BillPositionController {
 	public void deletePositionDraft(@RequestParam(value="posnumber") int posnumber){
 		
 		BillPosition pb = billPositionService.getBillPosDraftByInvpos(posnumber);
+		ArrayList<BillPosition> bpd = billPositionService.getAllPosPerBill(0);
+		for(int i=posnumber;i<bpd.size();i++){
+			bpd.get(i).setInvpos((bpd.get(i).getInvpos())-1);
+			billPositionService.save(bpd.get(i));
+		}
 		
 		billPositionService.delete(pb);
 		

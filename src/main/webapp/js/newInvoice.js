@@ -4,10 +4,60 @@ var invpos=0;
 $(window).resize(function(){
 	location.reload();
 });
-
+var client="";
 /*$(document).ready( function () {*/
 	/*document.getElementById("addpos").disabled = true;*/
+
+var isshow=0;
+$(document).ready(function() {
+	var options;
+	$.ajax("/getClientsName",
+		       { type: 'GET',
+		 		 success: function (data) {
+		 			options = data;
+
+				       	$('#clientlist').empty();
+				       	$('#clientlist').append($('<option></option>').html(""));
+				       	$.each(options, function(i, p) {
+				       	$('#clientlist').append($('<option></option>').val(p).html(p));
+				       	});
+		       },error:function(){
+		    	   $.notify({//options
+	   			    title:"<strong>Error!</strong>",
+	   				message:"An error occurred, please try again later",
+	   					
+	   				},
+	   				{//settings
+	   					allow_dismiss: true,
+	   						
+	   					type:"danger",
+	   					position: "fixed",
+	   					placement: {
+	   						from: "top",
+	   						align: "center"
+	   					}
+	   				
+	   			});
+		    	   //alert("An error occurred, please try later.")
+		       }
+
+		       
+		       });
+   if (isshow == 0) {
+	   $('#selectClientModal').modal({backdrop: 'static', keyboard: false})  
+     $('#selectClientModal').modal("show");
+   }
+   isshow = 1;
+   
+   $('.modal-footer').on('click', '#save', function () {
+	   client = $("#clientlist option:selected" ).text();
+	   $('#selectClientModal').modal("hide");
+   });
+});
+
 $(document).ready(function(){
+	
+	
 	var invoiceId = 0;
 	 $.ajax({
 			method: "POST",
@@ -30,7 +80,7 @@ $(document).ready(function(){
 					        { data: "price" },
 					        { data: "currency" },
 					        { data: "idticket"},
-					        { "defaultContent": '<button class="remove" type="button";">Delete</button>'}
+					        { "defaultContent": '<button class="remove" type="button";"><img   src="../style/img/delete.ico" style="width:20px;height:20px;" ></button>'}
 					    ]
 
 				    });
@@ -74,7 +124,7 @@ $(document).ready(function(){
 	    	var index =  table.row( $(this).parents('tr') ).index();
 	    	
 	    	 var posnumber = index+1;
-	    	 alert(posnumber);
+	    	console.log(posnumber);
 	    	 $.ajax({
 					method: "POST",
 					url: "deletePositionDraft",
@@ -119,7 +169,7 @@ $(document).ready(function(){
 											        { data: "price" },
 											        { data: "currency" },
 											        { data: "idticket"},
-											        { "defaultContent": '<button class="remove" type="button";">Delete</button>'}
+											        { "defaultContent": '<button class="remove" type="button";"><img   src="../style/img/delete.ico" style="width:20px;height:20px;" ></button>'}
 											    ]
 
 										    });
@@ -150,52 +200,20 @@ $(document).ready(function(){
 })
 })
 
-var options;
-$.ajax("/getClientsName",
-	       { type: 'GET',
-	 		 success: function (data) {
-	 			options = data;
 
-			       	$('#clientlist').empty();
-			       	$('#clientlist').append($('<option></option>').html(""));
-			       	$.each(options, function(i, p) {
-			       	$('#clientlist').append($('<option></option>').val(p).html(p));
-			       	});
-	       },error:function(){
-	    	   $.notify({//options
-   			    title:"<strong>Error!</strong>",
-   				message:"An error occurred, please try again later",
-   					
-   				},
-   				{//settings
-   					allow_dismiss: true,
-   						
-   					type:"danger",
-   					position: "fixed",
-   					placement: {
-   						from: "top",
-   						align: "center"
-   					}
-   				
-   			});
-	    	   //alert("An error occurred, please try later.")
-	       }
-
-	       
-	       });
 
 function addPos(){
 	/*if()*/
 
 	var clientname = $("#clientlist option:selected").text();
 	
-   if(clientname !== ""){
+   /*if(clientname !== ""){*/
 	   var options1;
 		$.ajax({
 			method: "POST",
 			url: "getIdTByIdCl",
 			data:
-				{"clientname": clientname}
+				{"clientname": client}
 				,success: function(data, status, xhr){
 					options1 = data;
 
@@ -272,7 +290,7 @@ function addPos(){
 	    show: true
 	});
 	
-   }else{
+  /* }else{
 	   $.notify({//options
 		    title:"<strong>Attention!</strong>",
 			message:"You must select a client",
@@ -289,7 +307,7 @@ function addPos(){
 				}
 			
 		});
-   }
+   }*/
 }
 
 //save pos function
@@ -328,9 +346,7 @@ function savePos() {
 		}else{
 			
 			invpos = invpos + 1;
-			console.log(servicename)
-			console.log(idticket)
-			console.log(invpos)
+			
 				$.ajax({
 					   method: "POST",
 					   url: "saveBillPosition",
@@ -364,7 +380,7 @@ function savePos() {
 											        { data: "price" },
 											        { data: "currency" },
 											        { data: "idticket"},
-											        { "defaultContent": '<button class="remove" type="button" >Delete</button>'}
+											        { "defaultContent": '<button class="remove" type="button" ><img   src="../style/img/delete.ico" style="width:20px;height:20px;" ></button>'}
 											    ]
 
 										    });
