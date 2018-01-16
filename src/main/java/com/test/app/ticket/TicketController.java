@@ -5,16 +5,14 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-
-
 import com.test.app.account.AccountService;
 import com.test.app.client.Client;
 import com.test.app.client.ClientService;
@@ -25,6 +23,7 @@ import com.test.app.specialisation.SpecialisationService;
 import com.test.app.ticketstatus.TicketStatusService;
 
 @RestController
+
 public class TicketController {
 
 	@Autowired
@@ -48,28 +47,70 @@ public class TicketController {
 	@Autowired
 	AccountService accountService;
 
-	@RequestMapping(path = "/ticketsToDo", method = RequestMethod.GET)
-	 
-	public List<TicketDetails> getAllTicketsToDo() {
-		List<Ticket> ttodo = ticketService.getTicketsToDo();
+	@RequestMapping(path = "/ticketsToDo", method = RequestMethod.GET)	 
+	 List<TicketDetails> getAllTicketsToDo() {
+		List<Ticket> ttodo =  new ArrayList<>();
 		List<TicketDetails> td = new ArrayList<>();
+		TicketDetails tkd = new TicketDetails();
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String name = authentication.getName();
+		
+		if(accountService.getAccByUsrename(name).getIdaccounttype() == 1){
+			System.out.println("I'm admin");
+			
+			 ttodo = ticketService.getTicketsToDo();
+			for(int i=0;i<ttodo.size();i++){
 
-		for(int i=0;i<ttodo.size();i++){
+					
+					tkd.setIdticket(ttodo.get(i).getId());
+					tkd.setDescription(ttodo.get(i).getDescription());
+					tkd.setProjecttypename(projectTypetService.getProjectTypeById(ttodo.get(i).getProjcttype()).getProjtypename());
+					//tkd.setDuedate(ttodo.get(i).getDuedate());
+					tkd.setCreationdate(ttodo.get(i).getCreationdate());
+					tkd.setStatus(ticketStatusService.getTicketStatusById(ttodo.get(i).getIdstatus()).getStatusname());
+					td.add(tkd);
+				}
+		}else if (accountService.getAccByUsrename(name).getIdaccounttype() == 2){
+			System.out.println("I'm client");
+			int idcl = clientService.getIdClByUsername(name) ;
+			ttodo = ticketService.getTicketsToDoByIdClient(idcl);
+			//List<TicketDetails> td = new ArrayList<>();
 
-				TicketDetails tkd = new TicketDetails();
-				tkd.setIdticket(ttodo.get(i).getId());
-				tkd.setDescription(ttodo.get(i).getDescription());
-				tkd.setProjecttypename(projectTypetService.getProjectTypeById(ttodo.get(i).getProjcttype()).getProjtypename());
-				//tkd.setDuedate(ttodo.get(i).getDuedate());
-				tkd.setCreationdate(ttodo.get(i).getCreationdate());
-				tkd.setStatus(ticketStatusService.getTicketStatusById(ttodo.get(i).getIdstatus()).getStatusname());
-				td.add(tkd);
-			}
+			for(int i=0;i<ttodo.size();i++){
+
+					//TicketDetails tkd = new TicketDetails();
+					tkd.setIdticket(ttodo.get(i).getId());
+					tkd.setDescription(ttodo.get(i).getDescription());
+					tkd.setProjecttypename(projectTypetService.getProjectTypeById(ttodo.get(i).getProjcttype()).getProjtypename());
+					tkd.setDuedate(ttodo.get(i).getDuedate());
+					tkd.setStatus(ticketStatusService.getTicketStatusById(ttodo.get(i).getIdstatus()).getStatusname());
+					td.add(tkd);
+				}
+		}else{
+			System.out.println("I'm employee");
+			int idemp = employeeService.getIdEmpByUsername(name);
+	    	int empspecialisationid = employeeService.getSpecialisationByIdEmp(idemp);
+		    ttodo = ticketService.getTicketsToDoByIdEmp(empspecialisationid);
+			 td = new ArrayList<>();
+
+			for(int i=0;i<ttodo.size();i++){
+
+					//TicketDetails tkd = new TicketDetails();
+					tkd.setIdticket(ttodo.get(i).getId());
+					tkd.setDescription(ttodo.get(i).getDescription());
+					tkd.setProjecttypename(projectTypetService.getProjectTypeById(ttodo.get(i).getProjcttype()).getProjtypename());
+					tkd.setDuedate(ttodo.get(i).getDuedate());
+					tkd.setStatus(ticketStatusService.getTicketStatusById(ttodo.get(i).getIdstatus()).getStatusname());
+					td.add(tkd);
+				}
+		}
+		
 
 		return td;
 	}
 	
-	@RequestMapping(path = "/ticketsToDoByClient", method = RequestMethod.POST)
+	/*@RequestMapping(path = "/ticketsToDoByClient", method = RequestMethod.POST)
 	public List<TicketDetails> getAllTicketsToDoByClient(@RequestParam(value="logeduser") String username){
     	int idcl = clientService.getIdClByUsername(username) ;
 		List<Ticket> ttodo = ticketService.getTicketsToDoByIdClient(idcl);
@@ -87,11 +128,15 @@ public class TicketController {
 			}
 
 		return td;
-	}
+	}*/
 	
-	@RequestMapping(path = "/ticketsToDoByEmp", method = RequestMethod.POST)
+	/*@RequestMapping(path = "/ticketsToDoByEmp", method = RequestMethod.POST)
 	public List<TicketDetails> getAllTicketsToDoByEmp(@RequestParam(value="logeduser") String username){
-    	int idemp = employeeService.getIdEmpByUsername(username);
+		
+			Authentication authentication = SecurityContextHolder.getContext().
+					getAuthentication();
+			String name = authentication.getName();
+    	int idemp = employeeService.getIdEmpByUsername(name);
     	int empspecialisationid = employeeService.getSpecialisationByIdEmp(idemp);
 		List<Ticket> ttodo = ticketService.getTicketsToDoByIdEmp(empspecialisationid);
 		List<TicketDetails> td = new ArrayList<>();
@@ -108,7 +153,7 @@ public class TicketController {
 			}
 
 		return td;
-	}
+	}*/
 
 	@RequestMapping(path = "/ticketsInProgress", method = RequestMethod.GET)
 	public List<TicketDetails> getAllTicketsAssigned() {

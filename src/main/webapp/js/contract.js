@@ -1,4 +1,4 @@
-if( !!$.cookie('loged_username') && $.cookie("loged_username") !== "" ){
+/*if( !!$.cookie('loged_username') && $.cookie("loged_username") !== "" ){*/
 
 $(window).resize(function(){location.reload();});
 
@@ -753,6 +753,6 @@ function expDateChange1(){
 }
 
 
-}else{
+/*}else{
 	location="/unauthorized";
-}
+}*/

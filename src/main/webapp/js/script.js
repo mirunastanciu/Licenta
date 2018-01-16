@@ -1,35 +1,48 @@
+/*
+	if( !!$.cookie('loged_username') && $.cookie("loged_username") !== "" ){*/
+$(document).ready( function () {
+	
+	$.ajax("/accountType",
+			{ type: 'GET',
+	 		  success: function (data) {
+		   			document.cookie = "accounting_type="+data;
+		   			var acctype = $.cookie("accounting_type");
+		   			
+		   			if(acctype == 2 ){
+		   				$("#accounts").hide();
+		   				$("#contracts").hide();
+		   				$("#registartionreq").hide();
+		   			}
+		   			if(acctype == 3){
+		   				$("#accounts").hide();
+		   				$("#contracts").hide();
+		   				$("#registartionreq").hide();
+		   				$("#invoice").hide();
+		   			}
+		   		}
+	 });
+})
 
-	if( !!$.cookie('loged_username') && $.cookie("loged_username") !== "" ){
 		var idTicket;
 		var logeduser = $.cookie("loged_username");
-		var acctype = $.cookie("accounting_type");
+		
 		$(window).resize(function(){location.reload();});
 
 		$(document).ready( function () {
 
-				   			if(acctype == 2 ){
-				   				$("#accounts").hide();
-				   				$("#contracts").hide();
-				   				$("#registartionreq").hide();
-				   			}
-				   			if(acctype == 3){
-				   				$("#accounts").hide();
-				   				$("#contracts").hide();
-				   				$("#registartionreq").hide();
-				   				$("#invoice").hide();
-				   			}
+				   			
 		     
 		});
 		
     /*})*/
 
 		
-
+		
 
 		//To Do table
 		$(document).ready( function () {
 			//if user is admin	
-				   		    if(acctype == 1){
+				   		   /* if(acctype == 1){*/
 				   				var table = $('#ticketsTable').dataTable({
 				   					"sAjaxSource": "/ticketsToDo",
 				   					"sAjaxDataProp": "",
@@ -51,7 +64,7 @@
 				   						
 				   			    });
 			//if user is client		   				
-				   			}else if(acctype == 2){
+/*				   			}else if(acctype == 2){
 				   				$.ajax({
 									method: "POST",
 									url: "ticketsToDoByClient",
@@ -149,7 +162,7 @@
 				   					});
 				   				
 				   			}
-				   		
+				   		*/
 
 			if($("#ticketsTable #stsColor"))
 
@@ -654,11 +667,11 @@
 				
 			});	
 						
-		});
+		/*});*/
 
 
 		//Assigned Table
-		$(document).ready( function () {
+		/*$(document).ready( function () {*/
 			 
 			//if user is admin	
 				   		    if(acctype == 1){
@@ -1105,11 +1118,11 @@
 				   		}
 				 });
 			});
-		});
+		/*});*/
 
 
 		//Done Table
-		$(document).ready( function () {
+		/*$(document).ready( function () {*/
 
 			//if user is admin	
 				   		    if(acctype == 1){
@@ -1608,9 +1621,9 @@
 		}
 
 
-	}else{
+	/*}else{
 		location="/unauthorized";
-	}
+	}*/
 
 
 

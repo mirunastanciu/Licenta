@@ -1,35 +1,3 @@
-<!-- <html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
-  <head>
-    <title tiles:fragment="title">Messages : Create</title>
-  </head>
-  <body>
-    <div tiles:fragment="content">
-        <form name="f" th:action="@{/loginPage}" method="post">               
-            <fieldset>
-                <legend>Please Login</legend>
-                <div th:if="${param.error}" class="alert alert-error">    
-                    Invalid username and password.
-                </div>
-                <div th:if="${param.logout}" class="alert alert-success"> 
-                    You have been logged out.
-                </div>
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username"/>        
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password"/>                    <div class="form-actions">
-                    <button type="submit" class="btn">Log in</button>
-                </div>
-            </fieldset>
-        </form>
-    </div>
-  </body>
-</html>
-
- -->
-
-
-
-
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
@@ -74,21 +42,28 @@
 
 <div class="containerLogin">
 	
-    	<p>Username :</p>
+    	<!-- <p>Username :</p>
     	<input  id="username" class="input" type="text" name="j_username" autocomplete="off" style="border-bottom: 1px solid #31708f;"/>
         <p>Password :</p>
         <input id="password" class="input"  type="password" name="j_password" autocomplete="off"   style="border-bottom: 1px solid #31708f;"/>
         
-        <button id="loginButton" class = "CustomButton" type="button" onclick="Login()">Login</button>
+        <button id="loginButton" class = "CustomButton" type="button" onclick="Login()">Login</button> -->
         
-     <!--   
-      <form action="/j_spring_security_check" method="POST">
-        <label for="username">User Name:</label>
-        <input id="username" name="j_username" type="text"/>
-        <label for="password">Password:</label>
-        <input id="password" name="j_password" type="password"/>
-        <input type="submit" value="Log In"/>
-      </form> -->
+        <form name='f' action="/j_spring_security_check" method='POST'>
+      <table>
+         <tr>
+            <td>User:</td>
+            <td><input type='text' name='j_username' value='' style="border-bottom: 1px solid #31708f;"></td>
+         </tr>
+         <tr>
+            <td>Password:</td>
+            <td><input type='password' name='j_password' style="border-bottom: 1px solid #31708f;"/></td>
+         </tr>
+         <tr>
+            <td><input name="Login" type="submit" class="centred" value="Login" /></td>
+         </tr>
+      </table>
+  </form>
     
 </div>
 

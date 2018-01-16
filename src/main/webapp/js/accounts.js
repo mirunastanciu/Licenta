@@ -1,5 +1,5 @@
-if(!!$.cookie('loged_username') && $.cookie("loged_username") !== "" ){
-	console.log("I'm in")
+/*if(!!$.cookie('loged_username') && $.cookie("loged_username") !== "" ){
+	console.log("I'm in")*/
 
 $(window).resize(function(){location.reload();});
 //Dev table
@@ -475,8 +475,8 @@ $(document).ready( function () {
 
 
 
-}else{
+/*}else{
 	location="/unauthorized";
-}
+}*/
 
 

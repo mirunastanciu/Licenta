@@ -1,7 +1,7 @@
 /*var x = $.cookie("loged_username");
 console.log(x);*/
-
-if( !!$.cookie('loged_username') && $.cookie("loged_username") !== "" ){
+/*
+if( !!$.cookie('loged_username') && $.cookie("loged_username") !== "" ){*/
 	
 
 var logeduser = $.cookie("loged_username");
@@ -796,10 +796,10 @@ function save(){
 
 }
 
-}else{
+/*}else{
 	location="/unauthorized";
 }
-
+*/
 
 
 

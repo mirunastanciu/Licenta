@@ -1,7 +1,14 @@
 package com.test.app.getPage;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -18,8 +25,15 @@ public class GetPagesController {
 		ModelAndView m = new ModelAndView("AdminAccountPage");
 		return m;
 	}*/
+	
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public ModelAndView logintest() {
+		ModelAndView m = new ModelAndView("startPage");
+		return m;
+	}
 
-	@RequestMapping("/loginPage")
+
+	@RequestMapping("/loginPage" )
 	public ModelAndView getLoginPage() {
 		ModelAndView m = new ModelAndView("Login");
 		return m;
@@ -94,5 +108,14 @@ public class GetPagesController {
 	public ModelAndView getUnauthorized() {
 		ModelAndView m = new ModelAndView("Unauthorized");
 		return m;
+	}
+	
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
+	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    if (auth != null){    
+	        new SecurityContextLogoutHandler().logout(request, response, auth);
+	    }
+	    return "redirect:/loginPage";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
 	}
 }

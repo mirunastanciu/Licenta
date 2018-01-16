@@ -1,4 +1,4 @@
-if( !!$.cookie('loged_username') && $.cookie("loged_username") !== "" ){
+/*if( !!$.cookie('loged_username') && $.cookie("loged_username") !== "" ){*/
 
 $(window).resize(function(){location.reload();});
 //Dev table
@@ -90,6 +90,6 @@ $(document).ready( function () {
 	 });
 });
 
-}else{
+/*}else{
 	location="/unauthorized";
-}
+}*/
