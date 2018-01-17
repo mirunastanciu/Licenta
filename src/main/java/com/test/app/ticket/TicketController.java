@@ -43,26 +43,26 @@ public class TicketController {
 
 	@Autowired
 	SpecialisationService specialisationService;
-	
+
 	@Autowired
 	AccountService accountService;
 
-	@RequestMapping(path = "/ticketsToDo", method = RequestMethod.GET)	 
+	@RequestMapping(path = "/ticketsToDo", method = RequestMethod.GET)
 	 List<TicketDetails> getAllTicketsToDo() {
 		List<Ticket> ttodo =  new ArrayList<>();
 		List<TicketDetails> td = new ArrayList<>();
 		TicketDetails tkd = new TicketDetails();
-		
+
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String name = authentication.getName();
-		
+
 		if(accountService.getAccByUsrename(name).getIdaccounttype() == 1){
 			System.out.println("I'm admin");
-			
+
 			 ttodo = ticketService.getTicketsToDo();
 			for(int i=0;i<ttodo.size();i++){
 
-					
+
 					tkd.setIdticket(ttodo.get(i).getId());
 					tkd.setDescription(ttodo.get(i).getDescription());
 					tkd.setProjecttypename(projectTypetService.getProjectTypeById(ttodo.get(i).getProjcttype()).getProjtypename());
@@ -105,11 +105,11 @@ public class TicketController {
 					td.add(tkd);
 				}
 		}
-		
+
 
 		return td;
 	}
-	
+
 	/*@RequestMapping(path = "/ticketsToDoByClient", method = RequestMethod.POST)
 	public List<TicketDetails> getAllTicketsToDoByClient(@RequestParam(value="logeduser") String username){
     	int idcl = clientService.getIdClByUsername(username) ;
@@ -129,10 +129,10 @@ public class TicketController {
 
 		return td;
 	}*/
-	
+
 	/*@RequestMapping(path = "/ticketsToDoByEmp", method = RequestMethod.POST)
 	public List<TicketDetails> getAllTicketsToDoByEmp(@RequestParam(value="logeduser") String username){
-		
+
 			Authentication authentication = SecurityContextHolder.getContext().
 					getAuthentication();
 			String name = authentication.getName();
@@ -157,11 +157,31 @@ public class TicketController {
 
 	@RequestMapping(path = "/ticketsInProgress", method = RequestMethod.GET)
 	public List<TicketDetails> getAllTicketsAssigned() {
-		List<Ticket> tInProgress = ticketService.getTicketsInProgress();
+		List<Ticket> tInProgress = new ArrayList<>();
 		List<TicketDetails> td = new ArrayList<>();
-		for(int i=0;i<tInProgress.size();i++){
+		TicketDetails tkd = new TicketDetails();
 
-				TicketDetails tkd = new TicketDetails();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+
+		if(accountService.getAccByUsrename(username).getIdaccounttype() == 1){
+			tInProgress = ticketService.getTicketsInProgress();
+		   for(int i=0;i<tInProgress.size();i++){
+
+
+				tkd.setIdticket(tInProgress.get(i).getId());
+				tkd.setDescription(tInProgress.get(i).getDescription());
+				tkd.setProjecttypename(projectTypetService.getProjectTypeById(tInProgress.get(i).getProjcttype()).getProjtypename());
+				tkd.setDuedate(tInProgress.get(i).getDuedate());
+				tkd.setStatus(ticketStatusService.getTicketStatusById(tInProgress.get(i).getIdstatus()).getStatusname());
+				td.add(tkd);
+			}
+		}else if(accountService.getAccByUsrename(username).getIdaccounttype() == 2) {
+			int idcl = clientService.getIdClByUsername(username) ;
+			tInProgress = ticketService.getTicketsInProgressByIdClient(idcl);
+			for(int i=0;i<tInProgress.size();i++){
+
+				//TicketDetails tkd = new TicketDetails();
 				tkd.setIdticket(tInProgress.get(i).getId());
 				tkd.setDescription(tInProgress.get(i).getDescription());
 				tkd.setProjecttypename(projectTypetService.getProjectTypeById(tInProgress.get(i).getProjcttype()).getProjtypename());
@@ -170,11 +190,27 @@ public class TicketController {
 				td.add(tkd);
 			}
 
+		}else {
+			int idemp = employeeService.getIdEmpByUsername(username);
+			 tInProgress = ticketService.getTicketsAssignedByIdEmp(idemp);
+
+				for(int i=0;i<tInProgress.size();i++){
+
+						//TicketDetails tkd = new TicketDetails();
+						tkd.setIdticket(tInProgress.get(i).getId());
+						tkd.setDescription(tInProgress.get(i).getDescription());
+						tkd.setProjecttypename(projectTypetService.getProjectTypeById(tInProgress.get(i).getProjcttype()).getProjtypename());
+						tkd.setDuedate(tInProgress.get(i).getDuedate());
+						tkd.setStatus(ticketStatusService.getTicketStatusById(tInProgress.get(i).getIdstatus()).getStatusname());
+						td.add(tkd);
+					}
+		}
+
 		return td;
 	}
 
-	
-	@RequestMapping(path = "/ticketsInProgressByClient", method = RequestMethod.POST)
+
+	/*@RequestMapping(path = "/ticketsInProgressByClient", method = RequestMethod.POST)
 	public List<TicketDetails> getAllTicketsInProgressByClient(@RequestParam(value="logeduser") String username){
     	int idcl = clientService.getIdClByUsername(username) ;
 		List<Ticket> tInProgress = ticketService.getTicketsInProgressByIdClient(idcl);
@@ -192,9 +228,9 @@ public class TicketController {
 			}
 
 		return td;
-	}
-	
-	@RequestMapping(path = "/ticketsAssignedByIdEmp", method = RequestMethod.POST)
+	}*/
+
+	/*@RequestMapping(path = "/ticketsAssignedByIdEmp", method = RequestMethod.POST)
 	public List<TicketDetails> getAllTicketsAssignedByIdEmp(@RequestParam(value="logeduser") String username){
     	int idemp = employeeService.getIdEmpByUsername(username);
 		List<Ticket> tInProgress = ticketService.getTicketsAssignedByIdEmp(idemp);
@@ -212,14 +248,15 @@ public class TicketController {
 			}
 
 		return td;
-	}
-	
+	}*/
+
 	@RequestMapping(path = "/ticketsDone", method = RequestMethod.GET)
 	public List<TicketDetails> getAllTicketsDone() {
 		List<Ticket> tDone = ticketService.getTicketsDone();
 		List<TicketDetails> td = new ArrayList<>();
+		TicketDetails tkd = new TicketDetails();
 		for(int i=0;i<tDone.size();i++) {
-				TicketDetails tkd = new TicketDetails();
+
 				tkd.setIdticket(tDone.get(i).getId());
 				tkd.setDescription(tDone.get(i).getDescription());
 				tkd.setProjecttypename(projectTypetService.getProjectTypeById(tDone.get(i).getProjcttype()).getProjtypename());
@@ -232,7 +269,7 @@ public class TicketController {
 		return td;
 	}
 
-	
+
 	@RequestMapping(path = "/ticketsDoneByClient", method = RequestMethod.POST)
 	public List<TicketDetails> getAllTicketsDoneByClient(@RequestParam(value="logeduser") String username){
     	int idcl = clientService.getIdClByUsername(username) ;
@@ -252,14 +289,14 @@ public class TicketController {
 
 		return td;
 	}
-	
+
 	@RequestMapping(path = "/addTicket" , method=RequestMethod.POST)
 	public String addTicket(@RequestParam("projecttype") String projecttype ,
 							@RequestParam("description") String description,
 							@RequestParam("assignpers") String assignpers,
 							@RequestParam("duedate") String duedate,
 							@RequestParam("logeduser") String logeduser
-							
+
 							){
 		Ticket t = new Ticket();
 		t.setDescription(description);
@@ -269,7 +306,7 @@ public class TicketController {
 		}else{
 			t.setIdemployee(0);
 		}
-		
+
 		java.sql.Date parseDate = java.sql.Date.valueOf(duedate);
 		t.setDuedate(parseDate);
 		if(accountService.getAccountTypeByUsername(logeduser) == 2 ){
@@ -279,7 +316,7 @@ public class TicketController {
 		}else{
 			t.setIdclient(clientService.getIdClByUsername(logeduser));
 		}
-		
+
 		t.setCreationdate(Date.valueOf(LocalDate.now()));
 		t.setIdstatus(1);//TO DO
 
@@ -287,7 +324,7 @@ public class TicketController {
 
 		String response = "/startPage";
 		return response;
-		
+
 
 
 
@@ -373,8 +410,8 @@ public class TicketController {
 			 tkd.setClientname("System");
 			 tkd.setClientemail("");
 		 }
-		
-		
+
+
 		 tkd.setCreationdate(tk.getCreationdate());
 		 tkd.setDuedate(tk.getDuedate());
 		 tkd.setStartdate(tk.getStartdate());
@@ -407,29 +444,29 @@ public class TicketController {
 
 	 }
 
-	 
+
 	 @RequestMapping(value ="/assignToMe" , method=RequestMethod.POST )
 	 public void assignToMe(@RequestParam(value = "logeduser") String logeduser,
 			 				@RequestParam(value = "idTicket") int idTicket){
-		 
+
 		 Ticket t = ticketService.getTicketById(idTicket);
 		 int emp = employeeService.getIdEmpByUsername(logeduser);
-		 
+
 		 t.setIdemployee(emp);
-		 
-		 ticketService.addTicket(t);
-	 }
-	 
-	 @RequestMapping(value ="/unassign" , method=RequestMethod.POST )
-	 public void unassign(@RequestParam(value = "idTicket") int idTicket){
-		 
-		 Ticket t = ticketService.getTicketById(idTicket);
-		 t.setIdemployee(0);
-		 
+
 		 ticketService.addTicket(t);
 	 }
 
-     
+	 @RequestMapping(value ="/unassign" , method=RequestMethod.POST )
+	 public void unassign(@RequestParam(value = "idTicket") int idTicket){
+
+		 Ticket t = ticketService.getTicketById(idTicket);
+		 t.setIdemployee(0);
+
+		 ticketService.addTicket(t);
+	 }
+
+
 
 
 }
