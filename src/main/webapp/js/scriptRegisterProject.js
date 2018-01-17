@@ -1,31 +1,4 @@
-if( $.cookie("loged_username") !== "" ){
-
-var logeduser = $.cookie("loged_username");
-
-$(document).ready( function () {
-	$.ajax({
-		   method: "POST",
-		   url: "accountType",
-		   data:{"logeduser": logeduser},
-		   		success: function(data, status, xhr){
-		   			console.log(data)
-		   			if(data === 2 ){
-		   				$("#accounts").hide();
-		   				$("#contracts").hide();
-		   				$("#registartionreq").hide();
-		   				$("#assignpersson").hide();
-		   			}
-		   			if(acctype == 3){
-		   				$("#accounts").hide();
-		   				$("#contracts").hide();
-		   				$("#registartionreq").hide();
-		   				$("#assignpersson").hide();
-		   				$("#invoice").hide();
-		   			}
-		   		}
-     });
-});
-
+var acctype = $.cookie("accounting_type");
 
 $(document).ready(function () {
     var options;
@@ -128,8 +101,8 @@ function saveTicket(){
 				{"projecttype": projecttype,
 				 "description": description,
 				 "assignpers": assignpers,
-				 "duedate": duedate,
-				 "logeduser": logeduser
+				 "duedate": duedate
+				 
 				},
 				success: function(data, status, xhr){
 					 $.notify({//options
@@ -177,6 +150,3 @@ function saveTicket(){
 
 }
 
-}else{
-	location="/unauthorized";
-}

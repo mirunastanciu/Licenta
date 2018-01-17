@@ -1,56 +1,29 @@
-/*var x = $.cookie("loged_username");
-console.log(x);*/
-/*
-if( !!$.cookie('loged_username') && $.cookie("loged_username") !== "" ){*/
-	
-
-var logeduser = $.cookie("loged_username");
-var acctype = $.cookie("accounting_type");
+$(window).resize(function(){
+	location.reload();
+});
 
 var eladdresslist = [];
-
-
+var acctype = $.cookie("accounting_type");
 $(document).ready( function () {
-	$.ajax({
-		   method: "POST",
-		   url: "accountType",
-		   data:{"logeduser": logeduser},
-		   		success: function(data, status, xhr){
-		   			if(data === 2){
+	
+
+		   			
+		   			if(acctype == 2){
 		   				$("#accounts").hide();
 		   				$("#contracts").hide();
 		   				$("#registartionreq").hide();
 		   			}
-		   			if(data == 3){
+		   			if(acctype == 3){
 		   				$("#accounts").hide();
 		   				$("#contracts").hide();
 		   				$("#registartionreq").hide();
 		   				$("#invoice").hide();
 		   			}
-		   		},error:function(){
-		   			$.notify({//options
-	    			    title:"<strong>Error!</strong>",
-	    				message:"An error occurred, please try again later",
-	    					
-	    				},
-	    				{//settings
-	    					allow_dismiss: true,
-	    						
-	    					type:"danger",
-	    					position: "fixed",
-	    					placement: {
-	    						from: "top",
-	    						align: "center"
-	    					}
-	    				
-	    			});
-		   			//alert("An error occurred, please try later")
-		   		}
-     });
+	
 });
 
-
 $(document).ready( function () {
+	console.log(acctype);
 	$("#fnameedit").hide();
 	$("#lnameedit").hide();
 	$("#emailedit").hide();
@@ -73,8 +46,7 @@ $(document).ready( function () {
 		$.ajax({
 			   method: "POST",
 			   url: "checkOldPass",
-			   data:{"oldpass": oldpass,
-				     "logeduser": logeduser},
+			   data:{"oldpass": oldpass},
 			   		success: function(data, status, xhr){
 
                      if(data == 1 ){
@@ -82,8 +54,7 @@ $(document).ready( function () {
                     		 $.ajax({
   			   				   method: "POST",
   			   				   url: "updatePass",
-  			   				   data:{"newpass": newpass,
-  			   					     "logeduser": logeduser},
+  			   				   data:{"newpass": newpass},
   			   				   		success: function(data, status, xhr){
   			   				   		 $.notify({//options
   			  		    			    title:"<strong>Success!</strong>",
@@ -178,14 +149,13 @@ $(document).ready( function () {
 
 
 	if(acctype == 1){
+		//console.log("iggfdcvbjoiu")
 		$("#contractinfo").hide();
 		$('#personalinfo').removeClass('inLine');
 		$('#personalinfo').addClass('centred');
 		//document.getElementById('personalinfo').className += ' centred';
-		$.ajax({
-			   method: "POST",
-			   url: "getAdminDetails",
-			   data:{"logeduser": logeduser},
+		$.ajax( "/getAdminDetails",
+				{ type: 'GET',
 			   		success: function(data, status, xhr){
 			   			$("#idacc").html(data.idaccount);
 			   			$("#fname").html(data.firstname);
@@ -212,15 +182,11 @@ $(document).ready( function () {
 			   		}
 		});
 
-		$.ajax({
-			   method: "POST",
-			   url: "getAddressByUser",
-			   data:{"logeduser": logeduser},
+		$.ajax("/getAddressByUser",
+				{ type: 'GET',
 			   		success: function(data, status, xhr){
 			   			$("#address").html(data);
 
-			   		},error:function(){
-			   			
 			   		},error:function(){
 			   			alert("An error occurred, please try later")
 			   		}
@@ -228,10 +194,8 @@ $(document).ready( function () {
 
 
 	}else if(acctype == 2){
-		$.ajax({
-			   method: "POST",
-			   url: "clientDetailsForMyAcc",
-			   data:{"logeduser": logeduser},
+		$.ajax("/clientDetailsForMyAcc",
+			{ type: 'GET',
 			   		success: function(data, status, xhr){
 			   			$("#idacc").html(data.idaccount);
 			   			$("#fname").html(data.firstname);
@@ -242,10 +206,8 @@ $(document).ready( function () {
 			   		}
 		});
 
-		$.ajax({
-			   method: "POST",
-			   url: "getAddressByUser",
-			   data:{"logeduser": logeduser},
+		$.ajax("/getAddressByUser",
+				{ type: 'GET',
 			   		success: function(data, status, xhr){
 			   			$("#address").html(data);
 
@@ -255,11 +217,10 @@ $(document).ready( function () {
 		});
 
 
-		$.ajax({
-			   method: "POST",
-			   url: "getClientContractDetailsForMyAcc",
-			   data:{"logeduser": logeduser},
-			   		success: function(data, status, xhr){
+		$.ajax( "/getClientContractDetailsForMyAcc",
+				{ type: 'GET',
+			success: function(data, status, xhr){
+				
 			   			$("#contractid").html(data.id);
 			   			$("#status").html(data.status);
 			   			$("#value").html(data.amount);
@@ -272,10 +233,8 @@ $(document).ready( function () {
 			   		}
 		});
 	}else if(acctype == 3){
-		$.ajax({
-			   method: "POST",
-			   url: "employeeDetailsForMyAcc",
-			   data:{"logeduser": logeduser},
+		$.ajax( "/employeeDetailsForMyAcc",
+				{ type: 'GET',
 			   		success: function(data, status, xhr){
 			   			$("#idacc").html(data.idaccount);
 			   			$("#fname").html(data.firstname);
@@ -302,10 +261,8 @@ $(document).ready( function () {
 			   		}
 		});
 
-		$.ajax({
-			   method: "POST",
-			   url: "getEmployeeContractDetailsForMyAcc",
-			   data:{"logeduser": logeduser},
+		$.ajax( "/getEmployeeContractDetailsForMyAcc",
+				{ type: 'GET',
 			   		success: function(data, status, xhr){
 			   			$("#contractid").html(data.id);
 			   			$("#status").html(data.status);
@@ -335,10 +292,8 @@ $(document).ready( function () {
 			   		}
 		});
 
-		$.ajax({
-			   method: "POST",
-			   url: "getAddressByUser",
-			   data:{"logeduser": logeduser},
+		$.ajax( "/getAddressByUser",
+				{ type: 'GET',
 			   		success: function(data, status, xhr){
 			   			$("#address").html(data);
 
@@ -525,9 +480,6 @@ function save(){
 	var response1=1;
 	var response2=1;
 
-	//console.log(localStorage.getItem("eladdresslist"))
-	
-	
 	if(eladdresslist.length !== 0){
 		var add = JSON.parse(localStorage.eladdresslist);
 		console.log(add[0])
@@ -549,14 +501,10 @@ function save(){
 				     "street2": street2,
 				     "streetno2": streetno2,
 				     "buildno2": buildno2,
-				     "appno2": appno2,
-				     "logeduser": logeduser
+				     "appno2": appno2
 			   },
 			   		success: function(data, status, xhr){
-			   			/*response2 = 1;
-			   			alert(response2);*/
-			   			//alert("The new Account Informations has been saved succesfully .");
-			   			//location.reload();
+			   			
 			   		},error:function(){
 			   			response2=0;
 			   		}
@@ -565,20 +513,17 @@ function save(){
 	}
 
 	//
-	if(acctype == 1){
+	
 		$.ajax({
 			   method: "POST",
-			   url: "updateAdminMyAcc",
+			   url: "updateMyAcc",
 			   data:{"fname": fname,
 				     "lname": lname,
-				     "email": email,
-				     "logeduser": logeduser
+				     "email": email
+				    
 			   },
 			   		success: function(data, status, xhr){
-			   			/*response1=1;
-			   			alert(response1);*/
-			   			//alert("The new Account Informations has been saved succesfully .");
-			   			//location.reload();
+			   			
 			   		},error:function(){
 			   			response1=0;
 			   		}
@@ -590,170 +535,8 @@ function save(){
 
 		 
 
-		 if(response1 === 1 && response2 === 1){
+	 if(response1 === 1 && response2 === 1){
 			 $.notify({//options
- 			    title:"<strong>Success!</strong>",
- 				message:"The new Account Informations has been saved.",
- 					
- 				},
- 				{//settings
- 					allow_dismiss: true,
- 						
- 					type:"success",
- 					position: "fixed",
- 					placement: {
- 						from: "top",
- 						align: "center"
- 					}
- 				
- 			});
-				//alert("The new Account Informations has been saved succesfully .");
-				location.reload();
-			}else{
-				$.notify({//options
-    			    title:"<strong>Error!</strong>",
-    				message:"An error occurred, please try again later",
-    					
-    				},
-    				{//settings
-    					allow_dismiss: true,
-    						
-    					type:"danger",
-    					position: "fixed",
-    					placement: {
-    						from: "top",
-    						align: "center"
-    					}
-    				
-    			});
-				//alert("Error on saving new informations");
-			}
-
-
-	}else if(acctype == 2){
-
-		$.ajax({
-			   method: "POST",
-			   url: "updateClMyAcc",
-			   data:{"fname": fname,
-				     "lname": lname,
-				     "email": email,
-				     "logeduser": logeduser
-			   },
-			   		success: function(data, status, xhr){
-
-			   			response1=1;
-			   			//alert("The new Account Informations has been saved succesfully .");
-			   			//location.reload();
-			   		},error:function(){
-			   			response1=0;
-			   		}
-		});
-
-		$.ajax({
-			   method: "POST",
-			   url: "changeAddressMyAcc",
-			   data:{"country2": country2,
-				     "county2": county2,
-				     "town2": town2,
-				     "street2": street2,
-				     "streetno2": streetno2,
-				     "buildno2": buildno2,
-				     "appno2": appno2,
-				     "logeduser": logeduser
-			   },
-			   		success: function(data, status, xhr){
-			   			//response2=1;
-			   			//alert("The new Account Informations has been saved succesfully .");
-			   			//location.reload();
-			   		},error:function(){
-			   			response2=0;
-			   		}
-		});
-
-		
-
-		if(response1 === 1 && response2 === 1){
-			$.notify({//options
-			    title:"<strong>Success!</strong>",
-				message:"The new Account Informations has been saved.",
-					
-				},
-				{//settings
-					allow_dismiss: true,
-						
-					type:"danger",
-					position: "fixed",
-					placement: {
-						from: "top",
-						align: "center"
-					}
-				
-			});
-			//alert("The new Account Informations has been saved succesfully .");
-			location.reload();
-		}else{
-			$.notify({//options
-			    title:"<strong>Error!</strong>",
-				message:"An error occurred, please try again later",
-					
-				},
-				{//settings
-					allow_dismiss: true,
-						
-					type:"danger",
-					position: "fixed",
-					placement: {
-						from: "top",
-						align: "center"
-					}
-				
-			});
-			//alert("Error on saving new informations");
-		}
-
-	}else{
-
-		$.ajax({
-			   method: "POST",
-			   url: "updateEmpMyAcc",
-			   data:{"fname": fname,
-				     "lname": lname,
-				     "email": email,
-				     "logeduser": logeduser
-			   },
-			   		success: function(data, status, xhr){
-			   			//response1=1;
-			   			//alert("The new Account Informations has been saved succesfully .");
-			   			//location.reload();
-			   		},error:function(){
-			   			response1=0;
-			   		}
-		});
-
-		$.ajax({
-			   method: "POST",
-			   url: "changeAddressMyAcc",
-			   data:{"country2": country2,
-				     "county2": county2,
-				     "town2": town2,
-				     "street2": street2,
-				     "streetno2": streetno2,
-				     "buildno2": buildno2,
-				     "appno2": appno2,
-				     "logeduser": logeduser
-			   },
-			   		success: function(data, status, xhr){
-			   			//response2=1;
-			   			//alert("The new Account Informations has been saved succesfully .");
-			   			//location.reload();
-			   		},error:function(){
-			   			response2=0;
-			   		}
-		});
-
-		if(response1 === 1 && response2 === 1){
-			$.notify({//options
 			    title:"<strong>Success!</strong>",
 				message:"The new Account Informations has been saved.",
 					
@@ -769,30 +552,9 @@ function save(){
 					}
 				
 			});
-			//alert("The new Account Informations has been saved succesfully .");
+			
 			location.reload();
-		}else{
-			$.notify({//options
-			    title:"<strong>Error!</strong>",
-				message:"An error occurred, please try again later",
-					
-				},
-				{//settings
-					allow_dismiss: true,
-						
-					type:"danger",
-					position: "fixed",
-					placement: {
-						from: "top",
-						align: "center"
-					}
-				
-			});
-			//alert("Error on saving new informations");
 		}
-		
-
-	}
 
 }
 

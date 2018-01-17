@@ -3,10 +3,13 @@ package com.test.app.client;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 
 
 import com.test.app.account.AccountService;
@@ -25,25 +28,25 @@ import com.test.app.ticket.TicketService;
 public class ClientController {
 
 	@Autowired
-	ClientService clientService;
+	private ClientService clientService;
 
 	@Autowired
-	ContractClientService contractClientService;
+	private ContractClientService contractClientService;
 
 	@Autowired
-	AccountService accountService;
+	private AccountService accountService;
 
 	@Autowired
-	AddressService addresService;
+	private AddressService addresService;
 	
 	@Autowired
-	BillService billService;
+	private BillService billService;
 	
 	@Autowired
-	TicketService ticketService;
+	private TicketService ticketService;
 
 	@Autowired
-	ContractClientStatusService contractClientStatusService;
+	private ContractClientStatusService contractClientStatusService;
 
 	@RequestMapping(path="/getAllClients" ,method=RequestMethod.GET)
 	public ArrayList<com.test.app.client.Client> getAllClients(){
@@ -132,22 +135,23 @@ public class ClientController {
 
 	}
 	
-	@RequestMapping(path = "/getClientName" , method=RequestMethod.POST)
+	/*@RequestMapping(path = "/getClientName" , method=RequestMethod.POST)
 	public String getClientName(@RequestParam(value="logeduser") String user){
 		return clientService.getNameByUsername(user);
-	}
+	}*/
 	
 	
-	@RequestMapping(path = "/clientDetailsForMyAcc", method = RequestMethod.POST)
-	public Client accountDetails(@RequestParam(value = "logeduser") String username) {
-		
+	@RequestMapping(path = "/clientDetailsForMyAcc", method = RequestMethod.GET)
+	public Client accountDetails() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
 		Client cl = clientService.getClientById(clientService.getIdClByUsername(username));
 		
 		return cl;
 		
 	}
 	
-	@RequestMapping(path = "/updateClMyAcc", method = RequestMethod.POST)
+	/*@RequestMapping(path = "/updateClMyAcc", method = RequestMethod.POST)
 	public void updateClMyAcc(@RequestParam(value = "fname") String fname,
 							  @RequestParam(value = "lname") String lname,
 							  @RequestParam(value = "email") String email,
@@ -162,7 +166,7 @@ public class ClientController {
 		
 		clientService.saveClient(c);
 		
-	}
+	}*/
 	
 	
 

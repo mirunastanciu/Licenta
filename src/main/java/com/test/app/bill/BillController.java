@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,9 +72,12 @@ public class BillController {
 		return unpaidInvoiceD;
 	}
 	
-	@RequestMapping(value ="/getWaitingInvoicesByClient" , method = RequestMethod.POST)
-	public ArrayList<BillDetails> getAllWaitingInvoicesByclient(@RequestParam(value="logeduser") String user){
-		ArrayList<Bill> unpaidInvoice =  billService.getWaitingBillsByClient(user);
+	@RequestMapping(value ="/getWaitingInvoicesByClient" , method = RequestMethod.GET)
+	public ArrayList<BillDetails> getAllWaitingInvoicesByclient(){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		
+		ArrayList<Bill> unpaidInvoice =  billService.getWaitingBillsByClient(username);
 		ArrayList<BillDetails> unpaidInvoiceD = new ArrayList<>();
 		for(int i=0;i<unpaidInvoice.size();i++){
 			BillDetails bd = new BillDetails();
@@ -112,9 +117,12 @@ public class BillController {
 		return paidInvoiceD;
 	}
 	
-	@RequestMapping(value ="/getProcessedInvoicesByClient" , method = RequestMethod.POST)
-	public ArrayList<BillDetails> getProcessedInvoicesByClient(@RequestParam(value="logeduser") String user){
-		ArrayList<Bill> paidInvoice =  billService.getPrecessdBillsByClient(user);
+	@RequestMapping(value ="/getProcessedInvoicesByClient" , method = RequestMethod.GET)
+	public ArrayList<BillDetails> getProcessedInvoicesByClient(){
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		ArrayList<Bill> paidInvoice =  billService.getPrecessdBillsByClient(username);
 		ArrayList<BillDetails> paidInvoiceD = new ArrayList<>();
 		for(int i=0;i<paidInvoice.size();i++){
 			BillDetails bd = new BillDetails();

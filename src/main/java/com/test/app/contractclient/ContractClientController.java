@@ -3,6 +3,8 @@ package com.test.app.contractclient;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -123,10 +125,12 @@ public class ContractClientController {
 
 	}
 	
-	@RequestMapping(path="/getClientContractDetailsForMyAcc", method=RequestMethod.POST)
-	public ContractClientDetails getAllEmployeeContract(@RequestParam(value="logeduser") String logeduser){
+	@RequestMapping(path="/getClientContractDetailsForMyAcc", method=RequestMethod.GET)
+	public ContractClientDetails getAllEmployeeContract(){
 		
-		int id = contractClientService.getIdContractByIdClient(clientService.getIdClByUsername(logeduser));
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		int id = contractClientService.getIdContractByIdClient(clientService.getIdClByUsername(username));
 		ContractClient contract = contractClientService.getContractById(id);
 
 			ContractClientDetails ccd = new ContractClientDetails();

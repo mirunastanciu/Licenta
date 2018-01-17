@@ -1,6 +1,8 @@
 package com.test.app.administrator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,18 +14,20 @@ public class AdministratorController {
 	@Autowired
 	AdministratorService adminService;
 	
-	@RequestMapping(path = "/getAdminName" , method=RequestMethod.POST)
+	/*@RequestMapping(path = "/getAdminName" , method=RequestMethod.POST)
 	public String getCAdminName(@RequestParam(value="logeduser") String user){
 		return adminService.getAdminNameByUsername(user);
-	}
+	}*/
 	
-	@RequestMapping(path = "/getAdminDetails" , method=RequestMethod.POST)
-	public Administrator getAdminDetails(@RequestParam(value="logeduser") String user){
-		Administrator admin = adminService.getAdminByUsername(user);
+	@RequestMapping(path = "/getAdminDetails" , method=RequestMethod.GET)
+	public Administrator getAdminDetails(){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		Administrator admin = adminService.getAdminByUsername(username);
 		return admin;
 	}
 	
-	@RequestMapping(path = "/updateAdminMyAcc", method = RequestMethod.POST)
+	/*@RequestMapping(path = "/updateAdminMyAcc", method = RequestMethod.POST)
 	public void updateEmpMyAcc(@RequestParam(value = "fname") String fname,
 							  @RequestParam(value = "lname") String lname,
 							  @RequestParam(value = "email") String email,
@@ -39,7 +43,7 @@ public class AdministratorController {
 		adminService.save(admin);
 		
 	}
-
+*/
 
 
 }

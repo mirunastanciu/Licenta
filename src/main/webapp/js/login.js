@@ -1,8 +1,10 @@
 var counter = 0;
 var counter2=0;
-function Login(){
+
+
+
 	//location="/invoicePage";
-	var username = $('#username').val();
+	/*var username = $('#username').val();
 	var password = $('#password').val();
 	
 	if(username === "" ){
@@ -56,7 +58,7 @@ function Login(){
 					if(data == -1){
 								counter2=counter2+1;
 								$.notify({//options
-									message:"The username or password are incorect.",
+									message:"The username or password is incorect.",
 									button: "Confirm"
 									},
 									{//settings
@@ -149,7 +151,7 @@ function Login(){
 	 }
 
 }
-	}
+	}*/
 	
 function redirectForgotPass(){
 	location="/forgotPasswordPage";

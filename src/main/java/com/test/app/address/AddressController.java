@@ -1,6 +1,8 @@
 package com.test.app.address;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,9 +19,11 @@ public class AddressController {
 	@Autowired 
 	AccountService accountService;
    
-	@RequestMapping(path="/getAddressByUser", method=RequestMethod.POST)
-	public String getAddressByUsername(@RequestParam(value="logeduser") String logeduser){
-		Address ad = addressService.getAddressById(accountService.getAccByUsrename(logeduser).getIddress());
+	@RequestMapping(path="/getAddressByUser", method=RequestMethod.GET)
+	public String getAddressByUsername(){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		Address ad = addressService.getAddressById(accountService.getAccByUsrename(username).getIddress());
 		String address = ad.getCountry() + ", " + ad.getConuty() + ", " + ad.getTown() + ", " + ad.getStreet() + " " + 
 						ad.getStreetnumber() + ", Build Number: " + ad.getBuildnumber() + ",  App No:" + ad.getApartmentnumber();
 		return address;
@@ -32,11 +36,11 @@ public class AddressController {
 							       @RequestParam(value="street2") String street,
 							       @RequestParam(value="streetno2") int streetno,
 							       @RequestParam(value="buildno2") int buildno,
-							       @RequestParam(value="appno2") int appno,
-							       @RequestParam(value="logeduser") String logeduser){
+							       @RequestParam(value="appno2") int appno){
 		
-		 
-		Address address = addressService.getAddressById(accountService.getAccByUsrename(logeduser).getIddress());
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		Address address = addressService.getAddressById(accountService.getAccByUsrename(username).getIddress());
 		address.setCountry(country);
 		address.setConuty(county);
 		address.setTown(town);

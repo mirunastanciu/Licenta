@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -185,19 +187,22 @@ public class EmployeeController {
 	}
 	
 
-	@RequestMapping(path = "/getEmployeeName" , method=RequestMethod.POST)
+	/*@RequestMapping(path = "/getEmployeeName" , method=RequestMethod.POST)
 	public String getEmpName(@RequestParam(value="logeduser") String user){
 		return employeeService.getNameByUsername(user);
 	}
-	
-	@RequestMapping(path = "/employeeDetailsForMyAcc" , method=RequestMethod.POST)
-	public Employee employeeDetail(@RequestParam(value="logeduser") String user){
-		Employee emp = employeeService.getEmployeeById(employeeService.getIdEmpByUsername(user));
+	*/
+	@RequestMapping(path = "/employeeDetailsForMyAcc" , method=RequestMethod.GET)
+	public Employee employeeDetail(){
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		Employee emp = employeeService.getEmployeeById(employeeService.getIdEmpByUsername(username));
 		
 		return emp;
 	}
 	
-	@RequestMapping(path = "/updateEmpMyAcc", method = RequestMethod.POST)
+	/*@RequestMapping(path = "/updateEmpMyAcc", method = RequestMethod.POST)
 	public void updateEmpMyAcc(@RequestParam(value = "fname") String fname,
 							  @RequestParam(value = "lname") String lname,
 							  @RequestParam(value = "email") String email,
@@ -212,7 +217,7 @@ public class EmployeeController {
 		
 		employeeService.save(e);
 		
-	}
+	}*/
 
 
 

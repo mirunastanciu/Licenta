@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
   <script type="text/javascript" src="../js/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="../js/jquery/jquery-3.2.1.js"></script>
   <script type="text/javascript" src="../js/notify/bootstrap-notify.min.js"></script>
     <script type="text/javascript" src="../js/notify/bootstrap-notify.js"></script>
 	<script type="text/javascript" src="../js/jquery/jquery.dataTables.js"></script>
@@ -28,7 +29,7 @@
 <!-- id="logout" 
 style="margin-right:10px;margin-top:10px;width:5%;"--> 
 	<div class = "inLine2 username" >
-		<button   class="username" onclick="Logout();" >Logout</button>
+		<a href="/logout"><button   class="username"  >Logout</button></a>
 	</div>
 	<br>
 	
@@ -67,13 +68,13 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
           	<div id="firstname" onchange="firstNameChange()">
 	            <h4>First name </h4>
 	          	<p id="fname"></p>
-	          	<input id="fnameedit" class="input"  type="text" autocomplete="off" style="width:50%;"/>
+	          	<input id="fnameedit" class="input"  type="text" autocomplete="off" style="width:50%;border-bottom: 1px solid #31708f;"/>
           	</div>
           	
           	<div id="lastname" onchange="lastNameChange()">
 	          	<h4>Last name </h4>
 	          	<p id="lname"></p>
-	          	<input id="lnameedit" class="input"  type="text" autocomplete="off" style="width:50%;"/>
+	          	<input id="lnameedit" class="input"  type="text" autocomplete="off" style="width:50%;border-bottom: 1px solid #31708f;"/>
           	</div>
           	
           	<div id="addressdiv" >
@@ -118,7 +119,7 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
           	<div id="email1" onchange="emailChange()">
 	          	<h4>Email</h4>
 	          	<p id="email"></p>
-	          	<input id="emailedit" class="input"  type="email" autocomplete="off" style="width:50%;"/>
+	          	<input id="emailedit" class="input"  type="email" autocomplete="off" style="width:50%;border-bottom: 1px solid #31708f;"/>
           	</div>
           	<br>
           	<br>
@@ -131,13 +132,13 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
           	
           	<div id="changepassdiv">
           		<h4>Old Password </h4>	          	
-	          	<input id="oldpass" class="input"  type="password" autocomplete="off" style="width:50%;"/>
+	          	<input id="oldpass" class="input mandatory"  type="password" autocomplete="off" style="width:50%;"/>
 	          	
 	          	<h4>New Password </h4>	          	
-	          	<input id="newpass" class="input"  type="password" autocomplete="off" style="width:50%;"/>
+	          	<input id="newpass" class="input mandatory"  type="password" autocomplete="off" style="width:50%;"/>
 	          	
 	          	<h4>Retype New Password </h4>
-	          	<input id="retypenewpass" class="input"  type="password" autocomplete="off" style="width:50%;"/>
+	          	<input id="retypenewpass" class="input mandatory"  type="password" autocomplete="off" style="width:50%;"/>
 	          	<br>
 	          	<button id="updatepasss" >Update</button>
 	          	<br>

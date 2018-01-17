@@ -1,8 +1,12 @@
+$(document).ready(function () {
+	 var current="#startpage" ;
+	 var a = localStorage.getItem(current);
+	 $(a).addClass('clicked');
 
 
-var current ;
-var logeduser = $.cookie("loged_username");
-var acctype = $.cookie("accounting_type");
+ 
+
+
 
  $(document).ready(function () {
    $('.text-nav').on('click', function (e) {
@@ -13,12 +17,7 @@ var acctype = $.cookie("accounting_type");
  });
 
 
- $(document).ready(function () {
-	 var a = localStorage.getItem(current);
-	 $(a).addClass('clicked');
 
-
- });
 
  $(document).ready(function () {
 	   $('#logout').on('click', function (e) {
@@ -34,49 +33,24 @@ var acctype = $.cookie("accounting_type");
 
 	 });
  
- function Logout(){
+ /*function Logout(){
 	 document.cookie = "loged_username=;";
 	 document.cookie = "accounting_type=;";
 	 location="/index.html";
- }
+ }*/
  
  $(document).ready(function () {
-	
-	if(acctype == 1){
-		logeduser = $.cookie("loged_username");
+	 if( window.location.pathname  !== "/loginPage" &&  window.location.pathname  !== "/index.html" ){
 		 $.ajax({
-			   method: "POST",
-			   url: "getAdminName",
-			   data: {"logeduser": logeduser},
+			   method: "GET",
+			   url: "accountName",
+			   
 			   success: function(data, status, xhr){
 				   $("#logedusernamediv #logedusername").html(data);
 			   }
 			   });
-	}else if(acctype == 2){
-		 logeduser = $.cookie("loged_username");
-		 $.ajax({
-			   method: "POST",
-			   url: "getClientName",
-			   data: {"logeduser": logeduser},
-			   success: function(data, status, xhr){
-				   $("#logedusernamediv #logedusername").html(data);
-			   }
-			   });
-	}else if(acctype == 3){
-		logeduser = $.cookie("loged_username");
-		 $.ajax({
-			   method: "POST",
-			   url: "getEmployeeName",
-			   data: {"logeduser": logeduser},
-			   success: function(data, status, xhr){
-				   
-				   $("#logedusernamediv #logedusername").html(data);
-			   }
-			   });
-	}
-	
-	 
+	 }
 	 
  });
- 
+});
 

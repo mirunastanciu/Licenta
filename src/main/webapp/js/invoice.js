@@ -4,7 +4,7 @@ $(window).resize(function(){
 	location.reload();
 });
 
-	var logeduser = $.cookie('loged_username');
+	
 	var acctype = $.cookie('accounting_type');
 
 
@@ -46,10 +46,8 @@ $(document).ready( function () {
 	 });
 //if user is client
   }else if(acctype == 2){
-	  $.ajax({
-			method: "POST",
-			url: "getWaitingInvoicesByClient",
-			data:{"logeduser": logeduser}
+	  $.ajax( "getWaitingInvoicesByClient",
+			{type:"GET"
 				,success: function(data, status, xhr){
 
 					var table = $('#unpaidInvoiceTable').dataTable({
@@ -293,10 +291,8 @@ if(acctype == 1){
 	 });
 //if user is client
 }else if(acctype == 2){
-	$.ajax({
-		method: "POST",
-		url: "getProcessedInvoicesByClient",
-		data:{"logeduser": logeduser}
+	$.ajax( "getProcessedInvoicesByClient",
+		{type:"GET"
 			,success: function(data, status, xhr){
 
 				var table = $('#paidInvoiceTable').dataTable({
