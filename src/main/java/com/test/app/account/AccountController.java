@@ -1,21 +1,16 @@
 package com.test.app.account;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.SpringSecurityCoreVersion;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.test.app.administrator.Administrator;
@@ -54,7 +49,7 @@ public class AccountController {
 		return accountService.getAllAccounts();
 	}
 
-	// User validation
+	/*// User validation
 	@ResponseBody
 	@RequestMapping(value = "/accountvalidation", method = RequestMethod.POST)
 	public int accountValidation(
@@ -68,20 +63,7 @@ public class AccountController {
 			if (username.equals(l.get(i).getUsername())
 					&& password.equals(l.get(i).getPassword())) {
 				response = 1;
-				/*
-				 * if (l.get(i).validateAdmin()) { user = username; pass =
-				 * password; response = "/startPage";
-				 * 
-				 * break; }else if(l.get(i).validateClient()){ user = username;
-				 * pass = password; response = "/startPage";
-				 * 
-				 * break; }else if(l.get(i).validateEmployee()){ user =
-				 * username; pass = password; response = "/startPage";
-				 * 
-				 * break;
-				 * 
-				 * }
-				 */
+				
 				break;
 			} else {
 				response = -1;
@@ -91,7 +73,7 @@ public class AccountController {
 		System.out.println(response);
 		return response;
 
-	}
+	}*/
 
 	@RequestMapping(value = "/uniqueUser", method = RequestMethod.POST)
 	public String uniquerUserCheck(
@@ -184,12 +166,13 @@ public class AccountController {
 	public int checkOldPass(@RequestParam(value = "oldpass") String oldpass) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String username = authentication.getName();
-		String password = accountService.getAccByUsrename(username).getPassword();
+		/*Object credentials = authentication.getCredentials();
+		String password = (credentials.toString());
+		System.out.println(password);*/
 		
 		int response = 0;
 
-	/*	String passByUsername = accountService.getAccByUsrename(username)
-				.getPassword();*/
+		String password = accountService.getAccByUsrename(username).getPassword();
 		if (password.equals(oldpass)) {
 			response = 1;
 		}
@@ -197,22 +180,19 @@ public class AccountController {
 		return response;
 	}
 
+	
 	@RequestMapping(value = "/updatePass", method = RequestMethod.POST)
-	@PreAuthorize("hasRole('USER')")
-	public void updatePass(Locale locale,
-			@RequestParam(value = "newpass") String newpass) {
+	public void updatePass(@RequestParam(value = "newpass") String newpass) throws Exception {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();		
 		String username = authentication.getName();
+		
+		
 		Account ac = accountService.getAccByUsrename(username);
 		ac.setPassword(newpass);
-
 		accountService.saveAccount(ac);
 		
-		/*Authentication authentication1 = new UsernamePasswordAuthenticationToken(ac, ac.getPassword(), ((Authentication) ac).getAuthorities());
-		SecurityContextHolder.getContext().setAuthentication(authentication1);*/
 		
-
 	}
 	
 	@RequestMapping(path = "/updateMyAcc", method = RequestMethod.POST)

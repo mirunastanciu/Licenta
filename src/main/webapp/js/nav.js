@@ -40,7 +40,7 @@ $(document).ready(function () {
  }*/
  
  $(document).ready(function () {
-	 if( window.location.pathname  !== "/loginPage" &&  window.location.pathname  !== "/index.html" ){
+	 if( window.location.pathname  !== "/loginPage" &&  window.location.pathname  !== "/index.html" && window.location.pathname  !== "/" ){
 		 $.ajax({
 			   method: "GET",
 			   url: "accountName",

@@ -19,6 +19,7 @@ public class Account {
 	private int idaccounttype;
 	@Column(name="IDADDRESS")
 	private int idadress;
+	
 
 	public int getIdaccount() {
 		return idaccount;
@@ -60,43 +61,10 @@ public class Account {
 		this.idadress = iddress;
 	}
 
-	/*
-	public boolean validateAdmin(){
-		if(this.getIdaccounttype() == 1){
-			return true;
-			
-		}else {
-			return false;
-		}
-	}*/
 	
-	/*public boolean validateClient(){
-		if(this.getIdaccounttype() == 2){
-			return true;
-			
-		}else {
-			return false;
-		}
-	}
 	
-	public boolean validateEmployee(){
-		if(this.getIdaccounttype() == 3){
-			return true;
-			
-		}else {
-			return false;
-		}
-	}*/
 	
-	/*public boolean isEmpty(){
-		boolean isEmpty = false;
-		if(this.){
-			isEmpty = true;
-		}
-		return isEmpty;
-	}*/
 
-	
 	
 	
 	
