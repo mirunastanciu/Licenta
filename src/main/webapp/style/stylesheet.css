@@ -453,3 +453,14 @@ input:required:focus {
 .mandatory{
 	    border-bottom-color: red;
 }
+
+.descstyle{
+	    background-color: #0a2633;
+        color: white;
+        border-radius: 10px;
+}
+
+.listel{
+	background-color: #dddddd63;
+    border-radius: 10px;
+}
