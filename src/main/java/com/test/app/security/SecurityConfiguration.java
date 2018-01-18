@@ -53,8 +53,35 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	        http
 	        .authorizeRequests()
 	          .antMatchers("/","/loginPage","/registerAccount","/registationRequestPage","/accountvalidation", "/css/**", "/js/**").permitAll()
-              .antMatchers("/startPage","/myAccountPage","/newTicketPage","/accountsPage","/contractsPage","/invoicePage",
-            		  "/CreateNewInvoicePage","/registationRequestPageList","/ticketsToDo").access("hasAnyRole('ROLE_ADMIN','ROLE_CLIENT','ROLE_EMP')")
+              .antMatchers("/startPage",
+            		  	   "/myAccountPage",
+            		  	   "/newTicketPage",
+            		  	   "/accountsPage",
+            		  	   "/contractsPage",
+            		  	   "/invoicePage",
+            		  	   "/CreateNewInvoicePage",
+            		  	   "/registationRequestPageList",
+            		  	   "/ticketsToDo",
+            		  	   "/accountName",
+            		  	   "/checkOldPass",
+            		  	   "/account*",
+            		  	   "/update*",
+            		  	   "/get*",
+            		  	   "/changeAddressMyAcc",
+            		  	   "/approveInvoice",
+            		  	   "/rejectInvoice",
+            		  	   "/save*",
+            		  	   "/delete*",
+            		  	   "/clientDetailsForMyAcc",
+            		  	   "/employee*",
+            		  	   "/regist*",
+            		  	   "/totalInvoice",
+            		  	   "/all*",
+            		  	   "/processRequest",
+            		  	   "/tickets*",
+            		  	   "/unassign",
+            		  	   "/assignToMe",
+            		  	   "/addTicket").access("hasAnyRole('ROLE_ADMIN','ROLE_CLIENT','ROLE_EMP')")
               	        
 	        .and().formLogin()
             .loginPage("/loginPage")
