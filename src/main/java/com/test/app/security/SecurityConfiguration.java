@@ -1,7 +1,5 @@
 package com.test.app.security;
 
-import java.util.ArrayList;
-
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import com.test.app.account.Account;
 import com.test.app.account.AccountService;
 
 /**
@@ -31,29 +28,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	DataSource dataSource;
-	
-	
-	/*@Value("${spring.queries.users-query}")
-	private String usersQuery;*/
-	
+
 	  @Override
 	    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		  
-		  /*ArrayList<Account> acc = accountService.getAllAccounts();
-		  for(int i=0;i<acc.size();i++){			  
-		  
-	        auth.eraseCredentials( false ).inMemoryAuthentication()
-	          .withUser(acc.get(i).getUsername()).password(acc.get(i).getPassword()).roles("USER");
-		  }*/
-		  
+		 
 		  auth.
 			jdbcAuthentication()
 				.usersByUsernameQuery("SELECT USERNAME,PASSWORD,enabled FROM account WHERE USERNAME=?")
 				.authoritiesByUsernameQuery("SELECT USERNAME,ACCOUNTYPENAME FROM account INNER JOIN accountype ON account.IDACCOUNTTYPE = accountype.IDACCOUNTYPE WHERE USERNAME = ? ")
 				.dataSource(dataSource);
-	
-
-		  
 		  
 	    }
 	  
@@ -71,7 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	        .authorizeRequests()
 	          .antMatchers("/","/loginPage","/registerAccount","/registationRequestPage","/accountvalidation", "/css/**", "/js/**").permitAll()
               .antMatchers("/startPage","/myAccountPage","/newTicketPage","/accountsPage","/contractsPage","/invoicePage",
-            		  "/CreateNewInvoicePage","/registationRequestPageList","/ticketsToDo").access("hasRole('ROLE_ADMIN')")
+            		  "/CreateNewInvoicePage","/registationRequestPageList","/ticketsToDo").access("hasAnyRole('ROLE_ADMIN','ROLE_CLIENT','ROLE_EMP')")
               	        
 	        .and().formLogin()
             .loginPage("/loginPage")

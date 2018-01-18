@@ -52,22 +52,24 @@ public class TicketController {
 		List<TicketDetails> td = new ArrayList<>();
 		
 
-		Authentication authentication = SecurityContextHolder.getContext()
-				.getAuthentication();
-		String name = authentication.getName();
-
-		if (accountService.getAccByUsrename(name).getIdaccounttype() == 1) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		//System.out.println(username);
+		int acctype = accountService.getAccByUsrename(username).getIdaccounttype();
+		System.out.println(username);
+		
+		if (acctype == 1) {
 			
 			ttodo = ticketService.getTicketsToDo();
 			
-		} else if (accountService.getAccByUsrename(name).getIdaccounttype() == 2) {
+		} else if (acctype == 2) {
 			
-			int idcl = clientService.getIdClByUsername(name);
+			int idcl = clientService.getIdClByUsername(username);
 			ttodo = ticketService.getTicketsToDoByIdClient(idcl);
 			
-		} else {
+		} else if (acctype == 3){
 			
-			int idemp = employeeService.getIdEmpByUsername(name);
+			int idemp = employeeService.getIdEmpByUsername(username);
 			int empspecialisationid = employeeService.getSpecialisationByIdEmp(idemp);
 			ttodo = ticketService.getTicketsToDoByIdEmp(empspecialisationid);
 		}
@@ -98,15 +100,17 @@ public class TicketController {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String username = authentication.getName();
+		System.out.println(username);
+		int acctype = accountService.getAccByUsrename(username).getIdaccounttype();
 
-		if (accountService.getAccByUsrename(username).getIdaccounttype() == 1) {
+		if (acctype == 1) {
 			tInProgress = ticketService.getTicketsInProgress();
 			
-		} else if (accountService.getAccByUsrename(username).getIdaccounttype() == 2) {
+		} else if (acctype == 2) {
 			int idcl = clientService.getIdClByUsername(username);
 			tInProgress = ticketService.getTicketsInProgressByIdClient(idcl);
 			
-		} else {
+		} else if (acctype == 3){
 			int idemp = employeeService.getIdEmpByUsername(username);
 			tInProgress = ticketService.getTicketsAssignedByIdEmp(idemp);
 		}
@@ -135,15 +139,16 @@ public class TicketController {
 		List<TicketDetails> td = new ArrayList<>();
 		
 
-		Authentication authentication = SecurityContextHolder.getContext()
-				.getAuthentication();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String username = authentication.getName();
+		System.out.println(username);
+		int acctype = accountService.getAccByUsrename(username).getIdaccounttype();
 
-		if (accountService.getAccByUsrename(username).getIdaccounttype() == 1) {
+		if (acctype == 1) {
 			
 				tDone = ticketService.getTicketsDone();
 
-		} else if (accountService.getAccByUsrename(username).getIdaccounttype() == 2) {
+		} else if (acctype == 2) {
 			int idcl = clientService.getIdClByUsername(username);
 			tDone = ticketService.getTicketsDoneByIdClient(idcl);			
 

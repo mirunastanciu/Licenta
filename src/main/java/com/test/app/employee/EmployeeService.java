@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class EmployeeService {
 
 	@Autowired
-	EmployeeRepository employeeRepository;
+	 EmployeeRepository employeeRepository;
 
 	public ArrayList<Employee> getAllEmployies(){
 		ArrayList<Employee> l = new ArrayList<>();

@@ -65,6 +65,8 @@ $(document).ready( function () {
 		
 //Details button function
 	 $('#ticketsTable').on('click', '.btn-details', function () {
+		 
+		 
 		 var tr = $(this).closest('tr');
 		 
 		 idTicket = tr.children('td:eq(0)').text();//get the id (from db)
@@ -82,6 +84,7 @@ $(document).ready( function () {
 					$("#startdateedit").hide();
 					$("#finishdateedit").hide();
 					$("#employeelist").hide();
+					//
 
 					$(".modal-body #ticketid").html(data.idticket);
 		            $(".modal-body #projecttype").html(data.projecttypename);
@@ -98,12 +101,17 @@ $(document).ready( function () {
 					    $(".modal-body #employeename").html(data.employeename);
 					    $("#empE").hide();
 						$("#empS").hide();
-					}else{
+						
+					}else if(data.employeename !== "Unassigned"){
+						//console.log("employee")
+						//$(".modal-footer #assigntome").hide();
+						//$("#assigntome").hide();
 						$("#empE").show();
 						$("#empS").show();
 			            $(".modal-body #employeename").html(data.employeename);
 			            $(".modal-body #employeeemail").html(data.employeeemail);
 			            $(".modal-body #employeespecialisation").html(data.employeespecialisation);
+			            
 					}
 
 
