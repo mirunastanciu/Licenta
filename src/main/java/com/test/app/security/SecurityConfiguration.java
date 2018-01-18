@@ -52,7 +52,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	   
 	        http
 	        .authorizeRequests()
-	          .antMatchers("/","/loginPage","/registerAccount","/registationRequestPage","/accountvalidation", "/css/**", "/js/**").permitAll()
+	          .antMatchers("/","/loginPage",
+		        		  "/registerAccount",
+		        		  "/registationRequestPage",
+		        		  "/accountvalidation",
+		        		  "/registrationRequest", 
+		        		  "/css/**", 
+		        		  "/js/**").permitAll()
               .antMatchers("/startPage",
             		  	   "/myAccountPage",
             		  	   "/newTicketPage",
