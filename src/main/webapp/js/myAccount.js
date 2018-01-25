@@ -24,6 +24,7 @@ $(document).ready( function () {
 
 $(document).ready( function () {
 	console.log(acctype);
+	$("#additional").hide();
 	$("#fnameedit").hide();
 	$("#lnameedit").hide();
 	$("#emailedit").hide();
@@ -220,6 +221,7 @@ $(document).ready( function () {
 				{ type: 'GET',
 			success: function(data, status, xhr){
 				if(data === 1){
+					$("#additional").hide();
 					$.ajax( "/getClientContractDetailsForMyAcc",
 							{ type: 'GET',
 						success: function(data, status, xhr){
@@ -237,6 +239,8 @@ $(document).ready( function () {
 					});
 				}else{
 					$("#contractinfo").hide();
+					$("#additional").show();
+					
 				}
 						
 			},
