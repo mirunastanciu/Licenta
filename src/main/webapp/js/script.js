@@ -41,7 +41,8 @@ $(document).ready( function () {
 			"sAjaxSource": "/ticketsToDo",
 			"sAjaxDataProp": "",
 			"columnDefs": [
-				  {'width': '50%', 'targets': 1}
+				  {'width': '50%', 'targets': 1},
+				  {"targets": 5,"orderable": false} 
 			  ],
 			"responsive": true,
 			"order": [[ 0, "desc" ]],
@@ -515,9 +516,12 @@ $(document).ready( function () {
 					    					}
 					    				
 					    			});
-								   //alert("The tickes has been deleted");
-								   $('#myModal').modal('hide');
-								   location.reload();
+								   var delay = 2000; 
+									setTimeout(function(){ 
+										 $('#myModal').modal('hide');
+										   location.reload();
+									}, delay);
+								  
 
 							   },error:function(){
 								   $.notify({//options
@@ -577,7 +581,8 @@ $(document).ready( function () {
 					"sAjaxDataProp": "",
 						"columnDefs": [
 						               {'width': '50%', 'targets': 1},
-						               {'width': '10%', 'targets': 4}
+						               {'width': '10%', 'targets': 4},
+						               {"targets": 5,"orderable": false} 
 									  ],			
 						"responsive": true,
 						"order": [[ 0, "asc" ]],
@@ -919,7 +924,8 @@ $(document).ready( function () {
 			"sAjaxSource": "/ticketsDone",
 			"sAjaxDataProp": "",
 			"columnDefs": [
-				  {'width': '50%', 'targets': 1}
+				  {'width': '50%', 'targets': 1},
+				  {"targets": 5,"orderable": false} 
 			  ],
 			"responsive": true,
 			"order": [[ 0, "asc" ]],

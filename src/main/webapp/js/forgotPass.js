@@ -104,7 +104,7 @@ function save(){
 								{//settings
 									allow_dismiss: true,
 										
-									type:"danger",
+									type:"success",
 									position: "fixed",
 									placement: {
 										from: "top",
@@ -112,8 +112,9 @@ function save(){
 									}
 								
 							});
-							//alert(data);
-							location = "/loginPage";
+							var delay = 2000; 
+							setTimeout(function(){ window.location = "/loginPage"; }, delay);
+							//location = "/loginPage";
 						}
 						
 	

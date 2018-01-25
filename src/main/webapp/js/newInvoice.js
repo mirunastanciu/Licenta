@@ -45,14 +45,41 @@ $(document).ready(function() {
 		       });
    if (isshow == 0) {
 	   $('#selectClientModal').modal({backdrop: 'static', keyboard: false})  
-     $('#selectClientModal').modal("show");
+       $('#selectClientModal').modal("show");
    }
    isshow = 1;
    
    $('.modal-footer').on('click', '#save', function () {
 	   client = $("#clientlist option:selected" ).text();
-	   $('#selectClientModal').modal("hide");
+	   if(client === ""){
+		   $.notify({//options
+			    title:"<strong>Attention!</strong>",
+				message:"You must select a client.",
+					
+				},
+				{//settings
+					allow_dismiss: true,
+					element:".modal",	
+					type:"danger",
+					position: "fixed",
+					placement: {
+						from: "top",
+						align: "center"
+					}
+				
+			});
+	   }else{
+		   $('#selectClientModal').modal("hide");
+	   }
+	   
    });
+   
+   $('.modal-footer').on('click', '#close', function () {
+	   console.log("gghnuj")
+		 $("#selectClientModal").modal("hide");
+		 location= "/invoicePage";
+   });
+   
 });
 
 $(document).ready(function(){
@@ -505,7 +532,26 @@ function savePos() {
     	 			 "duedate": duedate,
     	 			 "total": total}
     	 			,success: function(data, status, xhr){
-    	 				 window.location.replace(data);
+    	 				 $.notify({//options
+ 		    			    title:"<strong>Success!</strong>",
+ 		    				message:"The invoice has  been saved.",
+ 		    					
+ 		    				},
+ 		    				{//settings
+ 		    					allow_dismiss: true,
+ 		    					//element:".modal",	
+ 		    					type:"success",
+ 		    					position: "fixed",
+ 		    					placement: {
+ 		    						from: "top",
+ 		    						align: "center"
+ 		    					}
+ 		    				
+ 		    			});
+    	 				
+    	 				var delay = 2000; 
+						setTimeout(function(){ window.location = data; }, delay);
+    	 				 //window.location.replace(data);
 
     	 			}, error: function(){
     	 				 $.notify({//options
@@ -533,6 +579,8 @@ function savePos() {
 
 
  }
+ 
+
  
  function cancel(){
      var del="delete"

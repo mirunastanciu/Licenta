@@ -1,7 +1,14 @@
 var counter = 0;
 var counter2=0;
 
-
+$(document).ready(function(){
+	$('#login').click(function(){
+		
+		
+		
+	})
+	
+});
 
 	//location="/invoicePage";
 	/*var username = $('#username').val();

@@ -8,6 +8,7 @@ $(document).ready( function () {
 	 var table = $('#employeeTable').dataTable({
 			"sAjaxSource": "/employeesDetails",
 			"sAjaxDataProp": "",
+			"columnDefs": [{"targets": 4,"orderable": false} ],
 			"responsive": true,
 			"order": [[ 0, "asc" ]],
 			"aoColumns": [	/*{"mData": "tr.index()"},*/
@@ -337,6 +338,9 @@ $(document).ready( function () {
 	 var table = $('#clientTable').dataTable({
 			"sAjaxSource": "/getAllClients",
 			"sAjaxDataProp": "",
+			"columnDefs": [{"targets": 3,"orderable": false},
+			               {'width': '17%', 'targets': 3}
+			               ],
 			"responsive": true,
 			"order": [[ 0, "asc" ]],
 			"aoColumns": [
@@ -443,8 +447,11 @@ $(document).ready( function () {
 									}
 								
 							});
-						  // alert("The Client "+idClient+" has been deleted.")
-						   location.reload();
+						   var delay = 2000; 
+							setTimeout(function(){ 
+								location.reload();
+							}, delay);
+						   
 					   }
 					  
 				   },error: function(){

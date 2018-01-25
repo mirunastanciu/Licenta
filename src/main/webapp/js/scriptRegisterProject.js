@@ -1,6 +1,23 @@
 var acctype = $.cookie("accounting_type");
 
+
 $(document).ready(function () {
+	
+	if(acctype == 2 ){
+		$("#accounts").hide();
+		$("#contracts").hide();
+		$("#registartionreq").hide();
+		$("#assignpersson").hide();
+	    
+	}
+	if(acctype == 3){
+		$("#accounts").hide();
+		$("#contracts").hide();
+		$("#registartionreq").hide();
+		$("#invoice").hide();
+		$("#donet").hide();
+  
+	}
     var options;
 	$.ajax("/allProjectTypesName",
 		       { type: 'GET',

@@ -8,6 +8,9 @@ $(document).ready( function () {
 	 var table = $('#employeeContractTable').dataTable({
 			"sAjaxSource": "/getEmployeeContracts/Details",
 			"sAjaxDataProp": "",
+			"columnDefs": [{"targets": 6,"orderable": false},
+			              
+			               ],
 			"responsive": true,
 			"order": [[ 0, "asc" ]],
 			"aoColumns": [	/*{"mData": "tr.index()"},*/
@@ -148,6 +151,9 @@ $(document).ready( function () {
 	 var table = $('#clientContractTable').dataTable({
 			"sAjaxSource": "/getClientContracts/Details",
 			"sAjaxDataProp": "",
+			"columnDefs": [{"targets": 6,"orderable": false},
+				              
+			               ],
 			"responsive": true,
 			"order": [[ 0, "asc" ]],
 			"aoColumns": [	/*{"mData": "tr.index()"},*/

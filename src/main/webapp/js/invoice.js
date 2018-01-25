@@ -28,6 +28,9 @@ $(document).ready( function () {
 	  var table = $('#unpaidInvoiceTable').dataTable({
 			"sAjaxSource": "/getAllUnpaidInvoices",
 			"sAjaxDataProp": "",
+			"columnDefs": [{"targets": 6,"orderable": false},
+				              
+			               ],
 			"responsive": true,
 			"order": [[ 0, "asc" ]],
 			"aoColumns": [	/*{"mData": "tr.index()"},*/
@@ -52,6 +55,9 @@ $(document).ready( function () {
 
 					var table = $('#unpaidInvoiceTable').dataTable({
 						"responsive": true,
+						"columnDefs": [{"targets": 6,"orderable": false},
+							              
+						               ],
 						"order": [[ 0, "asc" ]],
 						"data": data,
 					    "columns": [
@@ -264,6 +270,9 @@ if(acctype == 1){
 	 var table = $('#paidInvoiceTable').dataTable({
 			"sAjaxSource": "/getAllPaidInvoices",
 			"sAjaxDataProp": "",
+			"columnDefs": [{"targets": 6,"orderable": false},
+				              
+			               ],
 			"responsive": true,
 			"order": [[ 0, "asc" ]],
 			"aoColumns": [	/*{"mData": "tr.index()"},*/
@@ -297,6 +306,9 @@ if(acctype == 1){
 
 				var table = $('#paidInvoiceTable').dataTable({
 					"responsive": true,
+					"columnDefs": [{"targets": 6,"orderable": false},
+						              
+					               ],
 					"order": [[ 0, "asc" ]],
 					"data": data,
 				    "columns": [

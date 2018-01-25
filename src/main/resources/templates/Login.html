@@ -42,25 +42,20 @@
 
 <div class="containerLogin">
 	
-    	<!-- <p>Username :</p>
-    	<input  id="username" class="input" type="text" name="j_username" autocomplete="off" style="border-bottom: 1px solid #31708f;"/>
-        <p>Password :</p>
-        <input id="password" class="input"  type="password" name="j_password" autocomplete="off"   style="border-bottom: 1px solid #31708f;"/>
-        
-        <button id="loginButton" class = "CustomButton" type="button" onclick="Login()">Login</button> -->
+
         
         <form name='f' action="/login" method='POST'>
       <table>
          <tr>
             <td>User:</td>
-            <td><input type='text' name='username' value='' style="border-bottom: 1px solid #31708f;" autofocus></td>
+            <td><input id="username" type='text' name='username' value='' style="border-bottom: 1px solid #31708f;" autofocus></td>
          </tr>
          <tr>
             <td>Password:</td>
-            <td><input type='password' name='password' style="border-bottom: 1px solid #31708f;"/></td>
+            <td><input id="password" type='password' name='password' style="border-bottom: 1px solid #31708f;"/></td>
          </tr>
          <tr>
-            <td><input name="Login" type="submit" class="centred" value="Login" /></td>
+            <td><input id="login" name="Login" type="submit" class="centred" value="Login" /></td>
          </tr>
       </table>
   </form>

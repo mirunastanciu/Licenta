@@ -7,8 +7,8 @@ $(document).ready( function () {
 	 var table = $('#WTBP').dataTable({
 			"sAjaxSource": "/getWTBPRequests",
 			"sAjaxDataProp": "",
-			"columnDefs": [
-							  {'width': '10%', 'targets': 4}
+			"columnDefs": [{"targets": 4,"orderable": false},
+			    			{'width': '10%', 'targets': 4}
 						  ],
 			"responsive": true,
 			"order": [[ 0, "asc" ]],
@@ -78,6 +78,10 @@ $(document).ready( function () {
 	 var table = $('#AP').dataTable({
 			"sAjaxSource": "/getAPRequests",
 			"sAjaxDataProp": "",
+			"columnDefs": [{"targets": 3,"orderable": false},
+				              
+			               ],
+			
 			"responsive": true,
 			"order": [[ 0, "asc" ]],
 			"aoColumns": [	/*{"mData": "tr.index()"},*/

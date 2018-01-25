@@ -48,8 +48,9 @@ function sent(){
 		    					}
 		    				
 		    			});
-						//alert("The request has been sant.");
-						location="loginPage";
+						var delay = 3000; 
+						setTimeout(function(){ window.location = "/loginPage"; }, delay);
+						//location="loginPage";
 					}, error: function(){
 						$.notify({//options
 		    			    title:"<strong>Error!</strong>",
