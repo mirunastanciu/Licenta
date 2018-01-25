@@ -17,7 +17,7 @@ $(document).ready( function () {
 						    {"mData": "name"},
 						    {"mData": "email"},
 						    {"mData": "phone"},
-						    {"defaultContent": '<button class="btn-details" type="button">PROCCESSED</button>'}
+						    {"defaultContent": '<button class="btn-details" type="button">CONFIRM</button>'}
 						    ]
 	 });
 	 
