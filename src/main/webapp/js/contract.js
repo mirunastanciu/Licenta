@@ -413,9 +413,13 @@ function modalEmployeeContract(){
 								}
 							
 						});
+						var delay = 2000; 
+						setTimeout(function(){ 
+							$('#myModalEmployeeContract').modal('hide');
+							 location.reload();
+						}, delay);
 						//alert("The new contract has been saved.");
-						$('#myModalEmployeeContract').modal('hide');
-						 location.reload();
+						
 
 					}, error: function(){
 						$.notify({//options
@@ -584,9 +588,13 @@ function modalClientContract(){
 								}
 							
 						});
+						var delay = 2000; 
+						setTimeout(function(){ 
+							$('#getEmployeeContractStatuses').modal('hide');
+							 location.reload();
+						}, delay);
 						//alert("The new contract has been saved .");
-						$('#getEmployeeContractStatuses').modal('hide');
-						 location.reload();
+						
 
 					}, error: function(){
 						$.notify({//options

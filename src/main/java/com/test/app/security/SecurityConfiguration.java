@@ -56,7 +56,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		        		  "/registerAccount",
 		        		  "/registationRequestPage",
 		        		  "/accountvalidation",
-		        		  "/registrationRequest", 
+		        		  "/registrationRequest",
+		        		  "/saveClientAccount",
 		        		  "/css/**", 
 		        		  "/js/**").permitAll()
               .antMatchers("/startPage",

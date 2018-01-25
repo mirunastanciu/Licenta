@@ -62,6 +62,19 @@ public class ClientController {
 	@RequestMapping(path="/getClientsName", method=RequestMethod.GET)
 	public ArrayList<String> getClientsLastNames(){
 		ArrayList<Client> l = clientService.getAllClients();
+		
+		ArrayList<ContractClient> cc = contractClientService.getAllClientContracts();
+		
+		
+		for(int i=0;i<cc.size();i++){
+			for(int j=0;j<l.size();j++){
+				if(l.get(j).getId() == cc.get(i).getIdclient()){
+					l.remove(j);
+				}
+			}
+		}
+		
+		
 		ArrayList<String> cname = new ArrayList<>();
 		for(int i=0;i<l.size();i++){
 			String a = l.get(i).getFirstname()+" "+l.get(i).getLastname();
@@ -85,13 +98,26 @@ public class ClientController {
 						  address.getStreet()+" "+address.getStreetnumber()+", Build Number : "+address.getBuildnumber()+
 						  ", App No : "+address.getApartmentnumber();
 		clientDetails.setAddress(address1);
+		
+		ArrayList<ContractClient> cc = contractClientService.getAllClientContracts();
+		int response = 0;
+		
+		for(int i=0;i<cc.size();i++){
+			if(cc.get(i).getIdclient() == client.getId()){
+				response = 1;
+				break;
+			}			
+		}
+		if(response == 1){
+			ContractClient contract = contractClientService.getContractByIdClient(client.getId());
+			clientDetails.setIdcontract(contract.getId());
+			clientDetails.setAmount(contract.getAmount());
+			clientDetails.setCurency(contract.getCurency());
+			clientDetails.setStartdate(contract.getStartdate());
+			clientDetails.setContractstatus(contractClientStatusService.getContractClientStatusNameById(contract.getIdstatus()));
+		}
 
-		ContractClient contract = contractClientService.getContractByIdClient(client.getId());
-		clientDetails.setIdcontract(contract.getId());
-		clientDetails.setAmount(contract.getAmount());
-		clientDetails.setCurency(contract.getCurency());
-		clientDetails.setStartdate(contract.getStartdate());
-		clientDetails.setContractstatus(contractClientStatusService.getContractClientStatusNameById(contract.getIdstatus()));
+		
 
 		return clientDetails;
 	}

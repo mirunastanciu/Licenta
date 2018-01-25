@@ -238,22 +238,7 @@ function validateSecureCode() {
 						});
 						//alert("This secure code is not valid");
 					}else{
-						$.notify({//options
-							title:"<strong>Success!</strong>",
-							message:"The code is valid."
-							
-						},
-						{//settings
-							type:"success",
-							allow_dismiss: true,
-							
-							position: "fixed",
-							placement: {
-								from: "top",
-								align: "center"
-							}
-						});
-						//alert(data);
+						
 						location="/registerAccount"
 					}
 					

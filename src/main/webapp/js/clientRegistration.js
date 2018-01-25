@@ -50,23 +50,23 @@ function Save(){
 						 $.ajax({
 							   method: "POST",
 							   url: "saveClientAccount",
-							   data: {firstname: firstname,
-							          lastname: lastname,
-							          email: email,
-							          username: username,
-							          password: password,
-							          country: country,
-							          county: county,
-							          town: town,
-							          street: street,
-							          streetno: streetno,
-							          buildno: buildno,
-							          appno: appno}
+							   data: {"firstname": firstname,
+							          "lastname": lastname,
+							          "email": email,
+							          "username": username,
+							          "password": password,
+							          "country": country,
+							          "county": county,
+							          "town": town,
+							          "street": street,
+							          "streetno": streetno,
+							          "buildno": buildno,
+							          "appno": appno}
 							          
 							          ,
 							   success: function(data, status, xhr){
 								   console.log(data);
-								   if(data !== "faild"){
+								   if(data == 1){
 									   $.notify({//options
 										    title:"<strong>Success!</strong>",
 											message:"The account has been saved .",
@@ -84,11 +84,14 @@ function Save(){
 											
 										});
 										
-									   //alert("The account has been saved .");
-									   window.location.replace("/loginPage"); 
+									   var delay = 2000; 
+										setTimeout(function(){ 
+											window.location.replace("/loginPage"); 
+										}, delay);
+									   
 	
 									   
-								   }else{
+								   }else if(data == 0){
 									   $.notify({//options
 										    title:"<strong>Attention!</strong>",
 											message:"This username alrady exist !Please try with another username.",
@@ -111,8 +114,8 @@ function Save(){
 								   	
 							   },error:function(){
 								   $.notify({//options
-									    title:"<strong>Attention!</strong>",
-										message:"This username alrady exist !Please try with another username.",
+									    title:"<strong>Error!</strong>",
+										message:"An error occurred, please try later",
 											
 										},
 										{//settings

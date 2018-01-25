@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.test.app.client.ClientService;
 import com.test.app.contractclientstatus.ContractClientStatusService;
+import com.test.app.mail.Mail;
+import com.test.app.mail.MailService;
 
 
 @RestController
@@ -26,6 +28,9 @@ public class ContractClientController {
 
 	@Autowired
 	ClientService clientService;
+	
+	@Autowired
+    private MailService emailService;
 
 	@RequestMapping(path="/getClientContracts/Details", method=RequestMethod.GET)
 	public ArrayList<ContractClientDetails> getAllClientContracts(){
@@ -79,6 +84,16 @@ public class ContractClientController {
 		ce.setCurency("EUR");
 
 		contractClientService.save(ce);
+		
+		Mail mail = new Mail();
+        mail.setFrom("miruna.anna@gmail.com");
+        mail.setTo(clientService.getClientById(clientService.getClientIdByName(client)).getEmail());
+        mail.setSubject("Contract available");
+        String content = "Your contract has been registred. Now you have acess to your contract details.";
+        		
+        mail.setContent(content);
+
+        emailService.sendSimpleMessage(mail);
 
 	}
 
@@ -123,6 +138,25 @@ public class ContractClientController {
 		contractClientService.save(ce);
 
 
+	}
+	
+	
+	@RequestMapping(path="/getClientContractExist", method=RequestMethod.GET)
+	public int getClientContractExist(){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		int idcl = clientService.getIdClByUsername(username);
+		ArrayList<ContractClient> cc = contractClientService.getAllClientContracts();
+		int response = 0;
+		
+		for(int i=0;i<cc.size();i++){
+			if(cc.get(i).getIdclient() == idcl){
+				response = 1;
+				break;
+			}			
+		}
+		 return response;
+		
 	}
 	
 	@RequestMapping(path="/getClientContractDetailsForMyAcc", method=RequestMethod.GET)

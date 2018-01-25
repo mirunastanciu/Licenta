@@ -19,8 +19,11 @@ import com.test.app.account.Account;
 import com.test.app.account.AccountService;
 import com.test.app.address.Address;
 import com.test.app.address.AddressService;
+import com.test.app.administrator.AdministratorService;
 import com.test.app.client.Client;
 import com.test.app.client.ClientService;
+import com.test.app.mail.Mail;
+import com.test.app.mail.MailService;
 
 @RestController
 public class ClientRegistrationController {
@@ -33,12 +36,19 @@ public class ClientRegistrationController {
 	
 	@Autowired 
 	ClientService clientService;
+	
+	@Autowired
+	AdministratorService adminService;
+	
+	@Autowired
+    private MailService emailService;
+	
 	ModelAndView model;
 	
 
 	
 	@RequestMapping(value = "/saveClientAccount" , method = RequestMethod.POST)
-	public String saveCleint(@RequestParam(value="firstname") String firstname,
+	public int saveCleint(@RequestParam(value="firstname") String firstname,
 						   @RequestParam(value="lastname") String lastname,
 						   @RequestParam(value="email") String email,
 						   @RequestParam(value="username") String username,
@@ -91,10 +101,21 @@ public class ClientRegistrationController {
 			client.setIdaccount(accountList.get(accountList.size()-1).getIdaccount());
 		
 			clientService.saveClient(client);
-			return "success";
+			
+			Mail mail = new Mail();
+	        mail.setFrom("miruna.anna@gmail.com");
+	        mail.setTo(adminService.getAdminemail());
+	        mail.setSubject("New Client Account Available");
+	        String content = "The new customer, "+client.getFirstname()+" "+client.getLastname()+
+	        		", has created his account. Now his contract can be registered.";
+	        		
+	        mail.setContent(content);
+
+	        emailService.sendSimpleMessage(mail);
+			return 1;
 		}else{
 			
-			return "faild";
+			return 0;
 		}
 	}
 	

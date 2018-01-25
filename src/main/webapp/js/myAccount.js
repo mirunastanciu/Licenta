@@ -216,21 +216,48 @@ $(document).ready( function () {
 			   		}
 		});
 
-
-		$.ajax( "/getClientContractDetailsForMyAcc",
+		$.ajax( "/getClientContractExist",
 				{ type: 'GET',
 			success: function(data, status, xhr){
-				
-			   			$("#contractid").html(data.id);
-			   			$("#status").html(data.status);
-			   			$("#value").html(data.amount);
-			   			$("#currency").html(data.curency);
-			   			$("#signdate").html(data.signdate);
-			   			$("#startdate").html(data.startdate);
-			   			$("#expdate").html(data.expirationdate);
-			   		},error:function(){
-			   			alert("An error occurred, please try later")
-			   		}
+				if(data === 1){
+					$.ajax( "/getClientContractDetailsForMyAcc",
+							{ type: 'GET',
+						success: function(data, status, xhr){
+							
+						   			$("#contractid").html(data.id);
+						   			$("#status").html(data.status);
+						   			$("#value").html(data.amount);
+						   			$("#currency").html(data.curency);
+						   			$("#signdate").html(data.signdate);
+						   			$("#startdate").html(data.startdate);
+						   			$("#expdate").html(data.expirationdate);
+						   		},error:function(){
+						   			alert("An error occurred, please try later")
+						   		}
+					});
+				}else{
+					$("#contractinfo").hide();
+				}
+						
+			},
+			error:function(){
+				$.notify({//options
+    			    title:"<strong>Error!</strong>",
+    				message:"An error occurred, please try again later",
+    					
+    				},
+    				{//settings
+    					allow_dismiss: true,
+    						
+    					type:"danger",
+    					position: "fixed",
+    					placement: {
+    						from: "top",
+    						align: "center"
+    					}
+    				
+    			});
+			}
 		});
 	}else if(acctype == 3){
 		$.ajax( "/employeeDetailsForMyAcc",

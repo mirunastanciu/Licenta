@@ -47,8 +47,13 @@ $(document).ready( function () {
 		    					}
 		    				
 		    			});
-						//alert("The request hes been processed .")
-						 location.reload();
+						var delay = 2000; 
+						setTimeout(function(){ 
+							
+							 location.reload();
+						}, delay);
+						
+						 
 					},error:function(){
 						$.notify({//options
 		    			    title:"<strong>Error!</strong>",

@@ -53,6 +53,17 @@ $(document).ready( function () {
 				   $('#myModalEmployeeDetails').modal('show');
 			   }
 		 });
+		 
+		//reset fields content on close
+			$('#myModalEmployeeDetails').on('hidden.bs.modal', function (e) {
+					  $(this)
+					    .find("input,textarea,select")
+					       .val('')
+					       .end()
+					    .find("input[type=checkbox], input[type=radio]")
+					       .prop("checked", "")
+					       .end();
+			})
 
 		//Delete button function
 		  $('.modal-footer').on('click', '#deletebutton', function () {
@@ -78,8 +89,13 @@ $(document).ready( function () {
 								}
 							
 						});
-					   //alert("The Employee account "+idEmployee+" has been deleted .")
-					   location.reload();
+					   var delay = 2000; 
+						setTimeout(function(){ 
+							
+							 location.reload();
+						}, delay);
+					   
+					 
 				   },error: function(){
 					   $.notify({//options
 						    title:"<strong>Error!</strong>",
@@ -240,9 +256,12 @@ function CreateNewEmployeeModal(){
 										}
 									
 								});
-								//alert("The new employee account has been saved . ");
-								$('#myModalEmployeeContract').modal('hide');
-								 location.reload();
+								var delay = 2000; 
+								setTimeout(function(){ 
+									 $('#myModalEmployeeContract').modal('hide');
+									 location.reload();
+								}, delay);
+								
 
 							}, error: function(){
 								$.notify({//options
@@ -352,6 +371,7 @@ $(document).ready( function () {
 	 });
 	 //Details button function
 	 $('#clientTable').on('click', '.btn-details', function () {
+		 $("#additionalinfo").hide();
 
 		 var tr = $(this).closest('tr');
 		 var idClient = tr.children('td:eq(0)').text();//get the id (from db)
@@ -369,13 +389,23 @@ $(document).ready( function () {
 		            $(".modal-body #cluser").html(data.username);
 		            $(".modal-body #claddress").html(data.address);
 
-
-		            $(".modal-body #contractidcl").html(data.idcontract);
-		            $(".modal-body #contractstatus1").html(data.contractstatus);
-		            $(".modal-body #amount").html(data.amount);
-		            //$(".modal-body #availableamount").html(data.curency);
-		            $(".modal-body #curency").html(data.curency);
-		            $(".modal-body #stdate1").html(data.startdate);
+		            if(data.idcontract == 0){
+		            	//$(".modalcontent #CInfo").hide();
+		            	$("#CInfo").hide();
+		            	$("#additionalinfo").show();
+		            	
+		            	//$(".modalcontent").append("<br><h4>The contract need to be created !</h4>");
+		            	
+		            }else{
+		            	$("#CInfo").show();
+		            	    $(".modal-body #contractidcl").html(data.idcontract);
+				            $(".modal-body #contractstatus1").html(data.contractstatus);
+				            $(".modal-body #amount").html(data.amount);
+				            //$(".modal-body #availableamount").html(data.curency);
+				            $(".modal-body #curency").html(data.curency);
+				            $(".modal-body #stdate1").html(data.startdate);
+		            }
+		           
 
 
 				   $('#myModalClientDetails').modal('show');
