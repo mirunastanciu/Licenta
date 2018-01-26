@@ -84,5 +84,9 @@ public class TicketService {
     	return ticketRepository.getTicketsAssigneByIdEmp(a);
     }
 
+    public ArrayList<Ticket> getTicketsDoneByIdSP(int a ){
+    	return ticketRepository.getTicketsDoneByIdSP(a);
+    }
+    
 
 }

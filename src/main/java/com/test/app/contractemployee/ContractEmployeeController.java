@@ -84,7 +84,7 @@ public class ContractEmployeeController {
 
 			ContractEmployeeDetails ced = new ContractEmployeeDetails();
 			ced.setId(contract.getId());
-			ced.setStatus(contractEmployeeStatusService.getContractEmployeeStatusById(contract.getId()).getStatusname());
+			ced.setStatus(contractEmployeeStatusService.getContractEmployeeStatusById(contract.getIdstatus()).getStatusname());
 			ced.setSalary(contract.getSalary());
 			ced.setCurency(contract.getCurency());
 			ced.setStartdate(contract.getStartdate());

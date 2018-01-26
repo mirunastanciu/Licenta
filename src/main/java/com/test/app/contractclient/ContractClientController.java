@@ -103,7 +103,7 @@ public class ContractClientController {
 
 			ContractClientDetails ccd = new ContractClientDetails();
 			ccd.setId(contract.getId());
-			ccd.setStatus(contractClientStatusService.getContractClientStatusById(contract.getId()).getStatusname());
+			ccd.setStatus(contractClientStatusService.getContractClientStatusById(contract.getIdstatus()).getStatusname());
 			ccd.setAmount(contract.getAmount());
 			ccd.setCurency(contract.getCurency());
 			ccd.setStartdate(contract.getStartdate());

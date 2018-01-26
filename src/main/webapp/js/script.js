@@ -22,7 +22,7 @@ $(document).ready( function () {
 		   				$("#contracts").hide();
 		   				$("#registartionreq").hide();
 		   				$("#invoice").hide();
-		   				$("#donet").hide();
+		   				//$("#donet").hide();
 		        	  
 		   			}
 		   		}
@@ -78,6 +78,7 @@ $(document).ready( function () {
 			   data: {idTicket: idTicket},
 			   success: function(data, status, xhr){
 
+				   	$("#cldiv").show();
 				   	$("#projecttypelist").hide();
 					$("#statuslist").hide();
 					$("#description").hide();
@@ -114,16 +115,20 @@ $(document).ready( function () {
 			            $(".modal-body #employeespecialisation").html(data.employeespecialisation);
 			            
 					}
+					$(".modal-body #clientname").html(data.clientname);
+					if(data.clientname === "System"){
+						$("#cldiv").hide();
+			           
+					}else{
+						 $(".modal-body #clientemail").html(data.clientemail);
+					}
 
-
-		            $(".modal-body #clientname").html(data.clientname);
-		            $(".modal-body #clientemail").html(data.clientemail);
 
 		            $('#myModal').modal('show');
 		            
 		            
-		        	//reset fields content on close
-		        	$('#myModal').on('hidden.bs.modal', function (e) {
+//reset fields content on close
+		        	/*$('#myModal').on('hidden.bs.modal', function (e) {
 		        			  $(this)
 		        			    .find("input,textarea,select")
 		        			       .val('')
@@ -131,7 +136,7 @@ $(document).ready( function () {
 		        			    .find("input[type=checkbox], input[type=radio]")
 		        			       .prop("checked", "")
 		        			       .end();
-		        	});
+		        	});*/
 		            
 //if user is client or employee no edit right , no delete right	            
 		            if(acctype == 2 ){
@@ -610,7 +615,7 @@ $(document).ready( function () {
 			   url: "getDetailsByIdTicket",
 			   data: {idTicket: idTicket},
 			   success: function(data, status, xhr){
-		            /*$('#myModal .modal-body ').html(data.clientname);*/
+				   $("#cldiv").show();
 				   $("#projecttypelist").hide();
 					$("#statuslist").hide();
 					$("#description").hide();
@@ -628,18 +633,39 @@ $(document).ready( function () {
 		            $(".modal-body #startdate").html(data.startdate);
 		            $(".modal-body #finishdate").html(data.finishdate);
 
-		            $(".modal-body #employeename").html(data.employeename);
-		            $(".modal-body #employeeemail").html(data.employeeemail);
-		            $(".modal-body #employeespecialisation").html(data.employeespecialisation);
+
+					if(data.employeename === "Unassigned"){
+						$(".modal-body #employeeemail").html(data.employeeemail);
+				        $(".modal-body #employeespecialisation").html(data.employeespecialisation);
+					    $(".modal-body #employeename").html(data.employeename);
+					    $("#empE").hide();
+						$("#empS").hide();
+						
+					}else if(data.employeename !== "Unassigned"){
+						//console.log("employee")
+						//$(".modal-footer #assigntome").hide();
+						//$("#assigntome").hide();
+						$("#empE").show();
+						$("#empS").show();
+			            $(".modal-body #employeename").html(data.employeename);
+			            $(".modal-body #employeeemail").html(data.employeeemail);
+			            $(".modal-body #employeespecialisation").html(data.employeespecialisation);
+			            
+					}
 
 		            $(".modal-body #clientname").html(data.clientname);
-		            $(".modal-body #clientemail").html(data.clientemail);
+					if(data.clientname === "System"){
+						$("#cldiv").hide();
+			           
+					}else{
+						 $(".modal-body #clientemail").html(data.clientemail);
+					}
 
 		            $('#myModal').modal('show');
 		            
 		            
-		          //reset fields content on close
-		        	$('#myModal').on('hidden.bs.modal', function (e) {
+//reset fields content on close
+		        	/*$('#myModal').on('hidden.bs.modal', function (e) {
 		        			  $(this)
 		        			    .find("input,textarea,select")
 		        			       .val('')
@@ -647,7 +673,7 @@ $(document).ready( function () {
 		        			    .find("input[type=checkbox], input[type=radio]")
 		        			       .prop("checked", "")
 		        			       .end();
-		        	})
+		        	})*/
 		            
 //if user is client or employee no edit right , no delete right	            
 		            
@@ -679,10 +705,10 @@ $(document).ready( function () {
 		            	$("#employeelist").show();
 		            });
 		            
-		            
-		            $('.modal-footer').on('click', '#close', function () {
+		           /* 
+///CLOSE		            $('.modal-footer').on('click', '#close', function () {
 		            	 location.reload();
-		            });
+		            });*/
 		           
 //Unassign
 		            $('.modal-footer').on('click', '#unassign', function () {
@@ -950,7 +976,7 @@ $(document).ready( function () {
 					   url: "getDetailsByIdTicket",
 					   data: {idTicket: idTicket},
 					   success: function(data, status, xhr){
-
+						   $("#cldiv").show();
 						   $("#projecttypelist").hide();
 							$("#statuslist").hide();
 							$("#description").hide();
@@ -968,18 +994,37 @@ $(document).ready( function () {
 				            $(".modal-body #startdate").html(data.startdate);
 				            $(".modal-body #finishdate").html(data.finishdate);
 
-				            $(".modal-body #employeename").html(data.employeename);
-				            $(".modal-body #employeeemail").html(data.employeeemail);
-				            $(".modal-body #employeespecialisation").html(data.employeespecialisation);
 
+							if(data.employeename === "Unassigned"){
+								$(".modal-body #employeeemail").html(data.employeeemail);
+						        $(".modal-body #employeespecialisation").html(data.employeespecialisation);
+							    $(".modal-body #employeename").html(data.employeename);
+							    $("#empE").hide();
+								$("#empS").hide();
+								
+							}else if(data.employeename !== "Unassigned"){
+								//console.log("employee")
+								//$(".modal-footer #assigntome").hide();
+								//$("#assigntome").hide();
+								$("#empE").show();
+								$("#empS").show();
+					            $(".modal-body #employeename").html(data.employeename);
+					            $(".modal-body #employeeemail").html(data.employeeemail);
+					            $(".modal-body #employeespecialisation").html(data.employeespecialisation);
+					            
+							}
 				            $(".modal-body #clientname").html(data.clientname);
-				            $(".modal-body #clientemail").html(data.clientemail);
-
+							if(data.clientname === "System"){
+								$("#cldiv").hide();
+					           
+							}else{
+								 $(".modal-body #clientemail").html(data.clientemail);
+							}
 				            $('#myModal').modal('show');
 				            
 				            
 //reset fields content on close
-				        	$('#myModal').on('hidden.bs.modal', function (e) {
+				        	/*$('#myModal').on('hidden.bs.modal', function (e) {
 				        			  $(this)
 				        			    .find("input,textarea,select")
 				        			       .val('')
@@ -987,7 +1032,7 @@ $(document).ready( function () {
 				        			    .find("input[type=checkbox], input[type=radio]")
 				        			       .prop("checked", "")
 				        			       .end();
-				        	})
+				        	})*/
 				            
 //if user is client or employee no edit right , no delete right	            
 				          
@@ -1114,9 +1159,9 @@ $(document).ready( function () {
 
 											       });
 										
-										 $('.modal-footer').on('click', '#close', function () {
-							            	 location.reload();
-							            });
+										 /*$('.modal-footer').on('click', '#close', function () {
+////Close							            	 location.reload();
+							            });*/
 										 
 //update function
 										$('.modal-footer').on('click', '#savebutton', function () {

@@ -11,7 +11,7 @@ var client="";
 var isshow=0;
 $(document).ready(function() {
 	var options;
-	$.ajax("/getClientsName",
+	$.ajax("/getClientsNameForInv",
 		       { type: 'GET',
 		 		 success: function (data) {
 		 			options = data;

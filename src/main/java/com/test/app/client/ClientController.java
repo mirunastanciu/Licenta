@@ -82,6 +82,18 @@ public class ClientController {
 		}
 		return cname;
 	}
+	
+	@RequestMapping(path="/getClientsNameForInv", method=RequestMethod.GET)
+	public ArrayList<String> getClientsLastNamesForInv(){
+		ArrayList<Client> l = clientService.getAllClients();
+		
+		ArrayList<String> cname = new ArrayList<>();
+		for(int i=0;i<l.size();i++){
+			String a = l.get(i).getFirstname()+" "+l.get(i).getLastname();
+			cname.add(a);
+		}
+		return cname;
+	}
 
 	@RequestMapping(path="/getClientDetails", method=RequestMethod.POST)
 	public ClientDetails getClientDetails(@RequestParam(value="idClient") int id){

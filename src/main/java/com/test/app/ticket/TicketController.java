@@ -152,6 +152,11 @@ public class TicketController {
 			int idcl = clientService.getIdClByUsername(username);
 			tDone = ticketService.getTicketsDoneByIdClient(idcl);			
 
+		}else if(acctype == 3){
+
+			int idemp = employeeService.getIdEmpByUsername(username);
+			int empspecialisationid = employeeService.getSpecialisationByIdEmp(idemp);
+			tDone = ticketService.getTicketsDoneByIdSP(empspecialisationid);
 		}
 		
 		for (int i = 0; i < tDone.size(); i++) {
@@ -320,10 +325,10 @@ public class TicketController {
 	}
 
 	@RequestMapping(value = "/getIdTByIdCl", method = RequestMethod.POST)
-	public ArrayList<Integer> getIdTByIdCl(
-			@RequestParam(value = "clientname") String name) {
+	public ArrayList<Integer> getIdTByIdCl(@RequestParam(value = "clientname") String name) {
 		int idCl = 0;
 		ArrayList<Client> cl = clientService.getAllClients();
+		
 		for (int i = 0; i < cl.size(); i++) {
 			String fullname = cl.get(i).getFirstname() + " "
 					+ cl.get(i).getLastname();

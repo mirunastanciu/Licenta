@@ -53,6 +53,7 @@ $(document).ready( function () {
 		 			 			options = data;
 
 		 					       	$('#StatusList').empty();
+		 					        $('#StatusList').append($('<option></option>').html(""));
 		 					       	$.each(options, function(i, p) {
 		 					       	$('#StatusList').append($('<option></option>').val(p).html(p));
 		 					       	});
@@ -195,6 +196,7 @@ $(document).ready( function () {
 		 			 			options = data;
 
 		 					       	$('#StatusListC').empty();
+		 					    	$('#StatusListC').append($('<option></option>').html(""));
 		 					       	$.each(options, function(i, p) {
 		 					       	$('#StatusListC').append($('<option></option>').val(p).html(p));
 		 					       	});

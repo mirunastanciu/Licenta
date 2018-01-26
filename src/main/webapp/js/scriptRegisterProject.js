@@ -8,6 +8,7 @@ $(document).ready(function () {
 		$("#contracts").hide();
 		$("#registartionreq").hide();
 		$("#assignpersson").hide();
+		
 	    
 	}
 	if(acctype == 3){
@@ -15,7 +16,8 @@ $(document).ready(function () {
 		$("#contracts").hide();
 		$("#registartionreq").hide();
 		$("#invoice").hide();
-		$("#donet").hide();
+		$("#assignpersson").hide();
+		//$("#donet").hide();
   
 	}
     var options;
