@@ -139,19 +139,19 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
           	 <br>
           	 
              <div class="modalcontent " >
-             <div id="div1" class="InLineDiv-StAdmPg " >
+             <div id="div1" style="padding-left: 60px;" >
                 <h4>Ticket ID </h4>
           		<p id="ticketid"></p>
           		<h4>Type Project </h4>
           		<p id="projecttype"></p>
-          		<p> <select id="projecttypelist" name="projecttype" onchange="projectTypeChange()" style="width:30%;"></select></p>
+          		<p> <select id="projecttypelist" name="projecttype" onchange="projectTypeChange()" style="width:30%;border-bottom: 1px solid #31708f;"></select></p>
           		<h4>Status </h4>
           		<p id="status"></p>
-          		<p> <select id="statuslist" name="status" onchange="statusChange()" style="width:30%;"></select></p>
+          		<select id="statuslist" name="status" onchange="statusChange()" style="width:30%;border-bottom: 1px solid #31708f;"></select>
           		<div id="desc" onchange="descriptionChange()">
           			<h4>Project Description </h4>
           			<p id="projectdescription"></p>
-          			<textarea id="description" class="input"  type="text" name="description" autocomplete="off" style="height: 300px;width:600px;"/></textarea>
+          			<textarea id="description" class="input"  type="text" name="description" autocomplete="off" style="height: 300px;width:600px;border-bottom: 1px solid #31708f;"/></textarea>
           		</div>  
           	</div>	  
           	<div id="div2" style="padding-left: 60px;">     		
@@ -160,17 +160,17 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
           		<div id="dd" onchange="duedateonChange()">
           			<h4>Project Due Date </h4>
 					<p id="duedate"></p>
-					<p><input id="duedateedit" class="input"  type="date"  name="duedate" autocomplete="off" style="width:30%;"/></p>
+					<p><input id="duedateedit" class="input"  type="date"  name="duedate" autocomplete="off" style="width:30%;border-bottom: 1px solid #31708f;"/></p>
 				</div>
 				<div id="sd" onchange="startdateonChange()">
 					<h4>Project Start Date </h4>
 					<p id="startdate"></p>
-					<p><input id="startdateedit" class="input"  type="date" name="startdate" autocomplete="off" style="width:30%;"/></p>
+					<p><input id="startdateedit" class="input"  type="date" name="startdate" autocomplete="off" style="width:30%;border-bottom: 1px solid #31708f;"/></p>
 				</div>
 				<div id="fd" onchange="finishdateonChange()">
 					<h4>Project Finish Date </h4>
 					<p id="finishdate"></p>		
-					<p><input id="finishdateedit" class="input"  type="date" name="sinishdate" autocomplete="off" style="width:30%;"/></p>
+					<p><input id="finishdateedit" class="input"  type="date" name="sinishdate" autocomplete="off" style="width:30%;border-bottom: 1px solid #31708f;"/></p>
 				</div>
 			</div> 			          
              </div>
@@ -184,7 +184,7 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
             	 <div id="emp">
              		<h4>Employee Name </h4>
              		<p id="employeename"></p>
-             		<p> <select id="employeelist" name="employee" onchange="assignementChange()"></select></p>
+             		<p> <select id="employeelist" name="employee" onchange="assignementChange()" style="border-bottom: 1px solid #31708f;"></select></p>
              	</div>
              	<h4 id="empE">Employee Email</h4>
              	<p id="employeeemail"></p>
@@ -207,7 +207,11 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
              </div>
         
        </div>
-        <div class="modal-footer">
+        
+      </div>
+      
+      
+      <div class="modal-footer" >
         <button id="assigntome" type="button" class="btn btn-default">Assigne To Me</button>
          <button id="unassign" type="button" class="btn btn-default">Unassign</button>
           <button id="editbutton" type="button" class="btn btn-default">Edit</button>
@@ -215,7 +219,6 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
           <button id="deletebutton" type="button" class="btn btn-default">Delete</button>
           <button id="close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
-      </div>
       
     </div>
   </div>

@@ -81,7 +81,7 @@ $(document).ready( function () {
 							{//settings
 								type:"success",
 								allow_dismiss: true,
-								
+								element:".modal",
 								position: "fixed",
 								placement: {
 									from: "top",
@@ -105,7 +105,7 @@ $(document).ready( function () {
 							{//settings
 								type:"danger",
 								allow_dismiss: true,
-								
+								element:".modal",
 								position: "fixed",
 								placement: {
 									from: "top",

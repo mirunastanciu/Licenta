@@ -97,7 +97,7 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
 	</div>
 <!-- ==========create new employee Contract modal ====================-->		
 	<div class="modal fade modalTD" id="myModalEmployeeContract" role="dialog">
-   	 <div class="modal-dialog modal-lg">
+   	 <div class="modal-dialog modal-lg" style="width:40%">
    		 <!-- Modal content-->
     	<div class="modal-content">
 	        <div class="modal-header">
@@ -116,11 +116,13 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
 		    			<select id="statusList" name="status"  class="mandatory"></select>
 		    			<br>
 		    			<br>
+		    			<h4>Signature Date</h4>
+		    			<input type="date" id="signdate" class="input mandatory" name="signdate" autocomplete="off" />
+							
+		    			<br>
 					 </div>
 					 <div id="d2" class="InLineDiv-StAdmPg ">
-					 	<h4>Signature Date</h4>
-		    			<input type="date" id="signdate" class="input mandatory" name="signdate" autocomplete="off" />
-						<br>	
+					 	
 						<br>
 		    			<h4>Start Date</h4>
 		    			<input type="date" id="startdate" class="input mandatory" name="startdate" autocomplete="off" />
@@ -133,21 +135,23 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
 		    		</div>
 		
 		        </div>
-		        <div class="modal-footer">
+		        
+	      </div>
+	      
+	    </div>
+	    
+	    <div class="modal-footer">
 		        
 		          <button id="savebutton" type="button" class="btn btn-default" >Save</button>
 		     
 		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		        </div>
-	      </div>
-	      
-	    </div>
 	  </div>
   </div>
  </div>
 <!-- ===========create new client Contract modal============== -->	
 	<div class="modal fade modalTD" id="myModalClientContract" role="dialog">
-   	 <div class="modal-dialog modal-lg">
+   	 <div class="modal-dialog modal-lg" style="width:40%">
    		 <!-- Modal content-->
     	<div class="modal-content">
 	        <div class="modal-header">
@@ -159,6 +163,7 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
 	         	  <br>
 		          <div class="modalcontent " >
 		             <div id="d1" class="InLineDiv-StAdmPg ">
+		           
 		             	<h4>Client</h4>
 		             	<select id="clientsList" name="clients" class="mandatory"  ></select>
 		             	<br>
@@ -187,24 +192,26 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
 		    		</div>
 		
 		        </div>
-		        <div class="modal-footer">
+		        
+	      </div>
+	      
+	    </div>
+	    
+	    <div class="modal-footer">
 		        
 		          <button id="savebutton" type="button" class="btn btn-default">Save</button>
 		     
 		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		        </div>
-	      </div>
-	      
-	    </div>
 	  </div>
   </div>
  </div>	
  
  <!--========= EDIT employee Contract modal =============-->		
-	<div class="modal fade modalTD" id="EditModalEmployeeContract" role="dialog">
-   	 <div class="modal-dialog modal-normal">
+	<div class="modal fade modalTD" id="EditModalEmployeeContract" role="dialog" >
+   	 <div class="modal-dialog modal-lg" style="width:40%">
    		 <!-- Modal content-->
-    	<div class="modal-content">
+    	<div class="modal-content" >
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
 	          <h4 class="modal-title">Edit Employee Contract</h4>
@@ -213,52 +220,57 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
 	          <div >
 	         	  <br>
 		          <div class="modalcontent " >
+		          <div class="inLine2" style="width:45%;margin-left:30px;">
 		             <h4>Id</h4>
 		             <p id="idE"></p>
 		             
 		             <h4>Status</h4>
 		             <p id="statusE"></p>
-		             <select id="StatusList" style="width:50%;border-bottom: 1px solid #31708f;" onchange="statusChange();"></select>
+		             <select id="StatusList" style="width:80%;border-bottom: 1px solid #31708f;" onchange="statusChange();"></select>
 		             
 		             <div id="SLRY" onchange="SalaryChange()">
 		             	<h4>Salary</h4>
 		             	<p id="salaryE"></p>
-		             	<input style="width:50%;border-bottom: 1px solid #31708f;" type="number" id="salaryEdit" class="input " name="expdate"  autocomplete="off" />
+		             	<input style="width:80%;border-bottom: 1px solid #31708f;" type="number" id="salaryEdit" class="input " name="expdate"  autocomplete="off" />
 		             </div>
 		             
 		             <h4>Curency</h4>
-		             <p id="curencyE"></p>	             
+		             <p id="curencyE"></p>	
+		           </div>     
+		           <div class="inLine2" style="width:45%;">        
 		             
-		             <h4>Signature Date</h4>
-		             <p id="signdateE"></p> 
+			             <h4>Signature Date</h4>
+			             <p id="signdateE"></p> 
+			             <br>
+			             <h4>Start Date</h4>
+			             <p id="startdateE"></p>  
+			             <br>
+			             <div id="EXPD" onchange="expDateChange()">
+			            	 <h4>Expiration Date</h4>
+			             	 <p id="expdateE"></p>  
+			             	 <input style="width:80%;border-bottom: 1px solid #31708f;" type="date" id="expDateEdit" class="input" name="expdate" autocomplete="off" /> 
+			             </div>
 		             
-		             <h4>Start Date</h4>
-		             <p id="startdateE"></p>  
-		             
-		             <div id="EXPD" onchange="expDateChange()">
-		            	 <h4>Expiration Date</h4>
-		             	 <p id="expdateE"></p>  
-		             	 <input style="width:50%;border-bottom: 1px solid #31708f;" type="date" id="expDateEdit" class="input" name="expdate" autocomplete="off" /> 
-		             </div>
-		             
-		
+				    </div>
 		          </div>
-		        <div class="modal-footer">
+		       
+	      </div>
+	      
+	    </div>
+	    
+	     <div class="modal-footer">
 		        
 		          <button id="savebutton" type="button" class="btn btn-default">Save</button>
 		     
 		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		        </div>
-	      </div>
-	      
-	    </div>
 	  </div>
   </div>
  </div>
  
   <!--========= EDIT client Contract modal =============-->		
 	<div class="modal fade modalTD" id="EditModalClientContract" role="dialog">
-   	 <div class="modal-dialog modal-normal">
+   	 <div class="modal-dialog modal-lg" style="width:40%">
    		 <!-- Modal content-->
     	<div class="modal-content">
 	        <div class="modal-header">
@@ -269,45 +281,48 @@ style="margin-right:10px;margin-top:10px;width:5%;"-->
 	          <div >
 	         	  <br>
 		          <div class="modalcontent " >
-		             <h4>Id</h4>
-		             <p id="idEC"></p>
-		             
-		             <h4>Status</h4>
-		             <p id="statusEC"></p>
-		             <select id="StatusListC" style="width:50%;border-bottom: 1px solid #31708f;" onchange="statusChange1();" ></select>
-		             
-		             <div id="SLRY1" onchange="SalaryChange1()">
-		             	<h4>Amount</h4>
-		             	<p id="amountEC"></p>
-		             	<input style="width:50%;border-bottom: 1px solid #31708f;" type="number" id="amountEdit" class="input " name="expdate"  autocomplete="off"/>
-		             </div>
-		             
-		             <h4>Curency</h4>
-		             <p id="curencyEC"></p>	             
-		             
-		             <h4>Signature Date</h4>
-		             <p id="signdateEC"></p> 
-		             
-		             <h4>Start Date</h4>
-		             <p id="startdateEC"></p>  
-		             
-		             <div id="EXPD1" onchange="expDateChange1()">
-		            	 <h4>Expiration Date</h4>
-		             	 <p id="expdateEC"></p>  
-		             	 <input style="width:50%;border-bottom: 1px solid #31708f;" type="date" id="expDateEditC" class="input" name="expdate" autocomplete="off"/> 
-		             </div>
-		             
+		           <div class="inLine2" style="width:45%;margin-left:30px;">
+			             <h4>Id</h4>
+			             <p id="idEC"></p>
+			             
+			             <h4>Status</h4>
+			             <p id="statusEC"></p>
+			             <select id="StatusListC" style="width:80%;border-bottom: 1px solid #31708f;" onchange="statusChange1();" ></select>
+			             
+			             <div id="SLRY1" onchange="SalaryChange1()">
+			             	<h4>Amount</h4>
+			             	<p id="amountEC"></p>
+			             	<input style="width:80%;border-bottom: 1px solid #31708f;" type="number" id="amountEdit" class="input " name="expdate"  autocomplete="off"/>
+			             </div>
+		            </div>
+		            <div class="inLine2" style="width:45%;"> 
+			             <h4>Curency</h4>
+			             <p id="curencyEC"></p>	             
+			             
+			             <h4>Signature Date</h4>
+			             <p id="signdateEC"></p> 
+			             
+			             <h4>Start Date</h4>
+			             <p id="startdateEC"></p>  
+			             
+			             <div id="EXPD1" onchange="expDateChange1()">
+			            	 <h4>Expiration Date</h4>
+			             	 <p id="expdateEC"></p>  
+			             	 <input style="width:80%;border-bottom: 1px solid #31708f;" type="date" id="expDateEditC" class="input" name="expdate" autocomplete="off"/> 
+			             </div>
+		            </div> 
 		
 		          </div>
-		        <div class="modal-footer">
+		        
+	      </div>
+	      
+	    </div>
+	    <div class="modal-footer">
 		        
 		          <button id="savebutton" type="button" class="btn btn-default">Save</button>
 		     
 		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		        </div>
-	      </div>
-	      
-	    </div>
 	  </div>
   </div>
  </div>

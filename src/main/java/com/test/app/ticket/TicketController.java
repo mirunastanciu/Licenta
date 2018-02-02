@@ -231,19 +231,24 @@ public class TicketController {
 		t.setId(idTicket);
 		t.setDescription(projectdescription);
 		t.setProjcttype(projectTypetService.getIdProjectTypeByName(projecttype));
-		t.setIdemployee(getIdEmployeeByName(employeename));
+		if(employeename == "Unassigned"){
+			t.setIdemployee(0);
+		}else{
+			t.setIdemployee(getIdEmployeeByName(employeename));
+		}
+		
 
 		if (duedate.equals("") == false) {
 			java.sql.Date parseDate = java.sql.Date.valueOf(duedate);
 			t.setDuedate(parseDate);
 		}
 
-		if (startdate.equals("") == false) {
+		if (startdate.equals("Not defined") == false) {
 			java.sql.Date parseDate = java.sql.Date.valueOf(startdate);
 			t.setStartdate(parseDate);
 		}
 
-		if (finishdate.equals("") == false) {
+		if (finishdate.equals("Not defined") == false) {
 			java.sql.Date parseDate = java.sql.Date.valueOf(finishdate);
 			t.setFinishdate(parseDate);
 		}
